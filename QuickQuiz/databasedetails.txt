@@ -1,0 +1,3 @@
+Host: mysql-shift-two.alwaysdata.net
+Username: shift-two_team9
+Password: teamnein

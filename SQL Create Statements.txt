@@ -16,27 +16,25 @@ PRIMARY KEY(ID),
 FOREIGN KEY (moduleID) REFERENCES module(ID)
 );
 
-CREATE TABLE staff
-(
-	ID integer (10) NOT NULL,
-	Password varchar(255) NOT NULL,
-	Name char(255) NOT NULL,
-	moduleID integer(10) NOT NULL,
-	PRIMARY KEY (ID),
-	FOREIGN KEY (moduleID) REFERENCES module(ID)
-)
+CREATE TABLE staff(
+ID INT (10) NOT NULL,
+password VARCHAR(255) NOT NULL,
+name CHAR(255) NOT NULL,
+moduleID INT(10) NOT NULL,
+PRIMARY KEY (ID),
+FOREIGN KEY (moduleID) REFERENCES module(ID)
+);
 
-CREATE TABLE QUIZ
-(
-	ID INT(10) NOT NULL,
-	name CHAR(255) NOT NULL,
-	description varchar(255) NOT NULL,
-	moduleID INT(10) NOT NULL,
-	staffID INT (10) NOT NULL,
-	PRIMARY KEY (ID),
-	FOREIGN KEY (moduleID) REFERENCES module(ID),
-	FOREIGN KEY (staffID) REFERENCES staff(ID)
-)
+CREATE TABLE QUIZ(
+ID INT(10) NOT NULL,
+name CHAR(255) NOT NULL,
+description VARCHAR(255) NOT NULL,
+moduleID INT(10) NOT NULL,
+staffID INT (10) NOT NULL,
+PRIMARY KEY (ID),
+FOREIGN KEY (moduleID) REFERENCES module(ID),
+FOREIGN KEY (staffID) REFERENCES staff(ID)
+);
 
 CREATE TABLE question(
 ID INT(10) NOT NULL,

@@ -1,0 +1,39 @@
+--SQL STATEMENTS--
+
+CREATE TABLE module(
+ID INT(10),
+name char(255),
+PRIMARY KEY (ID)
+);
+
+
+CREATE TABLE student(
+ID INT(10),
+password VARCHAR(255),
+name CHAR(255),
+moduleID int(10),
+PRIMARY KEY(ID),
+FOREIGN KEY (moduleID) REFERENCES module(ID)
+);
+
+CREATE TABLE staff
+(
+	ID integer (10),
+	Password varchar(255),
+	Name char(255),
+	moduleID integer(10),
+	PRIMARY KEY (ID),
+	FOREIGN KEY (moduleID) REFERENCES module(ID)
+)
+
+CREATE TABLE QUIZ
+(
+	ID INT(10),
+	name CHAR(255),
+	description varchar(255),
+	moduleID INT(10),
+	staffID INT (10),
+	PRIMARY KEY (ID),
+	FOREIGN KEY (moduleID) REFERENCES module(ID),
+	FOREIGN KEY (staffID) REFERENCES staff(ID)
+)

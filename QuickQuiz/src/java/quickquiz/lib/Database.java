@@ -28,13 +28,15 @@ import java.sql.SQLException;
  */
 public class Database
 {
+  // TODO: add method to close connection?
   private static Connection connection = null;
   
   
   
   public static void initialize()
-    throws SQLException
+    throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException
   {
+    Class.forName("com.mysql.jdbc.Driver").newInstance();
     // TODO: read class from xml file
     connection = DriverManager.getConnection("jdbc:mysql://mysql-shift-two.alwaysdata.net/shift-two_quizmanager?" +
                                              "user=shift-two_team9&password=teamnein");
@@ -48,9 +50,9 @@ public class Database
    * and not by the model.
    */
   public static Connection getInstance()
-    throws SQLException
+    throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException
   {
-    if(connection != null)
+    if(connection == null)
       Database.initialize();
     return connection;
   }

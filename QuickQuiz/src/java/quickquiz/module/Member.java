@@ -21,8 +21,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import quickquiz.lib.Database;
 
 /**
@@ -32,16 +30,33 @@ import quickquiz.lib.Database;
 public class Member
 {
   // TODO: hash passwords in db
-  public static Boolean areStaffLoginDetailsValid(String username, String password)
-    throws SQLException
+  /**
+   * This method checks that the given login details are correct, depending on
+   * the member's role (staffOrStudent). This can either be "staff" or "student".
+   * Otherwise, an IllegalArgumentException is thrown.
+   */
+  public static Boolean areLoginDetailsValid(String username, String password,
+                                             String staffOrStudent)
+    throws SQLException, ClassNotFoundException, InstantiationException,
+           IllegalAccessException
   {
     Boolean correctLoginDetails = null;
     Connection connection;
-    PreparedStatement statement;
+    PreparedStatement statement = null;
     ResultSet resultSet;
+    String sql;
     try {
       connection = Database.getInstance();
-      statement = connection.prepareStatement("CALL `StaffLogin`(?, ?);");
+      if (staffOrStudent.equalsIgnoreCase("student")) {
+        sql = "CALL `StuLogin`(?, ?);";
+      }
+      else if (staffOrStudent.equalsIgnoreCase("staff")) {
+        sql = "CALL `StaffLogin`(?, ?);";
+      }
+      else {
+        throw new IllegalArgumentException();
+      }
+      statement = connection.prepareStatement(sql);
       statement.setString(1, username);
       statement.setString(2, password);
       resultSet = statement.executeQuery();
@@ -53,17 +68,10 @@ public class Member
         correctLoginDetails = false;
       }
     }
-    catch(SQLException e) {
-      throw e;
-    } catch (ClassNotFoundException ex) {
-      Logger.getLogger(Member.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (InstantiationException ex) {
-      Logger.getLogger(Member.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (IllegalAccessException ex) {
-      Logger.getLogger(Member.class.getName()).log(Level.SEVERE, null, ex);
-    }
     finally {
-      
+      if (statement != null) {
+        statement.close();
+      }
     }
     return correctLoginDetails;
   }

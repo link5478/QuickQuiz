@@ -19,11 +19,15 @@ package quickquiz.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Set;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import quickquiz.module.Member;
+import quickquiz.stores.LoggedIn;
 
 /**
  *
@@ -89,23 +93,59 @@ public class Login extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         
-        // TODO
-        // get username and password,
-        // use database class to query.
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         
         if(username.isEmpty() || username.equals("") || password.isEmpty() || password.equals(""))
         {
-            request.setAttribute("error", "details error");
-            RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-            rd.forward(request, response);
+            returnUserToLoginPageWithError(request, response);
             return;
         }
         
-        
-        
-        
+        boolean valid = false;
+        try
+        {
+            valid = Member.areStaffLoginDetailsValid(username, password);
+            
+            if(valid)
+            {
+                // log them in.
+                // create loggedIn store
+                LoggedIn lg = new LoggedIn();
+                lg.setUsername(username);
+                
+                HttpSession session = request.getSession();
+                session.setAttribute("loggedIn", lg);
+                
+                returnUserToLoginSuccess(request, response);
+                
+            }
+            else
+            {
+               // send back error
+                returnUserToLoginPageWithError(request, response);
+            }
+        }
+        catch(Exception e)
+        {
+            
+        }    
+    }
+    
+    private void returnUserToLoginPageWithError(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException
+    {
+            request.setAttribute("message", "detail error");
+            RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+            rd.forward(request, response);
+    }
+    
+     private void returnUserToLoginSuccess(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException
+    {
+            request.setAttribute("message", "detail success");
+            RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+            rd.forward(request, response);
     }
 
     /**

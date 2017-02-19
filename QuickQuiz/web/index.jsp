@@ -5,7 +5,7 @@
     LoggedIn lg  = (LoggedIn)session.getAttribute("loggedIn");
     %>
     <h1> Welcome, <%=lg.getUsername() %>
-    <a href="/QuickQuiz/CreateQuiz"> Create A Quiz </a>
+    <a href="/QuickQuiz/quiz-creation"> Create A Quiz </a>
     <%
 }
 else

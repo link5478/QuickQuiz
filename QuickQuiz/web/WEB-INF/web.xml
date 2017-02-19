@@ -25,6 +25,11 @@
         <servlet-name>QuizCreation</servlet-name>
         <servlet-class>quickquiz.servlets.QuizCreation</servlet-class>
     </servlet>
+        
+    <servlet>
+        <servlet-name>NewQuestion</servlet-name>
+        <servlet-class>quickquiz.servlets.NewQuestion</servlet-class>
+    </servlet>
     
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
@@ -49,6 +54,11 @@
     <servlet-mapping>
         <servlet-name>ViewQuiz</servlet-name>
         <url-pattern>/ViewQuiz/*</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>NewQuestion</servlet-name>
+        <url-pattern>/new-question/*</url-pattern>
     </servlet-mapping>
     
     <session-config>

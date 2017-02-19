@@ -24,9 +24,41 @@ package quickquiz.stores;
 public class Quiz
 {
     private String name_;
-    private String moduleId_;
+    private Integer moduleId_;
     
     
-    
+    // TODO: name and int limited to db's lengths?
     public Quiz(String name, Integer moduleId)
+    {
+        name_ = name;
+        moduleId_ = moduleId;
+    }
+    
+    
+    
+    public String getName()
+    {
+        return name_;
+    }
+    
+    
+    
+    public Integer getModuleId()
+    {
+        return moduleId_;
+    }
+    
+    
+    
+    public void setName(String name)
+    {
+        name_ = name;
+    }
+    
+    
+    
+    public void setModuleId(Integer moduleId)
+    {
+        moduleId_ = moduleId;
+    }
 }

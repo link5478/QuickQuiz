@@ -19,12 +19,16 @@ package quickquiz.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import quickquiz.stores.LoggedIn;
+import quickquiz.model.Quiz;
 
 /**
  *
@@ -90,7 +94,27 @@ public class CreateQuiz extends HttpServlet {
         String qName = request.getParameter("quizName");
         String qDesc = request.getParameter("quizDesc");
         String modID = request.getParameter("module");
-
+        
+        HttpSession session = request.getSession();
+        LoggedIn lg = (LoggedIn)session.getAttribute("loggedIn");
+        String ID = lg.getUsername();
+        
+        if(qName.isEmpty() || qDesc.isEmpty() || modID.isEmpty()){
+            
+            RequestDispatcher rd = request.getRequestDispatcher("/CreateQuiz.jsp");
+            rd.forward(request, response);
+            return;           
+        }      
+        else{
+            try
+            {
+            Quiz.AddQuiz(qName, qDesc, modID, ID);
+            }
+            catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException e)
+            {
+                
+            }
+        }
     }
 
     /**

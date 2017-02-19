@@ -16,12 +16,12 @@
         <p> </p>
         
         Quiz Name
-        <input type ="text" name="Text1" >
+        <input type ="text" name="quizName" >
         
         <br/> <br/>
         
         Quiz Description
-        <input type ="text" name="Text2" >
+        <input type ="text" name="quizDesc" >
         
         <br/> <br/>
 

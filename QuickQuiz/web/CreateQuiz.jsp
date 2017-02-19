@@ -17,7 +17,9 @@
         
         Quiz Name
         <input type ="text" name="Text1" >
+        
         <br/> <br/>
+        
         Quiz Description
         <input type ="text" name="Text2" >
         
@@ -28,6 +30,10 @@
             <option>AC31007</option>
             <option>AC32007</option>
         </select>
+        
+        <br/> <br/>
+
+        <button type="button" onclick="">Submit </button>
         
         <p> </p>
 

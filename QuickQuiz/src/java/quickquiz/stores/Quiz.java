@@ -24,13 +24,13 @@ package quickquiz.stores;
 public class Quiz
 {
     private String description_;
-    private Integer moduleId_;
+    private String moduleId_;
     private String name_;
     private String staffId_;
     
     
     // TODO: name and int limited to db's lengths?
-    public Quiz(String description, Integer moduleId, String name,
+    public Quiz(String description, String moduleId, String name,
                 String staffId)
     {
         name_ = name;
@@ -48,7 +48,7 @@ public class Quiz
     
     
     
-    public Integer getModuleId()
+    public String getModuleId()
     {
         return moduleId_;
     }
@@ -76,7 +76,7 @@ public class Quiz
     
     
     
-    public void setModuleId(Integer moduleId)
+    public void setModuleId(String moduleId)
     {
         moduleId_ = moduleId;
     }

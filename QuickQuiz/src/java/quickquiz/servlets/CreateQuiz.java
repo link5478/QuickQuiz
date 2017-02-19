@@ -15,21 +15,23 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package servlet.lib;
+package quickquiz.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Josh Hogarth
+ * @author carstencheyne
  */
-public class Login extends HttpServlet {
+@WebServlet(name = "CreateQuiz", urlPatterns = {"/CreateQuiz"})
+public class CreateQuiz extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,10 +50,10 @@ public class Login extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Login</title>");            
+            out.println("<title>Servlet CreateQuiz</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Login at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet CreateQuiz at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -69,12 +71,9 @@ public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-        
-        RequestDispatcher rd =  request.getRequestDispatcher("login.jsp");
-        rd.forward(request, response);   
+        RequestDispatcher rd = request.getRequestDispatcher("/CreateQuiz.jsp");
+        rd.forward(request, response);
     }
-    
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -87,25 +86,11 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
         
-        // TODO
-        // get username and password,
-        // use database class to query.
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        
-        if(username.isEmpty() || username.equals("") || password.isEmpty() || password.equals(""))
-        {
-            request.setAttribute("error", "details error");
-            RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-            rd.forward(request, response);
-            return;
-        }
-        
-        
-        
-        
+        String qName = request.getParameter("quizName");
+        String qDesc = request.getParameter("quizDesc");
+        String modID = request.getParameter("module");
+
     }
 
     /**
@@ -115,8 +100,7 @@ public class Login extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "This servlet is responsible for handling the user validation "
-                + "for logging in.";
+        return "Short description";
     }// </editor-fold>
 
 }

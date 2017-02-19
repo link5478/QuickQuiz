@@ -101,8 +101,8 @@ public class Login extends HttpServlet {
                 // log them in.
                 // create loggedIn store
                 LoggedIn lg = new LoggedIn();
-                lg.setUsername(username);
-                lg.setUserType(type);                
+                lg.setUsername(username);                             
+                lg.setUserType(type);
                 
                 HttpSession session = request.getSession();
                 session.setAttribute("loggedIn", lg);

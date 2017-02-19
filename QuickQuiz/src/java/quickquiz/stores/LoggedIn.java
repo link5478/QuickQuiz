@@ -25,6 +25,8 @@ public class LoggedIn {
     
     private String username;
     private String userType = "student";
+    private String name;
+    private String module;
     
     public void setUsername(String Username)
     {
@@ -44,5 +46,25 @@ public class LoggedIn {
     public String getUserType()
     {
         return userType;
+    }
+    
+    public void setName(String Name)
+    {
+        name = Name;
+    }
+    
+    public String getName()
+    {
+        return name;
+    }
+    
+     public void setModule(String Module)
+    {
+        module = Module;
+    }
+    
+    public String getModule()
+    {
+        return module;
     }
 }

@@ -76,4 +76,34 @@ public class Member
     }
     return correctLoginDetails;
   }
+  
+  public static String getStudentModuleID(String ID)
+          throws SQLException, ClassNotFoundException, InstantiationException,
+           IllegalAccessException
+  {
+    Connection connection;
+    PreparedStatement statement = null;
+    ResultSet resultSet;
+    String sql;
+    String modID = "";
+    
+    try {
+      connection = Database.getInstance();
+      sql = "SELECT moduleID from student where ID=?;";
+      
+      statement = connection.prepareStatement(sql);
+      statement.setString(1, ID);
+      resultSet = statement.executeQuery();
+      while(resultSet.next())
+      {
+        modID = resultSet.getString("moduleID");
+      }
+    }
+    finally {
+      if (statement != null) {
+        statement.close();
+      }
+    }
+    return modID;
+  }
 }

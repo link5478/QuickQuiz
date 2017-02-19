@@ -73,9 +73,12 @@ public class ViewQuiz extends HttpServlet {
         PrintWriter pw = response.getWriter();
         //pw.print(request.getRequestURL());
         String pageURL = request.getRequestURL().toString();
+        //i hate regex
         String[] splitURL = pageURL.split("/");
+        //actual quiz id is last part of URL, after sixth slash
         String retrievedQuizID = splitURL[5];
         request.setAttribute("quizID", retrievedQuizID);
+        //pass to JSP
         request.getRequestDispatcher("/ViewQuiz.jsp").forward(request, response);
 
         processRequest(request, response);

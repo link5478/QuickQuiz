@@ -12,6 +12,24 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>This is the Create Quiz Page</h1>
+        <p> </p>
+        
+        Quiz Name
+        <input type ="text" name="Text1" >
+        <br/> <br/>
+        Quiz Description
+        <input type ="text" name="Text2" >
+        
+        <br/> <br/>
+
+        Module
+        <select name ="module">
+            <option>AC31007</option>
+            <option>AC32007</option>
+        </select>
+        
+        <p> </p>
+
     </body>
 </html>

@@ -12,7 +12,9 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <%String quizID = (String)request.getAttribute("quizID"); %>
         <h1>Hello World!</h1>
+        <p>Quiz ID:<%=quizID%></p>
         <p>Name:<% //= quizName%></p>
         <p>Module:<% //=moduleID%></p>
     </body>

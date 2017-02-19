@@ -23,15 +23,34 @@ package quickquiz.stores;
  */
 public class Quiz
 {
+    private String description_;
+    private String moduleId_;
     private String name_;
-    private Integer moduleId_;
+    private String staffId_;
     
     
     // TODO: name and int limited to db's lengths?
-    public Quiz(String name, Integer moduleId)
+    public Quiz(String description, String moduleId, String name,
+                String staffId)
     {
         name_ = name;
         moduleId_ = moduleId;
+        description_ = description;
+        staffId_ = staffId;
+    }
+    
+    
+    
+    public String getDescription()
+    {
+        return description_;
+    }
+    
+    
+    
+    public String getModuleId()
+    {
+        return moduleId_;
     }
     
     
@@ -43,9 +62,23 @@ public class Quiz
     
     
     
-    public Integer getModuleId()
+    public String getStaffId()
     {
-        return moduleId_;
+        return staffId_;
+    }
+    
+    
+    
+    public void setDescription(String description)
+    {
+        description_ = description;
+    }
+    
+    
+    
+    public void setModuleId(String moduleId)
+    {
+        moduleId_ = moduleId;
     }
     
     
@@ -57,8 +90,8 @@ public class Quiz
     
     
     
-    public void setModuleId(Integer moduleId)
+    public void setStaffId(String staffId)
     {
-        moduleId_ = moduleId;
+        staffId_ = staffId;
     }
 }

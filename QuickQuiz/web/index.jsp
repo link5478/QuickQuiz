@@ -1,8 +1,16 @@
-<a href="/QuickQuiz/Login"> Log me in </a>
+<%@ page import="quickquiz.stores.LoggedIn" %>
 
-<%  String s = (String)request.getAttribute("message");
-                if(s != null)
-                {
-                    out.println(s);
-                }
+<% if(session.getAttribute("loggedIn") != null)
+{
+    LoggedIn lg  = (LoggedIn)session.getAttribute("loggedIn");
+    %>
+    <h1> Welcome, <%=lg.getUsername() %>
+    <%
+}
+else
+{
+    %>
+    <a href="Login"> Log in <a/>
+    <%
+}
 %>

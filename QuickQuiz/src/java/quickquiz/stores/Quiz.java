@@ -33,9 +33,9 @@ public class Quiz
     public Quiz(String description, String moduleId, String name,
                 String staffId)
     {
-        name_ = name;
-        moduleId_ = moduleId;
         description_ = description;
+        moduleId_ = moduleId;
+        name_ = name;
         staffId_ = staffId;
     }
     

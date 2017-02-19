@@ -5,6 +5,11 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import= "java.util.ArrayList" %>
+<%@page import = "java.util.List" %>
+<%@page import = "quickquiz.stores.LoggedIn" %>
+<%@page import = "quickquiz.model.QuizModel" %>
+<%@page import = "quickquiz.model.Member" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,6 +17,28 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <% 
+            LoggedIn user = (LoggedIn)session.getAttribute("loggedIn");
+            List<String> ids = new ArrayList<>();
+            String myModule = Member.getStudentModuleID(user.getUsername());
+            ids = QuizModel.getQuizzes(myModule);            
+        %>
+        
+        <table>
+            <tr> <th>Module</th><tr>
+                <%
+                    for(int i = 0; i < ids.size(); i++)
+                    {
+                        String s = "/QuickQuiz/ViewQuiz/" + ids.get(i);
+                       %>                      
+            <tr><td><a href= <%=s%>> <%=ids.get(i)%></a> </td></tr>
+                       <%
+                    }
+                    
+                %>
+        </table>
+        
+        
+            
     </body>
 </html>

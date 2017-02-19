@@ -74,9 +74,9 @@ public class ViewQuiz extends HttpServlet {
         //pw.print(request.getRequestURL());
         String pageURL = request.getRequestURL().toString();
         String[] splitURL = pageURL.split("/");
-        String quizID = splitURL[5];
-        pw.print(quizID);
-            pw.close();
+        String retrievedQuizID = splitURL[5];
+        request.setAttribute("quizID", retrievedQuizID);
+        request.getRequestDispatcher("/ViewQuiz.jsp").forward(request, response);
 
         processRequest(request, response);
     }

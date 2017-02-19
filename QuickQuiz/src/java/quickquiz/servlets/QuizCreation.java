@@ -81,7 +81,7 @@ public class QuizCreation
         String moduleId = request.getParameter("quiz-module-id");
         String description = request.getParameter("quiz-description");
         String staffId = (String) request.getSession().getAttribute("staff-id");
-        Quiz quiz = new Quiz(description, moduleId, name, staffId);
+        Quiz quiz = new Quiz(name, description, moduleId, staffId, "");
         return quiz;
     }
 }

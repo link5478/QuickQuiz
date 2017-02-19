@@ -26,12 +26,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import quickquiz.model.QuizModel;
+import quickquiz.stores.LoggedIn;
 import quickquiz.stores.Quiz;
 
 /**
  *
- * @author Louis-Marie Matthews
+ * @author Carsten Cheyne, Louis-Marie Matthews
  */
 public class QuizCreation
   extends HttpServlet
@@ -76,12 +78,17 @@ public class QuizCreation
     
     private Quiz getQuizFromForm(HttpServletRequest request)
     {
-        request.getSession().setAttribute("staff-id", "STAFF123"); // TODO: TEMP
+        
         String name = request.getParameter("quiz-name");
         String moduleId = request.getParameter("quiz-module-id");
         String description = request.getParameter("quiz-description");
-        String staffId = (String) request.getSession().getAttribute("staff-id");
-        Quiz quiz = new Quiz(name, description, moduleId, staffId, "");
+        
+        HttpSession session = request.getSession();
+        LoggedIn lg = (LoggedIn)session.getAttribute("loggedIn");
+        String staffId = (String) lg.getUsername();;
+        
+        Quiz quiz = new Quiz(description, moduleId, name, staffId);
+        
         return quiz;
     }
 }

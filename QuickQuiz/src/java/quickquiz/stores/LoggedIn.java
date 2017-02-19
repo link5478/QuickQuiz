@@ -23,4 +23,26 @@ package quickquiz.stores;
  */
 public class LoggedIn {
     
+    private String username;
+    private String userType = "student";
+    
+    public void setUsername(String Username)
+    {
+        username = Username;
+    }
+    
+    public String getUsername()
+    {
+        return username;
+    }
+    
+    public void setUserType(String type)
+    {
+        userType = type;
+    }
+    
+    public String getUserType()
+    {
+        return userType;
+    }
 }

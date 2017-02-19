@@ -7,7 +7,7 @@
     </servlet>
     <servlet>
         <servlet-name>Login</servlet-name>
-        <servlet-class>servlet.Login</servlet-class>
+        <servlet-class>quickquiz.servlets.Login</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>QuizCreation</servlet-name>
@@ -25,6 +25,10 @@
         <servlet-name>QuizCreation</servlet-name>
         <url-pattern>/quiz-creation</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewQuiz</servlet-name>
+        <url-pattern>/ViewQuiz/*</url-pattern>
+    </servlet-mapping
     <session-config>
         <session-timeout>
             30

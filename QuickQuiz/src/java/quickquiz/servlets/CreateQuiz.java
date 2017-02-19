@@ -19,6 +19,7 @@ package quickquiz.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -70,7 +71,8 @@ public class CreateQuiz extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        RequestDispatcher rd = request.getRequestDispatcher("/CreateQuiz.jsp");
+        rd.forward(request, response);
     }
 
     /**
@@ -84,7 +86,11 @@ public class CreateQuiz extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        String qName = request.getParameter("quizName");
+        String qDesc = request.getParameter("quizDesc");
+        String modID = request.getParameter("module");
+
     }
 
     /**

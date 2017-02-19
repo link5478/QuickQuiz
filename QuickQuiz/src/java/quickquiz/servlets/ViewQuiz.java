@@ -71,8 +71,13 @@ public class ViewQuiz extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PrintWriter pw = response.getWriter();
-        pw.print(request.getRequestURL());
-        pw.close();
+        //pw.print(request.getRequestURL());
+        String pageURL = request.getRequestURL().toString();
+        String[] splitURL = pageURL.split("/");
+        String quizID = splitURL[5];
+        pw.print(quizID);
+            pw.close();
+
         processRequest(request, response);
     }
 

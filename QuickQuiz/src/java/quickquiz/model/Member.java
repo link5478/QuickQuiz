@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package quickquiz.module;
+package quickquiz.model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -30,6 +30,7 @@ import quickquiz.lib.Database;
 public class Member
 {
   // TODO: hash passwords in db
+  // TODO: enum instead of string for staffOrStudent
   /**
    * This method checks that the given login details are correct, depending on
    * the member's role (staffOrStudent). This can either be "staff" or "student".

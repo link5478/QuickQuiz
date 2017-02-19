@@ -85,9 +85,9 @@ public class QuizCreation
         
         HttpSession session = request.getSession();
         LoggedIn lg = (LoggedIn)session.getAttribute("loggedIn");
-        String staffId = (String) lg.getUsername();;
+        String staffId = (String) lg.getUsername();
         
-        Quiz quiz = new Quiz(description, moduleId, name, staffId);
+        Quiz quiz = new Quiz(name, description, moduleId, "", staffId);
         
         return quiz;
     }

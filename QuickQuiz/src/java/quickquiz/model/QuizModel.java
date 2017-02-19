@@ -28,7 +28,7 @@ import quickquiz.stores.Quiz;
 
 /**
  *
- * @author  Carsten Cheyne, Louis-Marie Matthews, Joshua Hogarth
+ * @author Louis-Marie Matthews
  */
 public class QuizModel
 {
@@ -52,9 +52,49 @@ public class QuizModel
             if (statement != null) {
                 statement.close();
             }
-        }        
+        }
+        
     }
     
+    public static Quiz viewQuiz(String name) throws SQLException, ClassNotFoundException, InstantiationException,
+           IllegalAccessException
+    {
+        Connection connection;
+        PreparedStatement statement = null;
+        ResultSet resultSet;
+        String sql;
+        Quiz product = new Quiz("","","","","");
+        try 
+        {
+            connection = Database.getInstance();
+            
+            sql = "CALL `shift-two_quizmanager`.`ViewQuiz`(?)";
+            
+            
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, name);
+            resultSet = statement.executeQuery();
+            
+            while (resultSet.next()) {
+                
+                String quizName = resultSet.getString("Quiz Name");
+                String desc = resultSet.getString("Description");
+                String moduleID = resultSet.getString("Module ID");
+                String moduleName = resultSet.getString("Module Name");
+                String staffName = resultSet.getString("Staff Name");
+                product = new quickquiz.stores.Quiz(quizName, desc, moduleID, moduleName, staffName);
+            }
+            
+            
+        }
+        finally {
+            if (statement != null) 
+            {
+              statement.close();
+            }
+        }  
+        return product;
+    }    
     
     public static List<String> getQuizzes(String moduleID)
             throws SQLException, ClassNotFoundException, InstantiationException,

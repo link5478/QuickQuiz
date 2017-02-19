@@ -23,20 +23,24 @@ package quickquiz.stores;
  */
 public class Quiz
 {
+    private String quizName_;
     private String description_;
     private String moduleId_;
+    private String moduleName_;
     private String name_;
     private String staffId_;
+    private String staffName_;
     
     
     // TODO: name and int limited to db's lengths?
-    public Quiz(String description, String moduleId, String name,
-                String staffId)
+    public Quiz(String quizName, String description, String moduleId, String moduleName,
+                String staffName)
     {
+        quizName_ = quizName;
         description_ = description;
         moduleId_ = moduleId;
-        name_ = name;
-        staffId_ = staffId;
+        moduleName_ = moduleName;
+        staffName_ = staffName;
     }
     
     

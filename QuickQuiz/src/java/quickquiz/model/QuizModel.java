@@ -17,16 +17,14 @@
  */
 package quickquiz.model;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 import quickquiz.lib.Database;
 import quickquiz.stores.Quiz;
 
 /**
  *
- * @author Louis-Marie Matthews
+ * @author  Carsten Cheyne, Louis-Marie Matthews
  */
 public class QuizModel
 {

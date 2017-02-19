@@ -78,7 +78,11 @@ public class Login extends HttpServlet {
     {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        String type = "student";
+        String type ="student";
+        if(request.getParameter("type") != null)
+        {
+            type = "teacher";
+        }
         
         if(username.isEmpty() || username.equals("") || password.isEmpty() || password.equals(""))
         {
@@ -129,7 +133,7 @@ public class Login extends HttpServlet {
             throws ServletException, IOException
     {
             request.setAttribute("message", "detail success");
-            RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
             rd.forward(request, response);
     }
 

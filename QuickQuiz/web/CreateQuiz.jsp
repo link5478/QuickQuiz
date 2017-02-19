@@ -15,6 +15,7 @@
         <h1>This is the Create Quiz Page</h1>
         <p> </p>
         
+        <form method="post" action="CreateQuiz">
         Quiz Name
         <input type ="text" name="quizName" >
         
@@ -33,8 +34,9 @@
         
         <br/> <br/>
 
-        <button type="button" onclick="">Submit</button>
+        <button type="submit">Submit</button>
         
+        </form>
         <p> </p>
 
     </body>

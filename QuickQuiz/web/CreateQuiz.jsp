@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Create a Quiz</title>
     </head>
     <body>
         <h1>This is the Create Quiz Page</h1>
@@ -33,7 +33,7 @@
         
         <br/> <br/>
 
-        <button type="button" onclick="">Submit </button>
+        <button type="button" onclick="">Submit</button>
         
         <p> </p>
 

@@ -7,7 +7,7 @@
     </servlet>
     <servlet>
         <servlet-name>Login</servlet-name>
-        <servlet-class>servlet.Login</servlet-class>
+        <servlet-class>quickquiz.servlets.Login</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>

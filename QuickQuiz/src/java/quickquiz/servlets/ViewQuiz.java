@@ -19,21 +19,18 @@ package quickquiz.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Set;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import quickquiz.model.Member;
-import quickquiz.stores.LoggedIn;
 
 /**
  *
- * @author Josh Hogarth
+ * @author craigchicken
  */
-public class Login extends HttpServlet {
+@WebServlet(name = "ViewQuiz", urlPatterns = {"/ViewQuiz"})
+public class ViewQuiz extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -52,10 +49,10 @@ public class Login extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Login</title>");            
+            out.println("<title>Servlet ViewQuiz</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Login at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ViewQuiz at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -73,12 +70,11 @@ public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        PrintWriter pw = response.getWriter();
+        pw.print(request.getRequestURL());
+        pw.close();
         processRequest(request, response);
-        
-        RequestDispatcher rd =  request.getRequestDispatcher("login.jsp");
-        rd.forward(request, response);   
     }
-    
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -92,61 +88,6 @@ public class Login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        String type = "student";
-        
-        if(username.isEmpty() || username.equals("") || password.isEmpty() || password.equals(""))
-        {
-            returnUserToLoginPageWithError(request, response);
-            return;
-        }
-        
-        boolean valid = false;
-        try
-        {
-            valid = Member.areLoginDetailsValid(username, password,type);
-            
-            if(valid)
-            {
-                // log them in.
-                // create loggedIn store
-                LoggedIn lg = new LoggedIn();
-                //lg.setUsername(username);
-                
-                HttpSession session = request.getSession();
-                session.setAttribute("loggedIn", lg);
-                
-                returnUserToLoginSuccess(request, response);
-                
-            }
-            else
-            {
-               // send back error
-                returnUserToLoginPageWithError(request, response);
-            }
-        }
-        catch(Exception e)
-        {
-            
-        }    
-    }
-    
-    private void returnUserToLoginPageWithError(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
-    {
-            request.setAttribute("message", "detail error");
-            RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-            rd.forward(request, response);
-    }
-    
-     private void returnUserToLoginSuccess(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
-    {
-            request.setAttribute("message", "detail success");
-            RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-            rd.forward(request, response);
     }
 
     /**
@@ -156,8 +97,7 @@ public class Login extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "This servlet is responsible for handling the user validation "
-                + "for logging in.";
+        return "Short description";
     }// </editor-fold>
 
 }

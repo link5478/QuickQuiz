@@ -17,6 +17,10 @@
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewQuiz</servlet-name>
+        <url-pattern>/ViewQuiz/*</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

@@ -103,6 +103,7 @@ public class Login extends HttpServlet {
                 LoggedIn lg = new LoggedIn();
                 lg.setUsername(username);                             
                 lg.setUserType(type);
+                lg.setModule(Member.getStudentModuleID(username));
                 
                 HttpSession session = request.getSession();
                 session.setAttribute("loggedIn", lg);

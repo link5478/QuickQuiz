@@ -19,6 +19,7 @@ package quickquiz.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.Set;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -27,6 +28,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.ServletOutputStream;
 import quickquiz.model.Member;
 import quickquiz.stores.LoggedIn;
 
@@ -78,12 +80,15 @@ public class Login extends HttpServlet {
     {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        String type = "student";
+        String type ="student";
+        if(request.getParameter("type") != null)
+        {
+            type = "staff";
+        }
         
         if(username.isEmpty() || username.equals("") || password.isEmpty() || password.equals(""))
         {
             returnUserToLoginPageWithError(request, response);
-            return;
         }
         
         boolean valid = false;
@@ -96,9 +101,9 @@ public class Login extends HttpServlet {
                 // log them in.
                 // create loggedIn store
                 LoggedIn lg = new LoggedIn();
-                lg.setUsername(username);
+                lg.setUsername(username);                             
                 lg.setUserType(type);
-          
+                
                 HttpSession session = request.getSession();
                 session.setAttribute("loggedIn", lg);
                 
@@ -110,7 +115,7 @@ public class Login extends HttpServlet {
                 returnUserToLoginPageWithError(request, response);
             }
         }
-        catch(Exception e)
+        catch(IOException | ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException | ServletException e)
         {
             
         } 
@@ -128,7 +133,7 @@ public class Login extends HttpServlet {
             throws ServletException, IOException
     {
             request.setAttribute("message", "detail success");
-            RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
             rd.forward(request, response);
     }
 

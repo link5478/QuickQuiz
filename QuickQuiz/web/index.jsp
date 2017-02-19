@@ -1,21 +1,8 @@
-<%@page import="quickquiz.module.Member"%>
-<%@page import="quickquiz.lib.Database" %>
+<a href="/QuickQuiz/Login"> Log me in </a>
 
-
-<!--
-<%
-  if (Member.areLoginDetailsValid("140023542", "passwor", "student")){
-    %>
-    Login successful.
-    <%
-  }
-  else {
+<%  String s = (String)request.getAttribute("message");
+                if(s != null)
+                {
+                    out.println(s);
+                }
 %>
-Wrong login details.
-<%
-  }
-%>
-
--->
-
-<a href="/Login"> Log me in </a>

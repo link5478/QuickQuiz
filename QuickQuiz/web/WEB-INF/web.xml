@@ -5,30 +5,52 @@
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+    
     <servlet>
         <servlet-name>Login</servlet-name>
         <servlet-class>quickquiz.servlets.Login</servlet-class>
     </servlet>
+    
+    <servlet>
+        <servlet-name>ViewQuiz</servlet-name>
+        <servlet-class>quickquiz.servlets.ViewQuiz</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>Index</servlet-name>
+        <servlet-class>quickquiz.servlets.Index</servlet-class>
+    </servlet>
+        
     <servlet>
         <servlet-name>QuizCreation</servlet-name>
         <servlet-class>quickquiz.servlets.QuizCreation</servlet-class>
     </servlet>
+    
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
     </servlet-mapping>
+    
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
     </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>Index</servlet-name>
+        <url-pattern>/Index</url-pattern>
+    </servlet-mapping>
+    
     <servlet-mapping>
         <servlet-name>QuizCreation</servlet-name>
         <url-pattern>/quiz-creation</url-pattern>
     </servlet-mapping>
+    
     <servlet-mapping>
         <servlet-name>ViewQuiz</servlet-name>
         <url-pattern>/ViewQuiz/*</url-pattern>
-    </servlet-mapping
+    </servlet-mapping>
+    
     <session-config>
         <session-timeout>
             30

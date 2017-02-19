@@ -12,6 +12,12 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <%  String s = (String)request.getAttribute("message");
+                if(s != null)
+                {
+                    out.println(s);
+                }
+%>
         <form method="post" action="Login">
         Username: <br>
         <input type="text" name="username"><br>

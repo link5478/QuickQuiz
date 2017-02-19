@@ -26,14 +26,17 @@ public class Quiz
     private String description_;
     private Integer moduleId_;
     private String name_;
+    private String staffId_;
     
     
     // TODO: name and int limited to db's lengths?
-    public Quiz(String description, Integer moduleId, String name)
+    public Quiz(String description, Integer moduleId, String name,
+                String staffId)
     {
         name_ = name;
         moduleId_ = moduleId;
         description_ = description;
+        staffId_ = staffId;
     }
     
     
@@ -59,6 +62,13 @@ public class Quiz
     
     
     
+    public String getStaffId()
+    {
+        return staffId_;
+    }
+    
+    
+    
     public void setDescription(String description)
     {
         description_ = description;
@@ -76,5 +86,12 @@ public class Quiz
     public void setName(String name)
     {
         name_ = name;
+    }
+    
+    
+    
+    public void setStaffId(String staffId)
+    {
+        staffId_ = staffId;
     }
 }

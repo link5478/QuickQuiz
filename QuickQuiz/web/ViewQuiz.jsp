@@ -18,6 +18,6 @@
         <p>Name:<% //= quizName%></p>
         <p>Module:<% //=moduleID%></p>
         
-        <% Quiz rs = Quiz.ViewQuiz(); %>
+        <% //Quiz rs = Quiz.ViewQuiz(); %>
     </body>
 </html>

@@ -15,8 +15,6 @@
         <td>
           <input disabled form="question-form" id="quiz-id" type="text"
                  value="<%= request.getAttribute("quiz-id") %>" />
-          <input form="question-form" name="quiz-id" type="hidden"
-                 value="<%= request.getAttribute("quiz-id") %>" />
         </td>
       </tr>
       <tr>

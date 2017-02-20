@@ -55,17 +55,25 @@ public class NewQuestion
   
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response)
+    throws IOException
   {
-    Question newQuestion = getQuestionFromForm(request);
     try {
+      Question newQuestion = getQuestionFromForm(request);
       QuestionModel.insertQuestion (newQuestion);
-    } catch (SQLException ex) {
+    }
+    catch (MalformedUrlException e) {
+      response.sendError(HttpServletResponse.SC_NOT_FOUND);
+    }
+    catch (SQLException ex) {
       Logger.getLogger(NewQuestion.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (ClassNotFoundException ex) {
+    }
+    catch (ClassNotFoundException ex) {
       Logger.getLogger(NewQuestion.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (InstantiationException ex) {
+    }
+    catch (InstantiationException ex) {
       Logger.getLogger(NewQuestion.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (IllegalAccessException ex) {
+    }
+    catch (IllegalAccessException ex) {
       Logger.getLogger(NewQuestion.class.getName()).log(Level.SEVERE, null, ex);
     }
     // TODO: redirect to a page
@@ -73,8 +81,8 @@ public class NewQuestion
   
   
   
-  private String getQuizId(HttpServletRequest request)
-          throws MalformedUrlException
+  private Integer getQuizId(HttpServletRequest request)
+    throws MalformedUrlException
   {
     String url = getUri(request);
     String[] uriElements = url.split("/");
@@ -82,12 +90,13 @@ public class NewQuestion
       // TODO: find a more appropriate exception
       throw new MalformedUrlException();
     }
-    return uriElements[1];
+    return Integer.parseInt(uriElements[1]);
   }
   
   
   
   private Question getQuestionFromForm(HttpServletRequest request)
+    throws MalformedUrlException
   {
     Question question = new Question();
     question.setAnswer1(request.getParameter("answer1"));
@@ -102,10 +111,7 @@ public class NewQuestion
     }
     question.setExplanation(request.getParameter("explanation"));
     question.setQuestionText(request.getParameter("question-text"));
-    if (request.getParameter("quiz-id") != null) {
-        Integer i = Integer.parseInt (request.getParameter("quiz-id"));
-        question.setQuizId (i);
-    }
+    question.setQuizId (getQuizId(request));
     return question;
   }
 }

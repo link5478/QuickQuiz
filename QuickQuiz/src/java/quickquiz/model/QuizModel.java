@@ -46,7 +46,6 @@ public class QuizModel
             statement.setString(3, quiz.getModuleId());
             statement.setString(4, quiz.getStaffId());
             statement.executeUpdate();
-            statement.close();
         }
         finally {
             if (statement != null) {

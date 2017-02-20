@@ -12,16 +12,18 @@
           <label form="question-form" for="quiz-id">Quiz Id: </label>
         </td>
         <td>
-          <input value="<%= request.getAttribute("quiz-id") %>" form="question-form"
-                 id="quiz-id" name="quiz-id" type="text" disabled />
+          <input disabled form="question-form" id="quiz-id" type="text"
+                 value="<%= request.getAttribute("quiz-id") %>" />
+          <input form="question-form" name="quiz-id" type="hidden"
+                 value="<%= request.getAttribute("quiz-id") %>" />
         </td>
       </tr>
       <tr>
         <td>
-          <label form="question-form" for="question">Question: </label>
+          <label form="question-form" for="question-text">Question: </label>
         </td>
         <td>
-          <input form="question-form" id="question" name="question" type="text" />
+          <input form="question-form" id="question-text" name="question-text" type="text" />
         </td>
       </tr>
       <tr>
@@ -78,7 +80,7 @@
         </td>
       </tr>
     </table>
-      <form action="new-question" id="question-form" method="post">
+      <form action="#" id="question-form" method="post">
           <button type="reset">Reset</button>
           <button type="submit">Add question</button>
       </form>

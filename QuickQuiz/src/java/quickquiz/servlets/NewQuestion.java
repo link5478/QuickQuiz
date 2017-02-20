@@ -85,11 +85,18 @@ public class NewQuestion
     question.setAnswer2(request.getParameter("answer2"));
     question.setAnswer3(request.getParameter("answer3"));
     question.setAnswer4(request.getParameter("answer4"));
-    int correct = Integer.parseInt(request.getParameter("correct-answer"));
-    question.setCorrectAnswer(correct);
+    if (request.getParameter("correct-answer") != null) {
+        question.setCorrectAnswer (request.getParameter ("correct-answer"));
+    }
+    else {
+        question.setCorrectAnswer (1);
+    }
     question.setExplanation(request.getParameter("explanation"));
     question.setQuestionText(request.getParameter("question-text"));
-    question.setQuizId(Integer.getInteger(request.getParameter("quiz-id")));
+    if (request.getParameter("quiz-id") != null) {
+        Integer i = Integer.parseInt (request.getParameter("quiz-id"));
+        question.setQuizId (i);
+    }
     return question;
   }
 }

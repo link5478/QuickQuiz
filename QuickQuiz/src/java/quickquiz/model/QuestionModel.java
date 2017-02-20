@@ -35,18 +35,19 @@ public class QuestionModel
     // TODO; check that one row has been affected, otherwise throw exception
     PreparedStatement statement = null;
     try {
-      String sql = "INSERT INTO question (questionText, answer1, answer2, " + 
-                   "answer3, answer4, explanation, correctAnswer, quizID) " + 
-                   "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+      //String sql = "INSERT INTO question (questionText, answer1, answer2, " + 
+      //             "answer3, answer4, explanation, correctAnswer, quizID) " + 
+      //             "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+      String sql = "CALL `AddQuestions`(?, ?, ?, ?, ?, ?, ?, ?, 1);";
       statement = Database.getInstance().prepareStatement(sql);
-      statement.setString (0, question.getQuestionText());
-      statement.setString (1, question.getAnswer1());
-      statement.setString (2, question.getAnswer2());
-      statement.setString (3, question.getAnswer3());
-      statement.setString (4, question.getAnswer4());
-      statement.setString (5, question.getExplanation());
-      statement.setInt (6, question.getCorrectAnswer());
-      statement.setInt (7, question.getQuizId());
+      statement.setString (1, question.getQuestionText());
+      statement.setString (2, question.getAnswer1());
+      statement.setString (3, question.getAnswer2());
+      statement.setString (4, question.getAnswer3());
+      statement.setString (5, question.getAnswer4());
+      statement.setString (6, question.getExplanation());
+      statement.setInt (7, question.getCorrectAnswer());
+      statement.setInt (8, question.getQuizId());
       statement.executeUpdate();
     }
     finally {

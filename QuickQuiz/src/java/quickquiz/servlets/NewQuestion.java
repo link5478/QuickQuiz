@@ -26,6 +26,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import quickquiz.exception.MalformedUrlException;
 import quickquiz.model.QuestionModel;
 import quickquiz.stores.Question;
 
@@ -34,16 +35,20 @@ import quickquiz.stores.Question;
  * @author Louis-Marie Matthews
  */
 public class NewQuestion
-  extends HttpServlet
+  extends ServletTemplate
 {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException
   {
-    
-    request.setAttribute("quiz-id", getQuizId(request));
-    RequestDispatcher rd = request.getRequestDispatcher("/new-question.jsp");
-    rd.forward(request, response);
+    try {
+      request.setAttribute("quiz-id", getQuizId(request));
+      RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/new-question.jsp");
+      rd.forward(request, response);
+    }
+    catch(MalformedUrlException e) {
+      response.sendError(HttpServletResponse.SC_NOT_FOUND);
+    }
   }
   
   
@@ -69,11 +74,15 @@ public class NewQuestion
   
   
   private String getQuizId(HttpServletRequest request)
+          throws MalformedUrlException
   {
-    String url = request.getRequestURI().toString();
-    String[] quizId = url.split("/");
-    // TODO: exception if quizId > 3
-    return quizId[3];
+    String url = getUri(request);
+    String[] uriElements = url.split("/");
+    if (uriElements.length != 2) {
+      // TODO: find a more appropriate exception
+      throw new MalformedUrlException();
+    }
+    return uriElements[1];
   }
   
   

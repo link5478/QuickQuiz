@@ -1,0 +1,38 @@
+/*
+ * QuickQuiz is a database application allowing staff to manage
+ * students to complete them.
+
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+package quickquiz.servlets;
+
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+
+/**
+ * Provides some utility functions to servlets that inherit it.
+ * 
+ * @author Louis-Marie Matthews
+ */
+public class ServletTemplate
+  extends HttpServlet
+{
+  public static String getUri (HttpServletRequest request)
+  {
+    // TODO: check that first char is always a /
+    String uri = request.getRequestURI().substring(request.getContextPath()
+                 .length() + 1); // +1 to remove fisrt slash
+    return uri;
+  }
+}

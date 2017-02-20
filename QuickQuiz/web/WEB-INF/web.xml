@@ -30,7 +30,8 @@
         <servlet-name>NewQuestion</servlet-name>
         <servlet-class>quickquiz.servlets.NewQuestion</servlet-class>
     </servlet>
-    
+    <!-- TODO: Ideally, entering directly page.jsp in the url bar should return a
+404 page, so that the technology used (java) is not disclosed. -->
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>

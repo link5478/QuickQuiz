@@ -39,7 +39,7 @@ public class ServletTemplate
   
   
   
-  private Integer getQuizId(HttpServletRequest request)
+  protected Integer getQuizId(HttpServletRequest request)
     throws MalformedUrlException
   {
     String url = getUri(request);

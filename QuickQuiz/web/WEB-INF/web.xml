@@ -5,60 +5,84 @@
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+    
     <servlet>
         <servlet-name>Login</servlet-name>
         <servlet-class>quickquiz.servlets.Login</servlet-class>
     </servlet>
+    
     <servlet>
         <servlet-name>ViewQuiz</servlet-name>
         <servlet-class>quickquiz.servlets.ViewQuiz</servlet-class>
     </servlet>
+    
     <servlet>
         <servlet-name>Index</servlet-name>
         <servlet-class>quickquiz.servlets.Index</servlet-class>
     </servlet>
+    
     <servlet>
         <servlet-name>QuizCreation</servlet-name>
         <servlet-class>quickquiz.servlets.QuizCreation</servlet-class>
     </servlet>
+    
     <servlet>
         <servlet-name>NewQuestion</servlet-name>
         <servlet-class>quickquiz.servlets.NewQuestion</servlet-class>
     </servlet>
     <!-- TODO: Ideally, entering directly page.jsp in the url bar should return a
 404 page, so that the technology used (java) is not disclosed. -->
-    <servlet>
+    
+    <servlet> 
         <servlet-name>QuizList</servlet-name>
         <servlet-class>quickquiz.servlets.QuizList</servlet-class>
     </servlet>
+    
+    <servlet>
+        <servlet-name>QuizAnsweringPage</servlet-name>
+        <servlet-class>quickquiz.servlets.QuizAnsweringPage</servlet-class>
+    </servlet>
+    
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
     </servlet-mapping>
+    
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
     </servlet-mapping>
+    
     <servlet-mapping>
         <servlet-name>Index</servlet-name>
         <url-pattern>/Index</url-pattern>
     </servlet-mapping>
+    
     <servlet-mapping>
         <servlet-name>QuizCreation</servlet-name>
         <url-pattern>/quiz-creation</url-pattern>
     </servlet-mapping>
+    
     <servlet-mapping>
         <servlet-name>ViewQuiz</servlet-name>
         <url-pattern>/ViewQuiz/*</url-pattern>
     </servlet-mapping>
+    
     <servlet-mapping>
         <servlet-name>NewQuestion</servlet-name>
         <url-pattern>/new-question/*</url-pattern>
     </servlet-mapping>
+    
     <servlet-mapping>
         <servlet-name>QuizList</servlet-name>
         <url-pattern>/QuizList</url-pattern>
     </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>QuizAnsweringPage</servlet-name>
+        <url-pattern>/quiz-answering-page/*</url-pattern>
+    </servlet-mapping>
+    
     <session-config>
         <session-timeout>
             30

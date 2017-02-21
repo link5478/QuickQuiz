@@ -14,10 +14,16 @@
     </head>
     <body>
         <%String quizID = (String)request.getAttribute("quizID"); %>
-        <p>Quiz ID:<%=quizID%></p>
-        <p>Name:<% //= quizName%></p>
-        <p>Module:<% //=moduleID%></p>
+        <%String quizName = (String)request.getAttribute("quizName"); %>
+        <%String description = (String)request.getAttribute("description"); %>
+        <%String moduleID = (String)request.getAttribute("moduleID"); %>
+        <%String moduleName = (String)request.getAttribute("moduleName"); %>
+        <%String staffName = (String)request.getAttribute("staffName"); %>
         
-        <% //Quiz rs = Quiz.ViewQuiz(); %>
+        <p>Quiz ID:<%= quizID%></p>
+        <p>Name:<%= quizName%></p>
+        <p>Module ID:<%= moduleID%></p>
+        <p>Module Name:<%= moduleName%></p>
+        <p>Staff Name:<%= staffName%></p>
     </body>
 </html>

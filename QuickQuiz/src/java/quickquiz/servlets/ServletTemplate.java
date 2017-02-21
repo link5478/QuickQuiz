@@ -19,6 +19,7 @@ package quickquiz.servlets;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import quickquiz.exception.MalformedUrlException;
 
 /**
  * Provides some utility functions to servlets that inherit it.
@@ -34,5 +35,19 @@ public class ServletTemplate
     String uri = request.getRequestURI().substring(request.getContextPath()
                  .length() + 1); // +1 to remove fisrt slash
     return uri;
+  }
+  
+  
+  
+  private Integer getQuizId(HttpServletRequest request)
+    throws MalformedUrlException
+  {
+    String url = getUri(request);
+    String[] uriElements = url.split("/");
+    if (uriElements.length != 2) {
+      // TODO: find a more appropriate exception
+      throw new MalformedUrlException();
+    }
+    return Integer.parseInt(uriElements[1]);
   }
 }

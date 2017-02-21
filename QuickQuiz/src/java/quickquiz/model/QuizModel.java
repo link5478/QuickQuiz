@@ -41,10 +41,10 @@ public class QuizModel
             String sql = "INSERT INTO quiz (name, description, moduleID, " + 
                          "staffID) VALUES (?, ?, ?, ?);";
             statement = Database.getInstance().prepareStatement(sql);
-            statement.setString(1, quiz.getName());
+            statement.setString(1, quiz.getQuizName());
             statement.setString(2, quiz.getDescription());
             statement.setString(3, quiz.getModuleId());
-            statement.setString(4, quiz.getStaffId());
+            statement.setString(4, quiz.getStaffName());
             statement.executeUpdate();
         }
         finally {

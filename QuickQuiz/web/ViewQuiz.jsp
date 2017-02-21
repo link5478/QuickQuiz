@@ -20,10 +20,10 @@
         <%String moduleName = (String)request.getAttribute("moduleName"); %>
         <%String staffName = (String)request.getAttribute("staffName"); %>
         
-        <p>Quiz ID:<%= quizID%></p>
-        <p>Name:<%= quizName%></p>
-        <p>Module ID:<%= moduleID%></p>
-        <p>Module Name:<%= moduleName%></p>
-        <p>Staff Name:<%= staffName%></p>
+        <p>Quiz ID: <%= quizID%></p>
+        <p>Name: <%= quizName%></p>
+        <p>Module ID: <%= moduleID%></p>
+        <p>Module Name: <%= moduleName%></p>
+        <p>Staff Name: <%= staffName%></p>
     </body>
 </html>

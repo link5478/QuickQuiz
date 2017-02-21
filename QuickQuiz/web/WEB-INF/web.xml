@@ -31,6 +31,10 @@
         <servlet-name>QuizList</servlet-name>
         <servlet-class>quickquiz.servlets.QuizList</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>quickquiz.servlets.Logout</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -58,6 +62,10 @@
     <servlet-mapping>
         <servlet-name>QuizList</servlet-name>
         <url-pattern>/QuizList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/Logout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

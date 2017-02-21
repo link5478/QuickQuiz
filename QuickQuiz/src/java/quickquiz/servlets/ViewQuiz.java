@@ -19,11 +19,16 @@ package quickquiz.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import static quickquiz.model.QuizModel.viewQuiz;
+import quickquiz.stores.Quiz;
 
 /**
  *
@@ -78,8 +83,33 @@ public class ViewQuiz extends HttpServlet {
         //actual quiz id is last part of URL, after sixth slash
         String retrievedQuizID = splitURL[5];
         request.setAttribute("quizID", retrievedQuizID);
-        //pass to JSP
-        request.getRequestDispatcher("/ViewQuiz.jsp").forward(request, response);
+        Quiz quiz = new Quiz("", "", "", "", "");
+        try {
+            //pass to JSP
+            quiz = viewQuiz(retrievedQuizID);
+        } catch (SQLException ex) {
+            Logger.getLogger(ViewQuiz.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ViewQuiz.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(ViewQuiz.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(ViewQuiz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String quizName = quiz.getQuizName();
+        String description = quiz.getDescription();
+        String moduleID = quiz.getModuleId();
+        String moduleName = quiz.getModuleName();
+        String staffName = quiz.getStaffName();
+        
+        request.setAttribute("quizName", quizName);
+        request.setAttribute("description", description);
+        request.setAttribute("moduleID", moduleID);
+        request.setAttribute("moduleName", moduleName);
+        request.setAttribute("staffName", staffName);
+        
+        
+        request.getRequestDispatcher("/WEB-INF/view-quiz.jsp").forward(request, response);
 
         processRequest(request, response);
     }

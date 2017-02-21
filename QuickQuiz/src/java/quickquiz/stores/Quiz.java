@@ -50,7 +50,10 @@ public class Quiz
         return description_;
     }
     
-    
+    public String getModuleName()
+    {
+        return moduleName_;
+    }
     
     public String getModuleId()
     {
@@ -59,16 +62,16 @@ public class Quiz
     
     
     
-    public String getName()
+    public String getQuizName()
     {
-        return name_;
+        return quizName_;
     }
     
     
     
-    public String getStaffId()
+    public String getStaffName()
     {
-        return staffId_;
+        return staffName_;
     }
     
     
@@ -87,15 +90,20 @@ public class Quiz
     
     
     
-    public void setName(String name)
+    public void setQuizName(String quizName)
     {
-        name_ = name;
+        quizName_ = quizName;
     }
     
     
     
-    public void setStaffId(String staffId)
+    public void setStaffName(String staffName)
     {
-        staffId_ = staffId;
+        staffName_ = staffName;
+    }
+    
+    public void setModuleName(String moduleName)
+    {
+        moduleName_ = moduleName;
     }
 }

@@ -20,7 +20,7 @@
         <% 
             LoggedIn user = (LoggedIn)session.getAttribute("loggedIn");
             List<String> ids = new ArrayList<>();
-            String myModule = Member.getStudentModuleID(user.getUsername());
+            String myModule = user.getModule();
             ids = QuizModel.getQuizzes(myModule);            
         %>
         

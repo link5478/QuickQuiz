@@ -18,9 +18,7 @@
 package quickquiz.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.Set;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -28,7 +26,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.ServletOutputStream;
 import quickquiz.model.Member;
 import quickquiz.stores.LoggedIn;
 
@@ -103,8 +100,7 @@ public class Login extends HttpServlet {
                 LoggedIn lg = new LoggedIn();
                 lg.setUsername(username);                             
                 lg.setUserType(type);
-                lg.setModule(Member.getStudentModuleID(username));
-                
+                lg.setModule(Member.getModuleID(username, type));
                 HttpSession session = request.getSession();
                 session.setAttribute("loggedIn", lg);
                 

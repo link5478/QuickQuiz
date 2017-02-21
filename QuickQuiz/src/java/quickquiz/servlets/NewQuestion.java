@@ -81,20 +81,6 @@ public class NewQuestion
   
   
   
-  private Integer getQuizId(HttpServletRequest request)
-    throws MalformedUrlException
-  {
-    String url = getUri(request);
-    String[] uriElements = url.split("/");
-    if (uriElements.length != 2) {
-      // TODO: find a more appropriate exception
-      throw new MalformedUrlException();
-    }
-    return Integer.parseInt(uriElements[1]);
-  }
-  
-  
-  
   private Question getQuestionFromForm(HttpServletRequest request)
     throws MalformedUrlException
   {

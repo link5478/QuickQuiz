@@ -17,37 +17,27 @@
  */
 package quickquiz.servlets;
 
+import java.io.IOException;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import quickquiz.exception.MalformedUrlException;
+import javax.servlet.http.HttpServletResponse;
 
 /**
- * Provides some utility functions to servlets that inherit it.
- * 
- * @author Louis-Marie Matthews
+ *
+ * @author brynpirie
  */
-public class ServletTemplate
-  extends HttpServlet
-{
-  public static String getUri (HttpServletRequest request)
-  {
-    // TODO: check that first char is always a /
-    String uri = request.getRequestURI().substring(request.getContextPath()
-                 .length() + 1); // +1 to remove fisrt slash
-    return uri;
-  }
-  
-  
-  
-  protected Integer getQuizId(HttpServletRequest request)
-    throws MalformedUrlException
-  {
-    String url = getUri(request);
-    String[] uriElements = url.split("/");
-    if (uriElements.length != 2) {
-      // TODO: find a more appropriate exception
-      throw new MalformedUrlException();
-    }
-    return Integer.parseInt(uriElements[1]);
-  }
+public class QuizAnsweringPage extends HttpServlet{
+    
+    @Override
+    public void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
+    
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/quiz-answering-page.jsp") ;
+        rd.forward(request, response) ;
+    //Everything here will be executed when a user opens the Answer Page.
+    //Redirect user to the Answer JSP page.
+        
+}
+    
 }

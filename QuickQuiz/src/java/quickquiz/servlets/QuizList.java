@@ -70,7 +70,7 @@ public class QuizList extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        //    processRequest(request, response);
-        RequestDispatcher rd = request.getRequestDispatcher("QuizList.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/quiz-list.jsp");
         rd.forward(request, response);
     }
 

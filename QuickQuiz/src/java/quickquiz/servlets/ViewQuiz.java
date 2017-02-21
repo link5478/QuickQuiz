@@ -109,7 +109,7 @@ public class ViewQuiz extends HttpServlet {
         request.setAttribute("staffName", staffName);
         
         
-        request.getRequestDispatcher("/ViewQuiz.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/view-quiz.jsp").forward(request, response);
 
         processRequest(request, response);
     }

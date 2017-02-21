@@ -43,6 +43,11 @@
         <servlet-class>quickquiz.servlets.QuizAnsweringPage</servlet-class>
     </servlet>
     
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>quickquiz.servlets.Logout</servlet-class>
+    </servlet>
+    
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -81,6 +86,11 @@
     <servlet-mapping>
         <servlet-name>QuizAnsweringPage</servlet-name>
         <url-pattern>/quiz-answering-page/*</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/Logout</url-pattern>
     </servlet-mapping>
     
     <session-config>

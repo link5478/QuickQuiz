@@ -77,7 +77,7 @@ public class Member
     return correctLoginDetails;
   }
   
-  public static String getStudentModuleID(String ID)
+  public static String getModuleID(String ID, String type)
           throws SQLException, ClassNotFoundException, InstantiationException,
            IllegalAccessException
   {
@@ -89,7 +89,14 @@ public class Member
     
     try {
       connection = Database.getInstance();
-      sql = "SELECT moduleID from student where ID=?;";
+      if(type.equals("student"))
+      {
+        sql = "SELECT moduleID from student where ID=?;";
+      }
+      else
+      {
+          sql = "SELECT moduleID from staff where ID=?;";
+      }
       
       statement = connection.prepareStatement(sql);
       statement.setString(1, ID);

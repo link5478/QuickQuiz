@@ -38,8 +38,8 @@ import quickquiz.stores.Quiz;
 public class QuizCreation
   extends HttpServlet
 {
-    private static String jspForm = "/quiz-creation.jsp";
-    private static String jspError = "/quiz-creation-error.jsp";
+    private final String jspForm = "/WEB-INF/quiz-creation.jsp";
+    private final String jspError = "/WEB-INF/quiz-creation-error.jsp";
     
     
     

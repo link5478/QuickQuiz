@@ -21,7 +21,7 @@
                 }
         %>
         
-        <form method="post" action="Login">
+        <form method="post" action="login">
         Username: <br>
         <input type="text" name="username"><br>
         Password: <br>

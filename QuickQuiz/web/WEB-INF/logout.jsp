@@ -13,6 +13,7 @@
         <title>Log Out</title>
     </head>
     
+    <body>
         <h1>Logging out.</h1>
         <%
             session = request.getSession();
@@ -21,11 +22,11 @@
         
         <script type="text/JavaScript"> 
             setTimeout(function () {
-                document.location = "/QuickQuiz/Index";
+                document.location = "/QuickQuiz/index";
             }, 5000);
         </script>
         <p>Redirecting you...</p>
-        <p>Click <a href="Index" >here</a> if you are not redirected.</p>
-        
+        <p>Click <a href="index" >here</a> if you are not redirected.</p>
+    </body>
     
 </html>

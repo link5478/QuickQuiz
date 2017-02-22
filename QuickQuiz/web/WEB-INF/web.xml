@@ -55,12 +55,12 @@
     
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
-        <url-pattern>/Login</url-pattern>
+        <url-pattern>/login</url-pattern>
     </servlet-mapping>
     
     <servlet-mapping>
         <servlet-name>Index</servlet-name>
-        <url-pattern>/Index</url-pattern>
+        <url-pattern>/index</url-pattern>
     </servlet-mapping>
     
     <servlet-mapping>
@@ -70,7 +70,7 @@
     
     <servlet-mapping>
         <servlet-name>ViewQuiz</servlet-name>
-        <url-pattern>/ViewQuiz/*</url-pattern>
+        <url-pattern>/view-quiz/*</url-pattern>
     </servlet-mapping>
     
     <servlet-mapping>
@@ -80,7 +80,7 @@
     
     <servlet-mapping>
         <servlet-name>QuizList</servlet-name>
-        <url-pattern>/QuizList</url-pattern>
+        <url-pattern>/quiz-list</url-pattern>
     </servlet-mapping>
     
     <servlet-mapping>
@@ -90,7 +90,7 @@
     
     <servlet-mapping>
         <servlet-name>Logout</servlet-name>
-        <url-pattern>/Logout</url-pattern>
+        <url-pattern>/logout</url-pattern>
     </servlet-mapping>
     
     <session-config>

@@ -1,33 +1,68 @@
 <%@ page import="quickquiz.stores.LoggedIn" %>
 
-<% 
-    if(session.getAttribute("loggedIn") != null)
-    {
-        LoggedIn lg  = (LoggedIn)session.getAttribute("loggedIn");
-        %>
-        <h1> Welcome, <%=lg.getUsername() %>          
-        <%
-            if(lg.getUserType().equals("staff"))
-            {
-        %>
-                <br><a href="quiz-creation"> Create A Quiz </a>
-        <%
-            }
-            else
-            {
-                %>
-                <br><a href="QuizList"> View Quizzes </a>
-                <%
-            }
+<!DOCTYPE html>
+<html>
+
+    
+    
+<head>
+    <%@include file="/WEB-INF/jspf/head.jspf" %>
+</head>
+
+<body>
+
+    <%@include file="/WEB-INF/jspf/navbar.jspf" %>
+    
+    <div class="container indexcontainer">
+    
+    <%
+        if(session.getAttribute("loggedIn") != null) //Checks the session variable to see if the user is logged in.
+        {
+            LoggedIn lg  = (LoggedIn)session.getAttribute("loggedIn");
             %>
-                <br><a href="Logout">Log out</a>
-            
+
+            <h1> Welcome, <%=lg.getUsername() %>          
+
             <%
-    }
-    else
-    {
-        %>
-        <a href="Login"> Log in <a/>
-        <%
-    }
-%>
+                if(lg.getUserType().equals("staff")) //Checks to see if the user is Staff.
+                {
+            %>
+
+                    <br><a href="quiz-creation"> Create A Quiz </a>
+
+            <%
+                }
+                else
+                {
+                    %>
+
+                    <br><a href="QuizList"> View Quizzes </a>
+
+                    <%
+                }
+                %>
+
+                    <br><a href="logout">Log out</a>
+
+                <%
+        }
+        else
+        {
+            %>
+
+            <a href="login"> Log in </a>
+
+            <%
+        }
+    %>
+
+    </div>
+    
+<footer>
+    <%@include file="/WEB-INF/jspf/footer.jspf" %>
+</footer>
+
+</body>
+
+</html>
+

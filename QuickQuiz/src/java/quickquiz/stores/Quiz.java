@@ -17,6 +17,8 @@
  */
 package quickquiz.stores;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Louis-Marie Matthews
@@ -30,6 +32,8 @@ public class Quiz
     private String name_;
     private String staffId_;
     private String staffName_;
+    private ArrayList<Question> questions_;
+    
     
     
     // TODO: name and int limited to db's lengths?
@@ -41,6 +45,21 @@ public class Quiz
         moduleId_ = moduleId;
         moduleName_ = moduleName;
         staffName_ = staffName;
+        questions_ = new ArrayList<Question>();
+    }
+    
+    
+    
+    public void addQuestion(Question question)
+    {
+        questions_.add(question);   
+    }
+    
+    
+    
+    public Question getQuestion(int position)
+    {
+        return questions_.get(position);
     }
     
     
@@ -50,10 +69,14 @@ public class Quiz
         return description_;
     }
     
+    
+    
     public String getModuleName()
     {
         return moduleName_;
     }
+    
+    
     
     public String getModuleId()
     {
@@ -102,6 +125,8 @@ public class Quiz
         staffName_ = staffName;
     }
     
+    
+   
     public void setModuleName(String moduleName)
     {
         moduleName_ = moduleName;

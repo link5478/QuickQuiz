@@ -5,64 +5,65 @@
 
     
     
-<head>
-    <%@include file="/WEB-INF/jspf/head.jspf" %>
-</head>
+    <head>
+        <%@include file="/WEB-INF/jspf/head.jspf" %>
+    </head>
 
-<body>
+    <body>
 
-    <%@include file="/WEB-INF/jspf/navbar.jspf" %>
-    
-    <div class="container indexcontainer">
-    
-    <%
-        if(session.getAttribute("loggedIn") != null) //Checks the session variable to see if the user is logged in.
-        {
-            LoggedIn lg  = (LoggedIn)session.getAttribute("loggedIn");
-            %>
+        <%@include file="/WEB-INF/jspf/navbar.jspf" %>
 
-            <h1> Welcome, <%=lg.getUsername() %>          
+        <div class="container indexcontainer">
 
-            <%
-                if(lg.getUserType().equals("staff")) //Checks to see if the user is Staff.
-                {
-            %>
-
-                    <br><a href="quiz-creation"> Create A Quiz </a>
-
-            <%
-                }
-                else
-                {
-                    %>
-
-                    <br><a href="QuizList"> View Quizzes </a>
-
-                    <%
-                }
+        <%
+            if(session.getAttribute("loggedIn") != null) //Checks the session variable to see if the user is logged in.
+            {
+                LoggedIn lg  = (LoggedIn)session.getAttribute("loggedIn");
                 %>
 
-                    <br><a href="logout">Log out</a>
+                <h1> Welcome, <%=lg.getUsername() %>          
 
                 <%
-        }
-        else
-        {
-            %>
+                    if(lg.getUserType().equals("staff")) //Checks to see if the user is Staff.
+                    {
+                %>
 
-            <a href="login"> Log in </a>
+                        <br><a href="quiz-creation"> Create A Quiz </a>
 
-            <%
-        }
-    %>
+                <%
+                    }
+                    else
+                    {
+                        %>
 
-    </div>
-    
-<footer>
-    <%@include file="/WEB-INF/jspf/footer.jspf" %>
-</footer>
+                        <br><a href="QuizList"> View Quizzes </a>
 
-</body>
+                        <%
+                    }
+                    %>
+
+                        <br><a href="logout">Log out</a>
+
+                    <%
+            }
+            else
+            {
+                %>
+
+                <h1>Welcome to QuickQuiz.</h1>
+                <a href="login"> Log in </a>
+
+                <%
+            }
+        %>
+
+        </div>
+
+    <footer>
+        <%@include file="/WEB-INF/jspf/footer.jspf" %>
+    </footer>
+
+    </body>
 
 </html>
 

@@ -16,8 +16,10 @@
         <h1>Logging out.</h1>
         <%
             session = request.getSession();
-            session.removeAttribute("loggedIn");
-            
+            session.removeAttribute("loggedIn");           
         %>
+        
+        Click <a href="Index" >here</a> to redirect to home page.
+        
     
 </html>

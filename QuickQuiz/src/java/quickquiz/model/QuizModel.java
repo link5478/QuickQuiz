@@ -123,4 +123,25 @@ public class QuizModel
         }
         return IDs;
   }   
+    
+    // TODO: FIX THIS FUNCTION
+    // @Louie @Virgil
+    public static Quiz getQuiz(int quizID)
+            throws SQLException, ClassNotFoundException, InstantiationException,
+             IllegalAccessException
+    {
+        PreparedStatement statement = null;
+        try{
+            String sql = "";
+            statement = Database.getInstance().prepareStatement(sql);
+            
+        }
+        finally{
+            
+            if (statement !=null){
+                statement.close();
+            }       
+        }
+        return new Quiz("","","","","");
+    }
 }

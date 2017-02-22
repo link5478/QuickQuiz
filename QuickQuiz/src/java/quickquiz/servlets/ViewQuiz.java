@@ -22,11 +22,13 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import quickquiz.exception.MalformedUrlException;
 import static quickquiz.model.QuizModel.viewQuiz;
 import quickquiz.stores.Quiz;
 
@@ -81,6 +83,7 @@ public class ViewQuiz extends HttpServlet {
         //i hate regex
         String[] splitURL = pageURL.split("/");
         //actual quiz id is last part of URL, after sixth slash
+        try {
         String retrievedQuizID = splitURL[5];
         request.setAttribute("quizID", retrievedQuizID);
         Quiz quiz = new Quiz("", "", "", "", "");
@@ -109,9 +112,21 @@ public class ViewQuiz extends HttpServlet {
         request.setAttribute("staffName", staffName);
         
         
-        request.getRequestDispatcher("/WEB-INF/view-quiz.jsp").forward(request, response);
 
-        processRequest(request, response);
+        
+            request.getRequestDispatcher("/WEB-INF/view-quiz.jsp").forward(request, response);
+            processRequest(request, response);
+            
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            
+            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/quiz-answering-error.jsp") ;
+            rd.forward(request, response);
+            //processRequest(request, response);
+            //Redirects user to an error page if the Quiz ID is not found.
+            Logger.getLogger(QuizAnsweringPage.class.getName()).log(Level.SEVERE, null, ex);
+            //Logs the catch.
+        }
+        
     }
 
     /**

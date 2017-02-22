@@ -4,6 +4,15 @@
  * and open the template in the editor.
  */
 
+
+/// DISCLAIMER
+/*
+This code is taken from Andy Cobley's Instagrim assignment with minor tweaks.
+Credit for most of the code goes to him.
+
+
+*/
+
 package quickquiz.filters;
 
 import java.io.IOException;

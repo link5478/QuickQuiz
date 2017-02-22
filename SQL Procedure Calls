@@ -1,0 +1,41 @@
+-- ADD QUESTION --
+
+CALL `shift-two_quizmanager`.`AddQuestions`
+(<{IN questionTex VARCHAR(255)}>,<{ans1 VARCHAR(255)}>,
+<{ans2 VARCHAR(255)}>, <{ans3 VARCHAR(255)}>,
+<{ans4 VARCHAR(255)}>, <{explan VARCHAR(255)}>,
+<{correct char(1)}>, <{quizNo int(10)}>,
+<{questNo int(10)}>);
+
+-- CREATE QUIZ --
+
+CALL `shift-two_quizmanager`.`CreateQuiz`
+(<{IN nam VARCHAR(255)}>, <{descrip VARCHAR(255)}>,
+<{modID VARCHAR(255)}>, <{staID VARCHAR(255)}>);
+
+-- GET QUIZ --
+
+CALL `shift-two_quizmanager`.`GetQuiz`(<{IN quID INT(64)}>);
+
+--  STAFF LOGIN --
+
+CALL `shift-two_quizmanager`.`StaffLogin`
+(<{IN staID VARCHAR(20)}>, <{IN pass VARCHAR(30)}>);
+
+-- STUDENT LOGIN --
+
+CALL `shift-two_quizmanager`.`StuLogin`
+(<{IN stuID VARCHAR(20)}>, <{IN pass VARCHAR(30)}>);
+
+-- STAFF RESULT --
+
+CALL `shift-two_quizmanager`.`StaffResult`(<{IN stID varchar(20)}>);
+
+--  STUDENT RESULT --
+
+CALL `shift-two_quizmanager`.`StuViewRes`(<{IN stuID varchar(255)}>);
+
+-- VIEW QUIZ --
+
+CALL `shift-two_quizmanager`.`ViewQuiz`(<{IN qID int(10)}>);
+

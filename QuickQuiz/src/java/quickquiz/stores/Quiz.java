@@ -64,6 +64,13 @@ public class Quiz
     
     
     
+    public int getNumberOfQuestions()
+    {
+        return questions_.size();
+    }
+    
+    
+    
     public String getDescription()
     {
         return description_;

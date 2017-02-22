@@ -21,8 +21,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import quickquiz.lib.Database;
 import quickquiz.stores.Quiz;
 
@@ -95,7 +96,7 @@ public class QuizModel
         return product;
     }    
     
-    public static List<String> getQuizzes(String moduleID)
+    public static Map<String,String> getQuizzes(String moduleID)
             throws SQLException, ClassNotFoundException, InstantiationException,
              IllegalAccessException
     {
@@ -103,17 +104,19 @@ public class QuizModel
         PreparedStatement statement = null;
         ResultSet resultSet;
         String sql;
-        List<String> IDs = new ArrayList<>();
+        Map<String, String> IDs = new HashMap<>();
         try {
           connection = Database.getInstance();
-          sql = "SELECT ID from quiz where moduleID=?;";
+          sql = "SELECT ID, name from quiz where moduleID=?;";
 
           statement = connection.prepareStatement(sql);
           statement.setString(1, moduleID);
           resultSet = statement.executeQuery();
           while(resultSet.next())
           {
-            IDs.add(resultSet.getString("ID"));
+              String ID = resultSet.getString("ID");
+              String Name = resultSet.getString("name");
+                IDs.put(ID, Name);
           }
         }
         finally {

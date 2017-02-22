@@ -6,7 +6,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import= "java.util.ArrayList" %>
-<%@page import = "java.util.List" %>
+<%@page import = "java.util.Map" %>
+<%@page import = "java.util.HashMap" %>
 <%@page import = "quickquiz.stores.LoggedIn" %>
 <%@page import = "quickquiz.model.QuizModel" %>
 <%@page import = "quickquiz.model.Member" %>
@@ -21,7 +22,7 @@
             LoggedIn user = (LoggedIn)session.getAttribute("loggedIn");
             if(user != null)
             {
-                List<String> ids = new ArrayList<>();
+                Map<String, String> ids = new HashMap<>();
                 String myModule = user.getModule();
                 ids = QuizModel.getQuizzes(myModule);   
             
@@ -30,11 +31,14 @@
         <table>
             <tr> <th>Module</th><tr>
                 <%
-                    for(int i = 0; i < ids.size(); i++)
+                    for(Map.Entry<String, String> entry : ids.entrySet())
                     {
-                        String s = "/QuickQuiz/ViewQuiz/" + ids.get(i);
+                        String key = entry.getKey();
+                        String value = entry.getValue();
+                        
+                        String s = "/QuickQuiz/ViewQuiz/" + key;
                        %>                      
-            <tr><td><a href= <%=s%>> <%=ids.get(i)%></a> </td></tr>
+            <tr><td><a href= <%=s%>> <%=value%></a> </td></tr>
                        <%
                     }
                     

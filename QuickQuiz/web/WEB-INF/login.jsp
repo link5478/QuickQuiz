@@ -30,5 +30,8 @@
         <input type="checkbox" name ="type" value ="Teacher"> <br>
         <input type="submit" value="submit">
         </form>
+        
+
+        
     </body>
 </html>

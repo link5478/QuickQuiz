@@ -19,7 +19,13 @@
             session.removeAttribute("loggedIn");           
         %>
         
-        Click <a href="Index" >here</a> to redirect to home page.
+        <script type="text/JavaScript"> 
+            setTimeout(function () {
+                document.location = "/QuickQuiz/Index";
+            }, 5000);
+        </script>
+        <p>Redirecting you...</p>
+        <p>Click <a href="Index" >here</a> if you are not redirected.</p>
         
     
 </html>

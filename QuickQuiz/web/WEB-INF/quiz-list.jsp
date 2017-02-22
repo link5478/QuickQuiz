@@ -19,9 +19,12 @@
     <body>
         <% 
             LoggedIn user = (LoggedIn)session.getAttribute("loggedIn");
-            List<String> ids = new ArrayList<>();
-            String myModule = user.getModule();
-            ids = QuizModel.getQuizzes(myModule);            
+            if(user != null)
+            {
+                List<String> ids = new ArrayList<>();
+                String myModule = user.getModule();
+                ids = QuizModel.getQuizzes(myModule);   
+            
         %>
         
         <table>
@@ -37,8 +40,8 @@
                     
                 %>
         </table>
-        
-        
-            
+        <%
+            }
+        %>          
     </body>
 </html>

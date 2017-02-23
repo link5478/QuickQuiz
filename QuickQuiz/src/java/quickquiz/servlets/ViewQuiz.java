@@ -110,12 +110,8 @@ public class ViewQuiz extends HttpServlet {
         request.setAttribute("moduleID", moduleID);
         request.setAttribute("moduleName", moduleName);
         request.setAttribute("staffName", staffName);
-        
-        
-
-        
-            request.getRequestDispatcher("/WEB-INF/view-quiz.jsp").forward(request, response);
-            processRequest(request, response);
+        request.getRequestDispatcher("/WEB-INF/view-quiz.jsp").forward(request, response);
+        //processRequest(request, response);
             
         } catch (ArrayIndexOutOfBoundsException ex) {
             
@@ -140,7 +136,7 @@ public class ViewQuiz extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       // processRequest(request, response);
     }
 
     /**

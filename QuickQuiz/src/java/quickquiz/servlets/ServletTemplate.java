@@ -39,6 +39,7 @@ public class ServletTemplate
   
   
   
+  // TODO: rename
   protected Integer getQuizId(HttpServletRequest request)
     throws MalformedUrlException
   {

@@ -12,7 +12,7 @@
 <%@page import = "quickquiz.model.QuizModel" %>
 <%@page import = "quickquiz.model.Member" %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="/WEB-INF/jspf/head.jspf" %>

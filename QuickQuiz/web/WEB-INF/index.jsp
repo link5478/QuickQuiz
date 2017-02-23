@@ -1,7 +1,7 @@
 <%@ page import="quickquiz.stores.LoggedIn" %>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
     
     

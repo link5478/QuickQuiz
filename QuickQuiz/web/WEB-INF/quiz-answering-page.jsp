@@ -9,7 +9,7 @@
 <%@page import="quickquiz.stores.Quiz"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <%@include file="/WEB-INF/jspf/head.jspf" %>
     <title>Quiz Answering Page</title>

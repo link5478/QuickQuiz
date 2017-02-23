@@ -28,8 +28,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import quickquiz.exception.MalformedUrlException;
 import quickquiz.model.QuizModel;
+import quickquiz.model.ResultsModel;
+import quickquiz.stores.LoggedIn;
 import quickquiz.stores.Question;
 import quickquiz.stores.Quiz;
+import quickquiz.stores.Result;
 
 /**
  *
@@ -69,5 +72,55 @@ public class QuizAnsweringPage
     catch (IllegalAccessException ex) {
       Logger.getLogger(QuizAnsweringPage.class.getName()).log(Level.SEVERE, null, ex);
     }
-}
+  }
+  
+  
+  
+  @Override
+  protected void doPost(HttpServletRequest request,
+                        HttpServletResponse response)
+  {
+    // TODO:  handle exceptions
+    try {
+      // TODO: get the quiz
+      // TODO: move somewhere
+      // TODO: add page to the list of student login protected pages
+      // TODO: convert to percentage
+      Quiz quiz = QuizModel.getQuiz(getQuizId(request));
+      ArrayList<Question> questions = quiz.getQuestions();
+      int points = 0;
+      for (int i = 0; i < questions.size(); i ++) {
+        Integer questionId = questions.get(i).getId();
+        Integer correctAnwer = questions.get(i).getCorrectAnswer();
+        Integer answerId = Integer.parseInt(request.getParameter(questionId.toString()));
+        if (questions.get(i).getCorrectAnswer() == answerId) {
+          points++;
+        }
+        else if (answerId == null) {
+          // TODO: use better exception class?
+          throw new NullPointerException();
+        }
+      }
+      Result r = new Result();
+      r.setMark(points);
+      r.setQuizId(quiz.getId());
+      r.setUserID(((LoggedIn) request.getSession().getAttribute("loggedIn")).getUsername());
+      ResultsModel.addResult(r);
+    }
+    catch (SQLException ex) {
+      Logger.getLogger(QuizAnsweringPage.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    catch (ClassNotFoundException ex) {
+      Logger.getLogger(QuizAnsweringPage.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    catch (InstantiationException ex) {
+      Logger.getLogger(QuizAnsweringPage.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    catch (IllegalAccessException ex) {
+      Logger.getLogger(QuizAnsweringPage.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    catch (MalformedUrlException ex) {
+      Logger.getLogger(QuizAnsweringPage.class.getName()).log(Level.SEVERE, null, ex);
+    }
+  }
 }

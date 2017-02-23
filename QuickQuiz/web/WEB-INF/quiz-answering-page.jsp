@@ -19,7 +19,7 @@
     <div class="container indexcontainer">
       <h1>${quiz.getName()}</h1>
       <p>${quiz.getDescription()}</p>
-      <form action="../answers-submission/${quiz.getId()}" method="POST">
+      <form action="#" method="POST">
       <% ArrayList<Question> questions = (ArrayList<Question>) request.getAttribute("questions");
          Iterator<Question> i = questions.iterator();
          while (i.hasNext()) {

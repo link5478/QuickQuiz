@@ -55,10 +55,13 @@ public class NewQuestion
   
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws IOException
+    throws IOException, ServletException
   {
+      int id = 0;
     try {
       Question newQuestion = getQuestionFromForm(request);
+      id = newQuestion.getQuizId();
+      
       QuestionModel.insertQuestion (newQuestion);
     }
     catch (MalformedUrlException e) {
@@ -77,6 +80,9 @@ public class NewQuestion
       Logger.getLogger(NewQuestion.class.getName()).log(Level.SEVERE, null, ex);
     }
     // TODO: redirect to a page
+    String redir = ((HttpServletRequest)request).getContextPath() + "/view-quiz/" + id;
+    RequestDispatcher rd = request.getRequestDispatcher(redir);
+    rd.forward(request, response);
   }
   
   

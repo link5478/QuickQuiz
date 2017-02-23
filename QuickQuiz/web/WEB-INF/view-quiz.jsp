@@ -3,6 +3,7 @@
     Created on : 19-Feb-2017, 12:34:31
     Author     : craigchicken
 --%>
+<%@ page import="quickquiz.stores.LoggedIn" %>
 <%@page import="quickquiz.model.QuizModel" %>
 <%@page import="quickquiz.stores.Quiz" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -25,5 +26,26 @@
         <p>Module ID: <%= moduleID%></p>
         <p>Module Name: <%= moduleName%></p>
         <p>Staff Name: <%= staffName%></p>
+        
+        
+         <%
+            if(session.getAttribute("loggedIn") != null) //Checks the session variable to see if the user is logged in.
+            {
+                LoggedIn lg  = (LoggedIn)session.getAttribute("loggedIn");
+                %>
+
+                <%
+                    
+                    if(lg.getUserType().equals("staff")) //Checks to see if the user is Staff.
+                    {
+                %>
+
+                        <br><a href="/QuickQuiz/new-question/<%= quizID %>"> Add a question </a>
+
+                <%
+                    }
+            }
+                    %>
+        
     </body>
 </html>

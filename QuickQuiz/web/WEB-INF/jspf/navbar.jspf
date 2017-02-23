@@ -1,4 +1,5 @@
 <%-- any content can be specified here e.g.: --%>
+<%@page import="quickquiz.stores.LoggedIn"%>
 <%@ page pageEncoding="UTF-8" %>
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -16,10 +17,19 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">Home</a></li>
             <%
+                LoggedIn lg  = (LoggedIn)session.getAttribute("loggedIn");
             if(session.getAttribute("loggedIn") != null) //Checks the session variable to see if the user is logged in.
             {
+                 if(lg.getUserType().equals("staff")) //Checks to see if the user is Staff.
+                    {
                 %>
+            <li><a href="quiz-creation">Create Quiz</a></li>
+                <% }
+                %>
+                
+            <li><a href="quiz-list">Quiz List</a></li>
             <li><a href="logout">Log Out</a></li>
+            
             <%
                 }else{
             %>

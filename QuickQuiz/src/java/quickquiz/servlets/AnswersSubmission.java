@@ -28,6 +28,8 @@ import quickquiz.stores.Result;
 public class AnswersSubmission
   extends ServletTemplate
 {
+  //TODO: doGet
+  
   @Override
   protected void doPost(HttpServletRequest request,
                         HttpServletResponse response)

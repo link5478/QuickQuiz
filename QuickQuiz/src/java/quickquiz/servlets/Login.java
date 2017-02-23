@@ -33,6 +33,8 @@ import quickquiz.stores.LoggedIn;
  *
  * @author Josh Hogarth
  */
+// TODO: error message when incorrect login details
+// TODO: should be forbidden when user is logged in
 public class Login extends HttpServlet {
 
     public void init(ServletConfig config) throws ServletException {

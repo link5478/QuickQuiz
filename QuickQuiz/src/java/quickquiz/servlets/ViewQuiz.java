@@ -36,6 +36,7 @@ import quickquiz.stores.Quiz;
  *
  * @author craigchicken
  */
+// TODO: delete url patterns here?
 @WebServlet(name = "ViewQuiz", urlPatterns = {"/ViewQuiz"})
 public class ViewQuiz extends HttpServlet {
 

@@ -29,7 +29,11 @@ public class Result {
     
     public void setMark(float Mark)
     {
-        mark = Mark;
+      if (Mark > 100.0 || Mark < 0.0) {
+        // TODO: custom / better exception?
+        throw new IllegalArgumentException();
+      }
+      mark = Mark;
     }  
     
     public float getMark()

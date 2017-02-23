@@ -102,7 +102,8 @@ public class QuizAnsweringPage
         }
       }
       Result r = new Result();
-      r.setMark(points);
+      float mark = points / questions.size() * 100;
+      r.setMark(mark);
       r.setQuizId(quiz.getId());
       r.setUserID(((LoggedIn) request.getSession().getAttribute("loggedIn")).getUsername());
       ResultsModel.addResult(r);

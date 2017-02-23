@@ -3,9 +3,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <%@include file="/WEB-INF/jspf/head.jspf" %>
         <title>Create a quiz | Quick Quiz</title>
     </head>
     <body>
+        <%@include file="/WEB-INF/jspf/navbar.jspf" %>
+
+        <div class="container indexcontainer">
         <h1>Create a quiz</h1>
         <table>
             <tr>
@@ -26,5 +30,6 @@
             <button type="reset">Reset</button>
             <button type="submit">Create quiz</button>
         </form>
+        </div>
     </body>
 </html>

@@ -11,9 +11,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <%@include file="/WEB-INF/jspf/head.jspf" %>
         <title>View Quiz | Quick Quiz</title>
     </head>
     <body>
+        <%@include file="/WEB-INF/jspf/navbar.jspf" %>
+
+        <div class="container indexcontainer">
         <%String quizID = (String)request.getAttribute("quizID"); %>
         <%String quizName = (String)request.getAttribute("quizName"); %>
         <%String description = (String)request.getAttribute("description"); %>
@@ -31,7 +35,7 @@
          <%
             if(session.getAttribute("loggedIn") != null) //Checks the session variable to see if the user is logged in.
             {
-                LoggedIn lg  = (LoggedIn)session.getAttribute("loggedIn");
+              //  LoggedIn lg  = (LoggedIn)session.getAttribute("loggedIn");
                 %>
 
                 <%
@@ -46,6 +50,6 @@
                     }
             }
                     %>
-        
+        </div>
     </body>
 </html>

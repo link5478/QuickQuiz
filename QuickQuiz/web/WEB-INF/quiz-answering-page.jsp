@@ -10,13 +10,16 @@
     
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <%@include file="/WEB-INF/jspf/head.jspf" %>
         <title>Quiz Answering | Quick Quiz</title>
     </head>
     
     <body>
-        
+        <%@include file="/WEB-INF/jspf/navbar.jspf" %>
+
+        <div class="container indexcontainer">
         <h1>This is the default page for quiz participation.</h1>
-        
+        </div>
     </body>
     
 </html>

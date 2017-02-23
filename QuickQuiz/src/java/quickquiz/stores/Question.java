@@ -36,7 +36,7 @@ public class Question
   
   public Question(String questionText, String answer1, String answer2,
                   String answer3, String answer4, String explanation,
-                  String correctAnswer)
+                  Integer correctAnswer)
   {
     questionText_ = questionText;
     answer1_ = answer1;
@@ -60,6 +60,39 @@ public class Question
     explanation_ = null;
     correctAnswer_ = null;
     quizId_ = null;
+  }
+  
+  
+  
+  @Override
+  public boolean equals(Object o)
+  {
+    // TODO: check for quiz id?
+    Boolean isEqual = null; 
+    
+    if (o instanceof Question) {
+      Question q = (Question) o;
+      boolean sameQuestionText = questionText_.equals(q.getQuestionText());
+      boolean sameAnswer1 = answer1_.equals(q.getAnswer1());
+      boolean sameAnswer2 = answer2_.equals(q.getAnswer2());
+      boolean sameAnswer3 = answer3_.equals(q.getAnswer3());
+      boolean sameAnswer4 = answer4_.equals(q.getAnswer4());
+      boolean sameExplanation = explanation_.equals(q.getExplanation());
+      boolean sameCorrectAnswer = correctAnswer_.equals(q.getCorrectAnswer());
+      // boolean sameQuizId = quizId_.equals(q.getQuizId());
+      if (sameQuestionText && sameAnswer1 && sameAnswer2 && sameAnswer3 &&
+          sameAnswer4 && sameExplanation && sameCorrectAnswer) {
+        isEqual = true;
+      }
+      else {
+        isEqual = false;
+      }
+    }
+    else {
+      isEqual = false;
+    }
+    
+    return isEqual;
   }
 
   public String getQuestionText() {

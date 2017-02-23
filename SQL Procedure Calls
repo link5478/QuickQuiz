@@ -39,3 +39,8 @@ CALL `shift-two_quizmanager`.`StuViewRes`(<{IN stuID varchar(255)}>);
 
 CALL `shift-two_quizmanager`.`ViewQuiz`(<{IN qID int(10)}>);
 
+-- VIEW RESULTS --
+
+CALL `shift-two_quizmanager`.`GetResults`(<{IN id VARCHAR(255)}>, <{stastu CHAR(1)}>);
+
+

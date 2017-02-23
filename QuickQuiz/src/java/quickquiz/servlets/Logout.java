@@ -29,6 +29,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author hogar
  */
+// TODO: should be forbiden to users not logged in
 public class Logout extends HttpServlet {
 
     /**

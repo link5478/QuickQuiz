@@ -49,6 +49,11 @@ public class ServletTemplate
       // TODO: find a more appropriate exception
       throw new MalformedUrlException();
     }
-    return Integer.parseInt(uriElements[1]);
+    String quizID = uriElements[1];
+    if(quizID.substring(quizID.length() - 1) == "#")
+    {
+        quizID = quizID.substring(0, quizID.length() - 1);
+    }
+    return Integer.parseInt(quizID);
   }
 }

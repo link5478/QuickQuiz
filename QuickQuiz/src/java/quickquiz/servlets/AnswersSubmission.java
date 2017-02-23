@@ -39,6 +39,7 @@ public class AnswersSubmission
       // TODO: get the quiz
       // TODO: move somewhere
       // TODO: add page to the list of student login protected pages
+      // TODO: convert to percentage
       Quiz quiz = QuizModel.getQuiz(getQuizId(request));
       ArrayList<Question> questions = quiz.getQuestions();
       int points = 0;

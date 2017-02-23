@@ -36,6 +36,7 @@ import quickquiz.stores.LoggedIn;
  *
  * @author Administrator
  */
+// TODO: move in web.xml
 @WebFilter(filterName = "ProtectPages", urlPatterns = {
     "/WEB-INF/logout.jsp", 
     "/WEB-INF/quiz-answering-error.jsp",  
@@ -51,6 +52,9 @@ import quickquiz.stores.LoggedIn;
     "/WEB-INF/new-question.jsp/*"
 },
         dispatcherTypes = {DispatcherType.REQUEST, DispatcherType.FORWARD, DispatcherType.INCLUDE})
+
+// TODO: 404 HTTP errors for all login-related access errors
+//TODO: do not forward to login but display access denied instead
 public class ProtectPages implements Filter {
     
     private static final boolean debug = true;

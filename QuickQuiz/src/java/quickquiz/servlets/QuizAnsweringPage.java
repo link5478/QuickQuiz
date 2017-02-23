@@ -35,6 +35,7 @@ import quickquiz.stores.Quiz;
  *
  * @author Louis-Marie Matthews
  */
+// TODO: staff should not have access to this page
 public class QuizAnsweringPage
   extends ServletTemplate
 {

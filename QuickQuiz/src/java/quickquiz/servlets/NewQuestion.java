@@ -19,13 +19,14 @@ package quickquiz.servlets;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import quickquiz.exception.MalformedUrlException;
 import quickquiz.model.QuestionModel;
 import quickquiz.stores.Question;
@@ -34,6 +35,9 @@ import quickquiz.stores.Question;
  * TODO: error when no quiz id
  * @author Louis-Marie Matthews
  */
+// TODO: display quiz not found when quiz is not found
+// TODO: students should not be able to create a new quiz
+// TODO: add / as url pattern in web.xml
 public class NewQuestion
   extends ServletTemplate
 {
@@ -55,10 +59,13 @@ public class NewQuestion
   
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws IOException
+    throws IOException, ServletException
   {
+      String id = "";
     try {
       Question newQuestion = getQuestionFromForm(request);
+      id = newQuestion.getQuizId().toString();
+      
       QuestionModel.insertQuestion (newQuestion);
     }
     catch (MalformedUrlException e) {
@@ -76,7 +83,12 @@ public class NewQuestion
     catch (IllegalAccessException ex) {
       Logger.getLogger(NewQuestion.class.getName()).log(Level.SEVERE, null, ex);
     }
-    // TODO: redirect to a page
+    // TODO: fix this.
+    String redir = ((HttpServletRequest)request).getContextPath() + "/view-quiz/" + id;
+    HttpSession session = request.getSession();
+    session.setAttribute("message", "success");
+      
+    response.sendRedirect(redir);
   }
   
   

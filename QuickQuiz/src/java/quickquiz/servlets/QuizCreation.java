@@ -35,6 +35,8 @@ import quickquiz.stores.Quiz;
  *
  * @author Carsten Cheyne, Louis-Marie Matthews
  */
+// TODO: students should not be able to create a new quiz
+// TODO: error when there is no such quiz
 public class QuizCreation
   extends HttpServlet
 {

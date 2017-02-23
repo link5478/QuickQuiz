@@ -36,7 +36,7 @@
                     {
                         %>
 
-                        <br><a href="QuizList"> View Quizzes </a>
+                        <br><a href="quiz-list"> View Quizzes </a>
 
                         <%
                     }

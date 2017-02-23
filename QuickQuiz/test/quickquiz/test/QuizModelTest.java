@@ -17,31 +17,45 @@
  */
 package quickquiz.test;
 
+import java.sql.SQLException;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
+import quickquiz.model.QuizModel;
 import quickquiz.stores.Question;
 import quickquiz.stores.Quiz;
 
 /**
  *
- * @author virgiliordache
+ * @author Virgil Iordache, Louis-Marie Matthews
  */
-public class QuizModelTest {
-    @Test
-    public void testQuiz(){
-        Question question1 = new Question("How old is Virgil?", "18", "20", "21", "22", "Because he was born on July 12th 1994", "answer4", 1);
-        Question question2 = new Question("How old is Louis?", "17", "18", "19", "20", "Because he was born on February 22nd 1997", "answer4", 2);
-        assertEquals("The question doesn't return correctly.", question1.getQuestionText(), "How old is Virgil?");
-        Quiz quiz1 = new Quiz("Guess someone's age", "You are challenged to guess someone's age by guessing.", "AC690069", "Age guessing education",
-                "Louis-Marie Matthews");
-        assertEquals("The quiz doesn't return correctly.", quiz1.getQuizName(), "Guess someone's age");
-        quiz1.addQuestion(question1);
-        assertEquals("The original question and the retrieved question are not the same", quiz1.getQuestion(0), question1);
-        assertEquals("The size is not the same as the one tested", quiz1.getNumberOfQuestions(), 1);
-        
-        
-        
-    }
- 
+public class QuizModelTest
+{
+  @Test
+  public void testQuiz()
+  {
+    Question question1 = new Question("How old is Virgil?", "18", "20", "21", "22", "Because he was born on July 12th 1994", "answer4", 1);
+    Question question2 = new Question("How old is Louis?", "17", "18", "19", "20", "Because he was born on February 22nd 1997", "answer4", 2);
+    assertEquals("The question doesn't return correctly.", question1.getQuestionText(), "How old is Virgil?");
+    Quiz quiz1 = new Quiz("Guess someone's age", "You are challenged to guess someone's age by guessing.", "AC690069", "Age guessing education",
+            "Louis-Marie Matthews");
+    assertEquals("The quiz doesn't return correctly.", quiz1.getName(), "Guess someone's age");
+    quiz1.addQuestion(question1);
+    assertEquals("The original question and the retrieved question are not the same", quiz1.getQuestion(0), question1);
+    assertEquals("The size is not the same as the one tested", quiz1.getNumberOfQuestions(), 1);
+  }
+  
+  
+  
+  @Test
+  public void testGetQuiz()
+    throws SQLException, ClassNotFoundException, InstantiationException,
+           IllegalAccessException
+  {
+    Quiz quiz = QuizModel.getQuiz(1);
+    //assertEquals("The fetched quiz description is different from the one in the db.", quiz.getDescription(), "Why are you taking my class?"););
+    assertEquals("The fetched quiz name is different from the one in the db.", quiz.getName(), "What is Agile");
+    //assertEquals("The fetched quiz module id is different from the one in the db.", quiz.getModuleId(), "AC31007"););
+    //assertEquals("The fetched quiz staff id is different from the one in the db.", quiz.getStaffId(), "STAFF123"););
+  }
 }
     

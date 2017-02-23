@@ -129,7 +129,7 @@ public class QuizModel
   
   
   
-  public Quiz getQuiz (Integer id)
+  public static Quiz getQuiz (Integer id)
     throws SQLException, ClassNotFoundException, InstantiationException,
            IllegalAccessException
   {

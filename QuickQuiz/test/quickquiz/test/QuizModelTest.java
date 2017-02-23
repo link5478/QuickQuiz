@@ -62,6 +62,7 @@ public class QuizModelTest
     assertEquals("The fetched quiz staff id is different from the one in the db.", quiz.getStaffName(), "Mark Snaith");
     Question q2 = quiz.getQuestions().get(0);
     assertEquals("Questions are not the same", q1, q2);
+    assertEquals("Ids should be the same.", (int) quiz.getId(), 1);
   }
 }
     

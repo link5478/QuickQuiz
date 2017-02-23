@@ -15,6 +15,7 @@ public class Result {
     private String userID;
     private float mark;
     private String quizName;
+    private Integer quizId_;
     
     public void setUserID(String uID)
     {
@@ -36,6 +37,22 @@ public class Result {
         return mark;
     }
     
+    
+    
+  public void setQuizId(Integer id)
+  {
+    quizId_ = id;
+  }
+  
+  
+  
+  public Integer getQuizId()
+  {
+    return quizId_;
+  }
+  
+  
+  
     public void setQuizName(String name)
     {
         quizName = name;

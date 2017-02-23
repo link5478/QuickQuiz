@@ -150,6 +150,7 @@ public class QuizModel
         quiz.setModuleId(rs.getString("Module ID"));
         quiz.setModuleName(rs.getString("Module Name"));
         quiz.setStaffName(rs.getString("Staff Name"));
+        quiz.setId(rs.getInt("Quiz ID"));
         Question q = new Question();
         q.setQuestionText(rs.getString("Question"));
         q.setAnswer1(rs.getString("Answer 1"));

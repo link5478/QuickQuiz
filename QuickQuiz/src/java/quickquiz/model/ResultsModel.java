@@ -17,7 +17,7 @@ import quickquiz.stores.Result;
 
 /**
  *
- * @author hogar
+ * @author hogar, Louis-Marie Matthews
  */
 public class ResultsModel {
     
@@ -64,4 +64,27 @@ public class ResultsModel {
     }
      return results;
     }
+  
+  
+  
+  public static void addResult(Result result)
+    throws SQLException, ClassNotFoundException, InstantiationException,
+           IllegalAccessException
+  {
+    PreparedStatement preparedStatement = null;
+    try {
+      String sql = "CALL `AddResult`(?, ?, ?);";
+      preparedStatement = Database.getInstance().prepareStatement(sql);
+      preparedStatement.setString(1, result.getUserID());
+      preparedStatement.setFloat(2, result.getMark());
+      preparedStatement.setInt(3, result.getQuizId());
+      // TODO: check that the results have been added
+      ResultSet rs = preparedStatement.executeQuery();
+    }
+    finally {
+      if (preparedStatement != null) {
+        preparedStatement.close();
+      }
+    }
+  }
 }

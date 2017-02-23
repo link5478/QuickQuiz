@@ -25,6 +25,7 @@ import java.util.ArrayList;
  */
 public class Quiz
 {
+    private Integer id_;
     private String description_;
     private String moduleId_;
     private String moduleName_;
@@ -45,6 +46,7 @@ public class Quiz
         moduleName_ = moduleName;
         staffName_ = staffName;
         questions_ = new ArrayList<Question>();
+        id_ = null;
     }
     
     
@@ -57,6 +59,7 @@ public class Quiz
         moduleName_ = null;
         staffName_ = null;
         questions_ = new ArrayList<Question>();
+        id_ = null;
     }
     
     
@@ -92,6 +95,20 @@ public class Quiz
     public String getName()
     {
         return name_;
+    }
+    
+    
+    
+    public Integer getId()
+    {
+      return id_;
+    }
+    
+    
+    
+    public void setId(Integer id)
+    {
+      id_ = id;
     }
     
     

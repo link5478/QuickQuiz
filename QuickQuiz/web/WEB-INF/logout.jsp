@@ -10,16 +10,23 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Log Out</title>
     </head>
     
+    <body>
         <h1>Logging out.</h1>
         <%
             session = request.getSession();
             session.removeAttribute("loggedIn");           
         %>
         
-        Click <a href="Index" >here</a> to redirect to home page.
-        
+        <script type="text/JavaScript"> 
+            setTimeout(function () {
+                document.location = "/QuickQuiz/index";
+            }, 5000);
+        </script>
+        <p>Redirecting you...</p>
+        <p>Click <a href="index" >here</a> if you are not redirected.</p>
+    </body>
     
 </html>

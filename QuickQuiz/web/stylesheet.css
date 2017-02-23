@@ -1,0 +1,13 @@
+
+.indexcontainer 
+{
+    margin-top: 100px;
+}
+.logincontainer 
+{
+    margin-top: 100px;
+    margin-left: auto;
+    width: 25%;
+    border: 3px solid black;
+    padding: 10px;
+}

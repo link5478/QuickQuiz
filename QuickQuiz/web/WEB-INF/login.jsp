@@ -10,10 +10,14 @@
     
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <%@include file="/WEB-INF/jspf/head.jspf" %>
+        <title>Login</title>
     </head>
     
     <body>
+        
+        <%@include file="/WEB-INF/jspf/navbar.jspf" %>
+        
         <%  String s = (String)request.getAttribute("message");
                 if(s != null)
                 {
@@ -21,14 +25,23 @@
                 }
         %>
         
-        <form method="post" action="Login">
-        Username: <br>
-        <input type="text" name="username"><br>
-        Password: <br>
-        <input type="password" name ="password"> <br>
-        Teacher? 
-        <input type="checkbox" name ="type" value ="Teacher"> <br>
-        <input type="submit" value="submit">
-        </form>
+        <div class="container logincontainer">
+        
+            <form method="post" action="login">
+            Username: <br>
+            <input type="text" name="username"><br>
+            Password: <br>
+            <input type="password" name ="password"> <br>
+            Teacher? 
+            <input type="checkbox" name ="type" value ="Teacher"> <br>
+            <input type="submit" value="submit">
+            </form>
+        
+        </div>
+        
+        <footer>
+            <%@include file="/WEB-INF/jspf/footer.jspf" %>
+        </footer>
+        
     </body>
 </html>

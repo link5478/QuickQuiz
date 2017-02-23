@@ -19,6 +19,7 @@
         
         <h1>Error 404: Quiz not found.</h1>
         <p> Returning you to the module listing...</p>
+        <p>Click <a href="/QuickQuiz/QuizList">here</a> if you are not redirected.</p>
     </body>
     
     

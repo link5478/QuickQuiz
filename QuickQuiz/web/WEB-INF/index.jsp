@@ -1,33 +1,69 @@
 <%@ page import="quickquiz.stores.LoggedIn" %>
 
-<% 
-    if(session.getAttribute("loggedIn") != null)
-    {
-        LoggedIn lg  = (LoggedIn)session.getAttribute("loggedIn");
-        %>
-        <h1> Welcome, <%=lg.getUsername() %>          
+<!DOCTYPE html>
+<html>
+
+    
+    
+    <head>
+        <%@include file="/WEB-INF/jspf/head.jspf" %>
+    </head>
+
+    <body>
+
+        <%@include file="/WEB-INF/jspf/navbar.jspf" %>
+
+        <div class="container indexcontainer">
+
         <%
-            if(lg.getUserType().equals("staff"))
+            if(session.getAttribute("loggedIn") != null) //Checks the session variable to see if the user is logged in.
             {
-        %>
-                <br><a href="quiz-creation"> Create A Quiz </a>
-        <%
+                LoggedIn lg  = (LoggedIn)session.getAttribute("loggedIn");
+                %>
+
+                <h1> Welcome, <%=lg.getUsername() %>          
+
+                <%
+                    if(lg.getUserType().equals("staff")) //Checks to see if the user is Staff.
+                    {
+                %>
+
+                        <br><a href="quiz-creation"> Create A Quiz </a>
+
+                <%
+                    }
+                    else
+                    {
+                        %>
+
+                        <br><a href="QuizList"> View Quizzes </a>
+
+                        <%
+                    }
+                    %>
+
+                        <br><a href="logout">Log out</a>
+
+                    <%
             }
             else
             {
                 %>
-                <br><a href="QuizList"> View Quizzes </a>
+
+                <h1>Welcome to QuickQuiz.</h1>
+                <a href="login"> Log in </a>
+
                 <%
             }
-            %>
-                <br><a href="Logout">Log out</a>
-            
-            <%
-    }
-    else
-    {
         %>
-        <a href="Login"> Log in <a/>
-        <%
-    }
-%>
+
+        </div>
+
+    <footer>
+        <%@include file="/WEB-INF/jspf/footer.jspf" %>
+    </footer>
+
+    </body>
+
+</html>
+

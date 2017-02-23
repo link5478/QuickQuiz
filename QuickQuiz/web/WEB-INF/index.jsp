@@ -18,7 +18,7 @@
         <%
             if(session.getAttribute("loggedIn") != null) //Checks the session variable to see if the user is logged in.
             {
-                LoggedIn lg  = (LoggedIn)session.getAttribute("loggedIn");
+                //LoggedIn lg  = (LoggedIn)session.getAttribute("loggedIn");
                 %>
 
                 <h1> Welcome, <%=lg.getUsername() %>          

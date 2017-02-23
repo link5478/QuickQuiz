@@ -61,20 +61,6 @@ public class Quiz
     
     
     
-    public void addQuestion(Question question)
-    {
-        questions_.add(question);   
-    }
-    
-    
-    
-    public Question getQuestion(int position)
-    {
-        return questions_.get(position);
-    }
-    
-    
-    
     public int getNumberOfQuestions()
     {
         return questions_.size();
@@ -110,6 +96,13 @@ public class Quiz
     
     
     
+    public ArrayList<Question> getQuestions()
+    {
+      return questions_;
+    }
+    
+    
+    
     public String getStaffName()
     {
         return staffName_;
@@ -134,6 +127,13 @@ public class Quiz
     public void setName(String name)
     {
         name_ = name;
+    }
+    
+    
+    
+    public void setQuestions(ArrayList<Question> questions)
+    {
+      questions_ = questions;
     }
     
     

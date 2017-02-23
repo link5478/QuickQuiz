@@ -23,18 +23,18 @@
                  if(lg.getUserType().equals("staff")) //Checks to see if the user is Staff.
                     {
                 %>
-            <li><a href="quiz-creation">Create Quiz</a></li>
+            <li><a href="<%=((HttpServletRequest)request).getContextPath()%>/quiz-creation">Create Quiz</a></li>
                 <% }
                 %>
                 
-            <li><a href="quiz-list">Quiz List</a></li>
-            <li><a href="results">View Results</a></li>
-            <li><a href="logout">Log Out</a></li>
+            <li><a href="<%=((HttpServletRequest)request).getContextPath()%>/quiz-list">Quiz List</a></li>
+            <li><a href="<%=((HttpServletRequest)request).getContextPath()%>/results">View Results</a></li>
+            <li><a href="<%=((HttpServletRequest)request).getContextPath()%>/logout">Log Out</a></li>
             
             <%
                 }else{
             %>
-            <li><a href="login">Log In</a></li>
+            <li><a href="<%=((HttpServletRequest)request).getContextPath()%>/login">Log In</a></li>
             <%
                 }
             %>

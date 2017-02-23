@@ -11,7 +11,7 @@
     <head>
         
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Quiz - Error</title>
+        <title>Quiz - Error | Quick Quiz</title>
         
     </head>
     

@@ -5,7 +5,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Could not create quiz</title>
+        <title>Could not create quiz | Quick Quiz</title>
     </head>
     <body>
         <p>Your quiz failed to be created.</p>

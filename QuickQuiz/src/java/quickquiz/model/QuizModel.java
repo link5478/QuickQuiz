@@ -42,7 +42,7 @@ public class QuizModel
             String sql = "INSERT INTO quiz (name, description, moduleID, " + 
                          "staffID) VALUES (?, ?, ?, ?);";
             statement = Database.getInstance().prepareStatement(sql);
-            statement.setString(1, quiz.getQuizName());
+            statement.setString(1, quiz.getName());
             statement.setString(2, quiz.getDescription());
             statement.setString(3, quiz.getModuleId());
             statement.setString(4, quiz.getStaffName());
@@ -125,26 +125,31 @@ public class QuizModel
           }
         }
         return IDs;
-  }   
-    
-    // TODO: FIX THIS FUNCTION
-    // @Louie @Virgil
-    public static Quiz getQuiz(int quizID)
-            throws SQLException, ClassNotFoundException, InstantiationException,
-             IllegalAccessException
-    {
-        PreparedStatement statement = null;
-        try{
-            String sql = "";
-            statement = Database.getInstance().prepareStatement(sql);
-            
-        }
-        finally{
-            
-            if (statement !=null){
-                statement.close();
-            }       
-        }
-        return new Quiz("","","","","");
+  }
+  
+  
+  
+  public static Quiz getQuiz (Integer id)
+    throws SQLException, ClassNotFoundException, InstantiationException,
+           IllegalAccessException
+  {
+    PreparedStatement preparedStatement = null;
+    Quiz quiz = new Quiz();
+    try {
+      String sql = "CALL `GetQuiz`(?);";
+      preparedStatement = Database.getInstance().prepareStatement(sql);
+      preparedStatement.setInt(1, id);
+      ResultSet rs = preparedStatement.executeQuery();
+      
+      while (rs.next()) {
+        quiz.setName(rs.getString("Quiz Name"));
+      }
     }
+    finally {
+      if (preparedStatement != null) {
+        preparedStatement.close();
+      }
+    }
+    return quiz;
+  }
 }

@@ -25,7 +25,6 @@ import java.util.ArrayList;
  */
 public class Quiz
 {
-    private String quizName_;
     private String description_;
     private String moduleId_;
     private String moduleName_;
@@ -37,14 +36,26 @@ public class Quiz
     
     
     // TODO: name and int limited to db's lengths?
-    public Quiz(String quizName, String description, String moduleId, String moduleName,
+    public Quiz(String name, String description, String moduleId, String moduleName,
                 String staffName)
     {
-        quizName_ = quizName;
+        name_ = name;
         description_ = description;
         moduleId_ = moduleId;
         moduleName_ = moduleName;
         staffName_ = staffName;
+        questions_ = new ArrayList<Question>();
+    }
+    
+    
+    
+    public Quiz()
+    {
+        name_ = null;
+        description_ = null;
+        moduleId_ = null;
+        moduleName_ = null;
+        staffName_ = null;
         questions_ = new ArrayList<Question>();
     }
     
@@ -92,9 +103,9 @@ public class Quiz
     
     
     
-    public String getQuizName()
+    public String getName()
     {
-        return quizName_;
+        return name_;
     }
     
     
@@ -120,9 +131,9 @@ public class Quiz
     
     
     
-    public void setQuizName(String quizName)
+    public void setName(String name)
     {
-        quizName_ = quizName;
+        name_ = name;
     }
     
     

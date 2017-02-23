@@ -99,7 +99,7 @@ public class ViewQuiz extends HttpServlet {
         } catch (IllegalAccessException ex) {
             Logger.getLogger(ViewQuiz.class.getName()).log(Level.SEVERE, null, ex);
         }
-        String quizName = quiz.getQuizName();
+        String quizName = quiz.getName();
         String description = quiz.getDescription();
         String moduleID = quiz.getModuleId();
         String moduleName = quiz.getModuleName();

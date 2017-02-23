@@ -18,6 +18,22 @@
         <%@include file="/WEB-INF/jspf/navbar.jspf" %>
 
         <div class="container indexcontainer">
+            <% 
+                // TODO: fix this shit. no session variables pls.
+                String s = (String)session.getAttribute("message");
+                if(s!= null)
+                {
+                    %>
+                    <p> Quiz Successfully added </p>
+                    <%
+                }
+                else
+                {
+                %>
+                <p> Add a question kappa </p>
+                <%
+                }     
+            %>
         <%String quizID = (String)request.getAttribute("quizID"); %>
         <%String quizName = (String)request.getAttribute("quizName"); %>
         <%String description = (String)request.getAttribute("description"); %>

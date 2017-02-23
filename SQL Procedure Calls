@@ -43,4 +43,7 @@ CALL `shift-two_quizmanager`.`ViewQuiz`(<{IN qID int(10)}>);
 
 CALL `shift-two_quizmanager`.`GetResults`(<{IN id VARCHAR(255)}>, <{stastu CHAR(1)}>);
 
+-- ADD RESULTS --
+
+CALL `shift-two_quizmanager`.`AddResult`(<{IN userID VARCHAR(20)}>, <{mar float}>, <{quiID INT(64)}>);
 

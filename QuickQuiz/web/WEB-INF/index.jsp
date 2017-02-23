@@ -7,6 +7,7 @@
     
     <head>
         <%@include file="/WEB-INF/jspf/head.jspf" %>
+        <title>Index | Quick Quiz</title>
     </head>
 
     <body>

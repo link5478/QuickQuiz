@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Create a quiz</title>
+        <title>Create a quiz | Quick Quiz</title>
     </head>
     <body>
         <h1>Create a quiz</h1>

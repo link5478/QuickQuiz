@@ -17,6 +17,9 @@
  */
 package quickquiz.stores;
 
+import java.util.Objects;
+import quickquiz.exception.UnrelatedAnswerException;
+
 /**
  *
  * @author Louis-Marie Matthews
@@ -61,6 +64,22 @@ public class Question
     explanation_ = null;
     correctAnswer_ = null;
     quizId_ = null;
+  }
+  
+  
+  
+  // TODO: use another exception
+  public boolean check(Answer answer)
+    throws UnrelatedAnswerException
+  {
+    if (answer.getQuestionId() == null || id_ == null) {
+      throw new NullPointerException();
+    }
+    else if (answer.getQuestionId() != id_) {
+      throw new UnrelatedAnswerException();
+    }
+    
+    return Objects.equals(answer.getChoosenAnswer(), correctAnswer_);
   }
   
   

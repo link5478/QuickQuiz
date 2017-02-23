@@ -36,7 +36,7 @@ public class Question
   
   public Question(String questionText, String answer1, String answer2,
                   String answer3, String answer4, String explanation,
-                  String correctAnswer, Integer quizId)
+                  String correctAnswer)
   {
     questionText_ = questionText;
     answer1_ = answer1;
@@ -45,7 +45,7 @@ public class Question
     answer4_ = answer4;
     explanation_ = explanation;
     setCorrectAnswer (correctAnswer);
-    quizId_ = quizId;
+    quizId_ = null;
   }
   
   

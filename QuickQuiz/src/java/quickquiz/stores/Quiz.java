@@ -50,6 +50,18 @@ public class Quiz
     
     
     
+    public Quiz()
+    {
+        quizName_ = null;
+        description_ = null;
+        moduleId_ = null;
+        moduleName_ = null;
+        staffName_ = null;
+        questions_ = new ArrayList<Question>();
+    }
+    
+    
+    
     public void addQuestion(Question question)
     {
         questions_.add(question);   

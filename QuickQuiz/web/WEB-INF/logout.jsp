@@ -10,10 +10,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Log Out</title>
+        <%@include file="/WEB-INF/jspf/head.jspf" %>
+        <title>Log Out | Quick Quiz</title>
     </head>
     
     <body>
+        <%@include file="/WEB-INF/jspf/navbar.jspf" %>
+
+        <div class="container indexcontainer">
         <h1>Logging out.</h1>
         <%
             session = request.getSession();
@@ -27,6 +31,7 @@
         </script>
         <p>Redirecting you...</p>
         <p>Click <a href="index" >here</a> if you are not redirected.</p>
+        </div>
     </body>
     
 </html>

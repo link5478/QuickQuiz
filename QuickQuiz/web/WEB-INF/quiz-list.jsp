@@ -15,9 +15,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Quiz List</title>
+        <%@include file="/WEB-INF/jspf/head.jspf" %>
+        <title>Quiz List | Quick Quiz</title>
     </head>
     <body>
+        <%@include file="/WEB-INF/jspf/navbar.jspf" %>
+
+        <div class="container indexcontainer">
         <% 
             LoggedIn user = (LoggedIn)session.getAttribute("loggedIn");
             if(user != null)
@@ -46,6 +50,7 @@
         </table>
         <%
             }
-        %>          
+        %>   
+        </div>
     </body>
 </html>

@@ -11,7 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="/WEB-INF/jspf/head.jspf" %>
-        <title>Login</title>
+        <title>Login | Quick Quiz</title>
     </head>
     
     <body>
@@ -32,7 +32,7 @@
             <input type="text" name="username"><br>
             Password: <br>
             <input type="password" name ="password"> <br>
-            Teacher? 
+            Staff? 
             <input type="checkbox" name ="type" value ="Teacher"> <br>
             <input type="submit" value="submit">
             </form>

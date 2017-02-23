@@ -19,7 +19,9 @@
             if(session.getAttribute("loggedIn") != null) //Checks the session variable to see if the user is logged in.
             {
                 %>
+            <li><a href="quiz-list">Quiz List</a></li>
             <li><a href="logout">Log Out</a></li>
+            
             <%
                 }else{
             %>

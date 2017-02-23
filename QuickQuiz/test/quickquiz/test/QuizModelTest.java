@@ -33,8 +33,8 @@ public class QuizModelTest
   @Test
   public void testQuiz()
   {
-    Question question1 = new Question("How old is Virgil?", "18", "20", "21", "22", "Because he was born on July 12th 1994", "answer4", 1);
-    Question question2 = new Question("How old is Louis?", "17", "18", "19", "20", "Because he was born on February 22nd 1997", "answer4", 2);
+    Question question1 = new Question("How old is Virgil?", "18", "20", "21", "22", "Because he was born on July 12th 1994", 1);
+    Question question2 = new Question("How old is Louis?", "17", "18", "19", "20", "Because he was born on February 22nd 1997", 2);
     assertEquals("The question doesn't return correctly.", question1.getQuestionText(), "How old is Virgil?");
     Quiz quiz1 = new Quiz("Guess someone's age", "You are challenged to guess someone's age by guessing.", "AC690069", "Age guessing education",
             "Louis-Marie Matthews");
@@ -52,10 +52,15 @@ public class QuizModelTest
            IllegalAccessException
   {
     Quiz quiz = QuizModel.getQuiz(1);
-    //assertEquals("The fetched quiz description is different from the one in the db.", quiz.getDescription(), "Why are you taking my class?"););
+    Question q1 = new Question("Agile fast or slow?", "Fast", "Slow", "No idea",
+                              "Is this a trick question?",
+                              "It is fast if you did not get it pls", 1);
+    assertEquals("The fetched quiz description is different from the one in the db.", quiz.getDescription(), "Why are you taking my class?");
     assertEquals("The fetched quiz name is different from the one in the db.", quiz.getName(), "What is Agile");
-    //assertEquals("The fetched quiz module id is different from the one in the db.", quiz.getModuleId(), "AC31007"););
-    //assertEquals("The fetched quiz staff id is different from the one in the db.", quiz.getStaffId(), "STAFF123"););
+    assertEquals("The fetched quiz module id is different from the one in the db.", quiz.getModuleId(), "AC31007");
+    assertEquals("The fetched quiz staff id is different from the one in the db.", quiz.getStaffName(), "Mark Snaith");
+    Question q2 = quiz.getQuestion(0);
+    assertEquals("Questions are not the same", q1, q2);
   }
 }
     

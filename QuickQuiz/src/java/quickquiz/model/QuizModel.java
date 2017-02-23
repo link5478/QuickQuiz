@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import quickquiz.lib.Database;
+import quickquiz.stores.Question;
 import quickquiz.stores.Quiz;
 
 /**
@@ -141,8 +142,22 @@ public class QuizModel
       preparedStatement.setInt(1, id);
       ResultSet rs = preparedStatement.executeQuery();
       
+      // TODO: to refactor
       while (rs.next()) {
         quiz.setName(rs.getString("Quiz Name"));
+        quiz.setDescription(rs.getString("Description"));
+        quiz.setModuleId(rs.getString("Module ID"));
+        quiz.setModuleName(rs.getString("Module Name"));
+        quiz.setStaffName(rs.getString("Staff Name"));
+        Question q = new Question();
+        q.setQuestionText(rs.getString("Question"));
+        q.setAnswer1(rs.getString("Answer 1"));
+        q.setAnswer2(rs.getString("Answer 2"));
+        q.setAnswer3(rs.getString("Answer 3"));
+        q.setAnswer4(rs.getString("Answer 4"));
+        q.setCorrectAnswer(rs.getInt("Correct Answer"));
+        q.setExplanation(rs.getString("Explanation"));
+        quiz.addQuestion(q);
       }
     }
     finally {

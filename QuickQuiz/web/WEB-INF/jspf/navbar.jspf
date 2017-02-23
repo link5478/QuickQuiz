@@ -28,6 +28,7 @@
                 %>
                 
             <li><a href="quiz-list">Quiz List</a></li>
+            <li><a href="results">View Results</a></li>
             <li><a href="logout">Log Out</a></li>
             
             <%

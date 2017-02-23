@@ -83,7 +83,7 @@
         </td>
       </tr>
     </table>
-      <form action="#" id="question-form" method="post">
+      <form action="" id="question-form" method="post">
           <button type="reset">Reset</button>
           <button type="submit">Add question</button>
       </form>

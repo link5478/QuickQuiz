@@ -30,6 +30,7 @@ public class Question
   private String answer4_;
   private String explanation_;
   private Integer correctAnswer_;
+  private Integer id_;
   private Integer quizId_;
   
   
@@ -174,6 +175,16 @@ public class Question
 
   public void setCorrectAnswer(Integer correctAnswer) {
     this.correctAnswer_ = correctAnswer;
+  }
+  
+  public Integer getId()
+  {
+    return id_;
+  }
+  
+  public void setId(Integer id)
+  {
+    id_ = id;
   }
 
   public Integer getQuizId() {

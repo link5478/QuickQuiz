@@ -39,8 +39,8 @@ public class QuizModelTest
     Quiz quiz1 = new Quiz("Guess someone's age", "You are challenged to guess someone's age by guessing.", "AC690069", "Age guessing education",
             "Louis-Marie Matthews");
     assertEquals("The quiz doesn't return correctly.", quiz1.getName(), "Guess someone's age");
-    quiz1.addQuestion(question1);
-    assertEquals("The original question and the retrieved question are not the same", quiz1.getQuestion(0), question1);
+    quiz1.getQuestions().add(question1);
+    assertEquals("The original question and the retrieved question are not the same", quiz1.getQuestions().get(0), question1);
     assertEquals("The size is not the same as the one tested", quiz1.getNumberOfQuestions(), 1);
   }
   
@@ -55,11 +55,12 @@ public class QuizModelTest
     Question q1 = new Question("Agile fast or slow?", "Fast", "Slow", "No idea",
                               "Is this a trick question?",
                               "It is fast if you did not get it pls", 1);
+    q1.setId(1);
     assertEquals("The fetched quiz description is different from the one in the db.", quiz.getDescription(), "Why are you taking my class?");
     assertEquals("The fetched quiz name is different from the one in the db.", quiz.getName(), "What is Agile");
     assertEquals("The fetched quiz module id is different from the one in the db.", quiz.getModuleId(), "AC31007");
     assertEquals("The fetched quiz staff id is different from the one in the db.", quiz.getStaffName(), "Mark Snaith");
-    Question q2 = quiz.getQuestion(0);
+    Question q2 = quiz.getQuestions().get(0);
     assertEquals("Questions are not the same", q1, q2);
   }
 }

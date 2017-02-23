@@ -1,25 +1,39 @@
 <%-- 
     Document   : quiz-answering-page
     Created on : 21-Feb-2017, 13:24:06
-    Author     : brynpirie
+    Author     : Louis-Marie Matthews
 --%>
-
+<%@page import="quickquiz.stores.Question"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="quickquiz.stores.Quiz"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <%@include file="/WEB-INF/jspf/head.jspf" %>
-        <title>Quiz Answering | Quick Quiz</title>
-    </head>
-    
-    <body>
-        <%@include file="/WEB-INF/jspf/navbar.jspf" %>
-
-        <div class="container indexcontainer">
-        <h1>This is the default page for quiz participation.</h1>
-        </div>
-    </body>
-    
+  <head>
+    <%@include file="/WEB-INF/jspf/head.jspf" %>
+    <title>Quiz Answering Page</title>
+  </head>
+  <body>
+    <%@include file="/WEB-INF/jspf/navbar.jspf" %>
+    <div class="container indexcontainer">
+    <h1>${quiz.getName()}</h1>
+    <p>${quiz.getDescription()}</p>
+    <% ArrayList<Question> questions = (ArrayList<Question>) request.getAttribute("questions");
+       Iterator<Question> i = questions.iterator();
+       while (i.hasNext()) {
+         Question q = i.next();
+    %>
+         <p><%= q.getQuestionText() %></p>
+         <input type="radio" name="" value="1" /><%= q.getAnswer1() %><br />
+         <input type="radio" name="" value="2" /><%= q.getAnswer2() %><br />
+         <input type="radio" name="" value="3" /><%= q.getAnswer3() %><br />
+         <input type="radio" name="" value="4" /><%= q.getAnswer4() %><br />
+    <%
+       }
+    %>
+    <footer>
+      <%@include file="/WEB-INF/jspf/footer.jspf" %>
+    </footer>
+  </body>
 </html>

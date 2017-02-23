@@ -29,7 +29,7 @@
         %>
         
         <table>
-            <tr> <th>Module</th><tr>
+            <tr> <th>Available Quizzes</th><tr>
                 <%
                     for(Map.Entry<String, String> entry : ids.entrySet())
                     {

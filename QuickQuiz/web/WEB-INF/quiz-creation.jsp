@@ -21,7 +21,7 @@
           <div class="form-group">
             <label form="quiz-form" for="quiz-module-id" class="col-sm-2 control-label">Module Id: </label>
             <div class="col-sm-10">
-              <input type="password" class="form-control" id="inputPassword3" placeholder="The Id of the module of the quiz" required>
+              <input type="text" class="form-control" id="inputPassword3" placeholder="The Id of the module of the quiz" required>
             </div>
           </div>
           <div class="form-group">

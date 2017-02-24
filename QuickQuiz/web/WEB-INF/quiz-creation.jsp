@@ -11,24 +11,30 @@
 
         <div class="container indexcontainer">
         <h1>Create a quiz</h1>
-        <table>
-            <tr>
-                <!-- to set to required (but later -->
-                <td><label form="quiz-form" for="quiz-name">Name: </label></td>
-                <td><input form="quiz-form" id="quiz-name" name="quiz-name" type="text" required /></td>
-            </tr>
-            <tr>
-                <td><label form="quiz-form" for="quiz-module-id">Module Id: </label></td>
-                <td><input form="quiz-form" id="quiz-module-id" name="quiz-module-id" type="text" required /></td>
-            </tr>
-            <tr>
-                <td><label form="quiz-form" for="quiz-description">Description: </label></td>
-                <td><textarea form="quiz-form" id="quiz-description" name="quiz-description"></textarea></td>
-            </tr>
-        </table>
-        <form action="quiz-creation" id="quiz-form" method="post">
-            <button type="reset">Reset</button>
-            <button type="submit">Create quiz</button>
+        <form action="quiz-creation" class="form-horizontal" id="quiz-form" method="post">
+          <div class="form-group">
+            <label form="quiz-form" for="quiz-name" class="col-sm-2 control-label">Name: </label>
+            <div class="col-sm-10">
+              <input type="email" class="form-control" id="inputEmail3" placeholder="Name of the quiz" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label form="quiz-form" for="quiz-module-id" class="col-sm-2 control-label">Module Id: </label>
+            <div class="col-sm-10">
+              <input type="password" class="form-control" id="inputPassword3" placeholder="The Id of the module of the quiz" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label form="quiz-form" for="quiz-description" class="col-sm-2 control-label">Description: </label>
+            <div class="col-sm-10">
+              <textarea form="quiz-form" class="form-control" id="quiz-description" name="quiz-description"></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class="btn btn-primary">Create a new Quiz</button>
+            </div>
+          </div>
         </form>
         </div>
     </body>

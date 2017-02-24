@@ -29,13 +29,13 @@
         if(lg.getUserType().equals("staff")) {//Checks to see if the user is Staff.
       %>
 
-      <br><a href="/QuickQuiz/new-question/${quiz.getId()}"> Add a question </a>
+      <a class="btn btn-primary" href="/QuickQuiz/new-question/${quiz.getId()}"> Add a question </a>
 
       <%
           }
           else if (lg.getUserType().equals("student")) {
       %>
-      <a href="<%=((HttpServletRequest)request).getContextPath()%>/quiz-answering-page/${quiz.getId()}">Try to answer to quiz</a>
+      <a class="btn btn-primary" href="<%=((HttpServletRequest)request).getContextPath()%>/quiz-answering-page/${quiz.getId()}">Try to answer to quiz</a>
       <%
           }
         }

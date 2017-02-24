@@ -33,6 +33,10 @@
         <url-pattern>/quiz-list</url-pattern>
     </filter-mapping>
     <filter-mapping>
+        <filter-name>RestrictionToMembers</filter-name>
+        <url-pattern>/results/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
         <filter-name>RestrictionToStaff</filter-name>
         <url-pattern>/new-question/*</url-pattern>
     </filter-mapping>
@@ -43,10 +47,6 @@
     <filter-mapping>
         <filter-name>RestrictionToStudents</filter-name>
         <url-pattern>/quiz-answering-page/*</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>RestrictionToStudents</filter-name>
-        <url-pattern>/results/*</url-pattern>
     </filter-mapping>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>

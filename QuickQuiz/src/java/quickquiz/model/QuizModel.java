@@ -24,6 +24,8 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import quickquiz.exception.NoQuizFoundException;
+import quickquiz.exception.QuizInsertionFailureException;
 import quickquiz.lib.Database;
 import quickquiz.stores.Question;
 import quickquiz.stores.Quiz;
@@ -32,22 +34,27 @@ import quickquiz.stores.Quiz;
  *
  * @author Louis-Marie Matthews
  */
+// TODO: cache?
 public class QuizModel
 {
     public static void insertQuiz(Quiz quiz)
       throws SQLException, ClassNotFoundException, InstantiationException,
-             IllegalAccessException
+             IllegalAccessException, QuizInsertionFailureException
     {
         PreparedStatement statement = null;
         try {
-            String sql = "INSERT INTO quiz (name, description, moduleID, " + 
-                         "staffID) VALUES (?, ?, ?, ?);";
-            statement = Database.getInstance().prepareStatement(sql);
-            statement.setString(1, quiz.getName());
-            statement.setString(2, quiz.getDescription());
-            statement.setString(3, quiz.getModuleId());
-            statement.setString(4, quiz.getStaffName());
-            statement.executeUpdate();
+          // TODO: prepared statement?
+          String sql = "INSERT INTO quiz (name, description, moduleID, " + 
+                       "staffID) VALUES (?, ?, ?, ?);";
+          statement = Database.getInstance().prepareStatement(sql);
+          statement.setString(1, quiz.getName());
+          statement.setString(2, quiz.getDescription());
+          statement.setString(3, quiz.getModuleId());
+          statement.setString(4, quiz.getStaffName());
+          statement.executeUpdate();
+          if (statement.getUpdateCount() == 0) {
+            throw new QuizInsertionFailureException();
+          }
         }
         finally {
             if (statement != null) {
@@ -57,16 +64,16 @@ public class QuizModel
         
     }
     
-    public static Quiz viewQuiz(String name) throws SQLException, ClassNotFoundException, InstantiationException,
-           IllegalAccessException
+    public static Quiz viewQuiz(String name)
+      throws SQLException, ClassNotFoundException, InstantiationException,
+             IllegalAccessException, NoQuizFoundException
     {
         Connection connection;
         PreparedStatement statement = null;
         ResultSet resultSet;
         String sql;
-        Quiz product = new Quiz("","","","","");
-        try 
-        {
+        Quiz product = new Quiz();
+        try {
             connection = Database.getInstance();
             
             sql = "CALL `shift-two_quizmanager`.`ViewQuiz`(?)";
@@ -75,9 +82,10 @@ public class QuizModel
             statement = connection.prepareStatement(sql);
             statement.setString(1, name);
             resultSet = statement.executeQuery();
-            
+            if (!resultSet.isBeforeFirst()) { // if there is no data
+              throw new NoQuizFoundException();
+            }
             while (resultSet.next()) {
-                
                 String quizName = resultSet.getString("Quiz Name");
                 String desc = resultSet.getString("Description");
                 String moduleID = resultSet.getString("Module ID");
@@ -132,7 +140,7 @@ public class QuizModel
   
   public static Quiz getQuiz (Integer id)
     throws SQLException, ClassNotFoundException, InstantiationException,
-           IllegalAccessException
+           IllegalAccessException, NoQuizFoundException
   {
     PreparedStatement preparedStatement = null;
     Quiz quiz = new Quiz();
@@ -142,8 +150,12 @@ public class QuizModel
       preparedStatement.setInt(1, id);
       ResultSet rs = preparedStatement.executeQuery();
       
+      
+      if (!rs.isBeforeFirst()) { // if there is no data
+        throw new NoQuizFoundException();
+      }
+      
       // TODO: to refactor
-      // TODO: throw exception when no quiz is found
       while (rs.next()) {
         quiz.setName(rs.getString("Quiz Name"));
         quiz.setDescription(rs.getString("Description"));
@@ -169,5 +181,31 @@ public class QuizModel
       }
     }
     return quiz;
+  }
+  
+  
+  
+  public static void checkExists(Integer id)
+    throws SQLException, ClassNotFoundException, InstantiationException,
+           IllegalAccessException, NoQuizFoundException
+  {
+    PreparedStatement ps = null;
+    try {
+      // TODO: stored procedure?
+      // TODO: use COUNT or something more approriate instead?
+      String sql = "SELECT ID FROM quiz WHERE ID = ?;";
+      ps = Database.getInstance().prepareCall(sql);
+      ps.setInt(1, id);
+      
+      ResultSet rs = ps.executeQuery();
+      if (!rs.isBeforeFirst()) { // true if there is no data
+        throw new NoQuizFoundException();
+      }
+    }
+    finally {
+      if (ps != null) {
+        ps.close();
+      }
+    }
   }
 }

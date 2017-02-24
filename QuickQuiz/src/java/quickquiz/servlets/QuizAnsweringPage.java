@@ -27,6 +27,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import quickquiz.exception.MalformedUrlException;
+import quickquiz.exception.NoQuizFoundException;
 import quickquiz.model.QuizModel;
 import quickquiz.model.ResultsModel;
 import quickquiz.stores.LoggedIn;
@@ -70,6 +71,9 @@ public class QuizAnsweringPage
       Logger.getLogger(QuizAnsweringPage.class.getName()).log(Level.SEVERE, null, ex);
     }
     catch (IllegalAccessException ex) {
+      Logger.getLogger(QuizAnsweringPage.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    catch (NoQuizFoundException ex) {
       Logger.getLogger(QuizAnsweringPage.class.getName()).log(Level.SEVERE, null, ex);
     }
   }
@@ -121,6 +125,9 @@ public class QuizAnsweringPage
       Logger.getLogger(QuizAnsweringPage.class.getName()).log(Level.SEVERE, null, ex);
     }
     catch (MalformedUrlException ex) {
+      Logger.getLogger(QuizAnsweringPage.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    catch (NoQuizFoundException ex) {
       Logger.getLogger(QuizAnsweringPage.class.getName()).log(Level.SEVERE, null, ex);
     }
   }

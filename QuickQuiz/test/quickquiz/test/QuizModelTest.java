@@ -19,7 +19,11 @@ package quickquiz.test;
 
 import java.sql.SQLException;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import org.junit.Test;
+import quickquiz.exception.NoQuizFoundException;
 import quickquiz.model.QuizModel;
 import quickquiz.stores.Question;
 import quickquiz.stores.Quiz;
@@ -49,7 +53,7 @@ public class QuizModelTest
   @Test
   public void testGetQuiz()
     throws SQLException, ClassNotFoundException, InstantiationException,
-           IllegalAccessException
+           IllegalAccessException, NoQuizFoundException
   {
     Quiz quiz = QuizModel.getQuiz(1);
     Question q1 = new Question("Agile fast or slow?", "Fast", "Slow", "No idea",
@@ -63,6 +67,28 @@ public class QuizModelTest
     Question q2 = quiz.getQuestions().get(0);
     assertEquals("Questions are not the same", q1, q2);
     assertEquals("Ids should be the same.", (int) quiz.getId(), 1);
+  }
+  
+  
+  
+  @Test
+  public void testCheckExists()
+    throws SQLException, ClassNotFoundException, InstantiationException,
+           IllegalAccessException
+  {
+    try {
+      QuizModel.checkExists(1);
+    }
+    catch (NoQuizFoundException e) {
+      fail("A quiz should have been found.");
+    }
+    try {
+      QuizModel.checkExists(2);
+      fail("NO quiz should have been found.");
+    }
+    catch (NoQuizFoundException e) {
+      
+    }
   }
 }
     

@@ -29,6 +29,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import quickquiz.exception.MalformedUrlException;
+import quickquiz.exception.NoQuizFoundException;
 import static quickquiz.model.QuizModel.viewQuiz;
 import quickquiz.stores.Quiz;
 
@@ -79,16 +80,17 @@ public class ViewQuiz extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PrintWriter pw = response.getWriter();
+        PrintWriter pw = response.getWriter(); // TODO: why?
         //pw.print(request.getRequestURL());
         String pageURL = request.getRequestURL().toString();
         //i hate regex
         String[] splitURL = pageURL.split("/");
         //actual quiz id is last part of URL, after sixth slash
         try {
+          // TODO: use getQuizId(request)
         String retrievedQuizID = splitURL[5];
         request.setAttribute("quizID", retrievedQuizID);
-        Quiz quiz = new Quiz("", "", "", "", "");
+        Quiz quiz = new Quiz("", "", "", "", ""); // TODO: why not just Quiz()?
         try {
             //pass to JSP
             quiz = viewQuiz(retrievedQuizID);
@@ -100,7 +102,9 @@ public class ViewQuiz extends HttpServlet {
             Logger.getLogger(ViewQuiz.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
             Logger.getLogger(ViewQuiz.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } catch (NoQuizFoundException ex) {
+            Logger.getLogger(ViewQuiz.class.getName()).log(Level.SEVERE, null, ex);
+          }
         String quizName = quiz.getName();
         String description = quiz.getDescription();
         String moduleID = quiz.getModuleId();
@@ -139,6 +143,7 @@ public class ViewQuiz extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        // processRequest(request, response);
+       // TODO: remove method
     }
 
     /**

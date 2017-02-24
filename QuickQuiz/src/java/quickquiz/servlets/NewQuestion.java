@@ -28,7 +28,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import quickquiz.exception.MalformedUrlException;
+import quickquiz.exception.NoQuizFoundException;
+import quickquiz.exception.QuestionInsertionFailureException;
 import quickquiz.model.QuestionModel;
+import quickquiz.model.QuizModel;
 import quickquiz.stores.Question;
 
 /**
@@ -45,13 +48,30 @@ public class NewQuestion
   public void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException
   {
+    
     try {
+      QuizModel.checkExists(getQuizId(request));
       request.setAttribute("quiz-id", getQuizId(request));
       RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/new-question.jsp");
       rd.forward(request, response);
     }
     catch(MalformedUrlException e) {
       response.sendError(HttpServletResponse.SC_NOT_FOUND);
+    }
+    catch (SQLException ex) {
+      Logger.getLogger(NewQuestion.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    catch (ClassNotFoundException ex) {
+      Logger.getLogger(NewQuestion.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    catch (InstantiationException ex) {
+      Logger.getLogger(NewQuestion.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    catch (IllegalAccessException ex) {
+      Logger.getLogger(NewQuestion.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    catch (NoQuizFoundException ex) {
+      Logger.getLogger(NewQuestion.class.getName()).log(Level.SEVERE, null, ex);
     }
   }
   
@@ -61,7 +81,7 @@ public class NewQuestion
   public void doPost(HttpServletRequest request, HttpServletResponse response)
     throws IOException, ServletException
   {
-      String id = "";
+    String id = "";
     try {
       Question newQuestion = getQuestionFromForm(request);
       id = newQuestion.getQuizId().toString();
@@ -81,6 +101,9 @@ public class NewQuestion
       Logger.getLogger(NewQuestion.class.getName()).log(Level.SEVERE, null, ex);
     }
     catch (IllegalAccessException ex) {
+      Logger.getLogger(NewQuestion.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    catch (QuestionInsertionFailureException ex) {
       Logger.getLogger(NewQuestion.class.getName()).log(Level.SEVERE, null, ex);
     }
     // TODO: fix this.

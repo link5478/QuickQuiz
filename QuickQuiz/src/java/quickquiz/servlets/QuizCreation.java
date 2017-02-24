@@ -27,6 +27,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import quickquiz.exception.QuizInsertionFailureException;
 import quickquiz.model.QuizModel;
 import quickquiz.stores.LoggedIn;
 import quickquiz.stores.Quiz;
@@ -64,15 +65,22 @@ public class QuizCreation
         Quiz newQuiz = getQuizFromForm(request);
         try {
             QuizModel.insertQuiz(newQuiz);
-        } catch (SQLException ex) {
-            Logger.getLogger(QuizCreation.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(QuizCreation.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(QuizCreation.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
+        }
+        catch (SQLException ex) {
             Logger.getLogger(QuizCreation.class.getName()).log(Level.SEVERE, null, ex);
         }
+        catch (ClassNotFoundException ex) {
+            Logger.getLogger(QuizCreation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        catch (InstantiationException ex) {
+            Logger.getLogger(QuizCreation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        catch (IllegalAccessException ex) {
+            Logger.getLogger(QuizCreation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        catch (QuizInsertionFailureException ex) {
+        Logger.getLogger(QuizCreation.class.getName()).log(Level.SEVERE, null, ex);
+      }
     }
     
     

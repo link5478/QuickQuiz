@@ -19,6 +19,7 @@ package quickquiz.model;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import quickquiz.exception.QuestionInsertionFailureException;
 import quickquiz.lib.Database;
 import quickquiz.stores.Question;
 
@@ -30,7 +31,7 @@ public class QuestionModel
 {
   public static void insertQuestion(Question question)
     throws SQLException, ClassNotFoundException, InstantiationException,
-           IllegalAccessException
+           IllegalAccessException, QuestionInsertionFailureException
   {
     // TODO; check that one row has been affected, otherwise throw exception
     PreparedStatement statement = null;
@@ -49,6 +50,9 @@ public class QuestionModel
       statement.setInt (7, question.getCorrectAnswer());
       statement.setInt (8, question.getQuizId());
       statement.executeUpdate();
+      if (statement.getUpdateCount() == 0) {
+        throw new QuestionInsertionFailureException();
+      }
     }
     finally {
       if (statement != null) {

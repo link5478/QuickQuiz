@@ -115,59 +115,72 @@ public class Question
     return isEqual;
   }
 
-  public String getQuestionText() {
+  public String getQuestionText()
+  {
     return questionText_;
   }
 
-  public void setQuestionText(String questionText) {
-    this.questionText_ = questionText;
+  public void setQuestionText(String questionText)
+  {
+    questionText_ = questionText;
   }
 
   public String getAnswer1() {
     return answer1_;
   }
 
-  public void setAnswer1(String answer1) {
-    this.answer1_ = answer1;
+  public void setAnswer1(String answer1)
+  {
+    answer1_ = answer1;
   }
 
-  public String getAnswer2() {
+  public String getAnswer2()
+  {
     return answer2_;
   }
 
-  public void setAnswer2(String answer2) {
-    this.answer2_ = answer2;
+  public void setAnswer2(String answer2)
+  {
+    answer2_ = answer2;
   }
 
-  public String getAnswer3() {
+  public String getAnswer3()
+  {
     return answer3_;
   }
 
-  public void setAnswer3(String answer3) {
-    this.answer3_ = answer3;
+  public void setAnswer3(String answer3)
+  {
+    answer3_ = answer3;
   }
 
-  public String getAnswer4() {
+  public String getAnswer4()
+  {
     return answer4_;
   }
 
-  public void setAnswer4(String answer4) {
-    this.answer4_ = answer4;
+  public void setAnswer4(String answer4)
+  {
+    answer4_ = answer4;
   }
 
-  public String getExplanation() {
+  public String getExplanation()
+  {
     return explanation_;
   }
 
-  public void setExplanation(String explanation) {
-    this.explanation_ = explanation;
+  public void setExplanation(String explanation)
+  {
+    explanation_ = explanation;
   }
 
-  public Integer getCorrectAnswer() {
+  public Integer getCorrectAnswer()
+  {
     return correctAnswer_;
   }
 
-  public void setCorrectAnswer(String correctAnswer) {
+  public void setCorrectAnswer(String correctAnswer)
+  {
     switch(correctAnswer)
     {
       case "answer1":
@@ -193,7 +206,7 @@ public class Question
   }
 
   public void setCorrectAnswer(Integer correctAnswer) {
-    this.correctAnswer_ = correctAnswer;
+    correctAnswer_ = correctAnswer;
   }
   
   public Integer getId()
@@ -206,11 +219,13 @@ public class Question
     id_ = id;
   }
 
-  public Integer getQuizId() {
+  public Integer getQuizId()
+  {
     return quizId_;
   }
 
-  public void setQuizId(Integer quizId) {
-    this.quizId_ = quizId;
+  public void setQuizId(Integer quizId)
+  {
+    quizId_ = quizId;
   }
 }

@@ -39,7 +39,9 @@ public class RestrictionToMembers
   private String restrictedToMembers;
 
   @Override
-  public void init(FilterConfig filterConfig) throws ServletException {
+  public void init(FilterConfig filterConfig)
+    throws ServletException
+  {
     restrictedToMembers = "/WEB-INF/members-restricted-page.jsp";
   }
 
@@ -62,7 +64,8 @@ public class RestrictionToMembers
   }
 
   @Override
-  public void destroy() {
+  public void destroy()
+  {
     throw new UnsupportedOperationException("Not supported yet.");
   }
 }

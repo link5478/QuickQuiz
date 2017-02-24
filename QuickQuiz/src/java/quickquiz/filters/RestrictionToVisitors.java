@@ -64,7 +64,8 @@ public class RestrictionToVisitors
   }
 
   @Override
-  public void destroy() {
+  public void destroy()
+  {
     throw new UnsupportedOperationException("Not supported yet.");
   }
   

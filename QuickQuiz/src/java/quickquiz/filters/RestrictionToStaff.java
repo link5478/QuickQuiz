@@ -39,7 +39,9 @@ public class RestrictionToStaff
   private String restrictedToStaff;
 
   @Override
-  public void init(FilterConfig filterConfig) throws ServletException {
+  public void init(FilterConfig filterConfig)
+    throws ServletException
+  {
     restrictedToStaff = "/WEB-INF/staff-restricted-page.jsp";
   }
 
@@ -62,7 +64,8 @@ public class RestrictionToStaff
   }
 
   @Override
-  public void destroy() {
+  public void destroy()
+  {
     throw new UnsupportedOperationException("Not supported yet.");
   }
 }

@@ -79,18 +79,17 @@ public class QuizCreation
     
     
     private Quiz getQuizFromForm(HttpServletRequest request)
-    {
-        
-        String name = request.getParameter("quiz-name");
-        String moduleId = request.getParameter("quiz-module-id");
-        String description = request.getParameter("quiz-description");
-        
-        HttpSession session = request.getSession();
-        LoggedIn lg = (LoggedIn)session.getAttribute("loggedIn");
-        String staffId = (String) lg.getUsername();
-        
-        Quiz quiz = new Quiz(name, description, moduleId, "", staffId);
-        
-        return quiz;
+    {  
+      String name = request.getParameter("quiz-name");
+      String moduleId = request.getParameter("quiz-module-id");
+      String description = request.getParameter("quiz-description");
+
+      HttpSession session = request.getSession();
+      LoggedIn lg = (LoggedIn)session.getAttribute("loggedIn");
+      String staffId = (String) lg.getUsername();
+
+      Quiz quiz = new Quiz(name, description, moduleId, "", staffId);
+
+      return quiz;
     }
 }

@@ -37,103 +37,105 @@ import quickquiz.stores.Quiz;
 // TODO: cache?
 public class QuizModel
 {
-    public static void insertQuiz(Quiz quiz)
-      throws SQLException, ClassNotFoundException, InstantiationException,
-             IllegalAccessException, QuizInsertionFailureException
-    {
-        PreparedStatement statement = null;
-        try {
-          // TODO: prepared statement?
-          String sql = "INSERT INTO quiz (name, description, moduleID, " + 
-                       "staffID) VALUES (?, ?, ?, ?);";
-          statement = Database.getInstance().prepareStatement(sql);
-          statement.setString(1, quiz.getName());
-          statement.setString(2, quiz.getDescription());
-          statement.setString(3, quiz.getModuleId());
-          statement.setString(4, quiz.getStaffName());
-          statement.executeUpdate();
-          if (statement.getUpdateCount() == 0) {
-            throw new QuizInsertionFailureException();
-          }
-        }
-        finally {
-            if (statement != null) {
-                statement.close();
-            }
-        }
-        
+  public static void insertQuiz(Quiz quiz)
+    throws SQLException, ClassNotFoundException, InstantiationException,
+           IllegalAccessException, QuizInsertionFailureException
+  {
+    PreparedStatement statement = null;
+    try {
+      // TODO: prepared statement?
+      String sql = "INSERT INTO quiz (name, description, moduleID, " + 
+                   "staffID) VALUES (?, ?, ?, ?);";
+      statement = Database.getInstance().prepareStatement(sql);
+      statement.setString(1, quiz.getName());
+      statement.setString(2, quiz.getDescription());
+      statement.setString(3, quiz.getModuleId());
+      statement.setString(4, quiz.getStaffName());
+      statement.executeUpdate();
+      if (statement.getUpdateCount() == 0) {
+        throw new QuizInsertionFailureException();
+      }
     }
-    
-    public static Quiz viewQuiz(String name)
-      throws SQLException, ClassNotFoundException, InstantiationException,
-             IllegalAccessException, NoQuizFoundException
-    {
-        Connection connection;
-        PreparedStatement statement = null;
-        ResultSet resultSet;
-        String sql;
-        Quiz product = new Quiz();
-        try {
-            connection = Database.getInstance();
-            
-            sql = "CALL `shift-two_quizmanager`.`ViewQuiz`(?)";
-            
-            
-            statement = connection.prepareStatement(sql);
-            statement.setString(1, name);
-            resultSet = statement.executeQuery();
-            if (!resultSet.isBeforeFirst()) { // if there is no data
-              throw new NoQuizFoundException();
-            }
-            while (resultSet.next()) {
-                String quizName = resultSet.getString("Quiz Name");
-                String desc = resultSet.getString("Description");
-                String moduleID = resultSet.getString("Module ID");
-                String moduleName = resultSet.getString("Module Name");
-                String staffName = resultSet.getString("Staff Name");
-                product = new quickquiz.stores.Quiz(quizName, desc, moduleID, moduleName, staffName);
-            }
-            
-            
-        }
-        finally {
-            if (statement != null) 
-            {
-              statement.close();
-            }
-        }  
-        return product;
+    finally {
+      if (statement != null) {
+        statement.close();
+      }
     }
-    
-    public static Map<String,String> getQuizzes(String moduleID)
-            throws SQLException, ClassNotFoundException, InstantiationException,
-             IllegalAccessException
-    {
-        Connection connection;
-        PreparedStatement statement = null;
-        ResultSet resultSet;
-        String sql;
-        Map<String, String> IDs = new HashMap<>();
-        try {
-          connection = Database.getInstance();
-          sql = "SELECT ID, name from quiz where moduleID=?;";
+  }
+  
+  
+  
+  public static Quiz viewQuiz(String name)
+    throws SQLException, ClassNotFoundException, InstantiationException,
+           IllegalAccessException, NoQuizFoundException
+  {
+    Connection connection;
+    PreparedStatement statement = null;
+    ResultSet resultSet;
+    String sql;
+    Quiz product = new Quiz();
+    try {
+      connection = Database.getInstance();
 
-          statement = connection.prepareStatement(sql);
-          statement.setString(1, moduleID);
-          resultSet = statement.executeQuery();
-          while(resultSet.next())
-          {
-              String ID = resultSet.getString("ID");
-              String Name = resultSet.getString("name");
-                IDs.put(ID, Name);
-          }
-        }
-        finally {
-          if (statement != null) {
-            statement.close();
-          }
-        }
-        return IDs;
+      sql = "CALL `shift-two_quizmanager`.`ViewQuiz`(?)";
+
+      statement = connection.prepareStatement(sql);
+      statement.setString(1, name);
+      resultSet = statement.executeQuery();
+      if (!resultSet.isBeforeFirst()) { // if there is no data
+        throw new NoQuizFoundException();
+      }
+      while (resultSet.next()) {
+          String quizName = resultSet.getString("Quiz Name");
+          String desc = resultSet.getString("Description");
+          String moduleID = resultSet.getString("Module ID");
+          String moduleName = resultSet.getString("Module Name");
+          String staffName = resultSet.getString("Staff Name");
+          product = new quickquiz.stores.Quiz(quizName, desc, moduleID, moduleName, staffName);
+      }
+    }
+    finally {
+      if (statement != null) 
+      {
+        statement.close();
+      }
+    }  
+    return product;
+  }
+  
+  
+  
+  public static Map<String,String> getQuizzes(String moduleID)
+    throws SQLException, ClassNotFoundException, InstantiationException,
+           IllegalAccessException
+  {
+    // TODO: close connection?
+    Connection connection;
+    PreparedStatement statement = null;
+    ResultSet resultSet;
+    String sql;
+    Map<String, String> IDs = new HashMap<>();
+    try {
+      connection = Database.getInstance();
+
+      sql = "SELECT ID, name from quiz where moduleID=?;";
+
+      statement = connection.prepareStatement(sql);
+      statement.setString(1, moduleID);
+      resultSet = statement.executeQuery();
+      while(resultSet.next())
+      {
+        String ID = resultSet.getString("ID");
+        String Name = resultSet.getString("name");
+        IDs.put(ID, Name);
+      }
+    }
+    finally {
+      if (statement != null) {
+        statement.close();
+      }
+    }
+    return IDs;
   }
   
   

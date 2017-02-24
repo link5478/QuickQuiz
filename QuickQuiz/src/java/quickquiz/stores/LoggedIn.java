@@ -18,53 +18,53 @@
 package quickquiz.stores;
 
 /**
- *
+ * TODO: camelCase attributes and methods' names.
  * @author hogar
  */
-public class LoggedIn {
-    
-    private String username;
-    private String userType = "student";
-    private String name;
-    private String module;
-    
-    public void setUsername(String Username)
-    {
-        username = Username;
-    }
-    
-    public String getUsername()
-    {
-        return username;
-    }
-    
-    public void setUserType(String type)
-    {
-        userType = type;
-    }
-    
-    public String getUserType()
-    {
-        return userType;
-    }
-    
-    public void setName(String Name)
-    {
-        name = Name;
-    }
-    
-    public String getName()
-    {
-        return name;
-    }
-    
-     public void setModule(String Module)
-    {
-        module = Module;
-    }
-    
-    public String getModule()
-    {
-        return module;
-    }
+public class LoggedIn
+{
+  private String username;
+  private String userType = "student";
+  private String name;
+  private String module;
+  
+  public void setUsername(String Username)
+  {
+      username = Username;
+  }
+
+  public String getUsername()
+  {
+      return username;
+  }
+
+  public void setUserType(String type)
+  {
+      userType = type;
+  }
+
+  public String getUserType()
+  {
+      return userType;
+  }
+
+  public void setName(String Name)
+  {
+      name = Name;
+  }
+
+  public String getName()
+  {
+      return name;
+  }
+
+   public void setModule(String Module)
+  {
+      module = Module;
+  }
+
+  public String getModule()
+  {
+      return module;
+  }
 }

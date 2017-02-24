@@ -39,7 +39,9 @@ public class RestrictionToStudents
   private String restrictedToStudents;
 
   @Override
-  public void init(FilterConfig filterConfig) throws ServletException {
+  public void init(FilterConfig filterConfig)
+    throws ServletException
+  {
     restrictedToStudents = "/WEB-INF/students-restricted-page.jsp";
   }
 
@@ -62,7 +64,8 @@ public class RestrictionToStudents
   }
 
   @Override
-  public void destroy() {
+  public void destroy()
+  {
     throw new UnsupportedOperationException("Not supported yet.");
   }
 }

@@ -31,36 +31,32 @@ import quickquiz.stores.Result;
  *
  * @author hogar, Louis-Marie Matthews
  */
-public class ResultsModel {
-    
-    
-    public static List<Result> getResults(LoggedIn user)
-             throws SQLException, ClassNotFoundException, InstantiationException,
+public class ResultsModel
+{
+  public static List<Result> getResults(LoggedIn user)
+    throws SQLException, ClassNotFoundException, InstantiationException,
            IllegalAccessException
+  {
+    List<Result> results = new ArrayList<>();
+
+    int type = 0;
+    if(user.getUserType().equals("staff"))
     {
-        
-        List<Result> results = new ArrayList<>();
-        
-        int type = 0;
-        if(user.getUserType().equals("staff"))
-        {
-            type = 1;
-        }
-        
-        Connection connection;
-        PreparedStatement statement = null;
-        ResultSet resultSet;
-        String sql = "CALL `shift-two_quizmanager`.`GetResults`(?, ?);";
-    
+        type = 1;
+    }
+
+    Connection connection;
+    PreparedStatement statement = null;
+    ResultSet resultSet;
+    String sql = "CALL `shift-two_quizmanager`.`GetResults`(?, ?);";
+
     try {
       connection = Database.getInstance();
-      
-      
       statement = connection.prepareStatement(sql);
       statement.setString(1,user.getUsername());
       statement.setInt(2, type);
       resultSet = statement.executeQuery();
-      while(resultSet.next())
+      while (resultSet.next())
       {
         Result newResult = new Result();
         newResult.setUserID(resultSet.getString("ID"));
@@ -74,8 +70,8 @@ public class ResultsModel {
         statement.close();
       }
     }
-     return results;
-    }
+    return results;
+  }
   
   
   

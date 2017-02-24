@@ -18,8 +18,6 @@
 package quickquiz.servlets;
 
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -29,6 +27,7 @@ import quickquiz.exception.MalformedUrlException;
 
 /**
  * Provides some utility functions to servlets that inherit it.
+ * Refactoring: Removed useless dependencies.
  * 
  * @author Louis-Marie Matthews
  */

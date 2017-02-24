@@ -43,6 +43,7 @@ public class QuizCreation
 {
     private final String jspForm = "/WEB-INF/quiz-creation.jsp";
     private final String jspError = "/WEB-INF/quiz-creation-error.jsp";
+    private final String jspSuccess = "/WEB-INF/successful-quiz-creation.jsp";
     
     
     
@@ -65,6 +66,8 @@ public class QuizCreation
         Quiz newQuiz = getQuizFromForm(request);
         try {
             QuizModel.insertQuiz(newQuiz);
+            RequestDispatcher r = request.getRequestDispatcher(jspSuccess);
+            r.forward(request, response);
         }
         catch (SQLException | ClassNotFoundException | InstantiationException |
                IllegalAccessException | QuizInsertionFailureException ex) {

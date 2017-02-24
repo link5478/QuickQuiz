@@ -1,6 +1,7 @@
 <%-- TODO: add user's username to right of navbar --%>
 <%@page import="quickquiz.stores.LoggedIn"%>
-<%@ page pageEncoding="UTF-8" %>
+<%@page pageEncoding="UTF-8" %>
+<% LoggedIn lg = (LoggedIn)session.getAttribute("loggedIn"); %>
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
@@ -16,29 +17,22 @@
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li><a href="<%=((HttpServletRequest)request).getContextPath()%>/index">Home</a></li>
-            <%
-                LoggedIn lg  = (LoggedIn)session.getAttribute("loggedIn");
-            if(session.getAttribute("loggedIn") != null) //Checks the session variable to see if the user is logged in.
-            {
-                 if(lg.getUserType().equals("staff")) //Checks to see if the user is Staff.
-                    {
-                %>
-            <li><a href="<%=((HttpServletRequest)request).getContextPath()%>/quiz-creation">Create Quiz</a></li>
-                <% }
-                %>
-                
-            <li><a href="<%=((HttpServletRequest)request).getContextPath()%>/quiz-list">Quiz List</a></li>
-            <li><a href="<%=((HttpServletRequest)request).getContextPath()%>/results">View Results</a></li>
-            <li><a href="<%=((HttpServletRequest)request).getContextPath()%>/logout">Log Out</a></li>
-            
-            <%
-                }else{
-            %>
-            <li><a href="<%=((HttpServletRequest)request).getContextPath()%>/login">Log In</a></li>
-            <%
-                }
-            %>
+            <% if(session.getAttribute("loggedIn") != null) { %> <%-- Checks the session variable to see if the user is logged in. --%>
+              <% if(lg.getUserType().equals("staff")) { %> <%-- Checks to see if the user is Staff. --%>
+                <li><a href="<%=((HttpServletRequest)request).getContextPath()%>/quiz-creation">Create Quiz</a></li>
+              <% } %>
+              <li><a href="<%=((HttpServletRequest)request).getContextPath()%>/quiz-list">Quiz List</a></li>
+              <li><a href="<%=((HttpServletRequest)request).getContextPath()%>/results">View Results</a></li>
+              <li><a href="<%=((HttpServletRequest)request).getContextPath()%>/logout">Log Out</a></li>
+            <% } else { %>
+              <li><a href="<%=((HttpServletRequest)request).getContextPath()%>/login">Log In</a></li>
+            <% } %>
           </ul>
+          <% if (lg != null) { %>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a><%= lg.getUsername() %></a></li>
+            </ul>
+          <% } %>
         </div><!--/.nav-collapse -->
       </div>
     </nav>

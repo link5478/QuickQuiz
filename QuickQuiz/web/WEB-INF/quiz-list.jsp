@@ -40,7 +40,7 @@
                         String key = entry.getKey();
                         String value = entry.getValue();
                         
-                        String s = "/QuickQuiz/view-quiz/" + key;
+                        String s = ((HttpServletRequest)request).getContextPath() + "/view-quiz/" + key;
                        %>                      
             <tr><td><a href= <%=s%>> <%=value%></a> </td></tr>
                        <%

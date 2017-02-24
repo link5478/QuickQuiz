@@ -12,6 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="/WEB-INF/jspf/head.jspf" %>
         <title>Log Out | Quick Quiz</title>
+        <meta http-equiv="refresh" content="3; url=<%=((HttpServletRequest)request).getContextPath()%>" />
     </head>
     
     <body>
@@ -23,12 +24,6 @@
             session = request.getSession();
             session.removeAttribute("loggedIn");           
         %>
-        
-        <script type="text/JavaScript"> 
-            setTimeout(function () {
-                document.location = "/QuickQuiz/index";
-            }, 5000);
-        </script>
         <p>Redirecting you...</p>
         <p>Click <a href="index" >here</a> if you are not redirected.</p>
         </div>

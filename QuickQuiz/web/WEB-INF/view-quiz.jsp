@@ -29,7 +29,7 @@
         if(lg.getUserType().equals("staff")) {//Checks to see if the user is Staff.
       %>
 
-      <a class="btn btn-primary" href="/QuickQuiz/new-question/${quiz.getId()}"> Add a question </a>
+      <a class="btn btn-primary" href="<%=((HttpServletRequest)request).getContextPath()%>/new-question/${quiz.getId()}"> Add a question </a>
 
       <%
           }

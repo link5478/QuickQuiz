@@ -11,17 +11,17 @@
 
         <div class="container indexcontainer">
         <h1>Create a quiz</h1>
-        <form action="quiz-creation" class="form-horizontal" id="quiz-form" method="post">
+        <form action="#" class="form-horizontal" id="quiz-form" method="post">
           <div class="form-group">
             <label form="quiz-form" for="quiz-name" class="col-sm-2 control-label">Name: </label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="Name of the quiz" required>
+              <input type="text" class="form-control" id="quiz-name" name="quiz-name" placeholder="Name of the quiz" required>
             </div>
           </div>
           <div class="form-group">
             <label form="quiz-form" for="quiz-module-id" class="col-sm-2 control-label">Module Id: </label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputPassword3" placeholder="The Id of the module of the quiz" required>
+              <input type="text" class="form-control" id="quiz-module-id" name="quiz-module-id" placeholder="The Id of the module of the quiz" required>
             </div>
           </div>
           <div class="form-group">

@@ -34,7 +34,9 @@ import static quickquiz.model.QuizModel.viewQuiz;
 import quickquiz.stores.Quiz;
 
 /**
- *
+ * This class has been refactored. The doPost method has been removed because it
+ * was not used, as well as getServletInfo()
+ * 
  * @author craigchicken
  * @author Louis-Marie Matthews
  */
@@ -55,6 +57,7 @@ public class ViewQuiz
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException
   {
+    // refactored
     try {
       Integer quizId = getQuizId(request);
       QuizModel.checkExists(quizId);
@@ -69,7 +72,7 @@ public class ViewQuiz
     }
     catch (MalformedUrlException | NoQuizFoundException ex) {
         Logger.getLogger(ViewQuiz.class.getName()).log(Level.SEVERE, null, ex);
-        forwardToQuizNotFound(request, response);  
+        forwardToQuizNotFound(request, response);
     }
   }
 }

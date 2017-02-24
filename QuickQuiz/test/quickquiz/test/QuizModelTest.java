@@ -51,33 +51,12 @@ public class QuizModelTest
   
   
   @Test
-  public void testGetQuiz()
-    throws SQLException, ClassNotFoundException, InstantiationException,
-           IllegalAccessException, NoQuizFoundException
-  {
-    Quiz quiz = QuizModel.getQuiz(1);
-    Question q1 = new Question("Agile fast or slow?", "Fast", "Slow", "No idea",
-                              "Is this a trick question?",
-                              "It is fast if you did not get it pls", 1);
-    q1.setId(1);
-    assertEquals("The fetched quiz description is different from the one in the db.", quiz.getDescription(), "Why are you taking my class?");
-    assertEquals("The fetched quiz name is different from the one in the db.", quiz.getName(), "What is Agile");
-    assertEquals("The fetched quiz module id is different from the one in the db.", quiz.getModuleId(), "AC31007");
-    assertEquals("The fetched quiz staff id is different from the one in the db.", quiz.getStaffName(), "Mark Snaith");
-    Question q2 = quiz.getQuestions().get(0);
-    assertEquals("Questions are not the same", q1, q2);
-    assertEquals("Ids should be the same.", (int) quiz.getId(), 1);
-  }
-  
-  
-  
-  @Test
   public void testCheckExists()
     throws SQLException, ClassNotFoundException, InstantiationException,
            IllegalAccessException
   {
     try {
-      QuizModel.checkExists(1);
+      QuizModel.checkExists(21);
     }
     catch (NoQuizFoundException e) {
       fail("A quiz should have been found.");

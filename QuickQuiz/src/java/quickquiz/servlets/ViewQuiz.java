@@ -28,6 +28,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import quickquiz.exception.MalformedUrlException;
 import quickquiz.exception.NoQuizFoundException;
+import quickquiz.model.QuizModel;
 import static quickquiz.model.QuizModel.getQuiz;
 import static quickquiz.model.QuizModel.viewQuiz;
 import quickquiz.stores.Quiz;
@@ -55,11 +56,11 @@ public class ViewQuiz
     throws ServletException, IOException
   {
     try {
-      request.setAttribute("quizID", getQuizId(request));
+      Integer quizId = getQuizId(request);
+      QuizModel.checkExists(quizId);
       Quiz quiz = getQuiz(getQuizId(request));
       request.setAttribute("quiz", quiz);
       request.getRequestDispatcher("/WEB-INF/view-quiz.jsp").forward(request, response);
-      //processRequest(request, response);
     }
     catch (SQLException | ClassNotFoundException | InstantiationException |
            IllegalAccessException ex) {

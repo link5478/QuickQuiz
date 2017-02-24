@@ -145,6 +145,7 @@ public class QuizModel
     PreparedStatement preparedStatement = null;
     Quiz quiz = new Quiz();
     try {
+      // TODO: fix stored procedure
       String sql = "CALL `GetQuiz`(?);";
       preparedStatement = Database.getInstance().prepareStatement(sql);
       preparedStatement.setInt(1, id);

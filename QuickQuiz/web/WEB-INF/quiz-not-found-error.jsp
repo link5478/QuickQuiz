@@ -14,7 +14,7 @@
   <body>
     <%@include file="/WEB-INF/jspf/navbar.jspf" %>
     <div class="container indexcontainer">
-      <p class="text-error">No quiz has the specified id.</p>
+      <p class="text-error">This quiz has no questions that you can answer at this time.</p>
     </div>
     <footer>
       <%@include file="/WEB-INF/jspf/footer.jspf" %>

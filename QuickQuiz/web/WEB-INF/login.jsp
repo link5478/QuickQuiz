@@ -20,13 +20,7 @@
         
         <div class="container logincontainer">
         
-            <%  
-                String s = (String)request.getAttribute("message");
-                if(s != null)
-                {
-                    out.println(s);
-                }
-            %>
+          <p class="text-error">${message}</p>
             <form method="post" action="login">
             Username: <br>
             <input type="text" name="username"><br>

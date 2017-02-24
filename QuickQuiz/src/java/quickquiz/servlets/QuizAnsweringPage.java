@@ -82,7 +82,7 @@ public class QuizAnsweringPage
       // TODO: convert to percentage
       Quiz quiz = QuizModel.getQuiz(getQuizId(request));
       ArrayList<Question> questions = quiz.getQuestions();
-      int points = 0;
+      float points = 0;
       for (int i = 0; i < questions.size(); i ++) {
         Integer questionId = questions.get(i).getId();
         Integer correctAnwer = questions.get(i).getCorrectAnswer();

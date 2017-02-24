@@ -15,11 +15,11 @@
             <tr>
                 <!-- to set to required (but later -->
                 <td><label form="quiz-form" for="quiz-name">Name: </label></td>
-                <td><input form="quiz-form" id="quiz-name" name="quiz-name" type="text" /></td>
+                <td><input form="quiz-form" id="quiz-name" name="quiz-name" type="text" required /></td>
             </tr>
             <tr>
                 <td><label form="quiz-form" for="quiz-module-id">Module Id: </label></td>
-                <td><input form="quiz-form" id="quiz-module-id" name="quiz-module-id" type="text" /></td>
+                <td><input form="quiz-form" id="quiz-module-id" name="quiz-module-id" type="text" required /></td>
             </tr>
             <tr>
                 <td><label form="quiz-form" for="quiz-description">Description: </label></td>

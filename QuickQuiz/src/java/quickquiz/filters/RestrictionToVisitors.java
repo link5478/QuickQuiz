@@ -27,7 +27,9 @@ public class RestrictionToVisitors
   private String restrictedToVisitors;
 
   @Override
-  public void init(FilterConfig filterConfig) throws ServletException {
+  public void init(FilterConfig filterConfig)
+    throws ServletException
+  {
     restrictedToVisitors = "/WEB-INF/visitors-restricted-page.jsp";
   }
 

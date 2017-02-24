@@ -30,19 +30,17 @@
                 
                     for(int i = 0; i < results.size(); i++)
                     {
-                        if(user.getUserType().equals("student"))
+                        if(user.getUserType().equals("staff"))
                         {
                             %>
-                            <h1> ID: <%=results.get(i).getUserID()%> </h1><br>  
-                            <h2> Quiz: <%=results.get(i).getQuizName()%> </h2> <br>
-                            <p> Mark: <%=results.get(i).getMark()%> <br><br> 
+                            <h1> ID: <%=results.get(i).getUserID()%> </h1>
                             <%
                         }
                         else
                         {
                         %>
-                            <h2> Quiz: <%=results.get(i).getQuizName()%> </h2> <br>
-                            <p> Average Mark: <%=results.get(i).getMark()%> <br><br> 
+                            <h2> Quiz: <%=results.get(i).getQuizName()%> </h2>
+                            <p> Mark: <%=results.get(i).getMark()%>%</p>
                         <%
 
                         }

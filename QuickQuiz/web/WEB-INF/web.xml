@@ -1,5 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <filter>
+        <filter-name>RestrictionToVisitors</filter-name>
+        <filter-class>quickquiz.filters.RestrictionToVisitors</filter-class>
+    </filter>
+    <filter>
+        <filter-name>RestrictionToMembers</filter-name>
+        <filter-class>quickquiz.filters.RestrictionToMembers</filter-class>
+    </filter>
+    <filter>
+        <filter-name>RestrictionToStaff</filter-name>
+        <filter-class>quickquiz.filters.RestrictionToStaff</filter-class>
+    </filter>
+    <filter>
+        <filter-name>RestrictionToStudents</filter-name>
+        <filter-class>quickquiz.filters.RestrictionToStudents</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>RestrictionToVisitors</filter-name>
+        <url-pattern>/login</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>RestrictionToMembers</filter-name>
+        <url-pattern>/logout</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>RestrictionToMembers</filter-name>
+        <url-pattern>/view-quiz/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>RestrictionToMembers</filter-name>
+        <url-pattern>/quiz-list</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>RestrictionToStaff</filter-name>
+        <url-pattern>/new-question/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>RestrictionToStaff</filter-name>
+        <url-pattern>/quiz-creation</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>RestrictionToStudents</filter-name>
+        <url-pattern>/quiz-answering-page/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>RestrictionToStudents</filter-name>
+        <url-pattern>/results/*</url-pattern>
+    </filter-mapping>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>

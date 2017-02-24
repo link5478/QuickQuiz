@@ -132,7 +132,7 @@ public class Login extends HttpServlet {
             throws ServletException, IOException
     {
             request.setAttribute("message", "detail success");
-            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/index.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/successful-login.jsp");
             rd.forward(request, response);
     }
 

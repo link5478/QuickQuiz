@@ -29,7 +29,7 @@
                     {
                 %>
 
-                        <br><a href="quiz-creation"> Create A Quiz </a>
+                        <br><a href="<%=((HttpServletRequest)request).getContextPath()%>/quiz-creation"> Create A Quiz </a>
 
                 <%
                     }
@@ -37,13 +37,13 @@
                     {
                         %>
                         
-                        <br><a href="quiz-list"> View Quizzes </a>
+                        <br><a href="<%=((HttpServletRequest)request).getContextPath()%>/quiz-list"> View Quizzes </a>
 
                         <%
                     }
                     %>
 
-                        <br><a href="logout">Log out</a>
+                        <br><a href="<%=((HttpServletRequest)request).getContextPath()%>/logout">Log out</a>
 
                     <%
             }
@@ -52,7 +52,7 @@
                 %>
 
                 <h1>Welcome to QuickQuiz.</h1>
-                <a href="login"> Log in </a>
+                <a href="<%=((HttpServletRequest)request).getContextPath()%>/login"> Log in </a>
 
                 <%
             }

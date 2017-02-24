@@ -17,8 +17,14 @@
  */
 package quickquiz.servlets;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import quickquiz.exception.MalformedUrlException;
 
 /**
@@ -43,6 +49,7 @@ public class ServletTemplate
   protected Integer getQuizId(HttpServletRequest request)
     throws MalformedUrlException
   {
+    Integer quizId = null;
     String url = getUri(request);
     String[] uriElements = url.split("/");
     if (uriElements.length != 2) {
@@ -54,6 +61,33 @@ public class ServletTemplate
     {
         quizID = quizID.substring(0, quizID.length() - 1);
     }
-    return Integer.parseInt(quizID);
+    try {
+      quizId = Integer.parseInt(quizID);
+    }
+    catch (NumberFormatException ex) {
+      throw new MalformedUrlException();
+    }
+    return quizId;
+  }
+  
+  
+  
+  protected void forwardToGeneralError(HttpServletRequest request,
+                                       HttpServletResponse response)
+    throws ServletException, IOException
+  {
+      // Logger.getLogger(NewQuestion.class.getName()).log(Level.SEVERE, null, ex);
+      RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/general-error.jsp");
+      rd.forward(request, response);
+  }
+  
+  
+  
+  protected void forwardToQuizNotFound(HttpServletRequest request,
+                                       HttpServletResponse response)
+    throws ServletException, IOException
+  {
+      RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/quiz-not-found-error.jsp");
+      rd.forward(request, response);
   }
 }

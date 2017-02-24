@@ -54,27 +54,16 @@ public class QuizAnsweringPage
       RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/quiz-answering-page.jsp") ;
       rd.forward(request, response) ;
     }
-    catch (MalformedUrlException ex) {
-      RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/quiz-answering-error.jsp") ;
+    catch (MalformedUrlException | NoQuizFoundException ex) {
+      Logger.getLogger(QuizAnsweringPage.class.getName()).log(Level.SEVERE, null, ex);
+      RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/quiz-not-found-error.jsp") ;
       rd.forward(request, response) ;
-      //Redirects user to an error page if the Quiz ID is not found.
-      Logger.getLogger(QuizAnsweringPage.class.getName()).log(Level.SEVERE, null, ex);
-      //Logs the catch.
     }
-    catch (SQLException ex) {
+    catch (SQLException | ClassNotFoundException | InstantiationException |
+           IllegalAccessException ex) {
       Logger.getLogger(QuizAnsweringPage.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    catch (ClassNotFoundException ex) {
-      Logger.getLogger(QuizAnsweringPage.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    catch (InstantiationException ex) {
-      Logger.getLogger(QuizAnsweringPage.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    catch (IllegalAccessException ex) {
-      Logger.getLogger(QuizAnsweringPage.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    catch (NoQuizFoundException ex) {
-      Logger.getLogger(QuizAnsweringPage.class.getName()).log(Level.SEVERE, null, ex);
+      RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/general-error.jsp") ;
+      rd.forward(request, response) ;
     }
   }
   
@@ -83,6 +72,7 @@ public class QuizAnsweringPage
   @Override
   protected void doPost(HttpServletRequest request,
                         HttpServletResponse response)
+    throws ServletException, IOException
   {
     // TODO:  handle exceptions
     try {
@@ -111,24 +101,15 @@ public class QuizAnsweringPage
       r.setQuizId(quiz.getId());
       r.setUserID(((LoggedIn) request.getSession().getAttribute("loggedIn")).getUsername());
       ResultsModel.addResult(r);
+      RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/successful-answers-submission.jsp") ;
+      rd.forward(request, response) ;
     }
-    catch (SQLException ex) {
+    catch (SQLException | ClassNotFoundException | InstantiationException |
+           IllegalAccessException | MalformedUrlException |
+           NumberFormatException | NullPointerException | NoQuizFoundException ex) {
       Logger.getLogger(QuizAnsweringPage.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    catch (ClassNotFoundException ex) {
-      Logger.getLogger(QuizAnsweringPage.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    catch (InstantiationException ex) {
-      Logger.getLogger(QuizAnsweringPage.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    catch (IllegalAccessException ex) {
-      Logger.getLogger(QuizAnsweringPage.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    catch (MalformedUrlException ex) {
-      Logger.getLogger(QuizAnsweringPage.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    catch (NoQuizFoundException ex) {
-      Logger.getLogger(QuizAnsweringPage.class.getName()).log(Level.SEVERE, null, ex);
+      RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/general-error.jsp") ;
+      rd.forward(request, response) ;
     }
   }
 }

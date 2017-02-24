@@ -34,18 +34,11 @@
                 <%
                 }     
             %>
-        <%String quizID = (String)request.getAttribute("quizID"); %>
-        <%String quizName = (String)request.getAttribute("quizName"); %>
-        <%String description = (String)request.getAttribute("description"); %>
-        <%String moduleID = (String)request.getAttribute("moduleID"); %>
-        <%String moduleName = (String)request.getAttribute("moduleName"); %>
-        <%String staffName = (String)request.getAttribute("staffName"); %>
-        
-        <p>Quiz ID: <%= quizID%></p>
-        <p>Name: <%= quizName%></p>
-        <p>Module ID: <%= moduleID%></p>
-        <p>Module Name: <%= moduleName%></p>
-        <p>Staff Name: <%= staffName%></p>
+        <p>Quiz ID: ${quiz.getId()}</p>
+        <p>Name: ${quiz.getName()}</p>
+        <p>Module ID: ${quiz.getModuleId()}</p>
+        <p>Module Name: ${quiz.getModuleName()}</p>
+        <p>Staff Name: ${quiz.getStaffName()}</p>
         
         
          <%
@@ -60,7 +53,7 @@
                     {
                 %>
 
-                        <br><a href="/QuickQuiz/new-question/<%= quizID %>"> Add a question </a>
+                        <br><a href="/QuickQuiz/new-question/${quiz.getId()}"> Add a question </a>
 
                 <%
                     }

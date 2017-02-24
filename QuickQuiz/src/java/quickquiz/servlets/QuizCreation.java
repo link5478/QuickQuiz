@@ -39,7 +39,7 @@ import quickquiz.stores.Quiz;
 // TODO: students should not be able to create a new quiz
 // TODO: error when there is no such quiz
 public class QuizCreation
-  extends HttpServlet
+  extends ServletTemplate
 {
     private final String jspForm = "/WEB-INF/quiz-creation.jsp";
     private final String jspError = "/WEB-INF/quiz-creation-error.jsp";
@@ -66,21 +66,10 @@ public class QuizCreation
         try {
             QuizModel.insertQuiz(newQuiz);
         }
-        catch (SQLException ex) {
-            Logger.getLogger(QuizCreation.class.getName()).log(Level.SEVERE, null, ex);
+        catch (SQLException | ClassNotFoundException | InstantiationException |
+               IllegalAccessException | QuizInsertionFailureException ex) {
+            forwardToGeneralError(request, response);
         }
-        catch (ClassNotFoundException ex) {
-            Logger.getLogger(QuizCreation.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        catch (InstantiationException ex) {
-            Logger.getLogger(QuizCreation.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        catch (IllegalAccessException ex) {
-            Logger.getLogger(QuizCreation.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        catch (QuizInsertionFailureException ex) {
-        Logger.getLogger(QuizCreation.class.getName()).log(Level.SEVERE, null, ex);
-      }
     }
     
     

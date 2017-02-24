@@ -41,6 +41,7 @@ import quickquiz.stores.Question;
 // TODO: display quiz not found when quiz is not found
 // TODO: students should not be able to create a new quiz
 // TODO: add / as url pattern in web.xml
+// TODO: update the version of the quiz whenever a new question is added?
 public class NewQuestion
   extends ServletTemplate
 {
@@ -48,30 +49,20 @@ public class NewQuestion
   public void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException
   {
-    
+    // TODO: method to redirect?
     try {
       QuizModel.checkExists(getQuizId(request));
       request.setAttribute("quiz-id", getQuizId(request));
       RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/new-question.jsp");
       rd.forward(request, response);
     }
-    catch(MalformedUrlException e) {
-      response.sendError(HttpServletResponse.SC_NOT_FOUND);
+    catch (SQLException | ClassNotFoundException | InstantiationException |
+           IllegalAccessException ex) {
+      forwardToGeneralError(request, response);
     }
-    catch (SQLException ex) {
+    catch (MalformedUrlException | NoQuizFoundException ex) {
       Logger.getLogger(NewQuestion.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    catch (ClassNotFoundException ex) {
-      Logger.getLogger(NewQuestion.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    catch (InstantiationException ex) {
-      Logger.getLogger(NewQuestion.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    catch (IllegalAccessException ex) {
-      Logger.getLogger(NewQuestion.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    catch (NoQuizFoundException ex) {
-      Logger.getLogger(NewQuestion.class.getName()).log(Level.SEVERE, null, ex);
+      forwardToQuizNotFound(request, response);
     }
   }
   
@@ -81,37 +72,29 @@ public class NewQuestion
   public void doPost(HttpServletRequest request, HttpServletResponse response)
     throws IOException, ServletException
   {
-    String id = "";
     try {
+      QuizModel.checkExists(getQuizId(request)); // TODO: right place to check?
+      
       Question newQuestion = getQuestionFromForm(request);
-      id = newQuestion.getQuizId().toString();
       
       QuestionModel.insertQuestion (newQuestion);
-    }
-    catch (MalformedUrlException e) {
-      response.sendError(HttpServletResponse.SC_NOT_FOUND);
-    }
-    catch (SQLException ex) {
-      Logger.getLogger(NewQuestion.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    catch (ClassNotFoundException ex) {
-      Logger.getLogger(NewQuestion.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    catch (InstantiationException ex) {
-      Logger.getLogger(NewQuestion.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    catch (IllegalAccessException ex) {
-      Logger.getLogger(NewQuestion.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    catch (QuestionInsertionFailureException ex) {
-      Logger.getLogger(NewQuestion.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    // TODO: fix this.
-    String redir = ((HttpServletRequest)request).getContextPath() + "/view-quiz/" + id;
-    HttpSession session = request.getSession();
-    session.setAttribute("message", "success");
       
-    response.sendRedirect(redir);
+      // TODO: fix this.
+      String redir = ((HttpServletRequest)request).getContextPath() + "/view-quiz/" + newQuestion.getQuizId();
+      HttpSession session = request.getSession();
+      session.setAttribute("message", "success");
+
+      response.sendRedirect(redir);
+    }
+    catch (MalformedUrlException | NoQuizFoundException ex) {
+      Logger.getLogger(NewQuestion.class.getName()).log(Level.SEVERE, null, ex);
+      RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/quiz-not-found-error.jsp");
+      rd.forward(request, response);
+    }
+    catch (SQLException | ClassNotFoundException | InstantiationException |
+           IllegalAccessException | QuestionInsertionFailureException ex) {
+      forwardToGeneralError(request, response);
+    }
   }
   
   

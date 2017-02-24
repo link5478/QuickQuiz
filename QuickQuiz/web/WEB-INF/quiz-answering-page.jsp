@@ -20,20 +20,42 @@
       <h1>${quiz.getName()}</h1>
       <p>${quiz.getDescription()}</p>
       <form action="#" method="POST">
-      <% ArrayList<Question> questions = (ArrayList<Question>) request.getAttribute("questions");
-         Iterator<Question> i = questions.iterator();
-         while (i.hasNext()) {
-           Question q = i.next();
-      %>
-           <p><%= q.getQuestionText() %></p>
-           <input type="radio" name="<%= q.getId() %>" value="1" /><%= q.getAnswer1() %><br />
-           <input type="radio" name="<%= q.getId() %>" value="2" /><%= q.getAnswer2() %><br />
-           <input type="radio" name="<%= q.getId() %>" value="3" /><%= q.getAnswer3() %><br />
-           <input type="radio" name="<%= q.getId() %>" value="4" /><%= q.getAnswer4() %><br />
       <%
-         }
-      %>
-      <button type="submit">Submit</button>
+        ArrayList<Question> questions = (ArrayList<Question>) request.getAttribute("questions");
+        Iterator<Question> i = questions.iterator();
+        while (i.hasNext()) {
+          Question q = i.next();
+      %>    
+        <hr />
+        <p><%= q.getQuestionText() %></p>
+        <div class="radio">
+           <label>
+              <input type="radio" name="<%= q.getId() %>" value="1" checked>
+              <%= q.getAnswer1() %>
+           </label>
+        </div>
+        <div class="radio">
+           <label>
+              <input type="radio" name="<%= q.getId() %>" value="2" checked>
+              <%= q.getAnswer2() %>
+           </label>
+        </div>
+        <div class="radio">
+           <label>
+              <input type="radio" name="<%= q.getId() %>" value="3" checked>
+              <%= q.getAnswer3() %>
+           </label>
+        </div>
+        <div class="radio">
+           <label>
+              <input type="radio" name="<%= q.getId() %>" value="4" checked>
+              <%= q.getAnswer4() %>
+           </label>
+        </div>
+        <%
+           }
+        %>
+        <button class="btn btn-primary" type="submit">Submit</button>
       </form>
     </div>
     <footer>

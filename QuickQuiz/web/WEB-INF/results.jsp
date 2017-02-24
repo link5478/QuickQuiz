@@ -28,6 +28,8 @@
                 LoggedIn user = (LoggedIn)session.getAttribute("loggedIn");
                 results = ResultsModel.getResults(user);
                 
+                if(results.size() > 0)
+                {
                     for(int i = 0; i < results.size(); i++)
                     {
                         if(user.getUserType().equals("staff"))
@@ -50,6 +52,14 @@
                           
                         <%
                     }
+                }
+                else
+                {
+                %>
+                <h2>You have not attempted any quizzes yet. </h2>
+                <p><a href="quiz-list"> Try one? </a> </p>
+                <%
+                }
             %>
             
         </div>

@@ -30,6 +30,7 @@ import quickquiz.exception.MalformedUrlException;
 import quickquiz.exception.NoQuizFoundException;
 import quickquiz.model.QuizModel;
 import static quickquiz.model.QuizModel.getQuiz;
+import static quickquiz.model.QuizModel.getQuizPresentation;
 import static quickquiz.model.QuizModel.viewQuiz;
 import quickquiz.stores.Quiz;
 
@@ -61,7 +62,7 @@ public class ViewQuiz
     try {
       Integer quizId = getQuizId(request);
       QuizModel.checkExists(quizId);
-      Quiz quiz = getQuiz(getQuizId(request));
+      Quiz quiz = getQuizPresentation(getQuizId(request));
       request.setAttribute("quiz", quiz);
       request.getRequestDispatcher("/WEB-INF/view-quiz.jsp").forward(request, response);
     }

@@ -103,7 +103,7 @@ public class QuizModel
             }
         }  
         return product;
-    }    
+    }
     
     public static Map<String,String> getQuizzes(String moduleID)
             throws SQLException, ClassNotFoundException, InstantiationException,
@@ -181,6 +181,43 @@ public class QuizModel
         preparedStatement.close();
       }
     }
+    return quiz;
+  }
+  
+  
+  
+  // TODO: To refactor
+  public static Quiz getQuizPresentation(Integer id)
+    throws SQLException, ClassNotFoundException, InstantiationException,
+           IllegalAccessException, NoQuizFoundException
+  {
+    Quiz quiz = new Quiz();
+    
+    PreparedStatement ps = null;
+    try {
+      String sql = "SELECT ID, name, description, moduleID, staffID FROM quiz WHERE ID = ?;";
+      ps = Database.getInstance().prepareStatement(sql);
+      ps.setInt(1, id);
+      ResultSet rs = ps.executeQuery();
+      
+      if (!rs.isBeforeFirst()) { // if there is no data
+        throw new NoQuizFoundException();
+      }
+      
+      while (rs.next()) {
+        quiz.setId(rs.getInt("ID"));
+        quiz.setName(rs.getString("name"));
+        quiz.setDescription(rs.getString("description"));
+        quiz.setModuleId(rs.getString("moduleID"));
+        quiz.setStaffName(rs.getString("staffID"));
+      }
+    }
+    finally {
+      if (ps != null) {
+          ps.close();
+      }
+    }
+    
     return quiz;
   }
   

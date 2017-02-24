@@ -34,6 +34,8 @@
                         {
                             %>
                             <h1> ID: <%=results.get(i).getUserID()%> </h1>
+                            <h2> Quiz: <%=results.get(i).getQuizName()%> </h2>
+                            <p> Mark: <%=results.get(i).getMark()%>%</p>
                             <%
                         }
                         else

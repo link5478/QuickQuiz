@@ -1,0 +1,324 @@
+--OLD DATABASE--
+
+--CREATE TABLES--
+
+CREATE TABLE `module` (
+  `ID` varchar(10) NOT NULL,
+  `name` char(255) NOT NULL,
+  PRIMARY KEY (`ID`)
+)
+
+	--------------------------------------------------------------------
+
+CREATE TABLE `question` (
+  `ID` int(10) NOT NULL AUTO_INCREMENT,
+  `questionText` varchar(255) NOT NULL,
+  `answer1` varchar(255) NOT NULL,
+  `answer2` varchar(255) NOT NULL,
+  `answer3` varchar(255) NOT NULL,
+  `answer4` varchar(255) NOT NULL,
+  `explanation` varchar(255) NOT NULL,
+  `correctAnswer` char(1) NOT NULL,
+  `quizID` int(10) NOT NULL,
+  `questionNo` int(10) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `quizID` (`quizID`),
+  CONSTRAINT `question_ibfk_1` FOREIGN KEY (`quizID`) REFERENCES `quiz` (`ID`)
+)
+
+	--------------------------------------------------------------------
+
+CREATE TABLE `quiz` (
+  `ID` int(10) NOT NULL AUTO_INCREMENT,
+  `name` char(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `moduleID` varchar(20) NOT NULL,
+  `staffID` varchar(20) NOT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `moduleID` (`moduleID`),
+  KEY `staffID` (`staffID`),
+  CONSTRAINT `quiz_ibfk_1` FOREIGN KEY (`moduleID`) REFERENCES `module` (`ID`),
+  CONSTRAINT `quiz_ibfk_2` FOREIGN KEY (`staffID`) REFERENCES `staff` (`ID`)
+)
+
+	--------------------------------------------------------------------
+
+CREATE TABLE `result` (
+  `ID` int(10) NOT NULL AUTO_INCREMENT,
+  `mark` float NOT NULL,
+  `quizID` int(10) NOT NULL,
+  `studentID` varchar(20) NOT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `quizID` (`quizID`),
+  KEY `studentID` (`studentID`),
+  CONSTRAINT `result_ibfk_1` FOREIGN KEY (`quizID`) REFERENCES `quiz` (`ID`),
+  CONSTRAINT `result_ibfk_2` FOREIGN KEY (`studentID`) REFERENCES `student` (`ID`)
+);
+
+	--------------------------------------------------------------------
+
+CREATE TABLE `staff` (
+  `ID` varchar(20) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `name` char(255) NOT NULL,
+  `moduleID` varchar(20) NOT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `moduleID` (`moduleID`),
+  CONSTRAINT `staff_ibfk_1` FOREIGN KEY (`moduleID`) REFERENCES `module` (`ID`)
+);
+
+	--------------------------------------------------------------------
+
+
+CREATE TABLE `student` (
+  `ID` varchar(20) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `name` char(255) NOT NULL,
+  `moduleID` varchar(20) NOT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `moduleID` (`moduleID`),
+  CONSTRAINT `student_ibfk_1` FOREIGN KEY (`moduleID`) REFERENCES `module` (`ID`)
+);
+
+
+--VIEWS--
+
+CREATE 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `shift-two_team9`@`%` 
+    SQL SECURITY DEFINER
+VIEW `QuizQuestion` AS
+    SELECT 
+        `q`.`name` AS `Quiz Name`,
+        `q`.`description` AS `Description`,
+        `q`.`moduleID` AS `Module ID`,
+        `m`.`name` AS `Module Name`,
+        `s`.`name` AS `Staff Name`,
+        `qu`.`ID` AS `Question ID`,
+        `qu`.`questionText` AS `Question`,
+        `qu`.`answer1` AS `Answer 1`,
+        `qu`.`answer2` AS `Answer 2`,
+        `qu`.`answer3` AS `Answer 3`,
+        `qu`.`answer4` AS `Answer 4`,
+        `qu`.`correctAnswer` AS `Correct Answer`,
+        `qu`.`explanation` AS `Explanation`,
+        `qu`.`quizID` AS `Quiz ID`
+    FROM
+        (((`question` `qu`
+        JOIN `quiz` `q`)
+        JOIN `module` `m`)
+        JOIN `staff` `s`)
+    WHERE
+        ((`qu`.`quizID` = `q`.`ID`)
+            AND (`q`.`staffID` = `s`.`ID`)
+            AND (`q`.`moduleID` = `m`.`ID`))
+    ORDER BY `q`.`ID` , `qu`.`ID`
+	
+	--------------------------------------------------------------------
+	CREATE 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `shift-two_team9`@`%` 
+    SQL SECURITY DEFINER
+VIEW `StaffQuiz` AS
+    SELECT 
+        `q`.`ID` AS `Quiz ID`,
+        `q`.`name` AS `Quiz Name`,
+        `q`.`description` AS `Description`,
+        `q`.`moduleID` AS `Module ID`,
+        `m`.`name` AS `Module Name`,
+        `s`.`name` AS `Staff Name`
+    FROM
+        ((`quiz` `q`
+        JOIN `module` `m`)
+        JOIN `staff` `s`)
+    WHERE
+        ((`q`.`moduleID` = `m`.`ID`)
+            AND (`q`.`staffID` = `s`.`ID`))
+		
+	--------------------------------------------------------------------
+
+		
+CREATE 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `shift-two_team9`@`%` 
+    SQL SECURITY DEFINER
+VIEW `StaffResult` AS
+    SELECT 
+        `s`.`ID` AS `ID`,
+        `q`.`name` AS `Name`,
+        AVG(`r`.`mark`) AS `Mark`
+    FROM
+        ((`quiz` `q`
+        JOIN `result` `r`)
+        JOIN `staff` `s`)
+    WHERE
+        ((`r`.`quizID` = `q`.`ID`)
+            AND (`q`.`staffID` = `s`.`ID`))
+    GROUP BY `q`.`ID`
+	
+		--------------------------------------------------------------------
+
+	
+CREATE 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `shift-two_team9`@`%` 
+    SQL SECURITY DEFINER
+VIEW `StuResult` AS
+    SELECT 
+        `s`.`ID` AS `ID`, `q`.`name` AS `Name`, `r`.`mark` AS `Mark`
+    FROM
+        ((`student` `s`
+        JOIN `result` `r`)
+        JOIN `quiz` `q`)
+    WHERE
+        ((`s`.`ID` = `r`.`studentID`)
+            AND (`r`.`quizID` = `q`.`ID`))
+			
+			
+--STORED PROCEDURES--
+
+CREATE DEFINER=`shift-two_team9`@`%` PROCEDURE `AddQuestions`(IN questionTex VARCHAR(255), ans1 VARCHAR(255), ans2 VARCHAR(255), ans3 VARCHAR(255), ans4 VARCHAR(255), explan VARCHAR(255), correct char(1), quizNo int(10), questNo int(10))
+BEGIN
+
+INSERT INTO question (`questionText`, `answer1`, `answer2`, `answer3`, `answer4`, `explanation`, `correctAnswer`, `quizID`, `questionNo`)
+  VALUES(questionTex, ans1, ans2, ans3, ans4, explan, correct, quizNo, questNo);
+END
+
+--------------------------------------------------------------------
+
+DELIMITER $$
+CREATE DEFINER=`shift-two_team9`@`%` PROCEDURE `AddResult`(IN userID VARCHAR(20), mar float, quiID INT(64))
+BEGIN
+
+INSERT INTO result(
+	mark,
+    quizID,
+    studentID)
+VALUES(
+	mar,
+    quiID,
+    userID);
+
+END$$
+DELIMITER ;
+
+--------------------------------------------------------------------
+
+DELIMITER $$
+CREATE DEFINER=`shift-two_team9`@`%` PROCEDURE `CreateQuiz`(IN nam VARCHAR(255), descrip VARCHAR(255), modID VARCHAR(255), staID VARCHAR(255))
+BEGIN
+
+INSERT INTO `shift-two_quizmanager`.`quiz`
+(`name`,
+`description`,
+`moduleID`,
+`staffID`)
+VALUES
+(nam,
+descrip,
+modID,
+staID);
+END$$
+DELIMITER ;
+
+--------------------------------------------------------------------
+
+DELIMITER $$
+CREATE DEFINER=`shift-two_team9`@`%` PROCEDURE `GetQuiz`(IN quID INT(64))
+BEGIN
+
+SELECT 
+`Quiz ID`,
+`Quiz Name`,
+`Description`,
+`Module ID`,
+`Module Name`,
+`Staff Name`,
+`Question ID`,
+`Question`,
+`Answer 1`,
+`Answer 2`,
+`Answer 3`,
+`Answer 4`,
+`Correct Answer`,
+`Explanation`
+FROM QuizQuestion
+WHERE quID = `Quiz ID`;
+
+END$$
+DELIMITER ;
+
+--------------------------------------------------------------------
+
+DELIMITER $$
+CREATE DEFINER=`shift-two_team9`@`%` PROCEDURE `GetResults`(IN id VARCHAR(255), stastu CHAR(1))
+Results:BEGIN
+IF stastu = '0'
+THEN	
+CALL `shift-two_quizmanager`.`StuViewRes`(id);
+
+ELSEIF stastu = '1'
+THEN
+CALL `shift-two_quizmanager`.`StaffResult`(id);
+
+ELSE
+LEAVE Results;
+END IF;
+
+
+END$$
+DELIMITER ;
+
+--------------------------------------------------------------------
+
+DELIMITER $$
+CREATE DEFINER=`shift-two_team9`@`%` PROCEDURE `StaffLogin`(IN staID VARCHAR(20), IN pass VARCHAR(30))
+BEGIN
+SELECT ID, password FROM staff
+  WHERE ID = staID and password = pass;
+END$$
+DELIMITER ;
+
+--------------------------------------------------------------------
+
+DELIMITER $$
+CREATE DEFINER=`shift-two_team9`@`%` PROCEDURE `StaffResult`(IN stID varchar(20))
+BEGIN
+SELECT * FROM StaffResult WHERE `ID` = stID;
+END$$
+DELIMITER ;
+
+--------------------------------------------------------------------
+
+DELIMITER $$
+CREATE DEFINER=`shift-two_team9`@`%` PROCEDURE `StuLogin`(IN stuID VARCHAR(20), IN pass VARCHAR(30))
+BEGIN
+SELECT ID, password FROM student
+  WHERE ID = stuID and password = pass;
+END$$
+DELIMITER ;
+
+--------------------------------------------------------------------
+
+DELIMITER $$
+CREATE DEFINER=`shift-two_team9`@`%` PROCEDURE `StuViewRes`(IN stuID varchar(255))
+BEGIN
+SELECT * FROM StuResult WHERE `ID` = stuID;
+END$$
+DELIMITER ;
+
+--------------------------------------------------------------------
+
+DELIMITER $$
+CREATE DEFINER=`shift-two_team9`@`%` PROCEDURE `ViewQuiz`(IN qID int(10))
+BEGIN
+SELECT
+`Quiz Name`,
+`Description`,
+`Module ID`,
+`Module Name`,
+`Staff Name`
+FROM StaffQuiz
+WHERE `Quiz ID` = qID;
+END$$
+DELIMITER ;

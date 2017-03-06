@@ -17,7 +17,7 @@
     <div class="container indexcontainer">
       <p class="text-success">You successfully logged in. Redirecting to the home page…</p>
       <%-- TODO: add login link if user not logged in? --%>
-      <p> Click <a href="/index"> here </a> to be redirected </p>
+      <p> Click <a href="/QuickQuiz/index"> here </a> to be redirected </p>
     </div>
     <footer>
       <%@include file="/WEB-INF/jspf/footer.jspf" %>

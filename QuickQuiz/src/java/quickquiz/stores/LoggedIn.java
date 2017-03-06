@@ -17,6 +17,9 @@
  */
 package quickquiz.stores;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * TODO: camelCase attributes and methods' names.
  * @author hogar
@@ -26,7 +29,7 @@ public class LoggedIn
   private String username;
   private String userType = "student";
   private String name;
-  private String module;
+  private List<String> module = new ArrayList<>();
   
   public void setUsername(String Username)
   {
@@ -60,10 +63,10 @@ public class LoggedIn
 
    public void setModule(String Module)
   {
-      module = Module;
+      module.add(Module);
   }
 
-  public String getModule()
+  public List<String> getModules()
   {
       return module;
   }

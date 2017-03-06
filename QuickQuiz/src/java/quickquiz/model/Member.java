@@ -36,8 +36,7 @@ public class Member
    * the member's role (staffOrStudent). This can either be "staff" or "student".
    * Otherwise, an IllegalArgumentException is thrown.
    */
-  public static Boolean areLoginDetailsValid(String username, String password,
-                                             String staffOrStudent)
+  public static Boolean areLoginDetailsValid(String username, String password)
     throws SQLException, ClassNotFoundException, InstantiationException,
            IllegalAccessException
   {
@@ -45,18 +44,10 @@ public class Member
     Connection connection;
     PreparedStatement statement = null;
     ResultSet resultSet;
-    String sql;
+    String sql = "";
     try {
       connection = Database.getInstance();
-      if (staffOrStudent.equalsIgnoreCase("student")) {
-        sql = "CALL `StuLogin`(?, ?);";
-      }
-      else if (staffOrStudent.equalsIgnoreCase("staff")) {
-        sql = "CALL `StaffLogin`(?, ?);";
-      }
-      else {
-        throw new IllegalArgumentException();
-      }
+      
       statement = connection.prepareStatement(sql);
       statement.setString(1, username);
       statement.setString(2, password);

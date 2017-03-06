@@ -76,11 +76,6 @@ public class Login
   {
     String username = request.getParameter("username");
     String password = request.getParameter("password");
-    String type ="student";
-    if(request.getParameter("type") != null)
-    {
-      type = "staff";
-    }
 
     if(username.isEmpty() || username.equals("") || password.isEmpty() || password.equals(""))
     {
@@ -90,14 +85,16 @@ public class Login
     boolean valid = false;
     try
     {
-      valid = Member.areLoginDetailsValid(username, password, type);
-
+      valid = Member.areLoginDetailsValid(username, password);
+     
       if(valid)
       {
         // log them in.
         // create loggedIn store
         LoggedIn lg = new LoggedIn();
-        lg.setUsername(username);                             
+        lg.setUsername(username);  
+        // TODO modify line below for query of sorts.
+        String type = "staff";
         lg.setUserType(type);
         lg.setModule(Member.getModuleID(username, type));
         HttpSession session = request.getSession();

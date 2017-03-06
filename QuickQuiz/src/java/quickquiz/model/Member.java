@@ -21,6 +21,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import quickquiz.lib.Database;
 
 /**
@@ -36,28 +38,34 @@ public class Member
    * the member's role (staffOrStudent). This can either be "staff" or "student".
    * Otherwise, an IllegalArgumentException is thrown.
    */
-  public static Boolean areLoginDetailsValid(String username, String password)
+  public static int areLoginDetailsValid(String username, String password)
     throws SQLException, ClassNotFoundException, InstantiationException,
            IllegalAccessException
   {
-    Boolean correctLoginDetails = null;
+    int correctLoginDetails = -1;
     Connection connection;
     PreparedStatement statement = null;
     ResultSet resultSet;
     String sql = "";
     try {
       connection = Database.getInstance();
-      
+      sql = "CALL `shift-two_quizmanager`.`Login`(? , ?);";
       statement = connection.prepareStatement(sql);
       statement.setString(1, username);
       statement.setString(2, password);
       resultSet = statement.executeQuery();
       // Check if there is one corresponding row
-      if (resultSet.next()) {
-        correctLoginDetails = true;
-      }
-      else {
-        correctLoginDetails = false;
+      if (resultSet.next()) 
+      {
+        String staffxstudent = resultSet.getString("type");
+        if(staffxstudent.equalsIgnoreCase("staff"))
+        {
+            correctLoginDetails = 1;
+        }
+        else
+        {
+            correctLoginDetails = 0;
+        }
       }
     }
     finally {
@@ -68,7 +76,7 @@ public class Member
     return correctLoginDetails;
   }
   
-  public static String getModuleID(String ID, String type)
+  public static List<String> getModuleIDs(String ID)
           throws SQLException, ClassNotFoundException, InstantiationException,
            IllegalAccessException
   {
@@ -76,25 +84,18 @@ public class Member
     PreparedStatement statement = null;
     ResultSet resultSet;
     String sql;
-    String modID = "";
+    List<String> modID = new ArrayList<>();
     
     try {
-      connection = Database.getInstance();
-      if(type.equals("student"))
-      {
-        sql = "SELECT moduleID from student where ID=?;";
-      }
-      else
-      {
-          sql = "SELECT moduleID from staff where ID=?;";
-      }
+        connection = Database.getInstance();
+        sql = "CALL `shift-two_quizmanager`.`GetModule`(?);";
       
       statement = connection.prepareStatement(sql);
       statement.setString(1, ID);
       resultSet = statement.executeQuery();
       while(resultSet.next())
       {
-        modID = resultSet.getString("moduleID");
+        modID.add(resultSet.getString("MODULE ID"));
       }
     }
     finally {

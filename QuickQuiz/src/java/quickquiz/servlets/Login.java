@@ -19,8 +19,8 @@ package quickquiz.servlets;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -82,21 +82,31 @@ public class Login
       returnUserToLoginPageWithError(request, response);
     }
 
-    boolean valid = false;
+    int valid = -1;
     try
     {
       valid = Member.areLoginDetailsValid(username, password);
      
-      if(valid)
+      if(valid != -1)
       {
         // log them in.
         // create loggedIn store
         LoggedIn lg = new LoggedIn();
-        lg.setUsername(username);  
-        // TODO modify line below for query of sorts.
-        String type = "staff";
+        lg.setUsername(username); 
+        String type;
+        
+        if(valid == 0)
+           type = "student";
+        else
+            type = "staff";
+        
         lg.setUserType(type);
-        lg.setModule(Member.getModuleID(username, type));
+        
+        List<String> m = Member.getModuleIDs(username);
+        for(int i = 0; i < m.size(); i++)
+        {
+            lg.setModule(m.get(i));
+        }
         HttpSession session = request.getSession();
         session.setAttribute("loggedIn", lg);
 

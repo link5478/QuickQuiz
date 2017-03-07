@@ -1,1 +1,64 @@
 Copy and Paste these lines of code into MYSQL Workbench (Should work, might be a small bug or something though so be warned)
+
+(ALSO NAMING CONVENTION IN THE DATABASE ARE A BIT MESSED UP RIGHT NOW, I AIM TO FIX THIS TOMORROW)
+
+1---------------------------------------------- (Run these in this order)
+
+CREATE 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `shift-two_team9`@`%` 
+    SQL SECURITY DEFINER
+VIEW `QuizQuestion` AS
+    SELECT 
+        `Q`.`NAME` AS `Quiz Name`,
+        `Q`.`DESCRIPTION` AS `Description`,
+        `Q`.`MODULEID` AS `Module ID`,
+        `M`.`NAME` AS `Module Name`,
+        `U`.`NAME` AS `Staff Name`,
+        `QU`.`ID` AS `Question ID`,
+        `QU`.`questionText` AS `Question`,
+        `QU`.`ANSWER1` AS `Answer 1`,
+        `QU`.`ANSWER2` AS `Answer 2`,
+        `QU`.`ANSWER3` AS `Answer 3`,
+        `QU`.`ANSWER4` AS `Answer 4`,
+        `QU`.`CORRECTANSWER` AS `Correct Answer`,
+        `QU`.`EXPLANATION` AS `Explanation`,
+        `QU`.`QUIZID` AS `Quiz ID`
+    FROM
+        (((`QUESTION` `QU`
+        JOIN `Quiz` `Q`)
+        JOIN `MODULE` `M`)
+        JOIN `USER` `U`)
+    WHERE
+        ((`QU`.`QUIZID` = `Q`.`ID`)
+            AND (`Q`.`USERID` = `U`.`ID`)
+            AND (`Q`.`MODULEID` = `M`.`ID`))
+    ORDER BY `Q`.`ID` , `QU`.`ID`
+    
+    
+    -------------------------
+    
+    CREATE 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `shift-two_team9`@`%` 
+    SQL SECURITY DEFINER
+VIEW `StaffQuiz` AS
+    SELECT 
+        `Q`.`ID` AS `Quiz ID`,
+        `Q`.`NAME` AS `Quiz Name`,
+        `Q`.`DESCRIPTION` AS `Description`,
+        `Q`.`MODULEID` AS `Module ID`,
+        `M`.`NAME` AS `Module Name`,
+        `U`.`NAME` AS `Staff Name`
+    FROM
+        ((`QUIZ` `Q`
+        JOIN `MODULE` `M`)
+        JOIN `USER` `U`)
+    WHERE
+        ((`Q`.`MODULEID` = `M`.`ID`)
+            AND (`Q`.`USERID` = `U`.`ID`))
+            
+            
+    -------------------------
+    
+    

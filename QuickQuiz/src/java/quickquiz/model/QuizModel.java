@@ -118,6 +118,7 @@ public class QuizModel
     try {
       connection = Database.getInstance();
 
+    // TODO : fix the retreival of quizzes.
       sql = "SELECT ID, name from quiz where moduleID=?;";
 
       statement = connection.prepareStatement(sql);

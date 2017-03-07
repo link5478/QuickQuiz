@@ -54,7 +54,7 @@ public class RestrictionToStaff
     
     HttpSession s = ((HttpServletRequest) request).getSession(false);
     LoggedIn lg = (LoggedIn) s.getAttribute("loggedIn");
-    if (lg == null || !lg.getUserType().equals("staff")) {
+    if (lg == null || !lg.getUserType().equalsIgnoreCase("staff")) {
       r = request.getRequestDispatcher(restrictedToStaff);
       r.forward(request, response);
     }

@@ -2,7 +2,7 @@ Copy and Paste these lines of code into MYSQL Workbench (Should work, might be a
 
 (ALSO NAMING CONVENTION IN THE DATABASE ARE A BIT MESSED UP RIGHT NOW, I AIM TO FIX THIS TOMORROW)
 
-1---------------------------------------------- (Run these in this order)
+1---------------------------------------------- (Run these in this order) - THESE ARE ALL THE PREVIOUS VIEWS UPDATED (Should work)
 
 CREATE 
     ALGORITHM = UNDEFINED 

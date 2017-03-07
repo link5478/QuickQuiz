@@ -119,7 +119,7 @@ public class QuizModel
       connection = Database.getInstance();
 
     // TODO : fix the retreival of quizzes.
-      sql = "SELECT ID, name from quiz where moduleID=?;";
+      sql = "CALL `shift-two_quizmanager`.`ReturnModuleQuiz`(?)";
 
       statement = connection.prepareStatement(sql);
       statement.setString(1, moduleID);
@@ -198,7 +198,7 @@ public class QuizModel
     
     PreparedStatement ps = null;
     try {
-      String sql = "SELECT ID, name, description, moduleID, staffID FROM quiz WHERE ID = ?;";
+      String sql = "SELECT ID, NAME, DESCRIPTION, USERID, MODULEID FROM QUIZ WHERE ID = ?;";
       ps = Database.getInstance().prepareStatement(sql);
       ps.setInt(1, id);
       ResultSet rs = ps.executeQuery();
@@ -209,10 +209,11 @@ public class QuizModel
       
       while (rs.next()) {
         quiz.setId(rs.getInt("ID"));
-        quiz.setName(rs.getString("name"));
-        quiz.setDescription(rs.getString("description"));
-        quiz.setModuleId(rs.getString("moduleID"));
-        quiz.setStaffName(rs.getString("staffID"));
+        quiz.setName(rs.getString("NAME"));
+        quiz.setDescription(rs.getString("DESCRIPTION"));
+        quiz.setStaffName(rs.getString("USERID"));
+        quiz.setModuleId(rs.getString("MODULEID"));
+        
       }
     }
     finally {
@@ -234,7 +235,7 @@ public class QuizModel
     try {
       // TODO: stored procedure?
       // TODO: use COUNT or something more approriate instead?
-      String sql = "SELECT ID FROM quiz WHERE ID = ?;";
+      String sql = "SELECT ID FROM QUIZ WHERE ID = ?;";
       ps = Database.getInstance().prepareCall(sql);
       ps.setInt(1, id);
       

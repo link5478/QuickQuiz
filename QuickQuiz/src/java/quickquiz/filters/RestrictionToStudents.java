@@ -54,7 +54,7 @@ public class RestrictionToStudents
     
     HttpSession s = ((HttpServletRequest) request).getSession(false);
     LoggedIn lg = (LoggedIn) s.getAttribute("loggedIn");
-    if (lg == null || !lg.getUserType().equals("student")) {
+    if (lg == null || !lg.getUserType().equalsIgnoreCase("student")) {
       r = request.getRequestDispatcher(restrictedToStudents);
       r.forward(request, response);
     }

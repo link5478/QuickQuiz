@@ -26,7 +26,7 @@
       <%
       if(session.getAttribute("loggedIn") != null) { //Checks the session variable to see if the user is logged in.
       //  LoggedIn lg  = (LoggedIn)session.getAttribute("loggedIn");
-        if(lg.getUserType().equals("staff")) {//Checks to see if the user is Staff.
+        if(lg.getUserType().equalsIgnoreCase("staff")) {//Checks to see if the user is Staff.
       %>
 
       <a class="btn btn-primary" href="<%=((HttpServletRequest)request).getContextPath()%>/new-question/${quiz.getId()}"> Add a question </a>

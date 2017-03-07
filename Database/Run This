@@ -1,0 +1,135 @@
+Copy and Paste these lines of code into MYSQL Workbench (Should work, might be a small bug or something though so be warned)
+
+(WARNING 1: NAMING CONVENTION IN THE DATABASE ARE A BIT MESSED UP RIGHT NOW, I AIM TO FIX THIS TOMORROW)
+(WARNING 2: THE DATABASE ISN'T POPULATED JUST YET, SO THERE MIGHT BE BREAKS DUE TO THAT. SHOULD BE ABLE TO BE DONE EASILY ON YOUR END)
+
+1---------------------------------------------- (Run these in this order) - THESE ARE ALL THE PREVIOUS VIEWS UPDATED (Should work)
+
+CREATE 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `shift-two_team9`@`%` 
+    SQL SECURITY DEFINER
+VIEW `QuizQuestion` AS
+    SELECT 
+        `Q`.`NAME` AS `Quiz Name`,
+        `Q`.`DESCRIPTION` AS `Description`,
+        `Q`.`MODULEID` AS `Module ID`,
+        `M`.`NAME` AS `Module Name`,
+        `U`.`NAME` AS `Staff Name`,
+        `QU`.`ID` AS `Question ID`,
+        `QU`.`questionText` AS `Question`,
+        `QU`.`ANSWER1` AS `Answer 1`,
+        `QU`.`ANSWER2` AS `Answer 2`,
+        `QU`.`ANSWER3` AS `Answer 3`,
+        `QU`.`ANSWER4` AS `Answer 4`,
+        `QU`.`CORRECTANSWER` AS `Correct Answer`,
+        `QU`.`EXPLANATION` AS `Explanation`,
+        `QU`.`QUIZID` AS `Quiz ID`
+    FROM
+        (((`QUESTION` `QU`
+        JOIN `Quiz` `Q`)
+        JOIN `MODULE` `M`)
+        JOIN `USER` `U`)
+    WHERE
+        ((`QU`.`QUIZID` = `Q`.`ID`)
+            AND (`Q`.`USERID` = `U`.`ID`)
+            AND (`Q`.`MODULEID` = `M`.`ID`))
+    ORDER BY `Q`.`ID` , `QU`.`ID`
+    
+    
+    -------------------------
+    
+    CREATE 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `shift-two_team9`@`%` 
+    SQL SECURITY DEFINER
+VIEW `StaffQuiz` AS
+    SELECT 
+        `Q`.`ID` AS `Quiz ID`,
+        `Q`.`NAME` AS `Quiz Name`,
+        `Q`.`DESCRIPTION` AS `Description`,
+        `Q`.`MODULEID` AS `Module ID`,
+        `M`.`NAME` AS `Module Name`,
+        `U`.`NAME` AS `Staff Name`
+    FROM
+        ((`QUIZ` `Q`
+        JOIN `MODULE` `M`)
+        JOIN `USER` `U`)
+    WHERE
+        ((`Q`.`MODULEID` = `M`.`ID`)
+            AND (`Q`.`USERID` = `U`.`ID`))
+            
+            
+    -------------------------
+    
+    CREATE 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `shift-two_team9`@`%` 
+    SQL SECURITY DEFINER
+VIEW `StaffResult` AS
+    SELECT 
+        `U`.`ID` AS `ID`,
+        `Q`.`NAME` AS `Name`,
+        AVG(`R`.`MARK`) AS `Mark`
+    FROM
+        ((`QUIZ` `Q`
+        JOIN `RESULT` `R`)
+        JOIN `USER` `U`)
+    WHERE
+        ((`R`.`QUIZID` = `Q`.`ID`)
+            AND (`Q`.`USERID` = `U`.`ID`))
+    GROUP BY `Q`.`ID`
+
+    -------------------------
+    
+    CREATE 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `shift-two_team9`@`%` 
+    SQL SECURITY DEFINER
+VIEW `StuResult` AS
+    SELECT 
+        `U`.`ID` AS `ID`, `Q`.`NAME` AS `Name`, `R`.`MARK` AS `Mark`
+    FROM
+        ((`USER` `U`
+        JOIN `RESULT` `R`)
+        JOIN `QUIZ` `Q`)
+    WHERE
+        ((`U`.`ID` = `R`.`USERID`)
+            AND (`R`.`QUIZID` = `Q`.`ID`))
+
+
+2---------------------------------------------- THESE ARE THE STORED PROCEDURES. THEY STILL EXIST IN THE DATABASE, BUT MIGHT NO
+WORK SO ALTER THEM TO MATCH THESE (Craig should know how to alter stored procedures)
+
+GET QUIZ SHOULD BE FINE (NOT 100% SURE)
+
+STAFF RESULT SHOULD BE FINE
+
+STU RESULT SHOULD BE FINE
+
+GET RESULTS SHOULD BE FINE?
+
+VIEW QUIZ SHOULD BE FINE
+
+(THIS SHOULD MAKE IT SO THE NEW DATABASE IS FUNCTIONAL, AT LEAST WITH OLD VERSION OF WEBSITE. MIGHT NEED SOME SMALL FIXES? )
+
+
+
+3---------------------------------------------- (Josh's request)
+"STORED PROCEDURE:-
+Takes in ID (module + user)
+Returns all Quiz IDs associated and their names, as well as completion status (optional)"
+
+(THIS STORED PROCEDURE SHOULD ONLY GET THE QUIZZES FOR A SPECIFIED MODULE) - BEING WORKED ON
+
+DELIMITER $$
+CREATE DEFINER=`shift-two_team9`@`%` PROCEDURE `ReturnModuleQuiz`(IN modID VARCHAR(30))
+BEGIN
+
+SELECT * FROM QUIZ q, RESULT r
+WHERE moduleID = q.MODULEID,
+AND r.QUIZID = q.ID
+  
+END$$
+DELIMITER ;
+

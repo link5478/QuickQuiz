@@ -1,8 +1,24 @@
 Update Stored Procedures:
-GetQuiz,
-GetResults,
-StaffResult,
-StuResult,
-ViewQuiz.
+GetQuiz (DONE),
+GetResults(DONE),
+StaffResult (DONE),
+StuResult (DONE),
+ViewQuiz (DONE).
 
-(NEED VIEWS FOR ABOVE)
+(NEED VIEWS FOR ABOVE (TAKE PLACEHOLDER FROM OLD VIEWS)) (DONE)
+
+
+FOR JOSH:
+
+STORED PROCEDURE:-
+Takes in ID (module + user)
+Returns all Quiz IDs associated and their names, as well as completion status (optional)
+
+
+WORK ON TOMORROW (07-03-2017)
+VVVVVVVVVVVVVVVVVVVVVVVV
+
+SELECT * FROM QUIZ, RESULT
+WHERE moduleID = q.mID,
+AND Result.QuizID = Quiz ID
+result.UserID = userID;

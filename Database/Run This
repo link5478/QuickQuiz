@@ -61,4 +61,20 @@ VIEW `StaffQuiz` AS
             
     -------------------------
     
-    
+    CREATE 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `shift-two_team9`@`%` 
+    SQL SECURITY DEFINER
+VIEW `StaffResult` AS
+    SELECT 
+        `U`.`ID` AS `ID`,
+        `Q`.`NAME` AS `Name`,
+        AVG(`R`.`MARK`) AS `Mark`
+    FROM
+        ((`QUIZ` `Q`
+        JOIN `RESULT` `R`)
+        JOIN `USER` `U`)
+    WHERE
+        ((`R`.`QUIZID` = `Q`.`ID`)
+            AND (`Q`.`USERID` = `U`.`ID`))
+    GROUP BY `Q`.`ID`

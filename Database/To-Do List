@@ -1,11 +1,11 @@
 Update Stored Procedures:
-GetQuiz,
-GetResults,
-StaffResult,
-StuResult,
-ViewQuiz.
+GetQuiz (DONE),
+GetResults(DONE),
+StaffResult (DONE),
+StuResult (DONE),
+ViewQuiz (DONE).
 
-(NEED VIEWS FOR ABOVE (TAKE PLACEHOLDER FROM OLD VIEWS))
+(NEED VIEWS FOR ABOVE (TAKE PLACEHOLDER FROM OLD VIEWS)) (DONE)
 
 
 FOR JOSH:

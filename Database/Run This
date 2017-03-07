@@ -111,3 +111,24 @@ GET RESULTS SHOULD BE FINE?
 VIEW QUIZ SHOULD BE FINE
 
 (THIS SHOULD MAKE IT SO THE NEW DATABASE IS FUNCTIONAL, AT LEAST WITH OLD VERSION OF WEBSITE. MIGHT NEED SOME SMALL FIXES? )
+
+
+
+3---------------------------------------------- (Josh's request)
+"STORED PROCEDURE:-
+Takes in ID (module + user)
+Returns all Quiz IDs associated and their names, as well as completion status (optional)"
+
+(THIS STORED PROCEDURE SHOULD ONLY GET THE QUIZZES FOR A SPECIFIED MODULE) - BEING WORKED ON
+
+DELIMITER $$
+CREATE DEFINER=`shift-two_team9`@`%` PROCEDURE `ReturnModuleQuiz`(IN modID VARCHAR(30))
+BEGIN
+
+SELECT * FROM QUIZ q, RESULT r
+WHERE moduleID = q.MODULEID,
+AND r.QUIZID = q.ID
+  
+END$$
+DELIMITER ;
+

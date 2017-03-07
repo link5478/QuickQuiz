@@ -33,7 +33,7 @@
 
       <%
           }
-          else if (lg.getUserType().equals("student")) {
+          else if (lg.getUserType().equalsIgnoreCase("student")) {
       %>
       <a class="btn btn-primary" href="<%=((HttpServletRequest)request).getContextPath()%>/quiz-answering-page/${quiz.getId()}">Try to answer to quiz</a>
       <%

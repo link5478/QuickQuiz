@@ -1,6 +1,7 @@
 Copy and Paste these lines of code into MYSQL Workbench (Should work, might be a small bug or something though so be warned)
 
-(ALSO NAMING CONVENTION IN THE DATABASE ARE A BIT MESSED UP RIGHT NOW, I AIM TO FIX THIS TOMORROW)
+(WARNING 1: NAMING CONVENTION IN THE DATABASE ARE A BIT MESSED UP RIGHT NOW, I AIM TO FIX THIS TOMORROW)
+(WARNING 2: THE DATABASE ISN'T POPULATED JUST YET, SO THERE MIGHT BE BREAKS DUE TO THAT. SHOULD BE ABLE TO BE DONE EASILY ON YOUR END)
 
 1---------------------------------------------- (Run these in this order) - THESE ARE ALL THE PREVIOUS VIEWS UPDATED (Should work)
 

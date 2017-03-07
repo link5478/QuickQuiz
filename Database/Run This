@@ -17,7 +17,7 @@ VIEW `QuizQuestion` AS
         `M`.`NAME` AS `Module Name`,
         `U`.`NAME` AS `Staff Name`,
         `QU`.`ID` AS `Question ID`,
-        `QU`.`questionText` AS `Question`,
+        `QU`.`TEXT` AS `Question`,
         `QU`.`ANSWER1` AS `Answer 1`,
         `QU`.`ANSWER2` AS `Answer 2`,
         `QU`.`ANSWER3` AS `Answer 3`,
@@ -27,14 +27,14 @@ VIEW `QuizQuestion` AS
         `QU`.`QUIZID` AS `Quiz ID`
     FROM
         (((`QUESTION` `QU`
-        JOIN `Quiz` `Q`)
+        JOIN `QUIZ` `Q`)
         JOIN `MODULE` `M`)
         JOIN `USER` `U`)
     WHERE
         ((`QU`.`QUIZID` = `Q`.`ID`)
             AND (`Q`.`USERID` = `U`.`ID`)
             AND (`Q`.`MODULEID` = `M`.`ID`))
-    ORDER BY `Q`.`ID` , `QU`.`ID`
+ORDER BY `Q`.`ID` , `QU`.`ID`
     
     
     -------------------------

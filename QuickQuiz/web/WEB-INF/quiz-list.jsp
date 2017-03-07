@@ -34,13 +34,8 @@
 
                     for (int i = 0; i < modules.size(); i++) 
                     {
-                        String modID = modules.get(i);
-                        //Map<String, String> quizzes = QuizModel.getQuizzes(modID);
-                        Map<String, String> quizzes = new HashMap<>();
-                        quizzes.put("1", "An Agile Approach to Software");
-                        quizzes.put("2", "A Look at Human Interaction");
-                        quizzes.put("3", "A Site to Game at");
-
+                        String modID = modules.get(i);                    
+                        Map<String, String> quizzes = QuizModel.getQuizzes(modID);
                         ids.put(modules.get(i), quizzes);
                     }
 
@@ -57,18 +52,18 @@
                             String key = entry.getKey();
                     %>
                     <br>     
-                    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo"><%=key%></button>
-                    <div id="demo" class="collapse">
+                    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo<%=key%>"><%=key%></button>
+                    <div id="demo<%=key%>" class="collapse">
                     <%
                         Map<String, String> value = entry.getValue();
                         for (Map.Entry<String, String> entry2 : value.entrySet()) 
                         {
                             String key2 = entry2.getKey();
                             String value2 = entry2.getValue();
-                            String url = "/QuickQuiz/view-quiz/" + key2;
-                    %>
-                    <p> <%=url%>    
+                            String url = "/QuickQuiz/view-quiz/" + key2;           
+                    %> 
                     <a href = <%=url%>><%=value2%></a>
+                    <br>
                     <br>
                     <%
                         }

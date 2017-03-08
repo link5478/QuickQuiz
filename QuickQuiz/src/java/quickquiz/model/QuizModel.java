@@ -50,7 +50,7 @@ public class QuizModel
       statement.setString(1, quiz.getName());
       statement.setString(2, quiz.getDescription());
       statement.setString(3, quiz.getModuleId());
-      statement.setString(4, quiz.getStaffName());
+      statement.setString(4, quiz.getUserName());
       statement.executeUpdate();
       if (statement.getUpdateCount() == 0) {
         throw new QuizInsertionFailureException();
@@ -165,7 +165,7 @@ public class QuizModel
         quiz.setDescription(rs.getString("Description"));
         quiz.setModuleId(rs.getString("Module ID"));
         quiz.setModuleName(rs.getString("Module Name"));
-        quiz.setStaffName(rs.getString("Staff Name"));
+        quiz.setUserName(rs.getString("Staff Name"));
         quiz.setId(rs.getInt("Quiz ID"));
         Question q = new Question();
         q.setQuestionText(rs.getString("Question"));
@@ -198,7 +198,8 @@ public class QuizModel
     
     PreparedStatement ps = null;
     try {
-      String sql = "SELECT ID, NAME, DESCRIPTION, USERID, MODULEID FROM QUIZ WHERE ID = ?;";
+      String sql = "CALL `shift-two_quizmanager`.`ViewQuiz`(?);";
+      
       ps = Database.getInstance().prepareStatement(sql);
       ps.setInt(1, id);
       ResultSet rs = ps.executeQuery();
@@ -208,11 +209,12 @@ public class QuizModel
       }
       
       while (rs.next()) {
-        quiz.setId(rs.getInt("ID"));
-        quiz.setName(rs.getString("NAME"));
-        quiz.setDescription(rs.getString("DESCRIPTION"));
-        quiz.setStaffName(rs.getString("USERID"));
-        quiz.setModuleId(rs.getString("MODULEID"));
+        quiz.setId(id);
+        quiz.setName(rs.getString("Quiz Name"));
+        quiz.setDescription(rs.getString("Description"));
+        quiz.setUserName(rs.getString("Staff Name"));
+        quiz.setModuleId(rs.getString("Module ID"));
+        quiz.setModuleName(rs.getString("Module Name"));
         
       }
     }

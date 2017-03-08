@@ -17,11 +17,11 @@
     <%@include file="/WEB-INF/jspf/navbar.jspf" %>
 
     <div class="container indexcontainer">
-      <p>Quiz ID: ${quiz.getId()}</p>
+      <!--<p>Quiz ID: ${quiz.getId()}</p> -->
       <p>Name: ${quiz.getName()}</p>
       <p>Module ID: ${quiz.getModuleId()}</p>
       <p>Module Name: ${quiz.getModuleName()}</p>
-      <p>Staff Name: ${quiz.getStaffName()}</p>
+      <p>Creator: ${quiz.getUserName()}</p>
 
       <%
       if(session.getAttribute("loggedIn") != null) { //Checks the session variable to see if the user is logged in.

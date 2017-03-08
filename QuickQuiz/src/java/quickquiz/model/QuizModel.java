@@ -44,13 +44,12 @@ public class QuizModel
     PreparedStatement statement = null;
     try {
       // TODO: prepared statement?
-      String sql = "INSERT INTO quiz (name, description, moduleID, " + 
-                   "staffID) VALUES (?, ?, ?, ?);";
+      String sql = "CALL `shift-two_quizmanager`.`CreateQuiz`" +"(?, ?, ?, ?);";
       statement = Database.getInstance().prepareStatement(sql);
       statement.setString(1, quiz.getName());
       statement.setString(2, quiz.getDescription());
       statement.setString(3, quiz.getModuleId());
-      statement.setString(4, quiz.getUserName());
+      statement.setString(4, quiz.getUserId());
       statement.executeUpdate();
       if (statement.getUpdateCount() == 0) {
         throw new QuizInsertionFailureException();

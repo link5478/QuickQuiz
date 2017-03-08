@@ -1,24 +1,9 @@
-Update Stored Procedures:
-GetQuiz (DONE),
-GetResults(DONE),
-StaffResult (DONE),
-StuResult (DONE),
-ViewQuiz (DONE).
-
-(NEED VIEWS FOR ABOVE (TAKE PLACEHOLDER FROM OLD VIEWS)) (DONE)
+Add Date to result (Done)
+Add AttemptNo to result? (Scrapped)
 
 
-FOR JOSH:
+Create column for quizzes with a predecessor
 
-STORED PROCEDURE:-
-Takes in ID (module + user)
-Returns all Quiz IDs associated and their names, as well as completion status (optional)
+Time lock on quiz:- So user can't open quiz and look up answers, then answer quiz. (not priority)
 
 
-WORK ON TOMORROW (07-03-2017)
-VVVVVVVVVVVVVVVVVVVVVVVV
-
-SELECT * FROM QUIZ, RESULT
-WHERE moduleID = q.mID,
-AND Result.QuizID = Quiz ID
-result.UserID = userID;

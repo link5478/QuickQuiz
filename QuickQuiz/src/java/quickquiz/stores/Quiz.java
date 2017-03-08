@@ -30,21 +30,21 @@ public class Quiz
   private String moduleId_;
   private String moduleName_;
   private String name_;
-  private String staffId_;
-  private String staffName_;
+  private String userID;
+  private String username;
   private ArrayList<Question> questions_;
 
 
 
   // TODO: name and int limited to db's lengths?
   public Quiz(String name, String description, String moduleId, String moduleName,
-              String staffName)
+              String userName)
   {
     name_ = name;
     description_ = description;
     moduleId_ = moduleId;
     moduleName_ = moduleName;
-    staffName_ = staffName;
+    username = userName;
     questions_ = new ArrayList<Question>();
     id_ = null;
   }
@@ -57,7 +57,7 @@ public class Quiz
     description_ = null;
     moduleId_ = null;
     moduleName_ = null;
-    staffName_ = null;
+    username = null;
     questions_ = new ArrayList<Question>();
     id_ = null;
   }
@@ -120,9 +120,14 @@ public class Quiz
 
 
 
-  public String getStaffName()
+  public String getUserName()
   {
-    return staffName_;
+    return username;
+  }
+  
+   public String getUserId()
+  {
+    return userID;
   }
 
 
@@ -155,9 +160,15 @@ public class Quiz
 
 
 
-  public void setStaffName(String staffName)
+  public void setUserName(String staffName)
   {
-    staffName_ = staffName;
+    username = staffName;
+  }
+  
+  
+   public void setUserId(String staffId)
+  {
+    userID = staffId;
   }
 
 

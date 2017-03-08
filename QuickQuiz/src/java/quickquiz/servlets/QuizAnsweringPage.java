@@ -20,6 +20,7 @@ package quickquiz.servlets;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -100,6 +101,8 @@ public class QuizAnsweringPage
       r.setMark(mark);
       r.setQuizId(quiz.getId());
       r.setUserID(((LoggedIn) request.getSession().getAttribute("loggedIn")).getUsername());
+      r.setDateTime();
+      
       ResultsModel.addResult(r);
       RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/successful-answers-submission.jsp") ;
       rd.forward(request, response) ;

@@ -1,5 +1,9 @@
 package quickquiz.stores;
 
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 /*
  * QuickQuiz is a database application allowing staff to manage
  * students to complete them.
@@ -28,6 +32,7 @@ public class Result
   private float mark;
   private String quizName;
   private Integer quizId_;
+  private String dateTime;
 
   public void setUserID(String uID)
   {
@@ -47,19 +52,29 @@ public class Result
     }
     mark = Mark;
   }  
+  // TODO : rename this to something better?
+  public void setDateTime()
+  {       
+    Date dt = new Date();
+    SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+     dateTime = sdf.format(dt);
+  }
 
   public float getMark()
   {
       return mark;
   }
 
-
-
   public void setQuizId(Integer id)
   {
     quizId_ = id;
   }
   
+  public String getDateTime()
+  {
+      return dateTime;
+  }
   
   
   public Integer getQuizId()

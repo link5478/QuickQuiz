@@ -44,7 +44,7 @@ public class Quiz
     description_ = description;
     moduleId_ = moduleId;
     moduleName_ = moduleName;
-    username = userName;
+    userID = userName;
     questions_ = new ArrayList<Question>();
     id_ = null;
   }
@@ -57,7 +57,7 @@ public class Quiz
     description_ = null;
     moduleId_ = null;
     moduleName_ = null;
-    username = null;
+    userID = null;
     questions_ = new ArrayList<Question>();
     id_ = null;
   }

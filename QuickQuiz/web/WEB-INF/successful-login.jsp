@@ -9,14 +9,12 @@
 <html lang="en">
   <head>
     <%@include file="/WEB-INF/jspf/head.jspf" %>
-    <meta http-equiv="refresh" content="3; url=<%=((HttpServletRequest)request).getContextPath()%>" />
     <title>Successful Login</title>
   </head>
   <body>
     <%@include file="/WEB-INF/jspf/navbar.jspf" %>
     <div class="container indexcontainer">
-      <p class="text-success">You successfully logged in. Redirecting to the home page…</p>
-      <%-- TODO: add login link if user not logged in? --%>
+      <p class="text-success">You successfully logged in.</p>
       <p> Click <a href="/QuickQuiz/index"> here </a> to be redirected </p>
     </div>
     <footer>

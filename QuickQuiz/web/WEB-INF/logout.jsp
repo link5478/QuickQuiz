@@ -12,7 +12,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="/WEB-INF/jspf/head.jspf" %>
         <title>Log Out | Quick Quiz</title>
-        <meta http-equiv="refresh" content="3; url=<%=((HttpServletRequest)request).getContextPath()%>" />
     </head>
     
     <body>
@@ -25,7 +24,7 @@
             session.removeAttribute("loggedIn");           
         %>
         <p>Redirecting you...</p>
-        <p>Click <a href="index" >here</a> if you are not redirected.</p>
+        <p>Click <a href="index" >here</a> to log out.</p>
         </div>
     </body>
     

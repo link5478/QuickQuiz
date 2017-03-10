@@ -19,7 +19,6 @@
         <%@include file="/WEB-INF/jspf/navbar.jspf" %>
         
         <div class="container logincontainer">
-          <p class="text-error">${message}</p>
           <form action="#" class="form-horizontal" method="post">
             <div class="form-group">
               <label for="username" class="col-sm-2 control-label">Username</label>

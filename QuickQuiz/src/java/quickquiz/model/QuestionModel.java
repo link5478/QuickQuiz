@@ -33,7 +33,6 @@ public class QuestionModel
     throws SQLException, ClassNotFoundException, InstantiationException,
            IllegalAccessException, QuestionInsertionFailureException
   {
-    // TODO; check that one row has been affected, otherwise throw exception
     PreparedStatement statement = null;
     try {
       //String sql = "INSERT INTO question (questionText, answer1, answer2, " + 

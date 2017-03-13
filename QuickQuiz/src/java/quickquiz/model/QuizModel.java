@@ -44,7 +44,7 @@ public class QuizModel
     PreparedStatement statement = null;
     try {
       // TODO: prepared statement?
-      String sql = "CALL `shift-two_quizmanager`.`CreateQuiz`" +"(?, ?, ?, ?);";
+      String sql = "CALL `shift-two_quizmanager`.`CreateQuiz` (?, ?, ?, ?);";
       statement = Database.getInstance().prepareStatement(sql);
       statement.setString(1, quiz.getName());
       statement.setString(2, quiz.getDescription());
@@ -147,7 +147,7 @@ public class QuizModel
     PreparedStatement preparedStatement = null;
     Quiz quiz = new Quiz();
     try {
-      // TODO: fix stored procedure
+      // TODO: optimise stored procedure
       String sql = "CALL `GetQuiz`(?);";
       preparedStatement = Database.getInstance().prepareStatement(sql);
       preparedStatement.setInt(1, id);
@@ -158,14 +158,18 @@ public class QuizModel
         throw new NoQuizFoundException();
       }
       
-      // TODO: to refactor
-      while (rs.next()) {
+      // Initialises the quiz description
+      if (rs.next()) {
         quiz.setName(rs.getString("Quiz Name"));
         quiz.setDescription(rs.getString("Description"));
         quiz.setModuleId(rs.getString("Module ID"));
         quiz.setModuleName(rs.getString("Module Name"));
         quiz.setUserName(rs.getString("Staff Name"));
         quiz.setId(rs.getInt("Quiz ID"));
+      }
+      
+      // Initialises the quiz questions
+      do {
         Question q = new Question();
         q.setQuestionText(rs.getString("Question"));
         q.setAnswer1(rs.getString("Answer 1"));
@@ -176,7 +180,7 @@ public class QuizModel
         q.setExplanation(rs.getString("Explanation"));
         q.setId(rs.getInt("Question ID"));
         quiz.getQuestions().add(q);
-      }
+      } while (rs.next());
     }
     finally {
       if (preparedStatement != null) {

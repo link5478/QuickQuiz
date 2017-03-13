@@ -21,6 +21,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -104,7 +105,7 @@ public class QuizModel
   
   
   
-  public static Map<String,String> getQuizzes(String moduleID)
+  public static Map<String,String> getAvailableQuizzes(String moduleID)
     throws SQLException, ClassNotFoundException, InstantiationException,
            IllegalAccessException
   {
@@ -117,8 +118,8 @@ public class QuizModel
     try {
       connection = Database.getInstance();
 
-    // TODO : fix the retreival of quizzes.
-      sql = "CALL `shift-two_quizmanager`.`ReturnModuleQuiz`(?)";
+      // TODO : fix the retreival of quizzes.
+      sql = "CALL `shift-two_quizmanager`.`ReturnModuleQuiz`(?, 'Student')";
 
       statement = connection.prepareStatement(sql);
       statement.setString(1, moduleID);
@@ -136,6 +137,54 @@ public class QuizModel
       }
     }
     return IDs;
+  }
+  
+  
+  
+  public static ArrayList<Quiz> getAllQuizzes(String moduleId)
+    throws SQLException, ClassNotFoundException, InstantiationException,
+           IllegalAccessException
+  {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ArrayList<Quiz> quizzes = new ArrayList<>();
+    
+    try {
+      ResultSet resultSet;
+      
+      connection = Database.getInstance();
+      
+      String sql = "CALL `ReturnModuleQuiz`(?, 'Staff');";
+      preparedStatement = connection.prepareStatement(sql);
+      preparedStatement.setString(1, moduleId);
+      resultSet = preparedStatement.executeQuery();
+      
+      while (resultSet.next()) {
+        Quiz quiz = new Quiz();
+        quiz.setId(resultSet.getInt("ID"));
+        quiz.setName(resultSet.getString("NAME"));
+        quiz.setDescription(resultSet.getString("DESCRIPTION"));
+        quiz.setUserId(resultSet.getString("USERID"));
+        quiz.setModuleId(resultSet.getString("MODULEID"));
+        if (resultSet.getBoolean("AVAILABLE")) {
+          quiz.makeAvailable();
+        }
+        else {
+          quiz.makeUnavailable();
+        }
+        quizzes.add(quiz);
+      }
+    }
+    finally {
+      if (preparedStatement != null) {
+        preparedStatement.close();
+      }
+      if (connection != null) {
+        connection.close();
+      }
+    }
+    
+    return quizzes;
   }
   
   

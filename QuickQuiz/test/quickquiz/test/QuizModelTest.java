@@ -18,6 +18,9 @@
 package quickquiz.test;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -50,23 +53,51 @@ public class QuizModelTest
   
   
   
+  /**
+   * If this test fails, it might be because quizzes have been updated in the
+   * database. The number at the very beginning of the method just need to be
+   * updated.
+   */
   @Test
   public void testCheckExists()
     throws SQLException, ClassNotFoundException, InstantiationException,
            IllegalAccessException
   {
+    int existingQuizId = 2;
+    int unexistingQuizId = 945273;
     try {
-      QuizModel.checkExists(21);
+      QuizModel.checkExists(existingQuizId);
     }
     catch (NoQuizFoundException e) {
       fail("A quiz should have been found.");
     }
     try {
-      QuizModel.checkExists(2);
+      QuizModel.checkExists(unexistingQuizId);
       fail("NO quiz should have been found.");
     }
     catch (NoQuizFoundException e) {
       
+    }
+  }
+  
+  
+  
+  /**
+   * If this test fails, it might be because quizzes have been updated in the
+   * database. The number at the very beginning of the method just need to be
+   * updated.
+   */
+  @Test
+  public void testGetQuizzes()
+  {
+    int numberOfAc31007Quizzes = 3; // TODO: const?
+    try {
+      ArrayList<Quiz> quizzes = QuizModel.getAllQuizzes("AC31007");
+      assertEquals("There should be 3 quizzes retrieved.", quizzes.size(),
+                  numberOfAc31007Quizzes);
+    }
+    catch (SQLException sqlException) {
+      fail(sqlException.getMessage());
     }
   }
 }

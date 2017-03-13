@@ -86,18 +86,33 @@ public class QuizModelTest
    * If this test fails, it might be because quizzes have been updated in the
    * database. The number at the very beginning of the method just need to be
    * updated.
+   * TODO: add predecessor
    */
   @Test
   public void testGetQuizzes()
   {
     int numberOfAc31007Quizzes = 3; // TODO: const?
+    int numberOfAc31007LiveQuizzes = 2; // TODO: const?
+    Quiz quizJava = new Quiz();
+    quizJava.setId(2);
+    quizJava.setName("An Agile Approach");
+    quizJava.setDescription("A quiz about Agile methods in programming");
+    quizJava.setUserId("140001337");
+    quizJava.setModuleId("AC31007");
+    quizJava.makeUnavailable();
     try {
-      ArrayList<Quiz> quizzes = QuizModel.getAllQuizzes("AC31007");
-      assertEquals("There should be 3 quizzes retrieved.", quizzes.size(),
-                  numberOfAc31007Quizzes);
+      ArrayList<Quiz> allQuizzes = QuizModel.getQuizzes("AC31007", "Staff");
+      assertEquals("There should be 3 quizzes retrieved for staff.",
+                   allQuizzes.size(), numberOfAc31007Quizzes);
+      Quiz quizDb = allQuizzes.get(0);
+      assertEquals("Quiz has not been correctly fetched", quizDb, quizJava);
+      ArrayList<Quiz> liveQuizzes = QuizModel.getQuizzes("AC31007", "Student");
+      assertEquals("There should be 3 quizzes retrieved for staff.",
+                   liveQuizzes.size(), numberOfAc31007LiveQuizzes);
     }
-    catch (SQLException sqlException) {
-      fail(sqlException.getMessage());
+    catch (SQLException | ClassNotFoundException | InstantiationException |
+           IllegalAccessException exception) {
+      fail(exception.getMessage());
     }
   }
 }

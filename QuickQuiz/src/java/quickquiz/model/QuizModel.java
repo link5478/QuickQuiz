@@ -141,10 +141,17 @@ public class QuizModel
   
   
   
-  public static ArrayList<Quiz> getAllQuizzes(String moduleId)
+  public static ArrayList<Quiz> getQuizzes(String moduleId, String userType)
     throws SQLException, ClassNotFoundException, InstantiationException,
            IllegalAccessException
   {
+    // TODO: use enum instead?
+    if (!userType.equals("Staff") &&
+        !userType.equals("Student")) {
+      String error = "Parameter can only be either \"Staff\" or \"Student\".";
+      throw new IllegalArgumentException(error);
+    }
+    
     Connection connection = null;
     PreparedStatement preparedStatement = null;
     ArrayList<Quiz> quizzes = new ArrayList<>();
@@ -154,9 +161,10 @@ public class QuizModel
       
       connection = Database.getInstance();
       
-      String sql = "CALL `ReturnModuleQuiz`(?, 'Staff');";
+      String sql = "CALL `ReturnModuleQuiz`(?, ?);";
       preparedStatement = connection.prepareStatement(sql);
       preparedStatement.setString(1, moduleId);
+      preparedStatement.setString(2, userType);
       resultSet = preparedStatement.executeQuery();
       
       while (resultSet.next()) {
@@ -166,11 +174,13 @@ public class QuizModel
         quiz.setDescription(resultSet.getString("DESCRIPTION"));
         quiz.setUserId(resultSet.getString("USERID"));
         quiz.setModuleId(resultSet.getString("MODULEID"));
-        if (resultSet.getBoolean("AVAILABLE")) {
-          quiz.makeAvailable();
-        }
-        else {
-          quiz.makeUnavailable();
+        if (userType.equals("Staff")) {
+          if (resultSet.getBoolean("AVAILABLE")) {
+            quiz.makeAvailable();
+          }
+          else {
+            quiz.makeUnavailable();
+          }
         }
         quizzes.add(quiz);
       }
@@ -178,9 +188,6 @@ public class QuizModel
     finally {
       if (preparedStatement != null) {
         preparedStatement.close();
-      }
-      if (connection != null) {
-        connection.close();
       }
     }
     
@@ -213,7 +220,7 @@ public class QuizModel
         quiz.setDescription(rs.getString("Description"));
         quiz.setModuleId(rs.getString("Module ID"));
         quiz.setModuleName(rs.getString("Module Name"));
-        quiz.setUserName(rs.getString("Staff Name"));
+        quiz.setUsername(rs.getString("Staff Name"));
         quiz.setId(rs.getInt("Quiz ID"));
       }
       
@@ -264,7 +271,7 @@ public class QuizModel
         quiz.setId(id);
         quiz.setName(rs.getString("Quiz Name"));
         quiz.setDescription(rs.getString("Description"));
-        quiz.setUserName(rs.getString("Staff Name"));
+        quiz.setUsername(rs.getString("Staff Name"));
         quiz.setModuleId(rs.getString("Module ID"));
         quiz.setModuleName(rs.getString("Module Name"));
         

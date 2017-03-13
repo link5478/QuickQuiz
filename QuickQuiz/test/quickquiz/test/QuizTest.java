@@ -17,6 +17,7 @@
  */
 package quickquiz.test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -38,5 +39,27 @@ public class QuizTest
     assertTrue("Quiz should be available", quiz.isAvailable());
     quiz.makeUnavailable();
     assertFalse("Quiz should be unavailable", quiz.isAvailable());
+  }
+  
+  
+  
+  @Test
+  public void testEquals()
+  {
+    Quiz quiz = new Quiz();
+    quiz.setId(2);
+    quiz.setName("An Agile Approach");
+    quiz.setDescription("A quiz about Agile methods in programming");
+    quiz.setUserId("140001337");
+    quiz.setModuleId("AC31007");
+    quiz.makeUnavailable();
+    Quiz quiz2 = new Quiz();
+    quiz2.setId(2);
+    quiz2.setName("An Agile Approach");
+    quiz2.setDescription("A quiz about Agile methods in programming");
+    quiz2.setUserId("140001337");
+    quiz2.setModuleId("AC31007");
+    quiz2.makeUnavailable();
+    assertEquals("quiz and quiz2 should be equal", quiz, quiz2);
   }
 }

@@ -6,6 +6,7 @@
 package quickquiz.test;
 
 import java.sql.SQLException;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import quickquiz.model.Member;
@@ -22,10 +23,10 @@ public class ModelTest
     throws SQLException, ClassNotFoundException, InstantiationException,
            IllegalAccessException
   {
-    String username = "STAFF123";
+    String username = "140001337";
     String password = "PASSWORD";
-    boolean valid = Member.areLoginDetailsValid(username, password, "staff");
-    assertTrue("Staff login details should be correct.", valid);
+    int valid = Member.areLoginDetailsValid(username, password);
+    assertEquals("Staff login details should be correct.", valid, 1);
   }
   
   
@@ -36,7 +37,7 @@ public class ModelTest
   {
     String username = "140023542";
     String password = "password";
-    boolean valid = Member.areLoginDetailsValid(username, password, "student");
-    assertTrue("Student login details should be correct.", valid);
+    int valid = Member.areLoginDetailsValid(username, password);
+    assertEquals("Student login details should be correct.", valid, 0);
   }
 }

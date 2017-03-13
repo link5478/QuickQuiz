@@ -18,6 +18,7 @@
 package quickquiz.stores;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * TODO: throw exception when field not set is accessed?
@@ -26,46 +27,76 @@ import java.util.ArrayList;
  */
 public class Quiz
 {
-  private Integer id_;
+  private Boolean available_;
   private String description_;
+  private Integer id_;
   private String moduleId_;
   private String moduleName_;
   private String name_;
-  private String userID;
-  private String username;
+  private String userId_;
+  private String username_;
   private ArrayList<Question> questions_;
-  private Boolean available_;
 
 
 
   // TODO: name and int limited to db's lengths?
   public Quiz(String name, String description, String moduleId, String moduleName,
-              String userName)
+              String userId)
   {
-    name_ = name;
+    available_ = null;
     description_ = description;
+    id_ = null;
+    name_ = name;
     moduleId_ = moduleId;
     moduleName_ = moduleName;
-    userID = userName;
-    questions_ = new ArrayList<Question>();
-    id_ = null;
-    available_ = null;
+    questions_ = new ArrayList<>();
+    userId_ = userId;
+    username_ = null;
   }
 
 
 
   public Quiz()
   {
-    name_ = null;
+    available_ = null;
     description_ = null;
+    id_ = null;
     moduleId_ = null;
     moduleName_ = null;
-    userID = null;
-    questions_ = new ArrayList<Question>();
-    id_ = null;
-    available_ = null;
+    name_ = null;
+    questions_ = new ArrayList<>();
+    userId_ = null;
+    username_ = null;
   }
-
+  
+  /**
+   *
+   * @param o the Quiz object to compare with the instance
+   * @return true if the two quiz hold the same data
+   */
+  @Override
+  public boolean equals(Object o)
+  {
+    Quiz quiz = (Quiz) o;
+    boolean sameId = Objects.equals(id_, quiz.getId());
+    boolean sameDescription = (description_ == null ? quiz.getDescription() == null : description_.equals(quiz.getDescription()));
+    boolean sameModuleId = (moduleId_ == null ? quiz.getModuleId() == null : moduleId_.equals(quiz.getModuleId()));
+    boolean sameModuleName = (moduleName_ == null ? quiz.getModuleName() == null : moduleName_.equals(quiz.getModuleName()));
+    boolean sameName = (name_ == null ? quiz.getName() == null : name_.equals(quiz.getName()));
+    boolean sameUserId = (userId_ == null ? quiz.getUserId() == null : userId_.equals(quiz.getUserId()));
+    boolean sameUsername = (username_ == null ? quiz.getUsername() == null : username_.equals(quiz.getUsername()));
+    //boolean sameQuestions = questions_ == quiz.getQuestions();
+    //boolean sameAvailability = Objects.equals(available_, quiz.isAvailable());
+    
+    if (sameId && sameDescription && sameModuleId && sameModuleName &&
+        sameName && sameUserId && sameUsername ) {// && sameQuestions
+        // && sameAvailability) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
 
 
   public int getNumberOfQuestions()
@@ -145,14 +176,14 @@ public class Quiz
 
 
 
-  public String getUserName()
+  public String getUsername()
   {
-    return username;
+    return username_;
   }
   
    public String getUserId()
   {
-    return userID;
+    return userId_;
   }
 
 
@@ -185,15 +216,15 @@ public class Quiz
 
 
 
-  public void setUserName(String staffName)
+  public void setUsername(String username)
   {
-    username = staffName;
+    username_ = username;
   }
   
   
-   public void setUserId(String staffId)
+   public void setUserId(String userId)
   {
-    userID = staffId;
+    userId_ = userId;
   }
 
 

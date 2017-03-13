@@ -20,7 +20,8 @@ package quickquiz.stores;
 import java.util.ArrayList;
 
 /**
- *
+ * TODO: throw exception when field not set is accessed?
+ * 
  * @author Louis-Marie Matthews
  */
 public class Quiz
@@ -33,6 +34,7 @@ public class Quiz
   private String userID;
   private String username;
   private ArrayList<Question> questions_;
+  private Boolean available_;
 
 
 
@@ -47,6 +49,7 @@ public class Quiz
     userID = userName;
     questions_ = new ArrayList<Question>();
     id_ = null;
+    available_ = null;
   }
 
 
@@ -60,6 +63,7 @@ public class Quiz
     userID = null;
     questions_ = new ArrayList<Question>();
     id_ = null;
+    available_ = null;
   }
 
 
@@ -102,6 +106,27 @@ public class Quiz
   public Integer getId()
   {
     return id_;
+  }
+  
+  
+  
+  public Boolean isAvailable()
+  {
+    return available_;
+  }
+  
+  
+  
+  public void makeAvailable()
+  {
+    available_ = true;
+  }
+  
+  
+  
+  public void makeUnavailable()
+  {
+    available_ = false;
   }
 
 

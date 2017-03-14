@@ -33,6 +33,38 @@ import quickquiz.stores.Result;
  */
 public class ResultsModel
 {
+    
+    public static List<String> getAnswers(int resultID)
+    throws SQLException, ClassNotFoundException, InstantiationException,
+           IllegalAccessException
+  {
+      
+      List<String> answers = new ArrayList<>();
+
+    Connection connection;
+    PreparedStatement statement = null;
+    ResultSet resultSet;
+    String sql = "CALL `shift-two_quizmanager`.`GetAnswers`(?);";
+
+    try {
+      connection = Database.getInstance();
+      statement = connection.prepareStatement(sql);
+      statement.setInt(1,resultID);
+      resultSet = statement.executeQuery();
+      while (resultSet.next())
+      {
+        answers.add(resultSet.getString("ANSWER"));
+      }
+    }
+    finally {
+      if (statement != null) {
+        statement.close();
+      }
+    }
+    return answers;
+  }
+    
+    
   public static List<Result> getResults(LoggedIn user)
     throws SQLException, ClassNotFoundException, InstantiationException,
            IllegalAccessException

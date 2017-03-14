@@ -20,7 +20,7 @@ package quickquiz.servlets;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -105,11 +105,18 @@ public class QuizAnsweringPage
       
       for (int i = 0; i < questions.size(); i ++) {
         Integer questionId = questions.get(i).getId();
-        Integer answerId = Integer.parseInt(request.getParameter(questionId.toString()));
+        String answerId = request.getParameter(questionId.toString());
         r.addAnswer(answerId);
       }
       
-      ResultsModel.addResult(r);
+      int resultID = ResultsModel.addResult(r);
+      List<String> answers = r.getAnswers();
+      
+      for(int i = 0; i < answers.size(); i++)
+      {
+          ResultsModel.addResultAnswer(resultID, answers.get(i));
+      }
+      
       RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/successful-answers-submission.jsp") ;
       rd.forward(request, response) ;
     }

@@ -9,7 +9,7 @@
 <html lang="en">
   <head>
     <%@include file="/WEB-INF/jspf/head.jspf" %>
-    <title>Successful Login</title>
+    <title>Login Successful</title>
   </head>
   <body>
     <%@include file="/WEB-INF/jspf/navbar.jspf" %>

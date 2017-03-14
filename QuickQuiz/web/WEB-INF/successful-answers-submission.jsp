@@ -10,7 +10,7 @@
   <head>
     <%@include file="/WEB-INF/jspf/head.jspf" %>
     <meta http-equiv="refresh" content="3; url=<%=((HttpServletRequest)request).getContextPath()%>" />
-    <title>Successful Answers Submission</title>
+    <title>Successful Answer Submission</title>
   </head>
   <body>
     <%@include file="/WEB-INF/jspf/navbar.jspf" %>

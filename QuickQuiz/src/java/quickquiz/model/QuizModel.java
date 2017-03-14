@@ -23,6 +23,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import quickquiz.exception.NoQuizFoundException;
@@ -146,11 +147,14 @@ public class QuizModel
            IllegalAccessException
   {
     // TODO: use enum instead?
-    if (!userType.equals("Staff") &&
-        !userType.equals("Student")) {
+    if (!userType.equalsIgnoreCase("Staff") &&
+        !userType.equalsIgnoreCase("Student")) {
       String error = "Parameter can only be either \"Staff\" or \"Student\".";
       throw new IllegalArgumentException(error);
     }
+    
+    // Convert to correct casing
+    userType = userType.equalsIgnoreCase("Staff") ? "Staff" : "Student";
     
     Connection connection = null;
     PreparedStatement preparedStatement = null;
@@ -192,6 +196,23 @@ public class QuizModel
     }
     
     return quizzes;
+  }
+  
+  
+  
+  public static Map<String, String> getQuizzesDescriptions(String moduleId,
+                                                    String userType)
+    throws SQLException, ClassNotFoundException, InstantiationException,
+           IllegalAccessException
+  {
+    HashMap<String, String> quizDescriptions = new HashMap<>();
+    ArrayList<Quiz> quizzes = getQuizzes (moduleId, userType);
+    Iterator<Quiz> i = quizzes.iterator();
+    while (i.hasNext()) {
+      Quiz currentQuiz = i.next();
+      quizDescriptions.put(currentQuiz.getId().toString(), currentQuiz.getName());
+    }
+    return quizDescriptions;
   }
   
   

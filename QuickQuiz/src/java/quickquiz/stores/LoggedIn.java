@@ -22,12 +22,14 @@ import java.util.List;
 
 /**
  * TODO: camelCase attributes and methods' names.
+ * TODO: use enum or throw exception when user type set to something different
+ * from Student and Staff.
  * @author hogar
  */
 public class LoggedIn
 {
   private String username;
-  private String userType = "student";
+  private String userType = "Student"; // TODO: why default to student?
   private String name;
   private List<String> module = new ArrayList<>();
   

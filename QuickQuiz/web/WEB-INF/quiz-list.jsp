@@ -47,10 +47,12 @@
                 Iterator<Quiz> j = currentQuizzes.iterator();
                 while (j.hasNext()) {
                   Quiz currentQuiz = j.next();
-                    if (user.getUserType().equalsIgnoreCase("Staff")) {
-                    }
-                    String value = currentQuiz.getName();
-                    String url = "/QuickQuiz/view-quiz/" + currentQuiz.getId();
+                  String value = currentQuiz.getName();
+                  if (user.getUserType().equalsIgnoreCase("Staff") &&
+                      !currentQuiz.isAvailable()) {
+                    value += " (unavailable)";
+                  }
+                  String url = "/QuickQuiz/view-quiz/" + currentQuiz.getId();
             %> 
               <a href = <%=url%>><%=value%></a>
               <br />

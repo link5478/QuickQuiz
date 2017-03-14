@@ -9,7 +9,7 @@
 <html lang="en">
   <head>
     <%@include file="/WEB-INF/jspf/head.jspf" %>
-    <title>Quiz not found Error</title>
+    <title>Quiz Not Found</title>
   </head>
   <body>
     <%@include file="/WEB-INF/jspf/navbar.jspf" %>

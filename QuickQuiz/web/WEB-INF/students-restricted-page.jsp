@@ -9,7 +9,7 @@
 <html lang="en">
   <head>
     <%@include file="/WEB-INF/jspf/head.jspf" %>
-    <title>Students restricted Page</title>
+    <title>Restricted Page</title>
   </head>
   <body>
     <%@include file="/WEB-INF/jspf/navbar.jspf" %>

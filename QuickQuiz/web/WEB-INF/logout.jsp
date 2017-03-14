@@ -5,9 +5,10 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page  %>
 <!DOCTYPE html>
+
 <html lang="en">
+    
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="/WEB-INF/jspf/head.jspf" %>
@@ -15,6 +16,7 @@
     </head>
     
     <body>
+        
         <%@include file="/WEB-INF/jspf/navbar.jspf" %>
 
         <div class="container indexcontainer">
@@ -26,6 +28,7 @@
         <p>Redirecting you...</p>
         <p>Click <a href="index" >here</a> to log out.</p>
         </div>
+        
     </body>
     
 </html>

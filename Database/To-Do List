@@ -1,9 +1,6 @@
-Add Date to result (Done)
-Add AttemptNo to result? (Scrapped)
-
-
-Create column for quizzes with a predecessor
-
 Time lock on quiz:- So user can't open quiz and look up answers, then answer quiz. (not priority)
 
-
+Filter by Comp Status (Really annoying)
+IF statements caused Error 1241 (1 or more columns issue)
+How else to approach?
+Case - No

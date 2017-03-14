@@ -19,6 +19,7 @@ package quickquiz.test;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static org.junit.Assert.assertEquals;
@@ -101,13 +102,13 @@ public class QuizModelTest
     quizJava.setModuleId("AC31007");
     quizJava.makeUnavailable();
     try {
-      ArrayList<Quiz> allQuizzes = QuizModel.getQuizzes("AC31007", "Staff");
+      List<Quiz> allQuizzes = QuizModel.getQuizzes("AC31007", "Staff");
       assertEquals("There should be 3 quizzes retrieved for staff.",
                    allQuizzes.size(), numberOfAc31007Quizzes);
       Quiz quizDb = allQuizzes.get(0);
       assertEquals("Quiz has not been correctly fetched", quizDb, quizJava);
-      ArrayList<Quiz> liveQuizzes = QuizModel.getQuizzes("AC31007", "Student");
-      assertEquals("There should be 3 quizzes retrieved for staff.",
+      List<Quiz> liveQuizzes = QuizModel.getQuizzes("AC31007", "Student");
+      assertEquals("There should be 2 quizzes retrieved for student.",
                    liveQuizzes.size(), numberOfAc31007LiveQuizzes);
     }
     catch (SQLException | ClassNotFoundException | InstantiationException |

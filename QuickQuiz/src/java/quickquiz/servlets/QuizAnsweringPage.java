@@ -103,6 +103,12 @@ public class QuizAnsweringPage
       r.setUserID(((LoggedIn) request.getSession().getAttribute("loggedIn")).getUsername());
       r.setDateTime();
       
+      for (int i = 0; i < questions.size(); i ++) {
+        Integer questionId = questions.get(i).getId();
+        Integer answerId = Integer.parseInt(request.getParameter(questionId.toString()));
+        r.addAnswer(answerId);
+      }
+      
       ResultsModel.addResult(r);
       RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/successful-answers-submission.jsp") ;
       rd.forward(request, response) ;

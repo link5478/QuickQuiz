@@ -42,10 +42,17 @@
                         }
                         else
                         {
+                            List<String> answers = ResultsModel.getAnswers(results.get(i).getResultID());
                         %>
                             <h2> Quiz: <%=results.get(i).getQuizName()%> </h2>
                             <p> Mark: <%=results.get(i).getMark()%>%</p>
                         <%
+                            for(int j =0; j < answers.size(); j++)
+                            {
+                                %>
+                                <p> For question: <%=j+1%> you answered: <%=answers.get(j)%> </p>
+                                <%
+                            }
 
                         }
                         %>

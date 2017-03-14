@@ -142,7 +142,7 @@ public class QuizModel
   
   
   
-  public static ArrayList<Quiz> getQuizzes(String moduleId, String userType)
+  public static List<Quiz> getQuizzes(String moduleId, String userType)
     throws SQLException, ClassNotFoundException, InstantiationException,
            IllegalAccessException
   {
@@ -158,7 +158,7 @@ public class QuizModel
     
     Connection connection = null;
     PreparedStatement preparedStatement = null;
-    ArrayList<Quiz> quizzes = new ArrayList<>();
+    List<Quiz> quizzes = new ArrayList<>();
     
     try {
       ResultSet resultSet;
@@ -196,23 +196,6 @@ public class QuizModel
     }
     
     return quizzes;
-  }
-  
-  
-  
-  public static Map<String, String> getQuizzesDescriptions(String moduleId,
-                                                    String userType)
-    throws SQLException, ClassNotFoundException, InstantiationException,
-           IllegalAccessException
-  {
-    HashMap<String, String> quizDescriptions = new HashMap<>();
-    ArrayList<Quiz> quizzes = getQuizzes (moduleId, userType);
-    Iterator<Quiz> i = quizzes.iterator();
-    while (i.hasNext()) {
-      Quiz currentQuiz = i.next();
-      quizDescriptions.put(currentQuiz.getId().toString(), currentQuiz.getName());
-    }
-    return quizDescriptions;
   }
   
   

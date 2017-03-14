@@ -4,6 +4,8 @@
     Author     : hogar
 --%>
 
+<%@page import="java.util.Iterator"%>
+<%@page import="quickquiz.stores.Quiz"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import= "java.util.ArrayList" %>
 <%@page import = "java.util.Map" %>
@@ -25,54 +27,40 @@
         <%@include file="/WEB-INF/jspf/navbar.jspf" %>
 
         <div class="container indexcontainer">
+          
+          <h2>Available Quizzes</h2>
             <%
-                // TODO: Refactor
+                // whole page refactored 
                 LoggedIn user = (LoggedIn) session.getAttribute("loggedIn");
-                if (user != null) 
-                {
-                    Map<String, Map<String, String>> ids = new HashMap<>();
-                    List<String> modules = user.getModules();
-
-                    for (int i = 0; i < modules.size(); i++) 
-                    {
-                        String modID = modules.get(i);                    
-                        Map<String, String> quizzes = QuizModel.getQuizzesDescriptions(modID, user.getUserType());
-                        ids.put(modules.get(i), quizzes);
+                List<String> modules = user.getModules();
+                Iterator<String> i = modules.iterator();
+                while (i.hasNext()) {
+                  String currentModule = i.next();
+                  List<Quiz> currentQuizzes = QuizModel.getQuizzes(currentModule, user.getUserType());
+            %>
+            
+            <!-- TODO : show all quizzes collapsed by module id? -->
+            <br />
+            <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo<%=currentModule%>"><%=currentModule%></button>
+            <div id="demo<%=currentModule%>" class="collapse">
+            <%
+                Iterator<Quiz> j = currentQuizzes.iterator();
+                while (j.hasNext()) {
+                  Quiz currentQuiz = j.next();
+                    if (user.getUserType().equalsIgnoreCase("Staff")) {
                     }
-
-             %>
-
-             
- 
-                    <h2>Available Quizzes</h2>
-                    
-                    <!-- TODO : show all quizzes collapsed by module id? -->
-                    <%   
-                    for (Map.Entry<String, Map<String, String>> entry : ids.entrySet()) 
-                    {
-                            String key = entry.getKey();
-                    %>
-                    <br>     
-                    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo<%=key%>"><%=key%></button>
-                    <div id="demo<%=key%>" class="collapse">
-                    <%
-                        Map<String, String> value = entry.getValue();
-                        for (Map.Entry<String, String> entry2 : value.entrySet()) 
-                        {
-                            String key2 = entry2.getKey();
-                            String value2 = entry2.getValue();
-                            String url = "/QuickQuiz/view-quiz/" + key2;           
-                    %> 
-                    <a href = <%=url%>><%=value2%></a>
-                    <br>
-                    <br>
-                    <%
-                        }
-                    %>
-                    </div>
-                    <%
-                    }                  
+                    String value = currentQuiz.getName();
+                    String url = "/QuickQuiz/view-quiz/" + currentQuiz.getId();
+            %> 
+              <a href = <%=url%>><%=value%></a>
+              <br />
+              <br /> <%-- TODO: List instead --%>
+            <%
                 }
+            %>
+            </div>
+            <%
+            }
             %>   
         </div>
     </body>

@@ -26,6 +26,7 @@
 
         <div class="container indexcontainer">
             <%
+                // TODO: Refactor
                 LoggedIn user = (LoggedIn) session.getAttribute("loggedIn");
                 if (user != null) 
                 {
@@ -35,7 +36,7 @@
                     for (int i = 0; i < modules.size(); i++) 
                     {
                         String modID = modules.get(i);                    
-                        Map<String, String> quizzes = QuizModel.getQuizzes(modID);
+                        Map<String, String> quizzes = QuizModel.getQuizzesDescriptions(modID, "Student");
                         ids.put(modules.get(i), quizzes);
                     }
 

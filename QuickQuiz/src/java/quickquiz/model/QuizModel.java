@@ -23,6 +23,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import quickquiz.exception.NoQuizFoundException;
@@ -192,6 +193,23 @@ public class QuizModel
     }
     
     return quizzes;
+  }
+  
+  
+  
+  public static Map<String, String> getQuizzesDescriptions(String moduleId,
+                                                    String userType)
+    throws SQLException, ClassNotFoundException, InstantiationException,
+           IllegalAccessException
+  {
+    HashMap<String, String> quizDescriptions = new HashMap<>();
+    ArrayList<Quiz> quizzes = getQuizzes (moduleId, userType);
+    Iterator<Quiz> i = quizzes.iterator();
+    while (i.hasNext()) {
+      Quiz currentQuiz = i.next();
+      quizDescriptions.put(currentQuiz.getId().toString(), currentQuiz.getName());
+    }
+    return quizDescriptions;
   }
   
   

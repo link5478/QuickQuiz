@@ -137,7 +137,7 @@ public class ResultsModel
     return -1;
   }
   
-  public static void addResultAnswer(int resultID, int answer)
+  public static void addResultAnswer(int resultID, String answer)
           throws SQLException, ClassNotFoundException, InstantiationException,
            IllegalAccessException
   {
@@ -146,7 +146,7 @@ public class ResultsModel
       String sql = "CALL `AddAnswer`(?, ?);";
       preparedStatement = Database.getInstance().prepareStatement(sql);
       preparedStatement.setInt(1, resultID);
-      preparedStatement.setString(2, Integer.toString(answer));
+      preparedStatement.setString(2, answer);
       // TODO: check that the results have been added
       ResultSet rs = preparedStatement.executeQuery();
     }

@@ -36,7 +36,7 @@
                     for (int i = 0; i < modules.size(); i++) 
                     {
                         String modID = modules.get(i);                    
-                        Map<String, String> quizzes = QuizModel.getQuizzesDescriptions(modID, "Student");
+                        Map<String, String> quizzes = QuizModel.getQuizzesDescriptions(modID, user.getUserType());
                         ids.put(modules.get(i), quizzes);
                     }
 

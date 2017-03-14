@@ -29,7 +29,7 @@ import java.util.List;
 public class LoggedIn
 {
   private String username;
-  private String userType = "student";
+  private String userType = "Student"; // TODO: why default to student?
   private String name;
   private List<String> module = new ArrayList<>();
   

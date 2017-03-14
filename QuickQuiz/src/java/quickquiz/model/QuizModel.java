@@ -147,11 +147,14 @@ public class QuizModel
            IllegalAccessException
   {
     // TODO: use enum instead?
-    if (!userType.equals("Staff") &&
-        !userType.equals("Student")) {
+    if (!userType.equalsIgnoreCase("Staff") &&
+        !userType.equalsIgnoreCase("Student")) {
       String error = "Parameter can only be either \"Staff\" or \"Student\".";
       throw new IllegalArgumentException(error);
     }
+    
+    // Convert to correct casing
+    userType = userType.equalsIgnoreCase("Staff") ? "Staff" : "Student";
     
     Connection connection = null;
     PreparedStatement preparedStatement = null;

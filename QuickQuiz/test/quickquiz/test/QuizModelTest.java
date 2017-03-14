@@ -18,17 +18,13 @@
 package quickquiz.test;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import org.junit.Test;
 import quickquiz.exception.NoQuizFoundException;
 import quickquiz.model.QuizModel;
+import static quickquiz.model.QuizModel.getQuizPresentation;
 import quickquiz.stores.Question;
 import quickquiz.stores.Quiz;
 
@@ -101,6 +97,7 @@ public class QuizModelTest
     quizJava.setUserId("140001337");
     quizJava.setModuleId("AC31007");
     quizJava.makeUnavailable();
+    
     try {
       List<Quiz> allQuizzes = QuizModel.getQuizzes("AC31007", "Staff");
       assertEquals("There should be 3 quizzes retrieved for staff.",
@@ -113,6 +110,42 @@ public class QuizModelTest
     }
     catch (SQLException | ClassNotFoundException | InstantiationException |
            IllegalAccessException exception) {
+      fail(exception.getMessage());
+    }
+  }
+  
+  
+  /**
+   * If this test fails, it might be because quizzes have been updated in the
+   * database. The quiz at the very beginning of the method just need to be
+   * updated.
+   * TODO: add predecessor
+   */
+  @Test
+  public void testGetQuizPresentation()
+  {
+    // MAKE SURE THESE VALUES ARE UP-TO-DATE
+    Quiz quizJavaStudent = new Quiz();
+    quizJavaStudent.setId(2);
+    quizJavaStudent.setName("An Agile Approach");
+    quizJavaStudent.setDescription("A quiz about Agile methods in programming");
+    quizJavaStudent.setUsername("AGILE MASTER");
+    quizJavaStudent.setModuleId("AC31007");
+    quizJavaStudent.setModuleName("Agile Software Programming");
+    
+    try {
+      Quiz quizDb = getQuizPresentation(2, "Student");
+      assertEquals("The hard-coded quiz and the one fetched from the database" +
+                   "should be identical.", quizJavaStudent, quizDb);
+      
+      Quiz quizJavaStaff = quizJavaStudent;
+      quizJavaStaff.setAvailability(true);
+      Quiz quizStaffDb = getQuizPresentation(2, "Staff");
+      assertEquals("The hard-coded quiz and the one fetched from the database" +
+                   "should be identical.", quizJavaStaff, quizStaffDb);
+    }
+    catch (SQLException | ClassNotFoundException | InstantiationException |
+             IllegalAccessException | NoQuizFoundException exception) {
       fail(exception.getMessage());
     }
   }

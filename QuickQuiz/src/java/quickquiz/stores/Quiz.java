@@ -85,12 +85,19 @@ public class Quiz
     boolean sameName = (name_ == null ? quiz.getName() == null : name_.equals(quiz.getName()));
     boolean sameUserId = (userId_ == null ? quiz.getUserId() == null : userId_.equals(quiz.getUserId()));
     boolean sameUsername = (username_ == null ? quiz.getUsername() == null : username_.equals(quiz.getUsername()));
-    //boolean sameQuestions = questions_ == quiz.getQuestions();
-    //boolean sameAvailability = Objects.equals(available_, quiz.isAvailable());
+    boolean sameQuestions;
+    if (questions_.size() == quiz.getQuestions().size() &&
+        questions_.containsAll(quiz.getQuestions())) {
+      sameQuestions = true;
+    }
+    else {
+      sameQuestions = false;
+    }
+    boolean sameAvailability = Objects.equals(available_, quiz.isAvailable());
     
     if (sameId && sameDescription && sameModuleId && sameModuleName &&
-        sameName && sameUserId && sameUsername ) {// && sameQuestions
-        // && sameAvailability) {
+        sameName && sameUserId && sameUsername && sameQuestions &&
+        sameAvailability) {
       return true;
     }
     else {
@@ -158,6 +165,13 @@ public class Quiz
   public void makeUnavailable()
   {
     available_ = false;
+  }
+  
+  
+  
+  public void setAvailability(boolean available)
+  {
+    available_ = available;
   }
 
 

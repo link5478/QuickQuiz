@@ -253,15 +253,26 @@ public class QuizModel
   
   
   // TODO: To refactor
-  public static Quiz getQuizPresentation(Integer id)
+  public static Quiz getQuizPresentation(Integer id, String userType)
     throws SQLException, ClassNotFoundException, InstantiationException,
            IllegalAccessException, NoQuizFoundException
   {
-    Quiz quiz = new Quiz();
+    // TODO: use enum instead?
+    if (!userType.equalsIgnoreCase("Staff") &&
+        !userType.equalsIgnoreCase("Student")) {
+      String error = "Parameter can only be either \"Staff\" or \"Student\".";
+      throw new IllegalArgumentException(error);
+    }
     
+    // Convert to correct casing
+    userType = userType.equalsIgnoreCase("Staff") ? "Staff" : "Student";
+    
+    Quiz quiz = new Quiz();
     PreparedStatement ps = null;
+    
     try {
-      String sql = "CALL `shift-two_quizmanager`.`ViewQuiz`(?);";
+      String sql = userType.equals("Staff") ? "CALL `ViewQuizStaff`(?);" :
+                                              "CALL `ViewQuizStudent`(?);";
       
       ps = Database.getInstance().prepareStatement(sql);
       ps.setInt(1, id);
@@ -278,7 +289,8 @@ public class QuizModel
         quiz.setUsername(rs.getString("Staff Name"));
         quiz.setModuleId(rs.getString("Module ID"));
         quiz.setModuleName(rs.getString("Module Name"));
-        
+        if (userType.equals("Staff"))
+          quiz.setAvailability(rs.getBoolean("Available"));
       }
     }
     finally {

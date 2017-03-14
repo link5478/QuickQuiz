@@ -18,20 +18,18 @@
 package quickquiz.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import quickquiz.exception.MalformedUrlException;
 import quickquiz.exception.NoQuizFoundException;
 import quickquiz.model.QuizModel;
-import static quickquiz.model.QuizModel.getQuiz;
 import static quickquiz.model.QuizModel.getQuizPresentation;
-import static quickquiz.model.QuizModel.viewQuiz;
+import quickquiz.stores.LoggedIn;
 import quickquiz.stores.Quiz;
 
 /**
@@ -58,11 +56,13 @@ public class ViewQuiz
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException
   {
+    HttpSession s = ((HttpServletRequest) request).getSession(false);
+    LoggedIn lg = (LoggedIn) s.getAttribute("loggedIn");
     // refactored
     try {
       Integer quizId = getQuizId(request);
       QuizModel.checkExists(quizId);
-      Quiz quiz = getQuizPresentation(getQuizId(request));
+      Quiz quiz = getQuizPresentation(getQuizId(request), lg.getUserType());
       request.setAttribute("quiz", quiz);
       request.getRequestDispatcher("/WEB-INF/view-quiz.jsp").forward(request, response);
     }

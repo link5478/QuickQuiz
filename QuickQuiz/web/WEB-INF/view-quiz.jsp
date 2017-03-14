@@ -21,7 +21,7 @@
       <p>Name: ${quiz.getName()}</p>
       <p>Module ID: ${quiz.getModuleId()}</p>
       <p>Module Name: ${quiz.getModuleName()}</p>
-      <p>Creator: ${quiz.getUserName()}</p>
+      <p>Creator: ${quiz.getUsername()}</p>
 
       <%
       if(session.getAttribute("loggedIn") != null) { //Checks the session variable to see if the user is logged in.

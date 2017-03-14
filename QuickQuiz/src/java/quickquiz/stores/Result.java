@@ -22,87 +22,83 @@ import java.util.List;
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 /**
  *
  * @author hogar
  */
-public class Result
-{
-  private String userID;
-  private float mark;
-  private String quizName;
-  private Integer quizId_;
-  private String dateTime;
-  private List<Integer> answers = new ArrayList<>();
+public class Result {
 
-  public void setUserID(String uID)
-  {
-      userID = uID;
-  }
+    private int resultID;
+    private String userID;
+    private float mark;
+    private String quizName;
+    private Integer quizId_;
+    private String dateTime;
+    private List<Integer> answers = new ArrayList<>();
 
-  public String getUserID()
-  {
-      return userID;
-  }
-
-  public void setMark(float Mark)
-  {
-    if (Mark > 100.0 || Mark < 0.0) {
-      // TODO: custom / better exception?
-      throw new IllegalArgumentException();
+    public void setResultID(int id)
+    {
+        resultID = id;
     }
-    mark = Mark;
-  }  
-  // TODO : rename this to something better?
-  public void setDateTime()
-  {       
-    Date dt = new Date();
-    SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    
+    public int getResultID()
+    {
+        return resultID;
+    }
+    
+    public void setUserID(String uID) {
+        userID = uID;
+    }
 
-     dateTime = sdf.format(dt);
-  }
+    public String getUserID() {
+        return userID;
+    }
 
-  public float getMark()
-  {
-      return mark;
-  }
+    public void setMark(float Mark) {
+        if (Mark > 100.0 || Mark < 0.0) {
+            // TODO: custom / better exception?
+            throw new IllegalArgumentException();
+        }
+        mark = Mark;
+    }
+    // TODO : rename this to something better?
 
-  public void setQuizId(Integer id)
-  {
-    quizId_ = id;
-  }
-  
-  public String getDateTime()
-  {
-      return dateTime;
-  }
-  
-  
-  public Integer getQuizId()
-  {
-    return quizId_;
-  }
-  
-  
-  
-  public void setQuizName(String name)
-  {
-      quizName = name;
-  }
+    public void setDateTime() {
+        Date dt = new Date();
+        SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-  public String getQuizName()
-  {
-      return quizName;
-  }
-  
-  public void addAnswer(int num)
-  {
-      answers.add(num);
-  }
-  
-  public List<Integer> getAnswers()
-  {
-      return answers;
-  }  
+        dateTime = sdf.format(dt);
+    }
+
+    public float getMark() {
+        return mark;
+    }
+
+    public void setQuizId(Integer id) {
+        quizId_ = id;
+    }
+
+    public String getDateTime() {
+        return dateTime;
+    }
+
+    public Integer getQuizId() {
+        return quizId_;
+    }
+
+    public void setQuizName(String name) {
+        quizName = name;
+    }
+
+    public String getQuizName() {
+        return quizName;
+    }
+
+    public void addAnswer(int num) {
+        answers.add(num);
+    }
+
+    public List<Integer> getAnswers() {
+        return answers;
+    }
 }

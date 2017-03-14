@@ -75,7 +75,7 @@ public class ResultsModel
   
   
   
-  public static void addResult(Result result)
+  public static int addResult(Result result)
     throws SQLException, ClassNotFoundException, InstantiationException,
            IllegalAccessException
   {
@@ -87,6 +87,33 @@ public class ResultsModel
       preparedStatement.setFloat(2, result.getMark());
       preparedStatement.setString(3, result.getDateTime());
       preparedStatement.setInt(4, result.getQuizId());
+      // TODO: check that the results have been added
+      ResultSet rs = preparedStatement.executeQuery();
+      
+      while(rs.next())
+      {
+          return rs.getInt("Last ID");
+      }
+    }
+    finally {
+      if (preparedStatement != null) {
+        preparedStatement.close();
+      }
+    }
+    
+    return -1;
+  }
+  
+  public static void addResultAnswer(int resultID, int answer)
+          throws SQLException, ClassNotFoundException, InstantiationException,
+           IllegalAccessException
+  {
+      PreparedStatement preparedStatement = null;
+    try {
+      String sql = "CALL `AddAnswer`(?, ?);";
+      preparedStatement = Database.getInstance().prepareStatement(sql);
+      preparedStatement.setInt(1, resultID);
+      preparedStatement.setString(2, Integer.toString(answer));
       // TODO: check that the results have been added
       ResultSet rs = preparedStatement.executeQuery();
     }

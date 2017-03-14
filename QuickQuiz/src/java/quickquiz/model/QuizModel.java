@@ -23,12 +23,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import quickquiz.exception.NoQuizFoundException;
 import quickquiz.exception.QuizInsertionFailureException;
 import quickquiz.lib.Database;
+import quickquiz.stores.LoggedIn;
 import quickquiz.stores.Question;
 import quickquiz.stores.Quiz;
 
@@ -142,10 +142,12 @@ public class QuizModel
   
   
   
-  public static List<Quiz> getQuizzes(String moduleId, String userType)
+  public static List<Quiz> getQuizzes(String moduleId, LoggedIn user)
     throws SQLException, ClassNotFoundException, InstantiationException,
            IllegalAccessException
   {
+      
+      String userType = user.getUserType();
     // TODO: use enum instead?
     if (!userType.equalsIgnoreCase("Staff") &&
         !userType.equalsIgnoreCase("Student")) {
@@ -165,10 +167,11 @@ public class QuizModel
       
       connection = Database.getInstance();
       
-      String sql = "CALL `ReturnModuleQuiz`(?, ?);";
+      String sql = "CALL `ReturnModuleQuiz`(?, ?, ?);";
       preparedStatement = connection.prepareStatement(sql);
       preparedStatement.setString(1, moduleId);
       preparedStatement.setString(2, userType);
+      preparedStatement.setString(3, user.getUsername());
       resultSet = preparedStatement.executeQuery();
       
       while (resultSet.next()) {

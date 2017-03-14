@@ -85,6 +85,8 @@ public class QuizModelTest
    * updated.
    * TODO: add predecessor
    */
+  
+  /*
   @Test
   public void testGetQuizzes()
   {
@@ -113,6 +115,7 @@ public class QuizModelTest
       fail(exception.getMessage());
     }
   }
+  */
   
   
   /**

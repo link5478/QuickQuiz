@@ -24,10 +24,10 @@ public class resultTest {
     public void ResultCheck()
     {
         Result r = new Result();
-        r.addAnswer(5);
-        List<Integer> expected = new ArrayList<>();
-        expected.add(5);
-        List<Integer> actual = r.getAnswers();
+        r.addAnswer("5");
+        List<String> expected = new ArrayList<>();
+        expected.add("5");
+        List<String> actual = r.getAnswers();
         
         try 
         {

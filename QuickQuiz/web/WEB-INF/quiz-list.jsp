@@ -36,7 +36,7 @@
                 Iterator<String> i = modules.iterator();
                 while (i.hasNext()) {
                   String currentModule = i.next();
-                  List<Quiz> currentQuizzes = QuizModel.getQuizzes(currentModule, user.getUserType());
+                  List<Quiz> currentQuizzes = QuizModel.getQuizzes(currentModule, user);
             %>
             
             <!-- TODO : show all quizzes collapsed by module id? -->

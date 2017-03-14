@@ -59,6 +59,7 @@ public class ResultsModel
       while (resultSet.next())
       {
         Result newResult = new Result();
+        newResult.setResultID(resultSet.getInt("Result ID"));
         newResult.setUserID(resultSet.getString("ID"));
         newResult.setQuizName(resultSet.getString("Name"));
         newResult.setMark(resultSet.getFloat("Mark"));

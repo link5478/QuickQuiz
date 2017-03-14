@@ -34,7 +34,7 @@ public class Result {
     private String quizName;
     private Integer quizId_;
     private String dateTime;
-    private List<Integer> answers = new ArrayList<>();
+    private List<String> answers = new ArrayList<>();
 
     public void setResultID(int id)
     {
@@ -94,11 +94,11 @@ public class Result {
         return quizName;
     }
 
-    public void addAnswer(int num) {
+    public void addAnswer(String num) {
         answers.add(num);
     }
 
-    public List<Integer> getAnswers() {
+    public List<String> getAnswers() {
         return answers;
     }
 }

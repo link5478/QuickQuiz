@@ -1,8 +1,9 @@
 package quickquiz.stores;
 
 import java.util.Date;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 /*
  * QuickQuiz is a database application allowing staff to manage
@@ -33,6 +34,7 @@ public class Result
   private String quizName;
   private Integer quizId_;
   private String dateTime;
+  private List<Integer> answers = new ArrayList<>();
 
   public void setUserID(String uID)
   {
@@ -93,4 +95,14 @@ public class Result
   {
       return quizName;
   }
+  
+  public void addAnswer(int num)
+  {
+      answers.add(num);
+  }
+  
+  public List<Integer> getAnswers()
+  {
+      return answers;
+  }  
 }

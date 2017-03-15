@@ -31,129 +31,149 @@ import quickquiz.stores.Result;
  *
  * @author hogar, Louis-Marie Matthews
  */
-public class ResultsModel
-{
-    
+public class ResultsModel {
+
     public static List<String> getAnswers(int resultID)
+            throws SQLException, ClassNotFoundException, InstantiationException,
+            IllegalAccessException {
+
+        List<String> answers = new ArrayList<>();
+
+        Connection connection;
+        PreparedStatement statement = null;
+        ResultSet resultSet;
+        String sql = "CALL `shift-two_quizmanager`.`GetAnswers`(?);";
+
+        try {
+            connection = Database.getInstance();
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, resultID);
+            resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                answers.add(resultSet.getString("ANSWER"));
+            }
+        } finally {
+            if (statement != null) {
+                statement.close();
+            }
+        }
+        return answers;
+    }
+
+    public static List<Result> getResults(LoggedIn user)
+            throws SQLException, ClassNotFoundException, InstantiationException,
+            IllegalAccessException {
+        List<Result> results = new ArrayList<>();
+
+        int type = 0;
+        if (user.getUserType().equals("staff")) {
+            type = 1;
+        }
+
+        Connection connection;
+        PreparedStatement statement = null;
+        ResultSet resultSet;
+        String sql = "CALL `shift-two_quizmanager`.`GetResults`(?, ?);";
+
+        try {
+            connection = Database.getInstance();
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, user.getUsername());
+            statement.setInt(2, type);
+            resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Result newResult = new Result();
+                newResult.setResultID(resultSet.getInt("Result ID"));
+                newResult.setUserID(resultSet.getString("ID"));
+                newResult.setQuizName(resultSet.getString("Name"));
+                newResult.setMark(resultSet.getFloat("Mark"));
+                results.add(newResult);
+            }
+        } finally {
+            if (statement != null) {
+                statement.close();
+            }
+        }
+        return results;
+    }
+
+    public static int addResult(Result result)
+            throws SQLException, ClassNotFoundException, InstantiationException,
+            IllegalAccessException {
+        PreparedStatement preparedStatement = null;
+        try {
+            String sql = "CALL `AddResult`(?, ?, ?, ?);";
+            preparedStatement = Database.getInstance().prepareStatement(sql);
+            preparedStatement.setString(1, result.getUserID());
+            preparedStatement.setFloat(2, result.getMark());
+            preparedStatement.setString(3, result.getDateTime());
+            preparedStatement.setInt(4, result.getQuizId());
+            // TODO: check that the results have been added
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                return rs.getInt("Last ID");
+            }
+        } finally {
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+        }
+
+        return -1;
+    }
+
+    public static void addResultAnswer(int resultID, String answer, int questionNo)
+            throws SQLException, ClassNotFoundException, InstantiationException,
+            IllegalAccessException {
+        PreparedStatement preparedStatement = null;
+        try {
+            String sql = "CALL `AddAnswer`(?, ?, ?);";
+            preparedStatement = Database.getInstance().prepareStatement(sql);
+            preparedStatement.setInt(1, resultID);
+            preparedStatement.setString(2, answer);
+            preparedStatement.setInt(3, questionNo);
+            // TODO: check that the results have been added
+            ResultSet rs = preparedStatement.executeQuery();
+        } finally {
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+        }
+    }
+
+    public static Result getResult(int id)
     throws SQLException, ClassNotFoundException, InstantiationException,
-           IllegalAccessException
-  {
-      
-      List<String> answers = new ArrayList<>();
-
-    Connection connection;
-    PreparedStatement statement = null;
-    ResultSet resultSet;
-    String sql = "CALL `shift-two_quizmanager`.`GetAnswers`(?);";
-
-    try {
-      connection = Database.getInstance();
-      statement = connection.prepareStatement(sql);
-      statement.setInt(1,resultID);
-      resultSet = statement.executeQuery();
-      while (resultSet.next())
-      {
-        answers.add(resultSet.getString("ANSWER"));
-      }
+            IllegalAccessException{
+        Result r = new Result();
+        PreparedStatement preparedStatement = null;
+        try {
+            String sql = "CALL `GetResult`(?);";
+            preparedStatement = Database.getInstance().prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+            // TODO: check that the results have been added
+            ResultSet rs = preparedStatement.executeQuery();
+            
+            while(rs.next())
+            {
+                float mark = rs.getFloat("MARK");
+                String uID = rs.getString("USERID");
+                int quizID = rs.getInt("QUIZID");
+                
+                r.setMark(mark);
+                r.setUserID(uID);
+                r.setQuizId(quizID);
+            }
+            
+        } finally {
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+        }
+        
+        return r;
     }
-    finally {
-      if (statement != null) {
-        statement.close();
-      }
-    }
-    return answers;
-  }
     
     
-  public static List<Result> getResults(LoggedIn user)
-    throws SQLException, ClassNotFoundException, InstantiationException,
-           IllegalAccessException
-  {
-    List<Result> results = new ArrayList<>();
-
-    int type = 0;
-    if(user.getUserType().equals("staff"))
-    {
-        type = 1;
-    }
-
-    Connection connection;
-    PreparedStatement statement = null;
-    ResultSet resultSet;
-    String sql = "CALL `shift-two_quizmanager`.`GetResults`(?, ?);";
-
-    try {
-      connection = Database.getInstance();
-      statement = connection.prepareStatement(sql);
-      statement.setString(1,user.getUsername());
-      statement.setInt(2, type);
-      resultSet = statement.executeQuery();
-      while (resultSet.next())
-      {
-        Result newResult = new Result();
-        newResult.setResultID(resultSet.getInt("Result ID"));
-        newResult.setUserID(resultSet.getString("ID"));
-        newResult.setQuizName(resultSet.getString("Name"));
-        newResult.setMark(resultSet.getFloat("Mark"));
-        results.add(newResult);
-      }
-    }
-    finally {
-      if (statement != null) {
-        statement.close();
-      }
-    }
-    return results;
-  }
-  
-  
-  
-  public static int addResult(Result result)
-    throws SQLException, ClassNotFoundException, InstantiationException,
-           IllegalAccessException
-  {
-    PreparedStatement preparedStatement = null;
-    try {
-      String sql = "CALL `AddResult`(?, ?, ?, ?);";
-      preparedStatement = Database.getInstance().prepareStatement(sql);
-      preparedStatement.setString(1, result.getUserID());
-      preparedStatement.setFloat(2, result.getMark());
-      preparedStatement.setString(3, result.getDateTime());
-      preparedStatement.setInt(4, result.getQuizId());
-      // TODO: check that the results have been added
-      ResultSet rs = preparedStatement.executeQuery();
-      
-      while(rs.next())
-      {
-          return rs.getInt("Last ID");
-      }
-    }
-    finally {
-      if (preparedStatement != null) {
-        preparedStatement.close();
-      }
-    }
     
-    return -1;
-  }
-  
-  public static void addResultAnswer(int resultID, String answer)
-          throws SQLException, ClassNotFoundException, InstantiationException,
-           IllegalAccessException
-  {
-      PreparedStatement preparedStatement = null;
-    try {
-      String sql = "CALL `AddAnswer`(?, ?);";
-      preparedStatement = Database.getInstance().prepareStatement(sql);
-      preparedStatement.setInt(1, resultID);
-      preparedStatement.setString(2, answer);
-      // TODO: check that the results have been added
-      ResultSet rs = preparedStatement.executeQuery();
-    }
-    finally {
-      if (preparedStatement != null) {
-        preparedStatement.close();
-      }
-    }
-  }
 }

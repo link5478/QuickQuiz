@@ -2,11 +2,11 @@
 AC31007 Agile Software Engineering Assignment
 
 Contributors:
-Bryn Pirie
-Carsten Cheyne
-Craig Chicken
-Joshua Hogarth
-Louis-Marie Matthews
+Bryn Pirie,\n
+Carsten Cheyne,
+Craig Chicken,
+Joshua Hogarth,
+Louis-Marie Matthews,
 Vergil Iordache
 
 Copyright disclaimers

@@ -82,7 +82,7 @@ public class QuizAnsweringPage
       // TODO: add page to the list of student login protected pages
       // TODO: convert to percentage
       Quiz quiz = QuizModel.getQuiz(getQuizId(request));
-      ArrayList<Question> questions = quiz.getQuestions();
+      List<Question> questions = quiz.getQuestions();
       float points = 0;
       for (int i = 0; i < questions.size(); i ++) {
         Integer questionId = questions.get(i).getId();

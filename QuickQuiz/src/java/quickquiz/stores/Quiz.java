@@ -18,6 +18,7 @@
 package quickquiz.stores;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -35,7 +36,7 @@ public class Quiz
   private String name_;
   private String userId_;
   private String username_;
-  private ArrayList<Question> questions_;
+  private List<Question> questions_;
 
 
 
@@ -183,7 +184,7 @@ public class Quiz
 
 
 
-  public ArrayList<Question> getQuestions()
+  public List<Question> getQuestions()
   {
     return questions_;
   }
@@ -223,7 +224,7 @@ public class Quiz
 
 
 
-  public void setQuestions(ArrayList<Question> questions)
+  public void setQuestions(List<Question> questions)
   {
     questions_ = questions;
   }

@@ -102,45 +102,7 @@ public class QuizModel
       }
     }  
     return product;
-  }
-  
-  
-  
-  public static Map<String,String> getAvailableQuizzes(String moduleID)
-    throws SQLException, ClassNotFoundException, InstantiationException,
-           IllegalAccessException
-  {
-    // TODO: close connection?
-    Connection connection;
-    PreparedStatement statement = null;
-    ResultSet resultSet;
-    String sql;
-    Map<String, String> IDs = new HashMap<>();
-    try {
-      connection = Database.getInstance();
-
-      // TODO : fix the retreival of quizzes.
-      sql = "CALL `shift-two_quizmanager`.`ReturnModuleQuiz`(?, 'Student')";
-
-      statement = connection.prepareStatement(sql);
-      statement.setString(1, moduleID);
-      resultSet = statement.executeQuery();
-      while(resultSet.next())
-      {
-        String ID = resultSet.getString("ID");
-        String Name = resultSet.getString("name");
-        IDs.put(ID, Name);
-      }
-    }
-    finally {
-      if (statement != null) {
-        statement.close();
-      }
-    }
-    return IDs;
-  }
-  
-  
+  }  
   
   public static List<Quiz> getQuizzes(String moduleId, LoggedIn user)
     throws SQLException, ClassNotFoundException, InstantiationException,

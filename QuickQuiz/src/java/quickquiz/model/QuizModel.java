@@ -108,8 +108,7 @@ public class QuizModel
     throws SQLException, ClassNotFoundException, InstantiationException,
            IllegalAccessException
   {
-      
-      String userType = user.getUserType();
+    String userType = user.getUserType();
     // TODO: use enum instead?
     if (!userType.equalsIgnoreCase("Staff") &&
         !userType.equalsIgnoreCase("Student")) {

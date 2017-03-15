@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+
+
+
     <filter>
         <filter-name>RestrictionToVisitors</filter-name>
         <filter-class>quickquiz.filters.RestrictionToVisitors</filter-class>
@@ -16,6 +19,9 @@
         <filter-name>RestrictionToStudents</filter-name>
         <filter-class>quickquiz.filters.RestrictionToStudents</filter-class>
     </filter>
+
+
+
     <filter-mapping>
         <filter-name>RestrictionToVisitors</filter-name>
         <url-pattern>/login</url-pattern>
@@ -45,9 +51,16 @@
         <url-pattern>/quiz-creation</url-pattern>
     </filter-mapping>
     <filter-mapping>
+        <filter-name>RestrictionToStaff</filter-name>
+        <url-pattern>/quiz-editing-page/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
         <filter-name>RestrictionToStudents</filter-name>
         <url-pattern>/quiz-answering-page/*</url-pattern>
     </filter-mapping>
+
+
+
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -73,8 +86,6 @@
         <servlet-name>NewQuestion</servlet-name>
         <servlet-class>quickquiz.servlets.NewQuestion</servlet-class>
     </servlet>
-    <!-- TODO: Ideally, entering directly page.jsp in the url bar should return a
-404 page, so that the technology used (java) is not disclosed. -->
     <servlet>
         <servlet-name>QuizList</servlet-name>
         <servlet-class>quickquiz.servlets.QuizList</servlet-class>
@@ -95,6 +106,13 @@
         <servlet-name>DetailedResults</servlet-name>
         <servlet-class>quickquiz.servlets.DetailedResults</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>QuizEditingPage</servlet-name>
+        <servlet-class>quickquiz.servlets.QuizEditingPage</servlet-class>
+    </servlet>
+
+
+
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -143,6 +161,13 @@
         <servlet-name>DetailedResults</servlet-name>
         <url-pattern>/DetailedResults/*</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QuizEditingPage</servlet-name>
+        <url-pattern>/quiz-editing-page/*</url-pattern>
+    </servlet-mapping>
+
+
+
     <session-config>
         <session-timeout>
             30

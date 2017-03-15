@@ -190,6 +190,10 @@ public class QuizModel
         quiz.setModuleName(rs.getString("Module Name"));
         quiz.setUsername(rs.getString("Staff Name"));
         quiz.setId(rs.getInt("Quiz ID"));
+        if (rs.getBoolean("Available"))
+          quiz.makeAvailable();
+        else
+          quiz.makeUnavailable();
       }
       
       // Initialises the quiz questions

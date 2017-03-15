@@ -114,7 +114,7 @@ public class QuizAnsweringPage
       
       for(int i = 0; i < answers.size(); i++)
       {
-          ResultsModel.addResultAnswer(resultID, answers.get(i));
+          ResultsModel.addResultAnswer(resultID, answers.get(i), i+1);
       }
       
       RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/successful-answers-submission.jsp") ;

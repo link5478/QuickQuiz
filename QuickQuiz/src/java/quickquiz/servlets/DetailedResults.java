@@ -7,17 +7,24 @@ package quickquiz.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import quickquiz.exception.NoQuizFoundException;
+import quickquiz.model.QuizModel;
 import quickquiz.model.ResultsModel;
+import quickquiz.stores.Answer;
+import quickquiz.stores.Quiz;
+import quickquiz.stores.Result;
 
 /**
  *
  * @author hogar
  */
-public class DetailedResults extends HttpServlet {
+public class DetailedResults extends ServletTemplate {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -57,6 +64,36 @@ public class DetailedResults extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        // need to get and store the results for this quiz.
+        // need to get the actual quiz.
+        // need to send these to page for comparison.
+        String uri = getUri(request);
+        uri = uri.substring(uri.indexOf("/") + 1);
+        Result result = new Result();
+        Quiz quiz = new Quiz();
+        
+        try
+        {
+        result = ResultsModel.getResult(Integer.parseInt(uri));
+        result.setResultID(Integer.parseInt(uri));
+        List<String> result_answers = ResultsModel.getAnswers(result.getResultID());
+        for(int i = 0; i< result_answers.size(); i++)
+        {
+            result.addAnswer(result_answers.get(i));
+        }
+            QuizModel.checkExists(result.getQuizId());
+            quiz = QuizModel.getQuiz(result.getQuizId());       
+        }
+        catch(ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException | NoQuizFoundException e)
+        {
+        }
+        
+        request.setAttribute("Quiz", quiz);
+        request.setAttribute("Result", result);
+        request.setAttribute("URI", uri);
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/detailed-results.jsp");
+        rd.forward(request, response);
     }
 
     /**

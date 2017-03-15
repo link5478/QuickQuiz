@@ -159,7 +159,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DetailedResults</servlet-name>
-        <url-pattern>/DetailedResults/*</url-pattern>
+        <url-pattern>/detailed-results/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>QuizEditingPage</servlet-name>

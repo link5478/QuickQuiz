@@ -11,7 +11,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="/WEB-INF/jspf/head.jspf" %>
-        <title>Login | Quick Quiz</title>
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+        <title>Login | QuickQuiz</title>
     </head>
     
     <body>
@@ -23,14 +24,14 @@
               
             <div class="form-group">
               <label for="username" class="col-sm-2 control-label">Username</label>
-              <div class="col-sm-10">
+              <div class="col-sm-8">
                 <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
               </div>
             </div>
               
             <div class="form-group">
               <label for="password" class="col-sm-2 control-label">Password</label>
-              <div class="col-sm-10">
+              <div class="col-sm-8">
                 <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
               </div>
             </div>

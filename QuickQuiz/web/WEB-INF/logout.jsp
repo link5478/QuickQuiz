@@ -12,7 +12,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="/WEB-INF/jspf/head.jspf" %>
-        <title>Log Out | Quick Quiz</title>
+        <title>Log Out | QuickQuiz</title>
     </head>
     
     <body>
@@ -26,7 +26,7 @@
             session.removeAttribute("loggedIn");           
         %>
         <p>Redirecting you...</p>
-        <p>Click <a href="index" >here</a> to log out.</p>
+        <p>Click <a href="index" >here</a> if you are not redirected.</p>
         </div>
         
     </body>

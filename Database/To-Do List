@@ -1,2 +1,4 @@
 Time lock on quiz:- So user can't open quiz and look up answers, then answer quiz. (not priority) - Can't be done on DB end,
 if time ask Josh?
+
+Make functions more Robust. Maybe reduce number of Stored Procedures?

@@ -1,5 +1,13 @@
 # QuickQuiz
-AC31007 Agile Software Engineering Assignment 1
+AC31007 Agile Software Engineering Assignment
+
+Contributors:
+Bryn Pirie,
+Carsten Cheyne,
+Craig Chicken,
+Joshua Hogarth,
+Louis-Marie Matthews,
+Vergil Iordache
 
 Copyright disclaimers
 

@@ -12,7 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="/WEB-INF/jspf/head.jspf" %>
         <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
-        <title>Login | Quick Quiz</title>
+        <title>Login | QuickQuiz</title>
     </head>
     
     <body>

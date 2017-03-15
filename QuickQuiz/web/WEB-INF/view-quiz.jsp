@@ -11,7 +11,7 @@
 <html lang="en">
   <head>
     <%@include file="/WEB-INF/jspf/head.jspf" %>
-    <title>View Quiz | Quick Quiz</title>
+    <title>View Quiz | QuickQuiz</title>
   </head>
   <body>
     <%@include file="/WEB-INF/jspf/navbar.jspf" %>

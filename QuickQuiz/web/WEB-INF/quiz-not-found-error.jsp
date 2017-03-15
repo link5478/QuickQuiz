@@ -14,7 +14,7 @@
   <body>
     <%@include file="/WEB-INF/jspf/navbar.jspf" %>
     <div class="container indexcontainer">
-      <p class="text-error">This quiz has no questions that you can answer at this time.</p>
+      <p class="text-error">Error 404: Quiz Not Found.</p>
     </div>
     <footer>
       <%@include file="/WEB-INF/jspf/footer.jspf" %>

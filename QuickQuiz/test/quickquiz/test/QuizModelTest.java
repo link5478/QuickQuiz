@@ -25,6 +25,7 @@ import org.junit.Test;
 import quickquiz.exception.NoQuizFoundException;
 import quickquiz.model.QuizModel;
 import static quickquiz.model.QuizModel.getQuizPresentation;
+import quickquiz.stores.LoggedIn;
 import quickquiz.stores.Question;
 import quickquiz.stores.Quiz;
 
@@ -85,28 +86,37 @@ public class QuizModelTest
    * updated.
    * TODO: add predecessor
    */
-  
-  /*
   @Test
   public void testGetQuizzes()
   {
-    int numberOfAc31007Quizzes = 3; // TODO: const?
-    int numberOfAc31007LiveQuizzes = 2; // TODO: const?
+    
+    final int numberOfAc31007Quizzes = 3;
+    final int numberOfAc31007LiveQuizzes = 2;
+    
+    LoggedIn staff = new LoggedIn();
+    staff.setUsername("AGILE MASTER");
+    staff.setUserType("Staff");
+    LoggedIn student = new LoggedIn();
+    student.setUsername("Carsten Cheyne");
+    student.setUserType("Student");
+    
     Quiz quizJava = new Quiz();
     quizJava.setId(2);
     quizJava.setName("An Agile Approach");
     quizJava.setDescription("A quiz about Agile methods in programming");
     quizJava.setUserId("140001337");
     quizJava.setModuleId("AC31007");
-    quizJava.makeUnavailable();
+    quizJava.makeAvailable();
+
     
     try {
-      List<Quiz> allQuizzes = QuizModel.getQuizzes("AC31007", "Staff");
+      List<Quiz> allQuizzes = QuizModel.getQuizzes("AC31007", staff);
       assertEquals("There should be 3 quizzes retrieved for staff.",
                    allQuizzes.size(), numberOfAc31007Quizzes);
       Quiz quizDb = allQuizzes.get(0);
       assertEquals("Quiz has not been correctly fetched", quizDb, quizJava);
-      List<Quiz> liveQuizzes = QuizModel.getQuizzes("AC31007", "Student");
+      
+      List<Quiz> liveQuizzes = QuizModel.getQuizzes("AC31007", student);
       assertEquals("There should be 2 quizzes retrieved for student.",
                    liveQuizzes.size(), numberOfAc31007LiveQuizzes);
     }
@@ -115,7 +125,6 @@ public class QuizModelTest
       fail(exception.getMessage());
     }
   }
-  */
   
   
   /**

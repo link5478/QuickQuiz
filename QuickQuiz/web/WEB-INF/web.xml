@@ -55,6 +55,10 @@
         <url-pattern>/quiz-editing-page/*</url-pattern>
     </filter-mapping>
     <filter-mapping>
+        <filter-name>RestrictionToStaff</filter-name>
+        <url-pattern>/question-editing-page/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
         <filter-name>RestrictionToStudents</filter-name>
         <url-pattern>/quiz-answering-page/*</url-pattern>
     </filter-mapping>
@@ -110,6 +114,10 @@
         <servlet-name>QuizEditingPage</servlet-name>
         <servlet-class>quickquiz.servlets.QuizEditingPage</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>QuestionEditingServlet</servlet-name>
+        <servlet-class>quickquiz.servlets.QuestionEditingServlet</servlet-class>
+    </servlet>
 
 
 
@@ -164,6 +172,10 @@
     <servlet-mapping>
         <servlet-name>QuizEditingPage</servlet-name>
         <url-pattern>/quiz-editing-page/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QuestionEditingServlet</servlet-name>
+        <url-pattern>/question-editing-page/*</url-pattern>
     </servlet-mapping>
 
 

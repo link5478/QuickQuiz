@@ -31,7 +31,8 @@
         <%@include file="/WEB-INF/jspf/navbar.jspf" %>
 
         <%-- add dropdown for module --%>
-        <%-- autofocus, required --%>>
+        <%-- autofocus, required --%>
+        <%-- TODO: no Java inside JSP page! --%>
         <div class="container indexcontainer">
             <h1>Edit Quiz #${quiz.getId()}</h1>
             <form action="#" method="POST">
@@ -54,19 +55,6 @@
                 </div>
                 <div class="form-group">
                     <textarea class="form-control" name="description" rows="3">${quiz.getDescription()}</textarea>
-                </div>
-                <div class="form-group">
-                    <ul>
-                    <%
-                      Iterator<Question> j = questions.iterator();
-                      while (j.hasNext()) {
-                        Question question = j.next();
-                    %>
-                        <li><a href="question-editing-page/<%= question.getId() %>"><%= question.getQuestionText() %></a></li>
-                    <%
-                      }
-                    %>
-                    </ul>
                 </div>
                 <div class="form-group">
                     <%-- TODO: check all relevant attributes are set https://developer.mozilla.org/en/docs/Web/HTML/Element/input --%>

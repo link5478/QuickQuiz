@@ -31,9 +31,27 @@ public class Module
   
   public Module (String courseId, String id, String name)
   {
+    courseId_ = courseId;
     name_ = name;
     id_ = id;
-    courseId_ = courseId;
+  }
+  
+  
+  
+  public Module (Module module)
+  {
+    courseId_ = module.getCourseId();
+    name_ = module.getName();
+    id_ = module.getId();
+  }
+  
+  
+  
+  public Module()
+  {
+    name_ = null;
+    id_ = null;
+    courseId_ = null;
   }
   
   
@@ -70,5 +88,26 @@ public class Module
   public String getName()
   {
     return name_;
+  }
+  
+  
+  
+  public void setCourseId (String courseId)
+  {
+    courseId_ = courseId;
+  }
+  
+  
+  
+  public void setId (String id)
+  {
+    id_ = id;
+  }
+  
+  
+  
+  public void setName (String name)
+  {
+    name_ = name;
   }
 }

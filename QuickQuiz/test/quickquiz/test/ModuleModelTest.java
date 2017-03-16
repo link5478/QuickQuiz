@@ -18,38 +18,34 @@
 package quickquiz.test;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import org.junit.Test;
-import quickquiz.model.Member;
+import quickquiz.model.ModuleModel;
+import quickquiz.stores.Module;
 
 /**
- * Test that the methods of the Member model class work correctly.
- * 
+ *
  * @author Louis-Marie Matthews
  */
-public class ModelTest
+public class ModuleModelTest
 {
   @Test
-  public void testAreLoginDetailsValidStaff()
+  public void testGetModules()
     throws SQLException, ClassNotFoundException, InstantiationException,
            IllegalAccessException
   {
-    String username = "140001337";
-    String password = "PASSWORD";
-    int valid = Member.areLoginDetailsValid(username, password);
-    assertEquals("Staff login details should be correct.", valid, 1);
-  }
-  
-  
-  
-  public void testAreLoginDetailsValidStudent()
-    throws SQLException, ClassNotFoundException, InstantiationException,
-           IllegalAccessException
-  {
-    String username = "140023542";
-    String password = "password";
-    int valid = Member.areLoginDetailsValid(username, password);
-    assertEquals("Student login details should be correct.", valid, 0);
+    List<Module> javaModules = new ArrayList<>();
+    javaModules.add(new Module("Course1", "AC31007", "Agile Software Programming"));
+    javaModules.add(new Module("Course1", "AC31007", "Agile Software Programming"));
+    
+    List<Module> dbModules = ModuleModel.getModules();
+    
+    assertEquals ("The first modules of each list should be equal",
+                  javaModules.get(0), dbModules.get(0));
+    
+    assertEquals ("The module list retrieved from the database should be of " +
+                  "size 2", dbModules.size(), 2);
   }
 }

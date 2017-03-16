@@ -18,10 +18,13 @@
 package quickquiz.stores;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
  * TODO: throw exception when field not set is accessed?
+ * Refactored: use class Module instead of having multiple module-related String
+ * fields.
  * 
  * @author Louis-Marie Matthews
  */
@@ -30,28 +33,35 @@ public class Quiz
   private Boolean available_;
   private String description_;
   private Integer id_;
-  private String moduleId_;
-  private String moduleName_;
+  private final Module module_;
   private String name_;
-  private String userId_;
-  private String username_;
-  private ArrayList<Question> questions_;
+  private final User author_;
+  private List<Question> questions_;
 
 
 
   // TODO: name and int limited to db's lengths?
-  public Quiz(String name, String description, String moduleId, String moduleName,
-              String userId)
+
+  /**
+   * This method is a constructor for Quiz.
+   * TODO: add parameters for other fields and a future one for predecessor
+   * 
+   * @param name the name of the quiz
+   * @param description the description of the quiz
+   * @param moduleId the module id of the quiz
+   * @param moduleName the module name of the quiz
+   * @param userId the user id of the author of the quiz
+   */
+  public Quiz(String name, String description, String moduleId,
+              String moduleName, String userId)
   {
+    author_ = new User (userId, null);
     available_ = null;
     description_ = description;
     id_ = null;
+    module_ = new Module (null, moduleId, moduleName);
     name_ = name;
-    moduleId_ = moduleId;
-    moduleName_ = moduleName;
     questions_ = new ArrayList<>();
-    userId_ = userId;
-    username_ = null;
   }
 
 
@@ -61,12 +71,10 @@ public class Quiz
     available_ = null;
     description_ = null;
     id_ = null;
-    moduleId_ = null;
-    moduleName_ = null;
+    module_ = new Module();
     name_ = null;
     questions_ = new ArrayList<>();
-    userId_ = null;
-    username_ = null;
+    author_ = new User();
   }
   
   /**
@@ -80,13 +88,11 @@ public class Quiz
     Quiz quiz = (Quiz) o;
     boolean sameId = Objects.equals(id_, quiz.getId());
     boolean sameDescription = (description_ == null ? quiz.getDescription() == null : description_.equals(quiz.getDescription()));
-    boolean sameModuleId = (moduleId_ == null ? quiz.getModuleId() == null : moduleId_.equals(quiz.getModuleId()));
-    boolean sameModuleName = (moduleName_ == null ? quiz.getModuleName() == null : moduleName_.equals(quiz.getModuleName()));
+    boolean sameModule = module_.equals(quiz.getModule());
     boolean sameName = (name_ == null ? quiz.getName() == null : name_.equals(quiz.getName()));
-    boolean sameUserId = (userId_ == null ? quiz.getUserId() == null : userId_.equals(quiz.getUserId()));
-    boolean sameUsername = (username_ == null ? quiz.getUsername() == null : username_.equals(quiz.getUsername()));
+    boolean sameAuthor = author_.equals(quiz.getAuthor());
     boolean sameQuestions;
-    if (questions_.size() == quiz.getQuestions().size() &&
+    if (questions_.size() == quiz.getNumberOfQuestions() &&
         questions_.containsAll(quiz.getQuestions())) {
       sameQuestions = true;
     }
@@ -95,20 +101,39 @@ public class Quiz
     }
     boolean sameAvailability = Objects.equals(available_, quiz.isAvailable());
     
-    if (sameId && sameDescription && sameModuleId && sameModuleName &&
-        sameName && sameUserId && sameUsername && sameQuestions &&
-        sameAvailability) {
+    if (sameId && sameDescription && sameModule && sameName && sameAuthor &&
+        sameQuestions && sameAvailability) {
       return true;
     }
     else {
       return false;
     }
   }
-
-
-  public int getNumberOfQuestions()
+  
+  
+  
+  public void addQuestion (Question question)
   {
-    return questions_.size();
+    questions_.add(question);
+  }
+  
+  
+  
+  public Boolean isAvailable()
+  {
+    return available_;
+  }
+  
+  
+  
+  /**
+   * Returns a copy of the author user of the quiz this method is called on.
+   * 
+   * @return a copy of the author user of the quiz this method is called on
+   */
+  public User getAuthor()
+  {
+    return new User (author_);
   }
 
 
@@ -120,16 +145,36 @@ public class Quiz
 
 
 
+  public Integer getId()
+  {
+    return id_;
+  }
+  
+  
+  
+  /**
+   * Returns a copy of the module associated to the quiz. A copy is returned
+   * to preserve encapsulation.
+   * 
+   * @return an identical copy of the module of the quiz
+   */
+  public Module getModule()
+  {
+    return new Module (module_);
+  }
+
+
+
   public String getModuleName()
   {
-    return moduleName_;
+    return module_.getName();
   }
 
 
 
   public String getModuleId()
   {
-    return moduleId_;
+    return module_.getId();
   }
 
 
@@ -140,17 +185,44 @@ public class Quiz
   }
 
 
-
-  public Integer getId()
+  public int getNumberOfQuestions()
   {
-    return id_;
+    return questions_.size();
+  }
+
+
+
+  public String getUsername()
+  {
+    return author_.getUsername();
   }
   
   
   
-  public Boolean isAvailable()
+  public String getUserId()
   {
-    return available_;
+    return author_.getId();
+  }
+  
+  
+  
+  public Question getQuestion (int i)
+  {
+    return new Question (questions_.get(i));
+  }
+
+
+
+  /**
+   * Returns a copy of the question list of the quiz. A copy is returned for
+   * encapsulation purposes.
+   * TODO: implement used list methods instead of providing access to list?
+   * 
+   * @return an identical copy of the list of questions of the quiz
+   */
+  public List<Question> getQuestions()
+  {
+    return new ArrayList<>(questions_);
   }
   
   
@@ -169,49 +241,37 @@ public class Quiz
   
   
   
-  public void setAvailability(boolean available)
+  public void setAvailability (boolean available)
   {
     available_ = available;
   }
 
 
 
-  public void setId(Integer id)
-  {
-    id_ = id;
-  }
-
-
-
-  public ArrayList<Question> getQuestions()
-  {
-    return questions_;
-  }
-
-
-
-  public String getUsername()
-  {
-    return username_;
-  }
-  
-   public String getUserId()
-  {
-    return userId_;
-  }
-
-
-
-  public void setDescription(String description)
+  public void setDescription (String description)
   {
     description_ = description;
   }
 
 
 
+  public void setId (Integer id)
+  {
+    id_ = id;
+  }
+
+
+
   public void setModuleId(String moduleId)
   {
-    moduleId_ = moduleId;
+    module_.setId(moduleId);
+  }
+
+
+
+  public void setModuleName (String moduleName)
+  {
+    module_.setName(moduleName);
   }
 
 
@@ -223,28 +283,22 @@ public class Quiz
 
 
 
-  public void setQuestions(ArrayList<Question> questions)
+  public void setQuestions(List<Question> questions)
   {
     questions_ = questions;
+  }
+  
+  
+  
+  public void setUserId(String id)
+  {
+    author_.setId (id);
   }
 
 
 
   public void setUsername(String username)
   {
-    username_ = username;
-  }
-  
-  
-   public void setUserId(String userId)
-  {
-    userId_ = userId;
-  }
-
-
-
-  public void setModuleName(String moduleName)
-  {
-    moduleName_ = moduleName;
+    author_.setUsername(username);
   }
 }

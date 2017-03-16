@@ -7,13 +7,14 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="/WEB-INF/jspf/head.jspf" %>
-        <title>Create a Quiz | Quick Quiz</title>
+        <title>Create a Quiz | QuickQuiz</title>
     </head>
     
     <body>
         <%@include file="/WEB-INF/jspf/navbar.jspf" %>
         
         <%-- add dropdown for module --%>
+        <%-- TODO: replace DIV by MAIN --%>
         <div class="container indexcontainer">
             
         <h1>Create a quiz</h1>

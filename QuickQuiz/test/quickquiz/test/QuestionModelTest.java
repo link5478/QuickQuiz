@@ -19,37 +19,30 @@ package quickquiz.test;
 
 import java.sql.SQLException;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import org.junit.Test;
-import quickquiz.model.Member;
+import quickquiz.exception.NoQuestionFoundException;
+import static quickquiz.model.QuestionModel.getQuestion;
+import quickquiz.stores.Question;
 
 /**
- * Test that the methods of the Member model class work correctly.
- * 
+ *
  * @author Louis-Marie Matthews
  */
-public class ModelTest
+public class QuestionModelTest
 {
   @Test
-  public void testAreLoginDetailsValidStaff()
+  public void testGetQuestion()
     throws SQLException, ClassNotFoundException, InstantiationException,
-           IllegalAccessException
+           IllegalAccessException, NoQuestionFoundException
   {
-    String username = "140001337";
-    String password = "PASSWORD";
-    int valid = Member.areLoginDetailsValid(username, password);
-    assertEquals("Staff login details should be correct.", valid, 1);
-  }
-  
-  
-  
-  public void testAreLoginDetailsValidStudent()
-    throws SQLException, ClassNotFoundException, InstantiationException,
-           IllegalAccessException
-  {
-    String username = "140023542";
-    String password = "password";
-    int valid = Member.areLoginDetailsValid(username, password);
-    assertEquals("Student login details should be correct.", valid, 0);
+    final int questionId = 3;
+    Question javaQuestion = new Question("123", "123", "123", "123", "123", "123",
+                  1, questionId, 2);
+    
+    Question dbQuestion = getQuestion (questionId);
+    
+    assertEquals ("The hard-coded question (javaQuestion) and the one " + 
+                  "from the database are not the same, yet they should be",
+                  javaQuestion, dbQuestion);
   }
 }

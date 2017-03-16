@@ -22,6 +22,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
+import quickquiz.stores.Question;
 import quickquiz.stores.Quiz;
 
 /**
@@ -30,6 +31,31 @@ import quickquiz.stores.Quiz;
  */
 public class QuizTest
 {
+  @Test
+  public void testQuiz()
+  {
+    Question question1 = new Question("How old is Virgil?", "18", "20", "21",
+                                      "22", "Because he was born on July " +
+                                      "12th 1994", 1, 1, 1);
+    Question question2 = new Question("How old is Louis?", "17", "18", "19",
+                                      "20", "Because he was born on February " +
+                                      "22nd 1997", 2, 1, 1);
+    assertEquals("The question doesn't return correctly.",
+                 question1.getQuestionText(), "How old is Virgil?");
+    Quiz quiz1 = new Quiz("Guess someone's age", "You are challenged to " +
+                          "guess someone's age by guessing.", "AC690069",
+                          "Age guessing education", "Louis-Marie Matthews");
+    assertEquals("The quiz doesn't return correctly.", quiz1.getName(),
+                 "Guess someone's age");
+    quiz1.addQuestion(question1);
+    assertEquals("The original question and the retrieved question are not " +
+                 "the same", quiz1.getQuestion(0), question1);
+    assertEquals("The size is not the same as the one tested",
+                 quiz1.getNumberOfQuestions(), 1);
+  }
+  
+  
+  
   @Test
   public void testAvailable()
   {
@@ -61,5 +87,26 @@ public class QuizTest
     quiz2.setModuleId("AC31007");
     quiz2.makeUnavailable();
     assertEquals("quiz and quiz2 should be equal", quiz, quiz2);
+  }
+  
+  
+  
+  @Test
+  public void testGetQuestions()
+  {
+    Quiz quiz = new Quiz();
+    Question question1 = new Question("How old is Virgil?", "18", "20", "21",
+                                      "22", "Because he was born on July " +
+                                      "12th 1994", 1, 1, 1);
+    Question question2 = new Question("How old is Louis?", "17", "18", "19",
+                                      "20", "Because he was born on February " +
+                                      "22nd 1997", 2, 1, 1);
+    quiz.addQuestion(question1);
+    quiz.addQuestion(question2);
+    
+    Question retrievedFromTheList = quiz.getQuestions().get(0);
+    
+    assertEquals ("The question retrieved from getQuestions is different " +
+                  "from the original one", question1, retrievedFromTheList);
   }
 }

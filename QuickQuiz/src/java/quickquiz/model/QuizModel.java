@@ -190,6 +190,10 @@ public class QuizModel
         quiz.setModuleName(rs.getString("Module Name"));
         quiz.setUsername(rs.getString("Staff Name"));
         quiz.setId(rs.getInt("Quiz ID"));
+        if (rs.getBoolean("Available"))
+          quiz.makeAvailable();
+        else
+          quiz.makeUnavailable();
       }
       
       // Initialises the quiz questions
@@ -203,7 +207,7 @@ public class QuizModel
         q.setCorrectAnswer(rs.getInt("Correct Answer"));
         q.setExplanation(rs.getString("Explanation"));
         q.setId(rs.getInt("Question ID"));
-        quiz.getQuestions().add(q);
+        quiz.addQuestion(q);
       } while (rs.next());
     }
     finally {

@@ -28,6 +28,7 @@ import javax.servlet.http.HttpSession;
 import quickquiz.exception.MalformedUrlException;
 import quickquiz.exception.NoQuizFoundException;
 import quickquiz.model.QuizModel;
+import static quickquiz.model.QuizModel.getQuiz;
 import static quickquiz.model.QuizModel.getQuizPresentation;
 import quickquiz.stores.LoggedIn;
 import quickquiz.stores.Quiz;
@@ -62,7 +63,15 @@ public class ViewQuiz
     try {
       Integer quizId = getQuizId(request);
       QuizModel.checkExists(quizId);
-      Quiz quiz = getQuizPresentation(getQuizId(request), lg.getUserType());
+      
+      Quiz quiz;
+      // if staff, import full quiz, including questions
+      // if student, only quiz presentation
+      if (lg.getUserType().equalsIgnoreCase("Staff"))
+        quiz = getQuiz(getQuizId(request));
+      else
+        quiz = getQuizPresentation(getQuizId(request), lg.getUserType());
+      
       request.setAttribute("quiz", quiz);
       request.getRequestDispatcher("/WEB-INF/view-quiz.jsp").forward(request, response);
     }

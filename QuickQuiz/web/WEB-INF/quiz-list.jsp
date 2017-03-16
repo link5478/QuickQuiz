@@ -21,7 +21,7 @@
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <%@include file="/WEB-INF/jspf/head.jspf" %>
-        <title>Quiz List | Quick Quiz</title>
+        <title>Quiz List | QuickQuiz</title>
     </head>
     <body>
         <%@include file="/WEB-INF/jspf/navbar.jspf" %>

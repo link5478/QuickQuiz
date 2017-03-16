@@ -12,7 +12,7 @@
         
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="/WEB-INF/jspf/head.jspf" %>
-        <title>Quiz Error | Quick Quiz</title>
+        <title>Quiz Error | QuickQuiz</title>
         
     </head>
     

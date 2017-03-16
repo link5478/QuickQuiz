@@ -18,7 +18,7 @@
     <%@include file="/WEB-INF/jspf/navbar.jspf" %>
     
     <div class="container indexcontainer">
-      <p class="text-error">Sorry, an error occurred.</p>
+      <p class="text-error">Sorry, an error occurred!</p>
     </div>
     
     <footer>

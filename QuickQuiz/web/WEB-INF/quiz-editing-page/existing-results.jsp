@@ -17,9 +17,9 @@
         
         <div class="container indexcontainer">
           <h1>Existing Results for Quiz #${quiz.getId()} | QuickQuiz</h1>
-          <p>There already is some results associated with this quiz. Updating
-          it will make set the already existing version of the quiz as 
-          unavailable and creates a new version of the quiz, available this time,
+          <p>There already are some results associated with this quiz. Updating
+          it will set the already existing version of the quiz as 
+          unavailable and create a new version of the quiz, available this time,
           with no results associated to it. Is that okay?</p>
           <p><a class="btn btn-default">No</a><a class="btn btn-default">Yes</a></p>
         </div>

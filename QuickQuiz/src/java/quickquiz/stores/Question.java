@@ -40,7 +40,7 @@ public class Question
   
   public Question(String questionText, String answer1, String answer2,
                   String answer3, String answer4, String explanation,
-                  Integer correctAnswer)
+                  Integer correctAnswer, Integer id, Integer quizId)
   {
     questionText_ = questionText;
     answer1_ = answer1;
@@ -48,8 +48,24 @@ public class Question
     answer3_ = answer3;
     answer4_ = answer4;
     explanation_ = explanation;
-    setCorrectAnswer (correctAnswer);
-    quizId_ = null;
+    correctAnswer_ = correctAnswer;
+    id_ = id;
+    quizId_ = quizId;
+  }
+  
+  
+  
+  public Question (Question question)
+  {
+    questionText_ = question.getQuestionText();
+    answer1_ = question.getAnswer1();
+    answer2_ = question.getAnswer2();
+    answer3_ = question.getAnswer3();
+    answer4_ = question.getAnswer4();
+    explanation_ = question.getExplanation();
+    correctAnswer_ = question.getCorrectAnswer();
+    id_ = question.getId();
+    quizId_ = question.getQuizId();
   }
   
   
@@ -114,72 +130,108 @@ public class Question
     
     return isEqual;
   }
-
-  public String getQuestionText()
+  
+  
+  
+  public String getAnswer1()
   {
-    return questionText_;
-  }
-
-  public void setQuestionText(String questionText)
-  {
-    questionText_ = questionText;
-  }
-
-  public String getAnswer1() {
     return answer1_;
   }
-
-  public void setAnswer1(String answer1)
-  {
-    answer1_ = answer1;
-  }
-
+  
+  
+  
   public String getAnswer2()
   {
     return answer2_;
   }
-
-  public void setAnswer2(String answer2)
-  {
-    answer2_ = answer2;
-  }
-
+  
+  
+  
   public String getAnswer3()
   {
     return answer3_;
   }
-
-  public void setAnswer3(String answer3)
-  {
-    answer3_ = answer3;
-  }
-
+  
+  
+  
   public String getAnswer4()
   {
     return answer4_;
   }
-
-  public void setAnswer4(String answer4)
-  {
-    answer4_ = answer4;
-  }
-
-  public String getExplanation()
-  {
-    return explanation_;
-  }
-
-  public void setExplanation(String explanation)
-  {
-    explanation_ = explanation;
-  }
-
+  
+  
+  
   public Integer getCorrectAnswer()
   {
     return correctAnswer_;
   }
-
-  public void setCorrectAnswer(String correctAnswer)
+  
+  
+  
+  public String getExplanation()
+  {
+    return explanation_;
+  }
+  
+  
+  
+  public Integer getId()
+  {
+    return id_;
+  }
+  
+  
+  
+  public String getQuestionText()
+  {
+    return questionText_;
+  }
+  
+  
+  
+  public Integer getQuizId()
+  {
+    return quizId_;
+  }
+  
+  
+  
+  public void setAnswer1 (String answer1)
+  {
+    answer1_ = answer1;
+  }
+  
+  
+  
+  public void setAnswer2 (String answer2)
+  {
+    answer2_ = answer2;
+  }
+  
+  
+  
+  public void setAnswer3 (String answer3)
+  {
+    answer3_ = answer3;
+  }
+  
+  
+  
+  public void setAnswer4 (String answer4)
+  {
+    answer4_ = answer4;
+  }
+  
+  
+  
+  public void setExplanation (String explanation)
+  {
+    explanation_ = explanation;
+  }
+  
+  
+  
+  public void setCorrectAnswer (String correctAnswer)
   {
     switch(correctAnswer)
     {
@@ -204,27 +256,35 @@ public class Question
         throw new IllegalArgumentException();
     }
   }
-
-  public void setCorrectAnswer(Integer correctAnswer) {
+  
+  
+  
+  /**
+   * TODO: check that correctAnswer within 4
+   * @param correctAnswer 
+   */
+  public void setCorrectAnswer (Integer correctAnswer)
+  {
     correctAnswer_ = correctAnswer;
   }
   
-  public Integer getId()
-  {
-    return id_;
-  }
   
-  public void setId(Integer id)
+  
+  public void setId (Integer id)
   {
     id_ = id;
   }
-
-  public Integer getQuizId()
+  
+  
+  
+  public void setQuestionText (String questionText)
   {
-    return quizId_;
+    questionText_ = questionText;
   }
-
-  public void setQuizId(Integer quizId)
+  
+  
+  
+  public void setQuizId (Integer quizId)
   {
     quizId_ = quizId;
   }

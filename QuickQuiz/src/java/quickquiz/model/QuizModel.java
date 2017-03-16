@@ -207,7 +207,7 @@ public class QuizModel
         q.setCorrectAnswer(rs.getInt("Correct Answer"));
         q.setExplanation(rs.getString("Explanation"));
         q.setId(rs.getInt("Question ID"));
-        quiz.getQuestions().add(q);
+        quiz.addQuestion(q);
       } while (rs.next());
     }
     finally {

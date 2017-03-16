@@ -14,6 +14,7 @@
         <%@include file="/WEB-INF/jspf/navbar.jspf" %>
         
         <%-- add dropdown for module --%>
+        <%-- TODO: replace DIV by MAIN --%>
         <div class="container indexcontainer">
             
         <h1>Create a quiz</h1>

@@ -18,7 +18,9 @@
 package quickquiz.model;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import quickquiz.exception.NoQuestionFoundException;
 import quickquiz.exception.QuestionInsertionFailureException;
 import quickquiz.lib.Database;
 import quickquiz.stores.Question;
@@ -58,5 +60,44 @@ public class QuestionModel
         statement.close();
       }
     }
+  }
+  
+  
+  
+  public static Question getQuestion (int id)
+    throws SQLException, ClassNotFoundException, InstantiationException,
+           IllegalAccessException, NoQuestionFoundException
+  {
+    Question question;
+    
+    PreparedStatement preparedStatement = null;
+    try {
+      // TODO: stored procedure
+      String sql = "SELECT * FROM QUESTION WHERE ID = ?";
+      preparedStatement = Database.getInstance().prepareStatement(sql);
+      preparedStatement.setInt(1, id);
+      ResultSet rs = preparedStatement.executeQuery();
+      
+      boolean hasRsOneRowAtLeast = rs.next();
+      if (!hasRsOneRowAtLeast) { // if there is no data
+        throw new NoQuestionFoundException();
+      }
+      question = new Question (rs.getString("TEXT"),
+                               rs.getString("ANSWER1"),
+                               rs.getString("ANSWER2"),
+                               rs.getString("ANSWER3"),
+                               rs.getString("ANSWER4"),
+                               rs.getString("EXPLANATION"),
+                               rs.getInt("CORRECTANSWER"),
+                               rs.getInt("ID"),
+                               rs.getInt("QUIZID") );
+    }
+    finally {
+      if (preparedStatement != null) {
+        preparedStatement.close();
+      }
+    }
+    
+    return question;
   }
 }

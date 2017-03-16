@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!-- TODO: common elements in jsp fragments -->
+<%-- create new quiz entry if already some results present, adn inform user of that --%>
 
 <html lang="en">
     

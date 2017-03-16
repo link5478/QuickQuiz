@@ -41,16 +41,27 @@ public class Quiz
 
 
   // TODO: name and int limited to db's lengths?
+
+  /**
+   * This method is a constructor for Quiz.
+   * TODO: add parameters for other fields and a future one for predecessor
+   * 
+   * @param name the name of the quiz
+   * @param description the description of the quiz
+   * @param moduleId the module id of the quiz
+   * @param moduleName the module name of the quiz
+   * @param userId the user id of the author of the quiz
+   */
   public Quiz(String name, String description, String moduleId,
               String moduleName, String userId)
   {
+    author_ = new User (userId, null);
     available_ = null;
     description_ = description;
     id_ = null;
-    name_ = name;
     module_ = new Module (null, moduleId, moduleName);
+    name_ = name;
     questions_ = new ArrayList<>();
-    author_ = new User (userId, null);
   }
 
 

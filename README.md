@@ -15,4 +15,4 @@ We, Group 9, declare that we do not in any way own the content within the boostr
 
 Website: http://getbootstrap.com/
 
-Copyright notice can by found in footer, states: "Code licensed MIT, docs CC BY 3.0."
+Copyright notice can be found in footer, states: "Code licensed MIT, docs CC BY 3.0."

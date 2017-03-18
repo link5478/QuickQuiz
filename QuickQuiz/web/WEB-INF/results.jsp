@@ -42,7 +42,7 @@
                         }
                         else
                         {
-                            String url = "/QuickQuiz/detailed-results/" + results.get(i).getResultID();
+                            String url = (String)((HttpServletRequest)request).getContextPath() + "/detailed-results/" + results.get(i).getResultID();
                         %>
                         <a href="<%=url%>"> <h2> Quiz: <%=results.get(i).getQuizName()%> </h2> </a>
                             <p> Mark: <%=results.get(i).getMark()%>%</p>

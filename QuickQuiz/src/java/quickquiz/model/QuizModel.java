@@ -295,4 +295,16 @@ public class QuizModel
       }
     }
   }
+  
+  
+  
+  /**
+   * Updates an already existing quiz excluding its questions.
+   * 
+   * @param quiz 
+   */
+  public static void updateQuizPresentation(Quiz quiz)
+  {
+    
+  }
 }

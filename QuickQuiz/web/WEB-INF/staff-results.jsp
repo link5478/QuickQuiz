@@ -7,10 +7,12 @@
 <%@page import="quickquiz.model.ResultsModel"%>
 <%@page import="quickquiz.model.QuizModel"%>
 <%@page import="java.util.List" %>
+<%@page import="java.util.Map" %>
 <%@page import ="java.util.ArrayList" %>
 <%@page import="quickquiz.stores.Result" %>
 <%@page import="quickquiz.stores.LoggedIn" %>
 <%@page import="quickquiz.stores.Quiz" %>
+<%@page import="quickquiz.stores.AnswerDistribution" %>
 
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -27,6 +29,8 @@
         <div class="container logincontainer">
             <%
                 List<Quiz> currentQuizzes = (List<Quiz>) request.getAttribute("quizzes");
+                Map<Integer, List<AnswerDistribution>> answers = (Map<Integer, List<AnswerDistribution>>)request.getAttribute("answerDistribution");
+                
                 if (currentQuizzes.size() == 0 || currentQuizzes == null)
                 {
             %>

@@ -98,8 +98,8 @@
         <servlet-class>quickquiz.servlets.Results</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DetailedResults</servlet-name>
-        <servlet-class>quickquiz.servlets.DetailedResults</servlet-class>
+        <servlet-name>StudentDetailedResults</servlet-name>
+        <servlet-class>quickquiz.servlets.StudentDetailedResults</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>QuizUpdate</servlet-name>
@@ -154,8 +154,8 @@
         <url-pattern>/results</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>DetailedResults</servlet-name>
-        <url-pattern>/detailed-results/*</url-pattern>
+        <servlet-name>StudentDetailedResults</servlet-name>
+        <url-pattern>/student-detailed-results/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>QuizUpdate</servlet-name>

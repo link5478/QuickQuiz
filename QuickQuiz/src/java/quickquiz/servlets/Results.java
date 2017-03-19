@@ -23,6 +23,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import quickquiz.stores.LoggedIn;
 
 /**
  * Refactoring: removed useless methods processRequest, doPost and
@@ -46,7 +48,25 @@ public class Results
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException
   {
-    RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/results.jsp");
+      
+    HttpSession session = request.getSession();
+    LoggedIn user = (LoggedIn)session.getAttribute("loggedIn");
+    RequestDispatcher rd;
+
+    if(user.getUserType().equalsIgnoreCase("student"))
+    { 
+        rd = request.getRequestDispatcher("/WEB-INF/student-results.jsp");
+    }
+    else if(user.getUserType().equalsIgnoreCase("staff"))
+    {
+        rd = request.getRequestDispatcher("/WEB-INF/staff-results.jsp");
+    }
+    else
+    {
+        rd = request.getRequestDispatcher("/WEB-INF/general-error.jsp");
+    }
+
     rd.forward(request, response);
+    
   }
 }

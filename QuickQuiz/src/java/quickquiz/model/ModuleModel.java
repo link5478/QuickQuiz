@@ -31,6 +31,14 @@ import quickquiz.stores.Module;
  */
 public class ModuleModel
 {
+  /**
+   * TODO: replace set by list
+   * @return
+   * @throws SQLException
+   * @throws ClassNotFoundException
+   * @throws InstantiationException
+   * @throws IllegalAccessException 
+   */
   public static List<Module> getModules()
     throws SQLException, ClassNotFoundException, InstantiationException,
            IllegalAccessException

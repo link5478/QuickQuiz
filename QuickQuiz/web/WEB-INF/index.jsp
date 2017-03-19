@@ -50,9 +50,13 @@
             else
             {
                 %>
-
-                <h1>Welcome to QuickQuiz.</h1>
-                <a href="<%=((HttpServletRequest)request).getContextPath()%>/login"> Log in </a>
+                <%-- HTML displayed if user is NOT logged in.--%>
+                
+                <div class="jumbotron">
+                    <h1>Welcome to QuickQuiz!</h1>
+                    <p>QuickQuiz is the foremost website for quizzes and quiz accessories.</p>
+                    <p><a class="btn btn-primary btn-lg" href="<%=((HttpServletRequest)request).getContextPath()%>/login" role="button">Log in</a></p>
+                </div>
 
                 <%
             }

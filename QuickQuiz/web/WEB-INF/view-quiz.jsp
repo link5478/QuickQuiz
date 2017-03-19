@@ -32,7 +32,9 @@
 
     <div class="container indexcontainer">
       <h1>Quiz #${quiz.getId()}: ${quiz.getName()}</h1>
+      <a href="<%=((HttpServletRequest)request).getContextPath()%>/quiz-answering-page/${quiz.getId()}">Try to answer to quiz</a>
       <h2>Description</h2>
+      <p><a href="<%=((HttpServletRequest)request).getContextPath()%>/quiz-update-form/${quiz.getId()}">Edit the description</a></p>
       <table>
         <tr>
           <td>Name</td>
@@ -57,22 +59,21 @@
         if(lg.getUserType().equalsIgnoreCase("staff")) {//Checks to see if the user is Staff.
       %>
       <h2>Questions</h2>
+      <p><a href="<%=((HttpServletRequest)request).getContextPath()%>/question-creation-form/${quiz.getId()}">Add a question</a></p>
       <ol>
       <%
         for (int i = 0; i < quiz.getNumberOfQuestions(); i++) {
       %>
-          <li><%= quiz.getQuestion(i).getQuestionText() %>: <a href="<%=((HttpServletRequest)request).getContextPath()%>/question-update-form/<%= quiz.getQuestion(i).getId() %>">edit</a> / <a href="<%=((HttpServletRequest)request).getContextPath()%>/question-deletion-confirmation/<%= quiz.getQuestion(i).getId() %>">delete</a></li>
+        <li><%= quiz.getQuestion(i).getQuestionText() %>: <a href="<%=((HttpServletRequest)request).getContextPath()%>/question-update-form/<%= quiz.getQuestion(i).getId() %>">edit</a> / <a href="<%=((HttpServletRequest)request).getContextPath()%>/question-deletion-confirmation/<%= quiz.getQuestion(i).getId() %>">delete</a></li>
       <%
         }
       %>
-      </ol> 
+      </ol>
 <%-- TODO: ul / li list --%>
-      <a class="btn btn-primary" href="<%=((HttpServletRequest)request).getContextPath()%>/question-creation-form/${quiz.getId()}">Add a question</a>
-      <a class="btn btn-primary" href="<%=((HttpServletRequest)request).getContextPath()%>/quiz-update-form/${quiz.getId()}">Edit the quiz description</a>
+      
       <%
           }
  %>
-      <a class="btn btn-primary" href="<%=((HttpServletRequest)request).getContextPath()%>/quiz-answering-page/${quiz.getId()}">Try to answer to quiz</a>
       <%
         }
       %>

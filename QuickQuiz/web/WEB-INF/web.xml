@@ -30,6 +30,10 @@
     </filter-mapping>
     <filter-mapping>
         <filter-name>RestrictionToMembers</filter-name>
+        <url-pattern>/student-detailed-results/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>RestrictionToMembers</filter-name>
         <url-pattern>/quiz-list</url-pattern>
     </filter-mapping>
     <filter-mapping>

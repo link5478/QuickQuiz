@@ -23,8 +23,17 @@ package quickquiz.stores;
  */
 public class Module
 {
+  /**
+  * Unique ID of a specific course
+  */
   private String courseId_;
+  /**
+   * ID of a specific module
+   */
   private String id_;
+  /**
+   * Name of a module
+   */
   private String name_;
   
   

@@ -39,7 +39,7 @@ public class resultTest {
 
     @Test
     public void getResultTest() {
-        int id = 3;
+        int id = 14;
         Result r;
         
         try
@@ -52,7 +52,7 @@ public class resultTest {
         }
 
         Result expected = new Result();
-        expected.setMark(70.00f);
+        expected.setMark(25.00f);
         expected.setQuizId(2);
         expected.setUserID("140023542");
 

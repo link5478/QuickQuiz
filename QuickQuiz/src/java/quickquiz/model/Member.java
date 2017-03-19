@@ -78,6 +78,16 @@ public class Member
     return correctLoginDetails;
   }
   
+  
+  
+  
+  /**
+   * Return the ids of the modules associated with a certain user.
+   * TODO: returns set instead
+   * 
+   * @param ID the id of the user to get modules from
+   * @return a list of module ids
+   */
   public static List<String> getModuleIDs(String ID)
     throws SQLException, ClassNotFoundException, InstantiationException,
            IllegalAccessException
@@ -108,6 +118,18 @@ public class Member
     return modID;
   }
   
+  
+  
+  /**
+   * TODO: return set instead
+   * 
+   * @param userId
+   * @return
+   * @throws SQLException
+   * @throws ClassNotFoundException
+   * @throws InstantiationException
+   * @throws IllegalAccessException 
+   */
   public static List<Module> getModules (String userId)
     throws SQLException, ClassNotFoundException, InstantiationException, 
            IllegalAccessException
@@ -144,6 +166,18 @@ public class Member
     return modules;
   }
   
+  
+  
+  /**
+   * set instead
+   * 
+   * @param quizID
+   * @return
+   * @throws SQLException
+   * @throws ClassNotFoundException
+   * @throws InstantiationException
+   * @throws IllegalAccessException 
+   */
   public static List<User> getStudentsWhoDidQuiz(int quizID)
           throws SQLException, ClassNotFoundException, InstantiationException,
            IllegalAccessException

@@ -61,9 +61,6 @@ public class ViewQuiz
     LoggedIn lg = (LoggedIn) s.getAttribute("loggedIn");
     // refactored
     try {
-      Integer quizId = getQuizId(request);
-      QuizModel.checkExists(quizId);
-      
       Quiz quiz;
       // if staff, import full quiz, including questions
       // if student, only quiz presentation

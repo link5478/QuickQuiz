@@ -53,6 +53,7 @@
       </ol> 
 <%-- TODO: ul / li list --%>
       <a class="btn btn-primary" href="<%=((HttpServletRequest)request).getContextPath()%>/question-creation-form/${quiz.getId()}">Add a question</a>
+      <a class="btn btn-primary" href="<%=((HttpServletRequest)request).getContextPath()%>/quiz-update-form/${quiz.getId()}">Edit the quiz description</a>
       <%
           }
  %>

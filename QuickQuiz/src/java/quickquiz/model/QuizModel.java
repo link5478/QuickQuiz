@@ -221,7 +221,7 @@ public class QuizModel
   
   
   // TODO: To refactor
-  public static Quiz getQuizPresentation(Integer id, String userType)
+  public static Quiz getQuizPresentation (Integer id, String userType)
     throws SQLException, ClassNotFoundException, InstantiationException,
            IllegalAccessException, NoQuizFoundException
   {
@@ -272,7 +272,7 @@ public class QuizModel
   
   
   
-  public static void checkExists(Integer id)
+  public static void checkExists (Integer id)
     throws SQLException, ClassNotFoundException, InstantiationException,
            IllegalAccessException, NoQuizFoundException
   {

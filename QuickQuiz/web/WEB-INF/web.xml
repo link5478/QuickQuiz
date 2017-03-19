@@ -46,11 +46,11 @@
     </filter-mapping>
     <filter-mapping>
         <filter-name>RestrictionToStaff</filter-name>
-        <url-pattern>/quiz-edition-form/*</url-pattern>
+        <url-pattern>/quiz-update-form/*</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>RestrictionToStaff</filter-name>
-        <url-pattern>/question-edition-form/*</url-pattern>
+        <url-pattern>/question-update-form/*</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>RestrictionToStudents</filter-name>
@@ -102,12 +102,12 @@
         <servlet-class>quickquiz.servlets.DetailedResults</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>QuizEdition</servlet-name>
-        <servlet-class>quickquiz.servlets.QuizEdition</servlet-class>
+        <servlet-name>QuizUpdate</servlet-name>
+        <servlet-class>quickquiz.servlets.QuizUpdate</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>QuestionEdition</servlet-name>
-        <servlet-class>quickquiz.servlets.QuestionEdition</servlet-class>
+        <servlet-name>QuestionUpdate</servlet-name>
+        <servlet-class>quickquiz.servlets.QuestionUpdate</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
@@ -158,12 +158,12 @@
         <url-pattern>/detailed-results/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>QuizEdition</servlet-name>
-        <url-pattern>/quiz-edition-form/*</url-pattern>
+        <servlet-name>QuizUpdate</servlet-name>
+        <url-pattern>/quiz-update-form/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>QuestionEdition</servlet-name>
-        <url-pattern>/question-edition-form/*</url-pattern>
+        <servlet-name>QuestionUpdate</servlet-name>
+        <url-pattern>/question-update-form/*</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

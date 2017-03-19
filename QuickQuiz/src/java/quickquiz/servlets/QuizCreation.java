@@ -65,7 +65,7 @@ public class QuizCreation
     {
         Quiz newQuiz = getQuizFromForm(request);
         try {
-            QuizModel.insertQuiz(newQuiz);
+            QuizModel.insertQuiz(newQuiz); // TODO: needs to return the id of the newly inserted quiz
             RequestDispatcher r = request.getRequestDispatcher(jspSuccess);
             r.forward(request, response);
         }

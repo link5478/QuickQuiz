@@ -5,6 +5,7 @@
   - Description: A page to inform the user that the quiz has been updated successfully.
   --%>
 
+<%-- TODO: link to quiz id --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

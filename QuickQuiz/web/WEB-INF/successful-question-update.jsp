@@ -5,6 +5,7 @@
   - Description: A page to inform the user that the question has been updated successfully.
   --%>
 
+<%-- TODO: link to question id --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

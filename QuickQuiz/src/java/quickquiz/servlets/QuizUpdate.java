@@ -36,10 +36,10 @@ import quickquiz.stores.Quiz;
  *
  * @author Louis-Marie Matthews
  */
-public class QuizEdition extends ServletTemplate
+public class QuizUpdate extends ServletTemplate
 {
-  private static final String form = "/WEB-INF/edit-quiz.jsp";
-  private static final String success = "/WEB-INF/successful-quiz-update.jsp";
+  private static final String FORM = "/WEB-INF/quiz-update-form.jsp";
+  private static final String SUCCESS = "/WEB-INF/successful-quiz-update.jsp";
   
   
   
@@ -49,14 +49,14 @@ public class QuizEdition extends ServletTemplate
   {
     try {
       //TODO: create method getQuizPresentation which only returns presentation
-      Quiz quiz = QuizModel.getQuiz ( getQuizId (request));
+      Quiz quiz = QuizModel.getQuiz (getQuizId (request));
       List<Module> modules = ModuleModel.getModules();
       
       request.setAttribute ("quiz", quiz);
-      request.setAttribute("modules", modules);
+      request.setAttribute ("modules", modules);
       
-      RequestDispatcher r = request.getRequestDispatcher(form);
-      r.forward(request, response);
+      RequestDispatcher r = request.getRequestDispatcher (FORM);
+      r.forward (request, response);
     }
     catch (MalformedUrlException | NoQuizFoundException exception) {
       forwardToQuizNotFound (request, response);
@@ -79,7 +79,7 @@ public class QuizEdition extends ServletTemplate
       request.setAttribute ("quiz", updatedQuiz);
       request.setAttribute("modules", ModuleModel.getModules());
       
-      RequestDispatcher r = request.getRequestDispatcher(success);
+      RequestDispatcher r = request.getRequestDispatcher (SUCCESS);
       r.forward(request, response);
       // TODO: insert quiz. If has results, dispatch to existing-results.jps.
     }

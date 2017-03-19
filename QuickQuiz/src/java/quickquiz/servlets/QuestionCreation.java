@@ -45,7 +45,9 @@ import quickquiz.stores.Question;
 public class QuestionCreation
   extends ServletTemplate
 {
-  private final static String form = "/WEB-INF/question-creation-form.jsp";
+  private final static String FORM = "/WEB-INF/question-creation-form.jsp";
+  private final static String SUCCESS = "/WEB-INF/successful-question-creation.jsp";
+  private final static String QUIZ_NOT_FOUND = "/WEB-INF/quiz-not-found-error.jsp";
   
   
   
@@ -57,7 +59,7 @@ public class QuestionCreation
     try {
       QuizModel.checkExists(getQuizId(request));
       request.setAttribute("quiz-id", getQuizId(request));
-      RequestDispatcher rd = request.getRequestDispatcher (form);
+      RequestDispatcher rd = request.getRequestDispatcher (FORM);
       rd.forward(request, response);
     }
     catch (SQLException | ClassNotFoundException | InstantiationException |
@@ -81,18 +83,13 @@ public class QuestionCreation
       
       Question newQuestion = getQuestionFromForm(request);
       
+      // TODO: needs to return id of inserted question
       QuestionModel.insertQuestion (newQuestion);
       
-      // TODO: fix this.
-      String redir = ((HttpServletRequest)request).getContextPath() + "/view-quiz/" + newQuestion.getQuizId();
-      HttpSession session = request.getSession();
-      session.setAttribute("message", "success");
-
-      response.sendRedirect(redir);
+      forwardToSuccessPage (request, response);
     }
     catch (MalformedUrlException | NoQuizFoundException ex) {
-      Logger.getLogger(QuestionCreation.class.getName()).log(Level.SEVERE, null, ex);
-      RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/quiz-not-found-error.jsp");
+      RequestDispatcher rd = request.getRequestDispatcher (QUIZ_NOT_FOUND);
       rd.forward(request, response);
     }
     catch (SQLException | ClassNotFoundException | InstantiationException |
@@ -121,5 +118,21 @@ public class QuestionCreation
     question.setQuestionText(request.getParameter("question-text"));
     question.setQuizId (getQuizId(request));
     return question;
+  }
+  
+  
+  
+  /**
+   * Forwards the request / response pair to the successful quiz creation page.
+   * 
+   * @param request the request to forward to successful-quiz-creation
+   * @param response the response to forward to successful-quiz-creation
+   */
+  private void forwardToSuccessPage (HttpServletRequest request,
+                                     HttpServletResponse response)
+    throws ServletException, IOException
+  {
+    RequestDispatcher rd = request.getRequestDispatcher(SUCCESS);
+    rd.forward(request, response);
   }
 }

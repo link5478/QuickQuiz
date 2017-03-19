@@ -1,22 +1,18 @@
 <%@page import="quickquiz.stores.Question"%>
 <%@page import="java.util.List"%>
-<%@ page import="quickquiz.stores.LoggedIn" %>
+<%@page import="quickquiz.stores.LoggedIn" %>
 <%@page import="quickquiz.model.QuizModel" %>
 <%@page import="quickquiz.stores.Quiz" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
-  // TODO: create separated servlet & jsp for view quiz staff and view quiz
-  // student? would allow for far less conditionals
-  // TODO: does not work when quiz unavailable
   Quiz quiz = (Quiz) request.getAttribute("quiz");
   String unavailableChecked = quiz.isAvailable() ? "" : "checked";
   String availableChecked = quiz.isAvailable() ? "checked" : "";
-  List<Question> questions = quiz.getQuestions();
 %>
 
 <%-- 
-    Document   : ViewQuiz
+    Document   : staff-view-quiz
     Created on : 19-Feb-2017, 12:34:31
     Author     : craigchicken, Louis-Marie Matthews
 --%>
@@ -53,30 +49,18 @@
           <td>${quiz.getUsername()}</td>
         </tr>
       </table>
-      <%
-      if(session.getAttribute("loggedIn") != null) { //Checks the session variable to see if the user is logged in. TODO: useless
-      //  LoggedIn lg  = (LoggedIn)session.getAttribute("loggedIn");
-        if(lg.getUserType().equalsIgnoreCase("staff")) {//Checks to see if the user is Staff.
-      %>
       <h2>Questions</h2>
       <p><a href="<%=((HttpServletRequest)request).getContextPath()%>/question-creation-form/${quiz.getId()}">Add a question</a></p>
       <ol>
-      <%
-        for (int i = 0; i < quiz.getNumberOfQuestions(); i++) {
-      %>
+        <%
+          for (int i = 0; i < quiz.getNumberOfQuestions(); i++) {
+        %>
         <li><%= quiz.getQuestion(i).getQuestionText() %>: <a href="<%=((HttpServletRequest)request).getContextPath()%>/question-update-form/<%= quiz.getQuestion(i).getId() %>">edit</a> / <a href="<%=((HttpServletRequest)request).getContextPath()%>/question-deletion-confirmation/<%= quiz.getQuestion(i).getId() %>">delete</a></li>
-      <%
-        }
-      %>
-      </ol>
-<%-- TODO: ul / li list --%>
-      
-      <%
+        <%
           }
- %>
-      <%
-        }
-      %>
+        %>
+      </ol>
+      <%-- TODO: ul / li list --%>
     </div>
   </body>
 </html>

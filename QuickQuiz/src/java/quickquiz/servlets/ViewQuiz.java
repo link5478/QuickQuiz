@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -45,6 +46,11 @@ import quickquiz.stores.Quiz;
 public class ViewQuiz
   extends ServletTemplate
 {
+  private final static String STAFF_VIEW = "/WEB-INF/staff-view-quiz.jsp";
+  private final static String STUDENT_VIEW = "/WEB-INF/student-view-quiz.jsp";
+  
+  
+  
   /**
    * Handles the HTTP <code>GET</code> method.
    *
@@ -70,15 +76,18 @@ public class ViewQuiz
         quiz = getQuizPresentation(getQuizId(request), lg.getUserType());
       
       request.setAttribute("quiz", quiz);
-      request.getRequestDispatcher("/WEB-INF/view-quiz.jsp").forward(request, response);
+      RequestDispatcher rd;
+      if (lg.getUserType().equalsIgnoreCase("Staff"))
+        rd = request.getRequestDispatcher (STAFF_VIEW);
+      else
+        rd = request.getRequestDispatcher (STUDENT_VIEW);
+      rd.forward(request, response);
     }
     catch (SQLException | ClassNotFoundException | InstantiationException |
            IllegalAccessException ex) {
-        Logger.getLogger(ViewQuiz.class.getName()).log(Level.SEVERE, null, ex);
         forwardToGeneralError(request, response);
     }
     catch (MalformedUrlException | NoQuizFoundException ex) {
-        Logger.getLogger(ViewQuiz.class.getName()).log(Level.SEVERE, null, ex);
         forwardToQuizNotFound(request, response);
     }
   }

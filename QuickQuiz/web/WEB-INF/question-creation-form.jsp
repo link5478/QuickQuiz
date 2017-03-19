@@ -14,13 +14,13 @@
     <%@include file="/WEB-INF/jspf/navbar.jspf" %>
 
     <div class="container indexcontainer">
-
+      <h1>Add a question to Quiz #${quizId}</h1>
       <form action="#" class="form-horizontal" id="question-form" method="post">
 
         <div class="form-group">
           <label class="col-sm-2 control-label" form="question-form" for="quiz-id">Quiz Id</label>
           <div class="col-sm-10">
-            <input class="form-control" disabled form="question-form" id="quiz-id" type="text" value="<%= request.getAttribute("quiz-id") %>" required />
+            <input class="form-control" disabled form="question-form" id="quiz-id" type="text" value="${quizId}" required />
           </div>
         </div>
 

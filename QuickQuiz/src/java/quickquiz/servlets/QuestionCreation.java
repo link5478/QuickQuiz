@@ -58,7 +58,7 @@ public class QuestionCreation
     // TODO: method to redirect?
     try {
       QuizModel.checkExists(getQuizId(request));
-      request.setAttribute("quiz-id", getQuizId(request));
+      request.setAttribute("quizId", getQuizId(request));
       RequestDispatcher rd = request.getRequestDispatcher (FORM);
       rd.forward(request, response);
     }

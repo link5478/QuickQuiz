@@ -18,11 +18,18 @@
 package quickquiz.servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import quickquiz.model.QuizModel;
+import quickquiz.stores.LoggedIn;
+import quickquiz.stores.Quiz;
 
 /**
  * Refactoring: removed useless methods processRequest, doPost and
@@ -46,7 +53,42 @@ public class Results
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException
   {
-    RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/results.jsp");
+      
+    HttpSession session = request.getSession();
+    LoggedIn user = (LoggedIn)session.getAttribute("loggedIn");
+    RequestDispatcher rd;
+
+    if(user.getUserType().equalsIgnoreCase("student"))
+    { 
+        rd = request.getRequestDispatcher("/WEB-INF/student-results.jsp");
+    }
+    else if(user.getUserType().equalsIgnoreCase("staff"))
+    {
+        
+        List<Quiz> currentQuizzes = new ArrayList<>();
+        for(int i =0; i< user.getModules().size(); i++)
+        {
+            List<Quiz> quizzes = new ArrayList<>();
+            try
+            {
+                quizzes = QuizModel.getQuizzes(user.getModules().get(i), user);
+            }
+            catch(ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException e)
+            {
+            }
+            
+            currentQuizzes.addAll(quizzes);
+        }
+          
+        request.setAttribute("quizzes", currentQuizzes);
+        rd = request.getRequestDispatcher("/WEB-INF/staff-results.jsp");
+    }
+    else
+    {
+        rd = request.getRequestDispatcher("/WEB-INF/general-error.jsp");
+    }
+
     rd.forward(request, response);
+    
   }
 }

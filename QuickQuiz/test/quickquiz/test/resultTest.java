@@ -11,8 +11,8 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import org.junit.Test;
-import quickquiz.exception.UnrelatedAnswerException;
 import quickquiz.model.ResultsModel;
+import quickquiz.stores.AnswerDistribution;
 
 import quickquiz.stores.Result;
 
@@ -59,5 +59,28 @@ public class resultTest {
         assertEquals("mark should be the same", expected.getMark(), r.getMark(), 2);
         assertEquals("quizID should be the same", expected.getQuizId(), r.getQuizId());
         assertEquals("UseriD should be the same", expected.getUserID(), r.getUserID());
+    }
+    
+    @Test
+    public void resultAnswersDistribution()
+    {
+        int quizID = 2;
+        
+        AnswerDistribution actualAnswer;
+        try
+        {
+            actualAnswer = ResultsModel.getAnswerDistribution(quizID);
+        }
+        catch(Exception e)
+        {
+        }
+        
+        AnswerDistribution ExpectedanswerDistribution = new AnswerDistribution();
+        ExpectedanswerDistribution.setQuizID(2);
+        ExpectedanswerDistribution.setNumberOfAs(2);
+        ExpectedanswerDistribution.setNumberOfBs(2);
+        ExpectedanswerDistribution.setNumberOfCs(2);
+        ExpectedanswerDistribution.setNumberOfDs(2);
+        
     }
 }

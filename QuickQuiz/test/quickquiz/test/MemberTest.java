@@ -5,6 +5,7 @@
  */
 package quickquiz.test;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
@@ -22,7 +23,15 @@ public class MemberTest {
     public void getStudentsWhoDidQuiz()
     {
         int quizID = 2;
-        List<User> students = Member.getStudentsWhoDidQuiz(quizID);
+        List<User> students = new ArrayList<>();
+        try
+        {
+            students = Member.getStudentsWhoDidQuiz(quizID);
+        }
+        catch(ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException e)
+        {
+            
+        }
         
         User student = new User();
         student.setUsername("Carsten Cheyne");

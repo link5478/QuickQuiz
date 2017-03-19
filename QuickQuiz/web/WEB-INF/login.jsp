@@ -20,6 +20,13 @@
         <%@include file="/WEB-INF/jspf/navbar.jspf" %>
         
         <div class="container logincontainer">
+            <p> Login Info for testing. </p>
+            <p> Student <br>
+                Username: 140023542 <br>
+                Password: password <br> </p>
+            <p> Staff <br>
+                Username: 140001337 <br>
+                Password: PASSWORD <br> </p>
           <form action="#" class="form-horizontal" method="post">
               
             <div class="form-group">

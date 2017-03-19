@@ -39,33 +39,60 @@ import quickquiz.stores.Quiz;
 // TODO: cache?
 public class QuizModel
 {
-  public static void insertQuiz(Quiz quiz)
+  /**
+   * Inserts data to Quiz table in database
+   * 
+   * @param quiz
+   * @throws SQLException
+   * @throws ClassNotFoundException
+   * @throws InstantiationException
+   * @throws IllegalAccessException
+   * @throws QuizInsertionFailureException 
+   */
+  public static Integer insertQuiz(Quiz quiz)
     throws SQLException, ClassNotFoundException, InstantiationException,
            IllegalAccessException, QuizInsertionFailureException
   {
+    Integer insertedQuizId = null;
+    
     PreparedStatement statement = null;
     try {
       // TODO: prepared statement?
-      String sql = "CALL `shift-two_quizmanager`.`CreateQuiz` (?, ?, ?, ?);";
+      String sql = "CALL `CreateQuiz` (?, ?, ?, ?);";
       statement = Database.getInstance().prepareStatement(sql);
       statement.setString(1, quiz.getName());
       statement.setString(2, quiz.getDescription());
       statement.setString(3, quiz.getModuleId());
       statement.setString(4, quiz.getUserId());
-      statement.executeUpdate();
+      
+      ResultSet rs = statement.executeQuery();
       if (statement.getUpdateCount() == 0) {
         throw new QuizInsertionFailureException();
       }
+      rs.next();
+      insertedQuizId = rs.getInt("ID");
     }
     finally {
       if (statement != null) {
         statement.close();
       }
     }
+    
+    return insertedQuizId;
   }
   
   
-  
+  /**
+   * Gets information about a specific quiz
+   * 
+   * @param name
+   * @return Aggregated quiz data
+   * @throws SQLException
+   * @throws ClassNotFoundException
+   * @throws InstantiationException
+   * @throws IllegalAccessException
+   * @throws NoQuizFoundException 
+   */
   public static Quiz viewQuiz(String name)
     throws SQLException, ClassNotFoundException, InstantiationException,
            IllegalAccessException, NoQuizFoundException
@@ -306,5 +333,5 @@ public class QuizModel
   public static void updateQuizPresentation(Quiz quiz)
   {
     
-  }
+  } 
 }

@@ -28,11 +28,29 @@ import java.util.List;
  */
 public class Result {
 
+    /**
+     * Unique ID of a specific set of results
+     */
     private int resultID;
+    /**
+     * Unique ID of a specific user
+     */
     private String userID;
+    /**
+     * Percentage mark a user got in a quiz
+     */
     private float mark;
+    /**
+     * Name of a quiz
+     */
     private String quizName;
+    /**
+     * Unique ID of a specific quiz
+     */
     private Integer quizId_;
+    /**
+     * Datestamp that a quiz was attempted
+     */
     private String dateTime;
     private List<String> answers = new ArrayList<>();
 

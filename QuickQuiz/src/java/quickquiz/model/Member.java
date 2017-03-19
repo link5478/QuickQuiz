@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import quickquiz.lib.Database;
 import quickquiz.stores.Module;
+import quickquiz.stores.User;
 
 /**
  *
@@ -77,6 +78,16 @@ public class Member
     return correctLoginDetails;
   }
   
+  
+  
+  
+  /**
+   * Return the ids of the modules associated with a certain user.
+   * TODO: returns set instead
+   * 
+   * @param ID the id of the user to get modules from
+   * @return a list of module ids
+   */
   public static List<String> getModuleIDs(String ID)
     throws SQLException, ClassNotFoundException, InstantiationException,
            IllegalAccessException
@@ -107,6 +118,18 @@ public class Member
     return modID;
   }
   
+  
+  
+  /**
+   * TODO: return set instead
+   * 
+   * @param userId
+   * @return
+   * @throws SQLException
+   * @throws ClassNotFoundException
+   * @throws InstantiationException
+   * @throws IllegalAccessException 
+   */
   public static List<Module> getModules (String userId)
     throws SQLException, ClassNotFoundException, InstantiationException, 
            IllegalAccessException
@@ -141,7 +164,52 @@ public class Member
       }
     }
     return modules;
-      
   }
   
+  
+  
+  /**
+   * set instead
+   * 
+   * @param quizID
+   * @return
+   * @throws SQLException
+   * @throws ClassNotFoundException
+   * @throws InstantiationException
+   * @throws IllegalAccessException 
+   */
+  public static List<User> getStudentsWhoDidQuiz(int quizID)
+          throws SQLException, ClassNotFoundException, InstantiationException,
+           IllegalAccessException
+  {
+    Connection connection;
+    PreparedStatement statement = null;
+    ResultSet resultSet;
+    String sql;
+    List<User> students = new ArrayList<>();
+      
+    
+    try {
+        connection = Database.getInstance();
+        sql = "CALL `shift-two_quizmanager`.`GetParticipants`(?);";
+      
+      statement = connection.prepareStatement(sql);
+      statement.setInt(1, quizID);
+      resultSet = statement.executeQuery();
+      while(resultSet.next())
+      {
+        User student = new User();
+        student.setId(resultSet.getString("ID"));
+        student.setUsername(resultSet.getString("User Name"));
+        students.add(student);
+      }
+    }
+    finally {
+      if (statement != null) {
+        statement.close();
+      }
+    }
+      
+      return students;
+  }
 }

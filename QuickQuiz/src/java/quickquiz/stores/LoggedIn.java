@@ -29,42 +29,81 @@ import java.util.List;
  */
 public class LoggedIn
 {
+  /**
+   * Shows username
+   */
   private String username;
+  /**
+   * Shows user type, either staff or student
+   */
   private String userType = "Student"; // TODO: why default to student?
+  /**
+   * Shows name of user
+   */
   private String name;
+  /**
+   * A list of all modules
+   */
   private List<Module> modules;
   
-  
+  /**
+   * Sets username
+   * @param Username 
+   */
   public void setUsername(String Username)
   {
       username = Username;
   }
-
+  
+  /**
+   * Gets username
+   * @return username
+   */
   public String getUsername()
   {
       return username;
   }
 
+  /**
+   * Sets user type
+   * @param type 
+   */
   public void setUserType(String type)
   {
       userType = type;
   }
 
+  /**
+   * Gets user type
+   * @return user type
+   */
   public String getUserType()
   {
       return userType;
   }
 
+  /**
+   * Sets name
+   * @param Name 
+   */
   public void setName(String Name)
   {
       name = Name;
   }
 
+  /**
+   * Gets name
+   * @return name
+   */
   public String getName()
   {
       return name;
   }
 
+  /**
+   * Sets module ID
+   * @param moduleId 
+   */
    public void setModule(String moduleId)
   {
       //Poor naming convention. Stores a ModuleID as a string.
@@ -72,6 +111,10 @@ public class LoggedIn
         module.setId(moduleId);
   }
 
+   /**
+    * Gets module IDs as a string
+    * @return List of all modules
+    */
   public List<String> getModules()
   {
       List<String> moduleIds = new ArrayList<>();
@@ -84,6 +127,10 @@ public class LoggedIn
       return moduleIds;
   }
   
+  /**
+   * Gets modules as an object
+   * @return List of all modules
+   */
   public List<Module> getModulesV2()
   {
       return modules;

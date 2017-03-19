@@ -99,7 +99,13 @@ public class QuestionCreation
   }
   
   
-  
+  /**
+   * Pulls the information for a question from the database
+   * 
+   * @param request
+   * @return Aggregate question data
+   * @throws MalformedUrlException 
+   */
   private Question getQuestionFromForm(HttpServletRequest request)
     throws MalformedUrlException
   {

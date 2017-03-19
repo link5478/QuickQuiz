@@ -53,7 +53,7 @@
         <url-pattern>/question-update-form/*</url-pattern>
     </filter-mapping>
     <filter-mapping>
-        <filter-name>RestrictionToStudents</filter-name>
+        <filter-name>RestrictionToMembers</filter-name>
         <url-pattern>/quiz-answering-page/*</url-pattern>
     </filter-mapping>
     <servlet>

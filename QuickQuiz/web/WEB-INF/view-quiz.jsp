@@ -46,13 +46,13 @@
       <%
         for (int i = 0; i < quiz.getNumberOfQuestions(); i++) {
           %>
-          <li><a href="<%=((HttpServletRequest)request).getContextPath()%>/question-editing-page/<%= quiz.getQuestion(i).getId() %>"><%= quiz.getQuestion(i).getQuestionText() %></a></li>
+          <li><a href="<%=((HttpServletRequest)request).getContextPath()%>/question-update-form/<%= quiz.getQuestion(i).getId() %>"><%= quiz.getQuestion(i).getQuestionText() %></a></li>
           <%
         }
       %>
       </ol> 
 <%-- TODO: ul / li list --%>
-      <a class="btn btn-primary" href="<%=((HttpServletRequest)request).getContextPath()%>/new-question/${quiz.getId()}">Add a question</a>
+      <a class="btn btn-primary" href="<%=((HttpServletRequest)request).getContextPath()%>/question-creation-form/${quiz.getId()}">Add a question</a>
       <%
           }
           else if (lg.getUserType().equalsIgnoreCase("student")) {

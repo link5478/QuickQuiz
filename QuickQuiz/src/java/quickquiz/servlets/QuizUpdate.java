@@ -19,8 +19,7 @@ package quickquiz.servlets;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -30,19 +29,17 @@ import quickquiz.exception.MalformedUrlException;
 import quickquiz.exception.NoQuizFoundException;
 import quickquiz.model.ModuleModel;
 import quickquiz.model.QuizModel;
+import quickquiz.stores.Module;
 import quickquiz.stores.Quiz;
 
 /**
  *
  * @author Louis-Marie Matthews
  */
-public class QuizEditingPage extends ServletTemplate
+public class QuizUpdate extends ServletTemplate
 {
-  private static final String DEFAULT_JSP = "/WEB-INF/quiz-editing-page.jsp";
-  private static final String EXISTING_RESULTS_JSP = "/WEB-INF/quiz-editing-page/" + 
-                                       "existing-results.jsp";
-  private Integer quizId_;
-  private Quiz quiz_;
+  private static final String FORM = "/WEB-INF/quiz-update-form.jsp";
+  private static final String SUCCESS = "/WEB-INF/successful-quiz-update.jsp";
   
   
   
@@ -51,22 +48,15 @@ public class QuizEditingPage extends ServletTemplate
     throws ServletException, IOException
   {
     try {
-      initializeQuizId (request);
-      
-      // TODO: in filter?
-      QuizModel.checkExists (quizId_);
-      
       //TODO: create method getQuizPresentation which only returns presentation
-      quiz_ = QuizModel.getQuiz (quizId_); 
-
-      // TODO: method in ServletTemplate using protected jspPath instanciated by
-      // childrend classes?
-      request.setAttribute ("quiz", quiz_);
-      request.setAttribute("modules", ModuleModel.getModules());
+      Quiz quiz = QuizModel.getQuiz (getQuizId (request));
+      List<Module> modules = ModuleModel.getModules();
       
+      request.setAttribute ("quiz", quiz);
+      request.setAttribute ("modules", modules);
       
-      RequestDispatcher r = request.getRequestDispatcher(DEFAULT_JSP);
-      r.forward(request, response);
+      RequestDispatcher r = request.getRequestDispatcher (FORM);
+      r.forward (request, response);
     }
     catch (MalformedUrlException | NoQuizFoundException exception) {
       forwardToQuizNotFound (request, response);
@@ -83,33 +73,51 @@ public class QuizEditingPage extends ServletTemplate
   public void doPost (HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException
   {
-    Quiz updatedQuiz = new Quiz();
     try {
-      updatedQuiz.setId (getQuizId (request));
-      updatedQuiz.setAvailability (getAvailabilityFromForm (request));
-      updatedQuiz.setDescription (request.getParameter("description"));
-      updatedQuiz.setModuleId(request.getParameter ("module-id"));
-      updatedQuiz.setName (request.getParameter ("name"));
+      Quiz updatedQuiz = getQuizFromRequest (request);
       
       request.setAttribute ("quiz", updatedQuiz);
       request.setAttribute("modules", ModuleModel.getModules());
       
-      RequestDispatcher r = request.getRequestDispatcher(EXISTING_RESULTS_JSP);
+      RequestDispatcher r = request.getRequestDispatcher (SUCCESS);
       r.forward(request, response);
       // TODO: insert quiz. If has results, dispatch to existing-results.jps.
     }
-    catch (MalformedUrlException | CorruptedQuizEditingFormException | SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex)
-    {
-      Logger.getLogger(QuizEditingPage.class.getName()).log(Level.SEVERE, null, ex);
+    catch (MalformedUrlException ex) {
+      forwardToQuizNotFound (request, response);
+    }
+    catch (CorruptedQuizEditingFormException | SQLException |
+           ClassNotFoundException | InstantiationException |
+           IllegalAccessException exception) {
+      forwardToGeneralError (request, response);
     }
   }
   
   
   
-  public void initializeQuizId (HttpServletRequest request)
-    throws MalformedUrlException
+  /**
+   * Return a quiz initialized by the request (from its POST data and its URL).
+   * Refactored (was previously in doPost).
+   * 
+   * @param request the request to initialise the quiz from
+   * @return a quiz initialised according to the request
+   * @throws quickquiz.exception.MalformedUrlException if the request's url is
+   * malformed and does not contain a valid quiz id
+   * @throws quickquiz.exception.CorruptedQuizEditingFormException if the form
+   * data sent through the request does not have a valid format
+   */
+  public Quiz getQuizFromRequest (HttpServletRequest request)
+    throws MalformedUrlException, CorruptedQuizEditingFormException
   {
-    quizId_ = getQuizId (request);
+    Quiz quiz = new Quiz();
+    
+    quiz.setId (getQuizId (request));
+    quiz.setAvailability (getAvailabilityFromForm (request));
+    quiz.setDescription (request.getParameter("description"));
+    quiz.setModuleId(request.getParameter ("module-id"));
+    quiz.setName (request.getParameter ("name"));
+    
+    return quiz;
   }
   
   

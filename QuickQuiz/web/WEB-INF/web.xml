@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
-
-
-
     <filter>
         <filter-name>RestrictionToVisitors</filter-name>
         <filter-class>quickquiz.filters.RestrictionToVisitors</filter-class>
@@ -19,9 +16,6 @@
         <filter-name>RestrictionToStudents</filter-name>
         <filter-class>quickquiz.filters.RestrictionToStudents</filter-class>
     </filter>
-
-
-
     <filter-mapping>
         <filter-name>RestrictionToVisitors</filter-name>
         <url-pattern>/login</url-pattern>
@@ -44,7 +38,7 @@
     </filter-mapping>
     <filter-mapping>
         <filter-name>RestrictionToStaff</filter-name>
-        <url-pattern>/new-question/*</url-pattern>
+        <url-pattern>/question-creation-form/*</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>RestrictionToStaff</filter-name>
@@ -52,19 +46,16 @@
     </filter-mapping>
     <filter-mapping>
         <filter-name>RestrictionToStaff</filter-name>
-        <url-pattern>/quiz-editing-page/*</url-pattern>
+        <url-pattern>/quiz-update-form/*</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>RestrictionToStaff</filter-name>
-        <url-pattern>/question-editing-page/*</url-pattern>
+        <url-pattern>/question-update-form/*</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>RestrictionToStudents</filter-name>
         <url-pattern>/quiz-answering-page/*</url-pattern>
     </filter-mapping>
-
-
-
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -87,8 +78,8 @@
         <servlet-class>quickquiz.servlets.QuizCreation</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>NewQuestion</servlet-name>
-        <servlet-class>quickquiz.servlets.NewQuestion</servlet-class>
+        <servlet-name>QuestionCreation</servlet-name>
+        <servlet-class>quickquiz.servlets.QuestionCreation</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>QuizList</servlet-name>
@@ -111,16 +102,13 @@
         <servlet-class>quickquiz.servlets.DetailedResults</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>QuizEditingPage</servlet-name>
-        <servlet-class>quickquiz.servlets.QuizEditingPage</servlet-class>
+        <servlet-name>QuizUpdate</servlet-name>
+        <servlet-class>quickquiz.servlets.QuizUpdate</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>QuestionEditingServlet</servlet-name>
-        <servlet-class>quickquiz.servlets.QuestionEditingServlet</servlet-class>
+        <servlet-name>QuestionUpdate</servlet-name>
+        <servlet-class>quickquiz.servlets.QuestionUpdate</servlet-class>
     </servlet>
-
-
-
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -146,8 +134,8 @@
         <url-pattern>/view-quiz/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>NewQuestion</servlet-name>
-        <url-pattern>/new-question/*</url-pattern>
+        <servlet-name>QuestionCreation</servlet-name>
+        <url-pattern>/question-creation-form/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>QuizList</servlet-name>
@@ -170,16 +158,13 @@
         <url-pattern>/detailed-results/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>QuizEditingPage</servlet-name>
-        <url-pattern>/quiz-editing-page/*</url-pattern>
+        <servlet-name>QuizUpdate</servlet-name>
+        <url-pattern>/quiz-update-form/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>QuestionEditingServlet</servlet-name>
-        <url-pattern>/question-editing-page/*</url-pattern>
+        <servlet-name>QuestionUpdate</servlet-name>
+        <url-pattern>/question-update-form/*</url-pattern>
     </servlet-mapping>
-
-
-
     <session-config>
         <session-timeout>
             30

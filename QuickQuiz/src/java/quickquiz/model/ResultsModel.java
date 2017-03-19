@@ -24,6 +24,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import quickquiz.lib.Database;
+import quickquiz.stores.AnswerDistribution;
 import quickquiz.stores.LoggedIn;
 import quickquiz.stores.Result;
 
@@ -174,6 +175,39 @@ public class ResultsModel {
         return r;
     }
     
-    
+    public static List<AnswerDistribution> getAnswerDistribution(int quizID)
+             throws SQLException, ClassNotFoundException, InstantiationException,
+            IllegalAccessException
+    {
+        List<AnswerDistribution> answersDistributions = new ArrayList<>();
+        
+        PreparedStatement preparedStatement = null;
+        try {
+            String sql = "CALL `StaffDetResult`(?);";
+            preparedStatement = Database.getInstance().prepareStatement(sql);
+            preparedStatement.setInt(1, quizID);
+            // TODO: check that the results have been added
+            ResultSet rs = preparedStatement.executeQuery();
+            
+            while(rs.next())
+            {
+                AnswerDistribution answerDistribution = new  AnswerDistribution();
+                answerDistribution.setQuizID(rs.getInt("Quiz ID"));
+                answerDistribution.setQuizID(rs.getInt("Answer 1"));
+                answerDistribution.setQuizID(rs.getInt("Answer 2"));
+                answerDistribution.setQuizID(rs.getInt("Answer 3"));
+                answerDistribution.setQuizID(rs.getInt("Answer 4"));
+                
+                answersDistributions.add(answerDistribution);
+            }
+            
+        } finally {
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+        }
+        
+        return answersDistributions;
+    }
     
 }

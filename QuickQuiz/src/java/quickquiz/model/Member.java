@@ -24,6 +24,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import quickquiz.lib.Database;
+import quickquiz.stores.Module;
 import quickquiz.stores.User;
 
 /**
@@ -78,7 +79,7 @@ public class Member
   }
   
   public static List<String> getModuleIDs(String ID)
-          throws SQLException, ClassNotFoundException, InstantiationException,
+    throws SQLException, ClassNotFoundException, InstantiationException,
            IllegalAccessException
   {
     Connection connection;
@@ -105,6 +106,42 @@ public class Member
       }
     }
     return modID;
+  }
+  
+  public static List<Module> getModules (String userId)
+    throws SQLException, ClassNotFoundException, InstantiationException, 
+           IllegalAccessException
+  {
+      
+    Connection connection;
+    PreparedStatement statement = null;
+    ResultSet rs;
+    String sql;
+    List<Module> modules = new ArrayList<>();
+    
+    try {
+      connection = Database.getInstance();
+      sql = "CALL `shift-two_quizmanager`.`GetModule`(?);";
+      
+      statement = connection.prepareStatement(sql);
+      statement.setString(1, userId);
+      rs = statement.executeQuery();
+      
+      while (rs.next()) {
+        Module module = new Module();
+        module.setCourseId(rs.getString("Course ID"));
+        module.setId(rs.getString("Module ID"));
+        module.setName(rs.getString("Module Name"));
+        
+        modules.add(module);
+      }
+    }
+    finally {
+      if (statement != null) {
+        statement.close();
+      }
+    }
+    return modules;
   }
   
   public static List<User> getStudentsWhoDidQuiz(int quizID)
@@ -141,5 +178,4 @@ public class Member
       
       return students;
   }
-  
 }

@@ -18,6 +18,7 @@
 package quickquiz.stores;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -31,7 +32,8 @@ public class LoggedIn
   private String username;
   private String userType = "Student"; // TODO: why default to student?
   private String name;
-  private List<String> module = new ArrayList<>();
+  private List<Module> modules;
+  
   
   public void setUsername(String Username)
   {
@@ -63,13 +65,32 @@ public class LoggedIn
       return name;
   }
 
-   public void setModule(String Module)
+   public void setModule(String moduleId)
   {
-      module.add(Module);
+      //Poor naming convention. Stores a ModuleID as a string.
+        Module module = new Module();
+        module.setId(moduleId);
   }
 
   public List<String> getModules()
   {
-      return module;
+      List<String> moduleIds = new ArrayList<>();
+      Iterator<Module> i = modules.iterator();
+      
+      while (i.hasNext()) {
+          Module module = i.next();
+          moduleIds.add(module.getId());
+      }
+      return moduleIds;
+  }
+  
+  public List<Module> getModulesV2()
+  {
+      return modules;
+  }
+  
+  public void setModules(List<Module> moduleList)
+  {
+      modules = moduleList;
   }
 }

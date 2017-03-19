@@ -66,7 +66,7 @@ public class resultTest {
     {
         int quizID = 2;
         
-        AnswerDistribution actualAnswer;
+        AnswerDistribution actualAnswer = new AnswerDistribution();
         try
         {
             actualAnswer = ResultsModel.getAnswerDistribution(quizID);
@@ -75,12 +75,14 @@ public class resultTest {
         {
         }
         
-        AnswerDistribution ExpectedanswerDistribution = new AnswerDistribution();
-        ExpectedanswerDistribution.setQuizID(2);
-        ExpectedanswerDistribution.setNumberOfAs(2);
-        ExpectedanswerDistribution.setNumberOfBs(2);
-        ExpectedanswerDistribution.setNumberOfCs(2);
-        ExpectedanswerDistribution.setNumberOfDs(2);
+        AnswerDistribution ExpectedAnswerDistribution = new AnswerDistribution();
+        ExpectedAnswerDistribution.setQuizID(2);
+        ExpectedAnswerDistribution.setNumberOfAs(2);
+        ExpectedAnswerDistribution.setNumberOfBs(2);
+        ExpectedAnswerDistribution.setNumberOfCs(2);
+        ExpectedAnswerDistribution.setNumberOfDs(2);
+        
+        assertEquals("The answer distribution should be the same but is not", ExpectedAnswerDistribution, actualAnswer);
         
     }
 }

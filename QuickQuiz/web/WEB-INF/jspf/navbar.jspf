@@ -16,16 +16,16 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="<%=((HttpServletRequest)request).getContextPath()%>/index">Home</a></li>
+            <li><a href="<%=((HttpServletRequest)request).getContextPath()%>/index"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a></li>
             <% if(session.getAttribute("loggedIn") != null) { %> <%-- Checks the session variable to see if the user is logged in. --%>
               <% if(lg.getUserType().equals("staff")) { %> <%-- Checks to see if the user is Staff. --%>
                 <li><a href="<%=((HttpServletRequest)request).getContextPath()%>/quiz-creation">Create Quiz</a></li>
               <% } %>
-              <li><a href="<%=((HttpServletRequest)request).getContextPath()%>/quiz-list">Quiz List</a></li>
-              <li><a href="<%=((HttpServletRequest)request).getContextPath()%>/results">View Results</a></li>
-              <li><a href="<%=((HttpServletRequest)request).getContextPath()%>/logout">Log Out</a></li>
+              <li><a href="<%=((HttpServletRequest)request).getContextPath()%>/quiz-list"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Quiz List</a></li>
+              <li><a href="<%=((HttpServletRequest)request).getContextPath()%>/results"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> View Results</a></li>
+              <li><a href="<%=((HttpServletRequest)request).getContextPath()%>/logout"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Log Out</a></li>
             <% } else { %>
-              <li><a href="<%=((HttpServletRequest)request).getContextPath()%>/login">Log In</a></li>
+              <li><a href="<%=((HttpServletRequest)request).getContextPath()%>/login"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Log In</a></li>
             <% } %>
           </ul>
           <% if (lg != null) { %>

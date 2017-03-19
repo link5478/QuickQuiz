@@ -169,14 +169,10 @@ public class QuizModel
         quiz.setDescription(resultSet.getString("DESCRIPTION"));
         quiz.setUserId(resultSet.getString("USERID"));
         quiz.setModuleId(resultSet.getString("MODULEID"));
-        if (userType.equals("Staff")) {
-          if (resultSet.getBoolean("AVAILABLE")) {
-            quiz.makeAvailable();
-          }
-          else {
-            quiz.makeUnavailable();
-          }
-        }
+        if (resultSet.getBoolean("AVAILABLE"))
+          quiz.makeAvailable();
+        else
+          quiz.makeUnavailable();
         quizzes.add(quiz);
       }
     }
@@ -284,8 +280,10 @@ public class QuizModel
         quiz.setUsername(rs.getString("Staff Name"));
         quiz.setModuleId(rs.getString("Module ID"));
         quiz.setModuleName(rs.getString("Module Name"));
-        if (userType.equals("Staff"))
-          quiz.setAvailability(rs.getBoolean("Available"));
+        if (rs.getBoolean("Available"))
+          quiz.makeAvailable();
+        else
+          quiz.makeUnavailable();
       }
     }
     finally {

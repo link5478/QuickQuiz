@@ -1,0 +1,9 @@
+Tables:
+`ANSWER`, `COURSE`, `MODULE`, `QUESTION`, `QUIZ`, `RESULT`, `USER`
+
+Views:
+`CourseModule`, `ModuleResult`, `QuizQuestion`, `QuizResult`, `StaffDetailResult`, `StaffQuiz`, `StaffResult`, `StuResult`
+
+Stored Procedures:
+`StuViewRes`, `StuSortByDate`, `StfSortByDate`, `StaffResult`, `StaffDetResult`, `ReturnModuleQuiz`, `QuizResultDate`, `ModuleResults`,
+`Login`, `GetResults`, `GetResult`, `GetQuiz`, `GetParticipants`, `GetModule`,`CreateQuiz`, `AddResult`, `AddAnswer`

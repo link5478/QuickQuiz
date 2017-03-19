@@ -31,23 +31,38 @@
     <%@include file="/WEB-INF/jspf/navbar.jspf" %>
 
     <div class="container indexcontainer">
-      <!--<p>Quiz ID: ${quiz.getId()}</p> -->
-      <p>Name: ${quiz.getName()}</p>
-      <p>Module ID: ${quiz.getModuleId()}</p>
-      <p>Module Name: ${quiz.getModuleName()}</p>
-      <p>Creator: ${quiz.getUsername()}</p>
-
+      <h1>Quiz #${quiz.getId()}: ${quiz.getName()}</h1>
+      <h2>Description</h2>
+      <table>
+        <tr>
+          <td>Name</td>
+          <td>${quiz.getName()}</td>
+        </tr>
+        <tr>
+          <td>Module ID</td>
+          <td>${quiz.getModuleId()}</td>
+        </tr>
+        <tr>
+          <td>Module Name</td>
+          <td>${quiz.getModuleName()}</td>
+        </tr>
+        <tr>
+          <td>Creator</td>
+          <td>${quiz.getUsername()}</td>
+        </tr>
+      </table>
       <%
       if(session.getAttribute("loggedIn") != null) { //Checks the session variable to see if the user is logged in. TODO: useless
       //  LoggedIn lg  = (LoggedIn)session.getAttribute("loggedIn");
         if(lg.getUserType().equalsIgnoreCase("staff")) {//Checks to see if the user is Staff.
       %>
+      <h2>Questions</h2>
       <ol>
       <%
         for (int i = 0; i < quiz.getNumberOfQuestions(); i++) {
-          %>
-          <li><a href="<%=((HttpServletRequest)request).getContextPath()%>/question-update-form/<%= quiz.getQuestion(i).getId() %>"><%= quiz.getQuestion(i).getQuestionText() %></a></li>
-          <%
+      %>
+          <li><%= quiz.getQuestion(i).getQuestionText() %>: <a href="<%=((HttpServletRequest)request).getContextPath()%>/question-update-form/<%= quiz.getQuestion(i).getId() %>">edit</a> / <a href="<%=((HttpServletRequest)request).getContextPath()%>/question-deletion-confirmation/<%= quiz.getQuestion(i).getId() %>">delete</a></li>
+      <%
         }
       %>
       </ol> 

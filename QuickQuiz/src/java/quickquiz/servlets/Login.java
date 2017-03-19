@@ -28,6 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import quickquiz.model.Member;
 import quickquiz.stores.LoggedIn;
+import quickquiz.stores.Module;
 
 /**
  * Refactoring: Removes getServletInfo (not used).
@@ -101,12 +102,11 @@ public class Login
             type = "staff";
         
         lg.setUserType(type);
+       
+        List<Module> m = Member.getModules(username);
         
-        List<String> m = Member.getModuleIDs(username);
-        for(int i = 0; i < m.size(); i++)
-        {
-            lg.setModule(m.get(i));
-        }
+        lg.setModules(m);
+        
         HttpSession session = request.getSession();
         session.setAttribute("loggedIn", lg);
 

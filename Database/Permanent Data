@@ -1,0 +1,42 @@
+Answer
+
+# ID, ANSWER, QUESTIONNO, RESULTID
+'15', '1', '1', '14'
+
+
+Course
+
+# ID, NAME
+'Course1', 'Course 1'
+
+
+Module
+
+# ID, NAME, COURSEID
+'AC31007', 'Agile Software Programming', 'Course1'
+
+
+Question
+
+# ID, TEXT, ANSWER1, ANSWER2, ANSWER3, ANSWER4, CORRECTANSWER, EXPLANATION, QUIZID, QUESTIONNO
+'3', '123', '123', '123', '123', '123', '1', '123', '2', '1'
+
+
+Quiz
+
+# ID, NAME, DESCRIPTION, USERID, MODULEID, PREDECESSOR, AVAILABLE
+'2', 'An Agile Approach', 'A quiz about Agile methods in programming', '140001337', 'AC31007', NULL, '1'
+
+
+Result
+
+# ID, MARK, DATE, USERID, QUIZID
+'14', '25.00', '2017-03-15 13:57:33', '140023542', '2'
+
+User
+
+# ID, NAME, PASSWORD, TYPE, COURSEID
+'140001337', 'AGILE MASTER', 'PASSWORD', 'Staff', 'Course1'
+
+'140023542', 'Carsten Cheyne', 'password', 'Student', 'Course1'
+

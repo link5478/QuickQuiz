@@ -55,11 +55,9 @@
       <a class="btn btn-primary" href="<%=((HttpServletRequest)request).getContextPath()%>/question-creation-form/${quiz.getId()}">Add a question</a>
       <%
           }
-          else if (lg.getUserType().equalsIgnoreCase("student")) {
-      %>
+ %>
       <a class="btn btn-primary" href="<%=((HttpServletRequest)request).getContextPath()%>/quiz-answering-page/${quiz.getId()}">Try to answer to quiz</a>
       <%
-          }
         }
       %>
     </div>

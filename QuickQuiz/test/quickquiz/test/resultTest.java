@@ -79,40 +79,39 @@ public class resultTest {
         // Question 1.
         AnswerDistribution ExpectedAnswer1 = new AnswerDistribution();
         ExpectedAnswer1.setQuizID(2);
-        ExpectedAnswer1.setNumberOfAs(2);
-        ExpectedAnswer1.setNumberOfBs(2);
-        ExpectedAnswer1.setNumberOfCs(2);
-        ExpectedAnswer1.setNumberOfDs(2);
+        ExpectedAnswer1.setNumberOfAs(3);
+        ExpectedAnswer1.setNumberOfBs(0);
+        ExpectedAnswer1.setNumberOfCs(0);
+        ExpectedAnswer1.setNumberOfDs(3);
         ExpectedAnswers.add(ExpectedAnswer1);
         
         // Question 2.
         AnswerDistribution ExpectedAnswer2 = new AnswerDistribution();
         ExpectedAnswer2.setQuizID(2);
-        ExpectedAnswer2.setNumberOfAs(2);
+        ExpectedAnswer2.setNumberOfAs(0);
         ExpectedAnswer2.setNumberOfBs(2);
-        ExpectedAnswer2.setNumberOfCs(2);
-        ExpectedAnswer2.setNumberOfDs(2);
+        ExpectedAnswer2.setNumberOfCs(0);
+        ExpectedAnswer2.setNumberOfDs(0);
         ExpectedAnswers.add(ExpectedAnswer2);
         
         // Question 3.
         AnswerDistribution ExpectedAnswer3 = new AnswerDistribution();
         ExpectedAnswer3.setQuizID(2);
-        ExpectedAnswer3.setNumberOfAs(2);
-        ExpectedAnswer3.setNumberOfBs(2);
+        ExpectedAnswer3.setNumberOfAs(0);
+        ExpectedAnswer3.setNumberOfBs(0);
         ExpectedAnswer3.setNumberOfCs(2);
-        ExpectedAnswer3.setNumberOfDs(2);
+        ExpectedAnswer3.setNumberOfDs(0);
         ExpectedAnswers.add(ExpectedAnswer3);
         
         // Question 4.
         AnswerDistribution ExpectedAnswer4 = new AnswerDistribution();
         ExpectedAnswer4.setQuizID(2);
-        ExpectedAnswer4.setNumberOfAs(2);
-        ExpectedAnswer4.setNumberOfBs(2);
-        ExpectedAnswer4.setNumberOfCs(2);
+        ExpectedAnswer4.setNumberOfAs(0);
+        ExpectedAnswer4.setNumberOfBs(0);
+        ExpectedAnswer4.setNumberOfCs(0);
         ExpectedAnswer4.setNumberOfDs(2);
         ExpectedAnswers.add(ExpectedAnswer4);
         
-        assertEquals("The answer distribution should be the same but is not", ExpectedAnswers, actualAnswer);
-        
+            assertEquals("The answer distribution of should be the same but is not", ExpectedAnswers, actualAnswer);
     }
 }

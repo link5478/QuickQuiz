@@ -306,5 +306,5 @@ public class QuizModel
   public static void updateQuizPresentation(Quiz quiz)
   {
     
-  }
+  } 
 }

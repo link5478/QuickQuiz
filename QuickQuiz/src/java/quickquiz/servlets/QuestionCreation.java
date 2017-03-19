@@ -42,9 +42,13 @@ import quickquiz.stores.Question;
 // TODO: students should not be able to create a new quiz
 // TODO: add / as url pattern in web.xml
 // TODO: update the version of the quiz whenever a new question is added?
-public class NewQuestion
+public class QuestionCreation
   extends ServletTemplate
 {
+  private final static String form = "/WEB-INF/question-creation-form.jsp";
+  
+  
+  
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException
@@ -53,7 +57,7 @@ public class NewQuestion
     try {
       QuizModel.checkExists(getQuizId(request));
       request.setAttribute("quiz-id", getQuizId(request));
-      RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/new-question.jsp");
+      RequestDispatcher rd = request.getRequestDispatcher (form);
       rd.forward(request, response);
     }
     catch (SQLException | ClassNotFoundException | InstantiationException |
@@ -61,7 +65,7 @@ public class NewQuestion
       forwardToGeneralError(request, response);
     }
     catch (MalformedUrlException | NoQuizFoundException ex) {
-      Logger.getLogger(NewQuestion.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(QuestionCreation.class.getName()).log(Level.SEVERE, null, ex);
       forwardToQuizNotFound(request, response);
     }
   }
@@ -87,7 +91,7 @@ public class NewQuestion
       response.sendRedirect(redir);
     }
     catch (MalformedUrlException | NoQuizFoundException ex) {
-      Logger.getLogger(NewQuestion.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(QuestionCreation.class.getName()).log(Level.SEVERE, null, ex);
       RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/quiz-not-found-error.jsp");
       rd.forward(request, response);
     }

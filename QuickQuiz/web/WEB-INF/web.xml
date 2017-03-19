@@ -38,7 +38,7 @@
     </filter-mapping>
     <filter-mapping>
         <filter-name>RestrictionToStaff</filter-name>
-        <url-pattern>/new-question/*</url-pattern>
+        <url-pattern>/question-creation-form/*</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>RestrictionToStaff</filter-name>
@@ -46,11 +46,11 @@
     </filter-mapping>
     <filter-mapping>
         <filter-name>RestrictionToStaff</filter-name>
-        <url-pattern>/edit-quiz/*</url-pattern>
+        <url-pattern>/quiz-edition-form/*</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>RestrictionToStaff</filter-name>
-        <url-pattern>/edit-question/*</url-pattern>
+        <url-pattern>/question-edition-form/*</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>RestrictionToStudents</filter-name>
@@ -78,8 +78,8 @@
         <servlet-class>quickquiz.servlets.QuizCreation</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>NewQuestion</servlet-name>
-        <servlet-class>quickquiz.servlets.NewQuestion</servlet-class>
+        <servlet-name>QuestionCreation</servlet-name>
+        <servlet-class>quickquiz.servlets.QuestionCreation</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>QuizList</servlet-name>
@@ -102,11 +102,11 @@
         <servlet-class>quickquiz.servlets.DetailedResults</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>EditQuizServlet</servlet-name>
+        <servlet-name>QuizEdition</servlet-name>
         <servlet-class>quickquiz.servlets.QuizEdition</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>EditQuestionServlet</servlet-name>
+        <servlet-name>QuestionEdition</servlet-name>
         <servlet-class>quickquiz.servlets.QuestionEdition</servlet-class>
     </servlet>
     <servlet-mapping>
@@ -134,8 +134,8 @@
         <url-pattern>/view-quiz/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>NewQuestion</servlet-name>
-        <url-pattern>/new-question/*</url-pattern>
+        <servlet-name>QuestionCreation</servlet-name>
+        <url-pattern>/question-creation-form/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>QuizList</servlet-name>
@@ -158,12 +158,12 @@
         <url-pattern>/detailed-results/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>EditQuizServlet</servlet-name>
-        <url-pattern>/edit-quiz/*</url-pattern>
+        <servlet-name>QuizEdition</servlet-name>
+        <url-pattern>/quiz-edition-form/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>EditQuestionServlet</servlet-name>
-        <url-pattern>/edit-question/*</url-pattern>
+        <servlet-name>QuestionEdition</servlet-name>
+        <url-pattern>/question-edition-form/*</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -36,7 +36,7 @@ import quickquiz.stores.Question;
  */
 public class QuestionEdition extends ServletTemplate
 {
-  private final String form = "/WEB-INF/edit-question.jsp";
+  private final String form = "/WEB-INF/question-edition-form.jsp";
   private final String notFound = "/WEB-INF/question-not-found-error.jsp";
   private final String success = "/WEB-INF/successful-question-update.jsp";
   

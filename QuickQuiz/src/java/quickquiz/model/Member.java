@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import quickquiz.lib.Database;
 import quickquiz.stores.Module;
+import quickquiz.stores.User;
 
 /**
  *
@@ -141,7 +142,40 @@ public class Member
       }
     }
     return modules;
-      
   }
   
+  public static List<User> getStudentsWhoDidQuiz(int quizID)
+          throws SQLException, ClassNotFoundException, InstantiationException,
+           IllegalAccessException
+  {
+    Connection connection;
+    PreparedStatement statement = null;
+    ResultSet resultSet;
+    String sql;
+    List<User> students = new ArrayList<>();
+      
+    
+    try {
+        connection = Database.getInstance();
+        sql = "CALL `shift-two_quizmanager`.`GetParticipants`(?);";
+      
+      statement = connection.prepareStatement(sql);
+      statement.setInt(1, quizID);
+      resultSet = statement.executeQuery();
+      while(resultSet.next())
+      {
+        User student = new User();
+        student.setId(resultSet.getString("ID"));
+        student.setUsername(resultSet.getString("User Name"));
+        students.add(student);
+      }
+    }
+    finally {
+      if (statement != null) {
+        statement.close();
+      }
+    }
+      
+      return students;
+  }
 }

@@ -20,7 +20,9 @@ package quickquiz.servlets;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -28,6 +30,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import quickquiz.model.QuizModel;
+import quickquiz.model.ResultsModel;
+import quickquiz.stores.AnswerDistribution;
 import quickquiz.stores.LoggedIn;
 import quickquiz.stores.Quiz;
 
@@ -81,8 +85,28 @@ public class Results
             
             currentQuizzes.addAll(quizzes);
         }
+        
+        Map<Integer, List<AnswerDistribution>> answerDistribution = new HashMap<>();
+        for(int i = 0; i< currentQuizzes.size(); i++)
+        {
+            int id = currentQuizzes.get(i).getId();
+            
+            List<AnswerDistribution> answers = new ArrayList<>();
+            
+            try
+            {
+                answers = ResultsModel.getAnswerDistribution(id);
+            }
+            catch(Exception e)
+            {
+                
+            }
+            
+            answerDistribution.put(id, answers);                    
+        }
           
         request.setAttribute("quizzes", currentQuizzes);
+        request.setAttribute("answerDistribution", answerDistribution);
         rd = request.getRequestDispatcher("/WEB-INF/staff-results.jsp");
     }
     else

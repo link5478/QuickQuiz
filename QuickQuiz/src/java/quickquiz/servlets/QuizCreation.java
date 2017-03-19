@@ -19,6 +19,7 @@ package quickquiz.servlets;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -28,8 +29,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import quickquiz.exception.QuizInsertionFailureException;
+import quickquiz.model.ModuleModel;
 import quickquiz.model.QuizModel;
 import quickquiz.stores.LoggedIn;
+import quickquiz.stores.Module;
 import quickquiz.stores.Quiz;
 
 /**
@@ -52,8 +55,16 @@ public class QuizCreation
                          HttpServletResponse response)
      throws ServletException, IOException
     {
+      try {
+        List<Module> modules = ModuleModel.getModules();
+        request.setAttribute ("modules", modules);
         RequestDispatcher rd = request.getRequestDispatcher(jspForm);
         rd.forward(request, response);
+      }
+      catch (SQLException | ClassNotFoundException | InstantiationException |
+             IllegalAccessException ex) {
+        forwardToGeneralError (request, response);
+      }
     }
     
     
@@ -80,7 +91,7 @@ public class QuizCreation
     
     
     private Quiz getQuizFromForm(HttpServletRequest request)
-    {  
+    {
       String name = request.getParameter("quiz-name");
       String moduleId = request.getParameter("quiz-module-id");
       String description = request.getParameter("quiz-description");

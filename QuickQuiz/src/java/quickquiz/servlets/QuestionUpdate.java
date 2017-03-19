@@ -108,7 +108,13 @@ public class QuestionUpdate extends ServletTemplate
   }
   
   
-  
+  /**
+   * Gets question ID
+   * 
+   * @param request
+   * @return
+   * @throws MalformedUrlException 
+   */
   public int getQuestionId(HttpServletRequest request)
     throws MalformedUrlException
   {

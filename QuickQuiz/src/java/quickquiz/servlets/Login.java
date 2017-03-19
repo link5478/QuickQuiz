@@ -71,7 +71,18 @@ public class Login
   {
     validateUserLogin(request, response);
   }
-
+  /**
+   * Validates user login
+   * <p>
+   * Receives username and password as request parameters and verifies them against the database
+   * <p>
+   * Verifies usertype based on database column
+   * 
+   * @param request
+   * @param response
+   * @throws ServletException
+   * @throws IOException 
+   */
   private void validateUserLogin(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException
   {
@@ -82,7 +93,9 @@ public class Login
     {
       returnUserToLoginPageWithError(request, response);
     }
-
+    /**
+     * Shows user login progress
+     */
     int valid = -1;
     try
     {
@@ -124,7 +137,14 @@ public class Login
     }
   }
   
-  
+  /**
+   * Returns user to login page with an error detail
+   * 
+   * @param request
+   * @param response
+   * @throws ServletException
+   * @throws IOException 
+   */
   private void returnUserToLoginPageWithError(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException
   {
@@ -134,7 +154,14 @@ public class Login
   }
   
   
-  
+  /**
+   * Returns user to the successful login page
+   * 
+   * @param request
+   * @param response
+   * @throws ServletException
+   * @throws IOException 
+   */
   private void returnUserToLoginSuccess(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException
   {

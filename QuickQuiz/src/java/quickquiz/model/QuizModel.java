@@ -39,6 +39,16 @@ import quickquiz.stores.Quiz;
 // TODO: cache?
 public class QuizModel
 {
+  /**
+   * Inserts data to Quiz table in database
+   * 
+   * @param quiz
+   * @throws SQLException
+   * @throws ClassNotFoundException
+   * @throws InstantiationException
+   * @throws IllegalAccessException
+   * @throws QuizInsertionFailureException 
+   */
   public static void insertQuiz(Quiz quiz)
     throws SQLException, ClassNotFoundException, InstantiationException,
            IllegalAccessException, QuizInsertionFailureException
@@ -65,7 +75,17 @@ public class QuizModel
   }
   
   
-  
+  /**
+   * Gets information about a specific quiz
+   * 
+   * @param name
+   * @return Aggregated quiz data
+   * @throws SQLException
+   * @throws ClassNotFoundException
+   * @throws InstantiationException
+   * @throws IllegalAccessException
+   * @throws NoQuizFoundException 
+   */
   public static Quiz viewQuiz(String name)
     throws SQLException, ClassNotFoundException, InstantiationException,
            IllegalAccessException, NoQuizFoundException

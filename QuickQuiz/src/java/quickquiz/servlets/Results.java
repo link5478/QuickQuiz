@@ -43,6 +43,8 @@ public class Results
 {
   /**
    * Handles the HTTP <code>GET</code> method.
+   * <p>
+   * Redirects user depending on usertype
    *
    * @param request servlet request
    * @param response servlet response

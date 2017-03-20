@@ -57,7 +57,6 @@ public class QuizModel
     
     PreparedStatement statement = null;
     try {
-      // TODO: prepared statement?
       String sql = "CALL `CreateQuiz` (?, ?, ?, ?);";
       statement = Database.getInstance().prepareStatement(sql);
       statement.setString(1, quiz.getName());
@@ -182,6 +181,7 @@ public class QuizModel
         quiz.setDescription(resultSet.getString("DESCRIPTION"));
         quiz.setUserId(resultSet.getString("USERID"));
         quiz.setModuleId(resultSet.getString("MODULEID"));
+        quiz.setPredecessorId (resultSet.getInt ("PREDECESSOR"));
         if (resultSet.getBoolean("AVAILABLE"))
           quiz.makeAvailable();
         else
@@ -226,6 +226,7 @@ public class QuizModel
         quiz.setModuleName(rs.getString("Module Name"));
         quiz.setUsername(rs.getString("Staff Name"));
         quiz.setId(rs.getInt("Quiz ID"));
+        quiz.setPredecessorId (rs.getInt ("Predecessor"));
         if (rs.getBoolean("Available"))
           quiz.makeAvailable();
         else
@@ -233,18 +234,20 @@ public class QuizModel
       }
       
       // Initialises the quiz questions
-      do {
-        Question q = new Question();
-        q.setQuestionText(rs.getString("Question"));
-        q.setAnswer1(rs.getString("Answer 1"));
-        q.setAnswer2(rs.getString("Answer 2"));
-        q.setAnswer3(rs.getString("Answer 3"));
-        q.setAnswer4(rs.getString("Answer 4"));
-        q.setCorrectAnswer(rs.getInt("Correct Answer"));
-        q.setExplanation(rs.getString("Explanation"));
-        q.setId(rs.getInt("Question ID"));
-        quiz.addQuestion(q);
-      } while (rs.next());
+      if (rs.getBoolean("Has Questions")) {
+        do {
+          Question q = new Question();
+          q.setQuestionText(rs.getString("Question"));
+          q.setAnswer1(rs.getString("Answer 1"));
+          q.setAnswer2(rs.getString("Answer 2"));
+          q.setAnswer3(rs.getString("Answer 3"));
+          q.setAnswer4(rs.getString("Answer 4"));
+          q.setCorrectAnswer(rs.getInt("Correct Answer"));
+          q.setExplanation(rs.getString("Explanation"));
+          q.setId(rs.getInt("Question ID"));
+          quiz.addQuestion(q);
+        } while (rs.next());
+      }
     }
     finally {
       if (preparedStatement != null) {
@@ -293,6 +296,9 @@ public class QuizModel
         quiz.setUsername(rs.getString("Staff Name"));
         quiz.setModuleId(rs.getString("Module ID"));
         quiz.setModuleName(rs.getString("Module Name"));
+        if (userType.equals ("Staff")) {
+          quiz.setPredecessorId( rs.getInt ("predecessor"));
+        }
         if (rs.getBoolean("Available"))
           quiz.makeAvailable();
         else
@@ -342,8 +348,8 @@ public class QuizModel
    * 
    * @param quiz 
    */
-  public static void updateQuizPresentation(Quiz quiz)
+  public static Integer updateQuizPresentation(Quiz quiz)
   {
-    
-  } 
+    return null;
+  }
 }

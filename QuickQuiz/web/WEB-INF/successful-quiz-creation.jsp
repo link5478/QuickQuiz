@@ -21,5 +21,8 @@
     <div class="container indexcontainer">
       <p class="text-success">You created a new quiz successfully. <a href="<%=root%>/view-quiz/${newQuizId}">View the quiz that you just created.</a></p>
     </div>
+    <footer>
+      <%@include file="/WEB-INF/jspf/footer.jspf" %>
+    </footer>
   </body>
 </html>

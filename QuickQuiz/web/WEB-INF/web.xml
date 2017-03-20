@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
-    <filter>
+  <!-- TODO: add missing url patterns to restrictions -->
+  <filter>
         <filter-name>RestrictionToVisitors</filter-name>
         <filter-class>quickquiz.filters.RestrictionToVisitors</filter-class>
     </filter>
@@ -31,6 +32,10 @@
     <filter-mapping>
         <filter-name>RestrictionToMembers</filter-name>
         <url-pattern>/student-detailed-results/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>RestrictionToStaff</filter-name>
+        <url-pattern>/staff-detailed-results/*</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>RestrictionToMembers</filter-name>

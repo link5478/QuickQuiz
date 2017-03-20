@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en"> <%-- TODO: check language is set in every page --%>
+<html lang="en">
   <head>
     <%@include file="/WEB-INF/jspf/head.jspf" %>
     <title>Edit Question #${question.getId()}</title>
@@ -63,6 +63,5 @@
     <footer>
       <%@include file="/WEB-INF/jspf/footer.jspf" %>
     </footer>
-    <%-- TODO: make sure footer is included in every page --%>
   </body>
 </html>

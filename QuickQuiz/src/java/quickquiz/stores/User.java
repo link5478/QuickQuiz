@@ -56,7 +56,6 @@ public class User
   /**
    * Compares to see if the object given as a parameter is identical to the User
    * instance this method is called on.
-   * TODO: what's hashTag?
    * 
    * @param o the object to compare the instance with
    * @return true if the two objects are identical, false otherwise

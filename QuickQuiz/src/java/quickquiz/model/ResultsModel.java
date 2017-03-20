@@ -98,30 +98,32 @@ public class ResultsModel {
         return results;
     }
 
-    public static int addResult(Result result)
-            throws SQLException, ClassNotFoundException, InstantiationException,
-            IllegalAccessException {
-        PreparedStatement preparedStatement = null;
-        try {
-            String sql = "CALL `AddResult`(?, ?, ?, ?);";
-            preparedStatement = Database.getInstance().prepareStatement(sql);
-            preparedStatement.setString(1, result.getUserID());
-            preparedStatement.setFloat(2, result.getMark());
-            preparedStatement.setString(3, result.getDateTime());
-            preparedStatement.setInt(4, result.getQuizId());
-            // TODO: check that the results have been added
-            ResultSet rs = preparedStatement.executeQuery();
+    public static int addResult (Result result)
+      throws SQLException, ClassNotFoundException, InstantiationException,
+      IllegalAccessException
+    {
+      PreparedStatement preparedStatement = null;
+      try {
+        String sql = "CALL `AddResult`(?, ?, ?, ?);";
+        preparedStatement = Database.getInstance().prepareStatement(sql);
+        preparedStatement.setString(1, result.getUserID());
+        preparedStatement.setFloat(2, result.getMark());
+        preparedStatement.setString(3, result.getDateTime());
+        preparedStatement.setInt(4, result.getQuizId());
+        // TODO: check that the results have been added
+        ResultSet rs = preparedStatement.executeQuery();
 
-            while (rs.next()) {
-                return rs.getInt("Last ID");
-            }
-        } finally {
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
+        while (rs.next()) {
+            return rs.getInt("Last ID");
         }
+      }
+      finally {
+        if (preparedStatement != null) {
+            preparedStatement.close();
+        }
+      }
 
-        return -1;
+      return -1;
     }
 
     public static void addResultAnswer(int resultID, String answer, int questionNo)
@@ -210,4 +212,15 @@ public class ResultsModel {
         return answersDistributions;
     }
     
+    
+    public static boolean Compare(AnswerDistribution a, AnswerDistribution b)
+    {
+        if(a.getNumberOfAs() == b.getNumberOfAs() &&
+                a.getNumberOfBs() == b.getNumberOfBs() &&
+                a.getNumberOfCs() ==  b.getNumberOfCs() &&
+                a.getNumberOfDs() == b.getNumberOfDs() &&
+                a.getQuizID() == b.getQuizID())
+            return true;
+        return false;
+    }
 }

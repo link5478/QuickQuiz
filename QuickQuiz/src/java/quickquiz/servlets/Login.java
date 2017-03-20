@@ -35,8 +35,6 @@ import quickquiz.stores.Module;
  * 
  * @author Josh Hogarth
  */
-// TODO: error message when incorrect login details
-// TODO: should be forbidden when user is logged in
 public class Login
   extends HttpServlet
 {
@@ -56,6 +54,7 @@ public class Login
     rd.forward(request, response);   
   }
 
+  
 
   /**
    * Handles the HTTP <code>POST</code> method.
@@ -71,6 +70,9 @@ public class Login
   {
     validateUserLogin(request, response);
   }
+  
+  
+  
   /**
    * Validates user login
    * <p>

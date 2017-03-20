@@ -72,10 +72,11 @@ public class Result {
         return userID;
     }
 
-    public void setMark(float Mark) {
+    public void setMark(float Mark)
+    {
         if (Mark > 100.0 || Mark < 0.0) {
-            // TODO: custom / better exception?
-            throw new IllegalArgumentException();
+          // TODO: custom / better exception?
+          throw new IllegalArgumentException();
         }
         mark = Mark;
     }

@@ -57,7 +57,6 @@
                   List<Quiz> currentQuizzes = QuizModel.getQuizzes(currentModule.getId(), user);
             %>
             
-            <!-- TODO : show all quizzes collapsed by module id? -->
             <br />
             
             
@@ -92,7 +91,8 @@
             } //END While loop
             %>   
         </div>
-            </div>
-        </div>
-    </body>
+    <footer>
+      <%@include file="/WEB-INF/jspf/footer.jspf" %>
+    </footer>
+  </body>
 </html>

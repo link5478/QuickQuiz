@@ -1,7 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%-- TODO: create new quiz entry if already some results present, adn inform user of that --%>
-<%-- TODO: update web.xml and links to new-question, edit-quiz / quiz-update-page, same for question --%>
 <!DOCTYPE html> 
 <html lang="en">
   <head>
@@ -86,5 +85,8 @@
 
       </form>
     </div>
+    <footer>
+      <%@include file="/WEB-INF/jspf/footer.jspf" %>
+    </footer>
   </body>
 </html>

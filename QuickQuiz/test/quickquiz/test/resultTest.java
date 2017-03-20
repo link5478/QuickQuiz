@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import org.junit.Test;
 import quickquiz.model.ResultsModel;
@@ -61,6 +62,9 @@ public class resultTest {
         assertEquals("UseriD should be the same", expected.getUserID(), r.getUserID());
     }
     
+    
+    // DATABASE CHANGES MAKE THIS RESULT VOLATILE. BUT IF YOU CHECK staff-detailed-results
+    // while logged in as staff, it does work.
     @Test
     public void resultAnswersDistribution()
     {
@@ -112,18 +116,10 @@ public class resultTest {
         ExpectedAnswer4.setNumberOfDs(3);
         expectedAnswers.add(ExpectedAnswer4);
         
-        for(int i =0; i< actualAnswer.size(); i++)
-        {
-            AnswerDistribution AD = actualAnswer.get(i);
-         
-            System.out.println(actualAnswer.get(i));
-            System.out.println(expectedAnswers.get(i));
-        }
-        
-            assertEquals("The answer distribution of should be the same but is not", expectedAnswers.get(0), actualAnswer.get(0));
-            assertEquals("The answer distribution of should be the same but is not", expectedAnswers.get(1), actualAnswer.get(1));
-            assertEquals("The answer distribution of should be the same but is not", expectedAnswers.get(2), actualAnswer.get(2));
-            assertEquals("The answer distribution of should be the same but is not", expectedAnswers.get(3), actualAnswer.get(3));
-            
+        assertTrue("The Answer Distribution received was not the same as expected.", ResultsModel.Compare(actualAnswer.get(0), expectedAnswers.get(0))); 
+        assertTrue("The Answer Distribution received was not the same as expected.", ResultsModel.Compare(actualAnswer.get(1), expectedAnswers.get(1))); 
+        assertTrue("The Answer Distribution received was not the same as expected.", ResultsModel.Compare(actualAnswer.get(2), expectedAnswers.get(2))); 
+        assertTrue("The Answer Distribution received was not the same as expected.", ResultsModel.Compare(actualAnswer.get(3), expectedAnswers.get(3))); 
+
     }
 }

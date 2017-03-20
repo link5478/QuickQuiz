@@ -37,6 +37,7 @@ public class Quiz
   private String name_;
   private final User author_;
   private List<Question> questions_;
+  private Integer predecessorId_;
 
 
 
@@ -62,6 +63,7 @@ public class Quiz
     module_ = new Module (null, moduleId, moduleName);
     name_ = name;
     questions_ = new ArrayList<>();
+    predecessorId_ = null;
   }
 
 
@@ -75,6 +77,7 @@ public class Quiz
     name_ = null;
     questions_ = new ArrayList<>();
     author_ = new User();
+    predecessorId_ = null;
   }
   
   /**
@@ -91,6 +94,7 @@ public class Quiz
     boolean sameModule = module_.equals(quiz.getModule());
     boolean sameName = (name_ == null ? quiz.getName() == null : name_.equals(quiz.getName()));
     boolean sameAuthor = author_.equals(quiz.getAuthor());
+    boolean samePredecessor = predecessorId_ == quiz.getPredecessorId();
     boolean sameQuestions;
     if (questions_.size() == quiz.getNumberOfQuestions() &&
         questions_.containsAll(quiz.getQuestions())) {
@@ -206,6 +210,13 @@ public class Quiz
   
   
   
+  public Integer getPredecessorId()
+  {
+    return predecessorId_;
+  }
+  
+  
+  
   public Question getQuestion (int i)
   {
     return new Question (questions_.get(i));
@@ -279,6 +290,13 @@ public class Quiz
   public void setName(String name)
   {
     name_ = name;
+  }
+  
+  
+  
+  public void setPredecessorId (Integer predecessorId)
+  {
+    predecessorId_ = predecessorId;
   }
 
 

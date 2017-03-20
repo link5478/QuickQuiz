@@ -1,3 +1,5 @@
+These were all created and maintained in the SQL database by Carsten Cheyne
+
 Tables:
 `ANSWER`, `COURSE`, `MODULE`, `QUESTION`, `QUIZ`, `RESULT`, `USER`
 

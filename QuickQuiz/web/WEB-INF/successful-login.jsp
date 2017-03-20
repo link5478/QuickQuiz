@@ -14,8 +14,8 @@
   <body>
     <%@include file="/WEB-INF/jspf/navbar.jspf" %>
     <div class="container indexcontainer">
-      <p class="text-success">You successfully logged in.</p>
-      <p> Click <a href="/QuickQuiz/index"> here </a> to be redirected </p>
+      <p class="text-success">You were logged in successfully.</p>
+      <p> Click <a href="/QuickQuiz/index"> here </a> to be redirected...</p>
     </div>
     <footer>
       <%@include file="/WEB-INF/jspf/footer.jspf" %>

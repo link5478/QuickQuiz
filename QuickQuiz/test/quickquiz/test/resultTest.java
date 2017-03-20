@@ -116,18 +116,10 @@ public class resultTest {
         ExpectedAnswer4.setNumberOfDs(3);
         expectedAnswers.add(ExpectedAnswer4);
         
-        for(int i =0; i< actualAnswer.size(); i++)
-        {
-            AnswerDistribution AD = actualAnswer.get(i);
-         
-            System.out.println(actualAnswer.get(i));
-            System.out.println(expectedAnswers.get(i));
-        }
-        
-            assertTrue("The Answer Distribution received was not the same as expected.", ResultsModel.Compare(actualAnswer.get(0), expectedAnswers.get(0))); 
-            assertTrue("The Answer Distribution received was not the same as expected.", ResultsModel.Compare(actualAnswer.get(1), expectedAnswers.get(1))); 
-            assertTrue("The Answer Distribution received was not the same as expected.", ResultsModel.Compare(actualAnswer.get(2), expectedAnswers.get(2))); 
-            assertTrue("The Answer Distribution received was not the same as expected.", ResultsModel.Compare(actualAnswer.get(3), expectedAnswers.get(3))); 
+        assertTrue("The Answer Distribution received was not the same as expected.", ResultsModel.Compare(actualAnswer.get(0), expectedAnswers.get(0))); 
+        assertTrue("The Answer Distribution received was not the same as expected.", ResultsModel.Compare(actualAnswer.get(1), expectedAnswers.get(1))); 
+        assertTrue("The Answer Distribution received was not the same as expected.", ResultsModel.Compare(actualAnswer.get(2), expectedAnswers.get(2))); 
+        assertTrue("The Answer Distribution received was not the same as expected.", ResultsModel.Compare(actualAnswer.get(3), expectedAnswers.get(3))); 
 
     }
 }

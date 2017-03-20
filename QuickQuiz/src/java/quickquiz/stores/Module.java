@@ -22,6 +22,7 @@ package quickquiz.stores;
  * @author Louis-Marie Matthews
  */
 public class Module
+  implements Comparable<Module>
 {
   /**
   * Unique ID of a specific course
@@ -76,6 +77,28 @@ public class Module
     boolean sameName = (name_ == null ? module.getName() == null :
                         name_.equals(module.getName()));
     return sameCourseId && sameId && sameName;
+  }
+  
+  
+  
+  @Override
+  /**
+   * TODO: Make thread-safe. (by making the method a sync one?
+   */
+  public int compareTo (Module module)
+  {
+    if (module == null)
+      throw new NullPointerException();
+    
+    if (id_.compareTo (module.getId()) == 0) {
+      if (courseId_.compareTo (module.getCourseId()) == 0) {
+        return name_.compareTo(module.getName());
+      }
+      else
+        return courseId_.compareTo(module.getCourseId());
+    }
+    else
+      return id_.compareTo (module.getId());
   }
   
   

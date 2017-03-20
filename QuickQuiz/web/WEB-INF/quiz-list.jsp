@@ -4,6 +4,7 @@
     Author     : hogar
 --%>
 
+<%@page import="quickquiz.stores.QuizComparator"%>
 <%@page import="quickquiz.stores.ModuleComparator"%>
 <%@page import="java.util.TreeSet"%>
 <%@page import="java.util.TreeSet"%>
@@ -41,12 +42,13 @@
             <div class="panel panel-default">
                 <div class="panel-body">
             
-          <h1>Available Quizzes</h1>
+          <h1>Quizzes</h1>
           <p class="text-info">Click on a module to see the quizzes available for it.</p>
           
             <%
                 //Entire page has been refactored multiple times!
                 LoggedIn user = (LoggedIn) session.getAttribute("loggedIn");
+                Boolean isStaff = user.getUserType().equalsIgnoreCase("Staff") ? true : false;
                 
                 //Sorts Modules by ID.
                 SortedSet<Module> modules = new TreeSet<>(new ModuleComparator());
@@ -68,32 +70,64 @@
                 
                 <%
                     Iterator<Quiz> j = currentQuizzes.iterator();
+                    SortedSet<Quiz> availableQuizzes = new TreeSet<>(new QuizComparator());
+                    SortedSet<Quiz> unavailableQuizzes = new TreeSet<>(new QuizComparator());
                     
                     while (j.hasNext()) {
-                        Quiz currentQuiz = j.next();
-                        String value = currentQuiz.getName();
-                      
-                        if (user.getUserType().equalsIgnoreCase("Staff") && 
-                            !currentQuiz.isAvailable() ) {
-                            value += " (unavailable)";
-                        }
-                        
-                        String predecessor;
-                        if (currentQuiz.getPredecessorId() != null) {
-                          predecessor = " (based on <a href=\"" + root + "/view-quiz/" + currentQuiz.getPredecessorId() + "\">Quiz #" + currentQuiz.getPredecessorId() + "</a>)";
-                        }
-                        else
-                          predecessor = "";
-                        
-                    String url = "/QuickQuiz/view-quiz/" + currentQuiz.getId();
+                      Quiz currentQuiz = j.next();
+                      if (currentQuiz.isAvailable())
+                        availableQuizzes.add (currentQuiz);
+                      else if (!currentQuiz.isAvailable())
+                        unavailableQuizzes.add (currentQuiz);
+                      else
+                        throw new NullPointerException();
+                    }
+                    if (isStaff) {
                 %>
                 
-                <li><a href="<%=url%>"><%=value%></a><%=predecessor%></li>
+                <h2>Available Quizzes</h2>
+                
+                <%
+                    }
+
+                    Iterator<Quiz> k = availableQuizzes.iterator();
+                    while (k.hasNext()) {
+                      Quiz currentQuiz = k.next();
+
+                      String predecessor;
+                      if (isStaff && currentQuiz.getPredecessorId() != null)
+                        predecessor = " (based on <a href=\"" + root + "/view-quiz/" + currentQuiz.getPredecessorId() + "\">Quiz #" + currentQuiz.getPredecessorId() + "</a>)";
+                      else
+                        predecessor = "";
+                %>
+                
+                <li><a href="/QuickQuiz/view-quiz/<%= currentQuiz.getId() %>">Quiz #<%= currentQuiz.getId() %>: <%= currentQuiz.getName() %></a><%=predecessor%></li>
                     
                 <%
                     }
+                    if (isStaff) {
                 %>
                 
+                <h2>Unavailable Quizzes</h2>
+                
+                <%
+                      Iterator<Quiz> l = unavailableQuizzes.iterator();
+                      while (l.hasNext()) {
+                        Quiz currentQuiz = l.next();
+
+                        String predecessor;
+                        if (isStaff && currentQuiz.getPredecessorId() != null)
+                          predecessor = " (based on <a href=\"" + root + "/view-quiz/" + currentQuiz.getPredecessorId() + "\">Quiz #" + currentQuiz.getPredecessorId() + "</a>)";
+                        else
+                          predecessor = "";
+                %>
+                
+                <li><a href="/QuickQuiz/view-quiz/<%= currentQuiz.getId() %>">Quiz #<%= currentQuiz.getId() %>: <%= currentQuiz.getName() %></a><%=predecessor%></li>
+                
+                <%
+                      }
+                    }
+                %>
             </ul>
             
             <%

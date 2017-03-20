@@ -34,6 +34,10 @@
         <url-pattern>/student-detailed-results/*</url-pattern>
     </filter-mapping>
     <filter-mapping>
+        <filter-name>RestrictionToStaff</filter-name>
+        <url-pattern>/staff-detailed-results/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
         <filter-name>RestrictionToMembers</filter-name>
         <url-pattern>/quiz-list</url-pattern>
     </filter-mapping>

@@ -79,8 +79,11 @@ public class QuestionCreation
       Question newQuestion = getQuestionFromForm(request);
       
       // TODO: needs to return id of inserted question
-      QuestionModel.insertQuestion (newQuestion);
-      
+      int[] ids = QuestionModel.insertQuestion (newQuestion);
+      String root = ((HttpServletRequest)request).getContextPath();
+      request.setAttribute ("root", root);
+      request.setAttribute ("quizId", ids[0]);
+      request.setAttribute ("questionId", ids[1]);
       forwardToSuccessPage (request, response);
     }
     catch (MalformedUrlException | NoQuizFoundException ex) {

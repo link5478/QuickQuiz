@@ -85,7 +85,7 @@
                     if (isStaff) {
                 %>
                 
-                <h2>Available Quizzes</h2>
+                <h3>Available Quizzes</h3>
                 
                 <%
                     }
@@ -101,14 +101,14 @@
                         predecessor = "";
                 %>
                 
-                <li><a href="/QuickQuiz/view-quiz/<%= currentQuiz.getId() %>">Quiz #<%= currentQuiz.getId() %>: <%= currentQuiz.getName() %></a><%=predecessor%></li>
+                <li class="bg-success"><a href="/QuickQuiz/view-quiz/<%= currentQuiz.getId() %>">Quiz #<%= currentQuiz.getId() %>: <%= currentQuiz.getName() %></a><%=predecessor%></li>
                     
                 <%
                     }
                     if (isStaff) {
                 %>
                 
-                <h2>Unavailable Quizzes</h2>
+                <h3>Unavailable Quizzes</h3>
                 
                 <%
                       Iterator<Quiz> l = unavailableQuizzes.iterator();
@@ -122,7 +122,7 @@
                           predecessor = "";
                 %>
                 
-                <li><a href="/QuickQuiz/view-quiz/<%= currentQuiz.getId() %>">Quiz #<%= currentQuiz.getId() %>: <%= currentQuiz.getName() %></a><%=predecessor%></li>
+                <li class="bg-danger"><a href="/QuickQuiz/view-quiz/<%= currentQuiz.getId() %>">Quiz #<%= currentQuiz.getId() %>: <%= currentQuiz.getName() %></a><%=predecessor%></li>
                 
                 <%
                       }

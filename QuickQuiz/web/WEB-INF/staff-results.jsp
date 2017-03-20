@@ -29,7 +29,6 @@
         <div class="container logincontainer">
             <%
                 List<Quiz> currentQuizzes = (List<Quiz>) request.getAttribute("quizzes");
-                Map<Integer, List<AnswerDistribution>> answers = (Map<Integer, List<AnswerDistribution>>)request.getAttribute("answerDistribution");
                 
                 if (currentQuizzes.size() == 0 || currentQuizzes == null)
                 {
@@ -42,8 +41,9 @@
 
                     for (int i = 0; i < currentQuizzes.size(); i++) 
                     {
-            %>
-            <p> Quiz Name: <%=currentQuizzes.get(i).getName()%> </p>
+                    Quiz currentQuiz = currentQuizzes.get(i);
+            %>      
+            <p><a href="<%=((HttpServletRequest)request).getContextPath()%>/staff-detailed-results/<%=currentQuiz.getId()%>"> <%=currentQuiz.getName()%> </a></p>
             <p> Quiz Description: <%=currentQuizzes.get(i).getDescription() %> </p>
             <br>
             <p> ================================================================= </p>

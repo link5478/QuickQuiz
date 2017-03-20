@@ -81,6 +81,7 @@ public class QuizModel
   }
   
   
+  
   /**
    * Gets information about a specific quiz
    * 
@@ -181,7 +182,13 @@ public class QuizModel
         quiz.setDescription(resultSet.getString("DESCRIPTION"));
         quiz.setUserId(resultSet.getString("USERID"));
         quiz.setModuleId(resultSet.getString("MODULEID"));
-        quiz.setPredecessorId (resultSet.getInt ("PREDECESSOR"));
+        
+        // getInt returns 0 if predecessor is null. VERY USEFUL if the
+        // predecessor has an id of 0.
+        Integer predecessor = resultSet.getInt ("PREDECESSOR");
+        if (predecessor != 0)
+          quiz.setPredecessorId (predecessor);
+        
         if (resultSet.getBoolean("AVAILABLE"))
           quiz.makeAvailable();
         else
@@ -226,7 +233,13 @@ public class QuizModel
         quiz.setModuleName(rs.getString("Module Name"));
         quiz.setUsername(rs.getString("Staff Name"));
         quiz.setId(rs.getInt("Quiz ID"));
-        quiz.setPredecessorId (rs.getInt ("Predecessor"));
+        
+        // getInt returns 0 if predecessor is null. VERY USEFUL if the
+        // predecessor has an id of 0.
+        Integer predecessor = rs.getInt ("Predecessor");
+        if (predecessor != 0)
+          quiz.setPredecessorId (predecessor);
+        
         if (rs.getBoolean("Available"))
           quiz.makeAvailable();
         else
@@ -297,7 +310,8 @@ public class QuizModel
         quiz.setModuleId(rs.getString("Module ID"));
         quiz.setModuleName(rs.getString("Module Name"));
         if (userType.equals ("Staff")) {
-          quiz.setPredecessorId( rs.getInt ("predecessor"));
+          if (rs.getInt ("predecessor") != 0)
+            quiz.setPredecessorId (rs.getInt ("predecessor"));
         }
         if (rs.getBoolean("Available"))
           quiz.makeAvailable();

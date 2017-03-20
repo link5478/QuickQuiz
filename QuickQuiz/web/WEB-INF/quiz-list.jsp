@@ -4,6 +4,10 @@
     Author     : hogar
 --%>
 
+<%@page import="quickquiz.stores.ModuleComparator"%>
+<%@page import="java.util.TreeSet"%>
+<%@page import="java.util.TreeSet"%>
+<%@page import="java.util.SortedSet"%>
 <%@page import="quickquiz.stores.Module"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="quickquiz.stores.Quiz"%>
@@ -39,9 +43,13 @@
           <h1>Available Quizzes</h1>
           <p class="text-info">Click on a module to see the quizzes available for it.</p>
             <%
-                // whole page refactored 
+                //Entire page has been refactored multiple times!
                 LoggedIn user = (LoggedIn) session.getAttribute("loggedIn");
-                List<Module> modules = user.getModulesV2();
+                
+                //Sorts Modules by ID.
+                SortedSet<Module> modules = new TreeSet<>(new ModuleComparator());
+                modules.addAll(user.getModulesV2());
+                
                 Iterator<Module> i = modules.iterator();
                 
                 while (i.hasNext()) {

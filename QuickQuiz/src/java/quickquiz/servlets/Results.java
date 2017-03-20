@@ -85,28 +85,9 @@ public class Results
             
             currentQuizzes.addAll(quizzes);
         }
-        
-        Map<Integer, List<AnswerDistribution>> answerDistribution = new HashMap<>();
-        for(int i = 0; i< currentQuizzes.size(); i++)
-        {
-            int id = currentQuizzes.get(i).getId();
-            
-            List<AnswerDistribution> answers = new ArrayList<>();
-            
-            try
-            {
-                answers = ResultsModel.getAnswerDistribution(id);
-            }
-            catch(Exception e)
-            {
-                
-            }
-            
-            answerDistribution.put(id, answers);                    
-        }
+
           
         request.setAttribute("quizzes", currentQuizzes);
-        request.setAttribute("answerDistribution", answerDistribution);
         rd = request.getRequestDispatcher("/WEB-INF/staff-results.jsp");
     }
     else

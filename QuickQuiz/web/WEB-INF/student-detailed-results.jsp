@@ -53,7 +53,7 @@
             <h1> Results: <%=q.getName()%> <small>(Result ID: <%= request.getAttribute("URI")%>)</small></h1>
             
             <h3><%=q.getDescription()%> </h3>
-            <h3> Created by <%=q.getUsername()%>.   Attempted by: <%=userName%>(<%=r.getUserID()%>) </h3>
+            <h3> Created by <%=q.getUsername()%>.   Attempted by: <%=userName%> (<%=r.getUserID()%>) </h3>
 
             <br/>
             
@@ -63,7 +63,7 @@
             %>
             <h4> Question No. <%=i + 1%> </h4>
             <p> <%=qu.getQuestionText()%> </p>
-            <table class="table">
+            <table class="table table-bordered table-striped">
                 <tr> 
                     <th> Choices </th>
                     <th> Your Answer </th>

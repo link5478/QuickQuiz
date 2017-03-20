@@ -17,7 +17,8 @@
   <body>
     <%@include file="/WEB-INF/jspf/navbar.jspf" %>
     
-    <div class="container indexcontainer">
+    <main class="container indexcontainer">
+        
         <div class="panel panel-default">
             <div class="panel-body">
                 <h1>Restricted Page</h1>
@@ -26,7 +27,8 @@
                 <p>Click <a href="<%=((HttpServletRequest)request).getContextPath()%>/logout">here</a> if you would like to log out.</p>
             </div>
         </div>
-    </div>
+            
+    </main>
             
     <footer>
       <%@include file="/WEB-INF/jspf/footer.jspf" %>

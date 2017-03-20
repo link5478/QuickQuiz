@@ -7,6 +7,15 @@
 {
     margin-top: 100px;
 }
+.error404container
+{
+    margin-top: 100px;
+}
+
+.error-text
+{
+    color: darkred;
+}
 
 .tooltip {
     position: relative;

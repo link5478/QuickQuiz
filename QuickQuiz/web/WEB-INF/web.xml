@@ -114,6 +114,10 @@
         <servlet-name>QuestionUpdate</servlet-name>
         <servlet-class>quickquiz.servlets.QuestionUpdate</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>StaffDetailedResults</servlet-name>
+        <servlet-class>quickquiz.servlets.StaffDetailedResults</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -169,6 +173,10 @@
     <servlet-mapping>
         <servlet-name>QuestionUpdate</servlet-name>
         <url-pattern>/question-update-form/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StaffDetailedResults</servlet-name>
+        <url-pattern>/staff-detailed-results/*</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

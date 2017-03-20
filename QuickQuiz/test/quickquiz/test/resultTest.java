@@ -75,15 +75,15 @@ public class resultTest {
         {
         }
         
-        List<AnswerDistribution> ExpectedAnswers = new ArrayList<>();
+        List<AnswerDistribution> expectedAnswers = new ArrayList<>();
         // Question 1.
         AnswerDistribution ExpectedAnswer1 = new AnswerDistribution();
         ExpectedAnswer1.setQuizID(2);
-        ExpectedAnswer1.setNumberOfAs(3);
+        ExpectedAnswer1.setNumberOfAs(4);
         ExpectedAnswer1.setNumberOfBs(0);
-        ExpectedAnswer1.setNumberOfCs(0);
-        ExpectedAnswer1.setNumberOfDs(3);
-        ExpectedAnswers.add(ExpectedAnswer1);
+        ExpectedAnswer1.setNumberOfCs(3);
+        ExpectedAnswer1.setNumberOfDs(0);
+        expectedAnswers.add(ExpectedAnswer1);
         
         // Question 2.
         AnswerDistribution ExpectedAnswer2 = new AnswerDistribution();
@@ -92,16 +92,16 @@ public class resultTest {
         ExpectedAnswer2.setNumberOfBs(2);
         ExpectedAnswer2.setNumberOfCs(0);
         ExpectedAnswer2.setNumberOfDs(0);
-        ExpectedAnswers.add(ExpectedAnswer2);
+        expectedAnswers.add(ExpectedAnswer2);
         
         // Question 3.
         AnswerDistribution ExpectedAnswer3 = new AnswerDistribution();
         ExpectedAnswer3.setQuizID(2);
         ExpectedAnswer3.setNumberOfAs(0);
         ExpectedAnswer3.setNumberOfBs(0);
-        ExpectedAnswer3.setNumberOfCs(2);
+        ExpectedAnswer3.setNumberOfCs(3);
         ExpectedAnswer3.setNumberOfDs(0);
-        ExpectedAnswers.add(ExpectedAnswer3);
+        expectedAnswers.add(ExpectedAnswer3);
         
         // Question 4.
         AnswerDistribution ExpectedAnswer4 = new AnswerDistribution();
@@ -109,9 +109,21 @@ public class resultTest {
         ExpectedAnswer4.setNumberOfAs(0);
         ExpectedAnswer4.setNumberOfBs(0);
         ExpectedAnswer4.setNumberOfCs(0);
-        ExpectedAnswer4.setNumberOfDs(2);
-        ExpectedAnswers.add(ExpectedAnswer4);
+        ExpectedAnswer4.setNumberOfDs(3);
+        expectedAnswers.add(ExpectedAnswer4);
         
-            assertEquals("The answer distribution of should be the same but is not", ExpectedAnswers, actualAnswer);
+        for(int i =0; i< actualAnswer.size(); i++)
+        {
+            AnswerDistribution AD = actualAnswer.get(i);
+         
+            System.out.println(actualAnswer.get(i));
+            System.out.println(expectedAnswers.get(i));
+        }
+        
+            assertEquals("The answer distribution of should be the same but is not", expectedAnswers.get(0), actualAnswer.get(0));
+            assertEquals("The answer distribution of should be the same but is not", expectedAnswers.get(1), actualAnswer.get(1));
+            assertEquals("The answer distribution of should be the same but is not", expectedAnswers.get(2), actualAnswer.get(2));
+            assertEquals("The answer distribution of should be the same but is not", expectedAnswers.get(3), actualAnswer.get(3));
+            
     }
 }

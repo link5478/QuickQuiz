@@ -195,10 +195,10 @@ public class ResultsModel {
             {
                 AnswerDistribution answerDistribution = new  AnswerDistribution();
                 answerDistribution.setQuizID(rs.getInt("Quiz ID"));
-                answerDistribution.setQuizID(rs.getInt("Answer 1"));
-                answerDistribution.setQuizID(rs.getInt("Answer 2"));
-                answerDistribution.setQuizID(rs.getInt("Answer 3"));
-                answerDistribution.setQuizID(rs.getInt("Answer 4"));
+                answerDistribution.setNumberOfAs(rs.getInt("Answer 1"));
+                answerDistribution.setNumberOfBs(rs.getInt("Answer 2"));
+                answerDistribution.setNumberOfCs(rs.getInt("Answer 3"));
+                answerDistribution.setNumberOfDs(rs.getInt("Answer 4"));
                 
                 answersDistributions.add(answerDistribution);
             }

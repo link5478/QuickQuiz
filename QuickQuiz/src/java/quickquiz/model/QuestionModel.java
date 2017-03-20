@@ -31,14 +31,22 @@ import quickquiz.stores.Question;
  */
 public class QuestionModel
 {
-  public static void insertQuestion(Question question)
+  /**
+   * TODO: return object instead?
+   * @param question
+   * @return
+   * @throws SQLException
+   * @throws ClassNotFoundException
+   * @throws InstantiationException
+   * @throws IllegalAccessException
+   * @throws QuestionInsertionFailureException 
+   */
+  public static int[] insertQuestion(Question question)
     throws SQLException, ClassNotFoundException, InstantiationException,
            IllegalAccessException, QuestionInsertionFailureException
   {
     PreparedStatement statement = null;
     try {
-      // TODO: CRITICAL: duplicate quiz if already existing result
-      // TODO: return int of quiz
       String sql = "CALL `AddQuestions`(?, ?, ?, ?, ?, ?, ?, ?, 1);";
       statement = Database.getInstance().prepareStatement(sql);
       statement.setString (1, question.getQuestionText());
@@ -49,10 +57,15 @@ public class QuestionModel
       statement.setString (6, question.getExplanation());
       statement.setInt (7, question.getCorrectAnswer());
       statement.setInt (8, question.getQuizId());
-      statement.executeUpdate();
+      ResultSet rs = statement.executeQuery();
       if (statement.getUpdateCount() == 0) {
         throw new QuestionInsertionFailureException();
       }
+      rs.next();
+      int[] ids = new int[2];
+      ids[0] = rs.getInt ("Quiz ID");
+      ids[1] = rs.getInt ("New Question ID"); // TODO: fix stored procedure
+      return ids;
     }
     finally {
       if (statement != null) {

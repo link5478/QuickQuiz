@@ -53,7 +53,7 @@
             %>
             <h4> Question No. <%=i + 1%> </h4>
             <p> <%=qu.getQuestionText()%> </p>
-            <table>
+            <table class="table">
                 <tr> 
                     <th> Choices </th>
                     <th> Your Answer </th>

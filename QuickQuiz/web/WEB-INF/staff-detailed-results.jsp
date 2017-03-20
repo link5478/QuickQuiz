@@ -11,46 +11,69 @@
 <%@ page import="quickquiz.stores.Result" %>
 <%@ page import="quickquiz.stores.User" %>
 <!DOCTYPE html>
+
 <html>
+    
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
          <%@include file="/WEB-INF/jspf/head.jspf" %>
-        <title>A Closer Look | QuickQuiz</title>
+        <title>Detailed Results | QuickQuiz</title>
     </head>
+    
     <body>
-         <%@include file="/WEB-INF/jspf/navbar.jspf" %>
-         <div class="container logincontainer">             
-         <%
-         List<AnswerDistribution> answers = (List<AnswerDistribution>)request.getAttribute("answers");
-         
-        if(answers !=null && !answers.isEmpty())
-        {
-        %>
         
-        <table class = "table">
-            <tr>
-            <th> Question Number  </th>
-            <th> 1s </th>
-            <th> 2s </th>
-            <th> 3s </th>
-            <th> 4s </th>
-            </tr>
-            <%
-                for(int i =0; i < answers.size(); i++)
-                {
-                    AnswerDistribution AD = answers.get(i);
-                    %>
+         <%@include file="/WEB-INF/jspf/navbar.jspf" %>
+         
+         <div class="container logincontainer">
+             
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Aggregate Results</h3>
+                </div>
+            <div class="panel-body">
+             
+                 <%
+                    List<AnswerDistribution> answers = (List<AnswerDistribution>)request.getAttribute("answers");
+
+                    if(answers !=null && !answers.isEmpty())
+                    {
+                %>
+        
+                <table class="table table-striped table-bordered">
                     <tr>
-                        <td> <%=i+1%> </td>
-                        <td> <%=AD.getNumberOfAs()%> </td>
-                        <td> <%=AD.getNumberOfBs()%> </td>
-                        <td> <%=AD.getNumberOfCs()%> </td>
-                        <td> <%=AD.getNumberOfDs()%> </td>
+                    <th> Question Number  </th>
+                    <th> Answer 1 % </th>
+                    <th> Answer 2 % </th>
+                    <th> Answer 3 % </th>
+                    <th> Answer 4 % </th>
                     </tr>
+
                     <%
-                }
-            %>    
-        </table>
+                        for(int i =0; i < answers.size(); i++)
+                        {
+                            AnswerDistribution AD = answers.get(i);
+                            %>
+                            <tr>
+                                <td> <%=i+1%> </td>
+                                <td> <%=AD.getNumberOfAs()%> </td>
+                                <td> <%=AD.getNumberOfBs()%> </td>
+                                <td> <%=AD.getNumberOfCs()%> </td>
+                                <td> <%=AD.getNumberOfDs()%> </td>
+                            </tr>
+                            <%
+                        }
+                    %>    
+                </table>
+        
+            </div>
+        </div>
+        
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Individual Student Results</h3>
+            </div>
+            <div class="panel-body">
+        
              <%
                  
                 Map<String, List<Result>> studentBreakdown = (Map<String, List<Result>>)request.getAttribute("results");
@@ -58,7 +81,7 @@
                  if(studentBreakdown != null && !studentBreakdown.isEmpty())
                  {
                      %>
-                     <p> Student Breakdown </p>
+
                      <%
                      String currentStudent = "";
                      for (Map.Entry<String, List<Result>> entry : studentBreakdown.entrySet())
@@ -67,7 +90,7 @@
                         if(!name.equals(currentStudent))
                         {
                             %>
-                            <p>Student: <%=name%></p>
+                            <h4>Student: <%=name%></h4>
                             <%
                              currentStudent = name;
                         }
@@ -94,11 +117,13 @@
         else
         {
             %>
-            <p> No one has taken any of your quizzes so there are no statistics to show.</p>
+            <p> No one has taken this quiz so there are no statistics to show.</p>
             <%
         }
         %>
-             
+                
+                </div>
+            </div>
          </div>        
     </body>
 </html>

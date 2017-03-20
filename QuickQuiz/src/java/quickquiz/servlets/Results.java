@@ -20,9 +20,7 @@ package quickquiz.servlets;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -31,9 +29,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import quickquiz.model.QuizModel;
 import quickquiz.model.ResultsModel;
-import quickquiz.stores.AnswerDistribution;
 import quickquiz.stores.LoggedIn;
 import quickquiz.stores.Quiz;
+import quickquiz.stores.Result;
 
 /**
  * Refactoring: removed useless methods processRequest, doPost and
@@ -70,23 +68,39 @@ public class Results
     else if(user.getUserType().equalsIgnoreCase("staff"))
     {
         
-        List<Quiz> currentQuizzes = new ArrayList<>();
+        List<Quiz> hasResults = new ArrayList<>();
+        List<Quiz> noResults = new ArrayList<>();
+        
         for(int i =0; i< user.getModules().size(); i++)
         {
             List<Quiz> quizzes = new ArrayList<>();
+            
             try
             {
                 quizzes = QuizModel.getQuizzes(user.getModules().get(i), user);
+                for(Quiz q : quizzes)
+                {
+                   boolean hasResult = ResultsModel.hasResult(q.getId());
+                   if(hasResult)
+                   {
+                       hasResults.add(q);
+                   }
+                   else
+                   {
+                       noResults.add(q);
+                   }
+                }
+                
             }
             catch(ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException e)
             {
             }
-            
-            currentQuizzes.addAll(quizzes);
         }
 
           
-        request.setAttribute("quizzes", currentQuizzes);
+        request.setAttribute("hasResults", hasResults);
+        request.setAttribute("noResults", noResults);
+        
         rd = request.getRequestDispatcher("/WEB-INF/staff-results.jsp");
     }
     else

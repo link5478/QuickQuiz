@@ -27,7 +27,7 @@
                 <div class="row">
 
                 <%
-                    if(lg.getUserType().equals("staff")) //IF (USER = STAFF)
+                    if(lg.getUserType().equalsIgnoreCase("staff")) //IF (USER = STAFF)
                     {
                 %>
                

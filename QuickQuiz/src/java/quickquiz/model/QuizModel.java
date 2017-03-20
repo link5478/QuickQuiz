@@ -131,6 +131,19 @@ public class QuizModel
     return product;
   }  
   
+  
+  
+  /**
+   * TODO: refactor: remove second parameter
+   * 
+   * @param moduleId the id of the module which quizzes should be returned
+   * @param user either staff or student (obsolete parameter)
+   * @return all the quizzes that belong to the specified module
+   * @throws SQLException
+   * @throws ClassNotFoundException
+   * @throws InstantiationException
+   * @throws IllegalAccessException 
+   */
   public static List<Quiz> getQuizzes(String moduleId, LoggedIn user)
     throws SQLException, ClassNotFoundException, InstantiationException,
            IllegalAccessException
@@ -243,7 +256,7 @@ public class QuizModel
   
   
   
-  // TODO: To refactor
+  // TODO: To refactor: remove parameter userType
   public static Quiz getQuizPresentation (Integer id, String userType)
     throws SQLException, ClassNotFoundException, InstantiationException,
            IllegalAccessException, NoQuizFoundException
@@ -325,6 +338,7 @@ public class QuizModel
   
   /**
    * Updates an already existing quiz excluding its questions.
+   * TODO: finish up
    * 
    * @param quiz 
    */

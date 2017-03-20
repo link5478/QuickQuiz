@@ -212,8 +212,37 @@ public class ResultsModel {
         return answersDistributions;
     }
     
+    public static boolean hasResult(int quizID)
+            throws SQLException, ClassNotFoundException, InstantiationException,
+            IllegalAccessException
+    {
+        boolean result = false;
+        
+        PreparedStatement preparedStatement = null;
+        try {
+            String sql = "CALL `QuizResult`(?);";
+            preparedStatement = Database.getInstance().prepareStatement(sql);
+            preparedStatement.setInt(1, quizID);
+            // TODO: check that the results have been added
+            ResultSet rs = preparedStatement.executeQuery();
+            
+            if(rs.next())
+            {
+                return true;
+            }
+            
+        } finally {
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+        }
+        
+        
+        return result;
+    }
     
-    public static boolean Compare(AnswerDistribution a, AnswerDistribution b)
+    
+    public static boolean compare(AnswerDistribution a, AnswerDistribution b)
     {
         if(a.getNumberOfAs() == b.getNumberOfAs() &&
                 a.getNumberOfBs() == b.getNumberOfBs() &&

@@ -18,18 +18,26 @@
     <body>
         
         <%@include file="/WEB-INF/jspf/navbar.jspf" %>
-
-        <div class="container indexcontainer">
-        <h1>Logging out.</h1>
+        
         <%
             session = request.getSession();
             session.removeAttribute("loggedIn");           
         %>
-        <p>Redirecting you...</p>
-        <p>Click <a href="index" >here</a> if you are not redirected.</p>
-        </div>
+
+        <main class="container indexcontainer">
+            
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h1>Logging out.</h1>
+                    <p>Redirecting you...</p>
+                    <p>Click <a href="index" >here</a> if you are not redirected.</p>
+                </div>
+            </div>
+        </main>
+        
     <footer>
       <%@include file="/WEB-INF/jspf/footer.jspf" %>
     </footer>
+    
   </body>
 </html>

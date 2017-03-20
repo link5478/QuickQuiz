@@ -81,7 +81,7 @@
                             <div class="caption">
                                 <h3>View Results</h3>
                                 <p>See a list of your previous quiz attempts and the answers you gave.</p>
-                                <p><a href="<%=((HttpServletRequest)request).getContextPath()%>/quiz-list" class="btn btn-primary btn-block" role="button">View Quizzes</a>
+                                <p><a href="<%=((HttpServletRequest)request).getContextPath()%>/quiz-list" class="btn btn-primary btn-block" role="button">View Results</a>
                             </div>
                         </div>
                     </div>

@@ -36,24 +36,29 @@
             </div>
             <div class="panel-body">
         
-      <h1>
-          Quiz #${quiz.getId()}: ${quiz.getName()}
-          <%
-            if (quiz.getPredecessorId() != null) {
-          %>
-          <small>Based on <a href="${root}/view-quiz/${quiz.getPredecessorId()}">Quiz #${quiz.getPredecessorId()}</a></small>
-      </h1>
-      <%
-        }
-      %>
-      <a class="btn btn-default" href="<%=((HttpServletRequest)request).getContextPath()%>/quiz-answering-page/${quiz.getId()}" role="button">Start a new Quiz Attempt</a>
-      
-      
-      <h2>Description</h2>
-      <p>${quiz.getDescription()}</p>
-      
-      <p><a class="btn btn-default" href="<%=((HttpServletRequest)request).getContextPath()%>/quiz-update-form/${quiz.getId()}" role="button">Edit the description</a></p>
-      
+                <div row>
+                    <div class="col-md-12">
+                        <h1>
+                        Quiz #${quiz.getId()}: ${quiz.getName()}
+                        <%
+                            if (quiz.getPredecessorId() != null) {
+                        %>
+                        <small>Based on <a href="${root}/view-quiz/${quiz.getPredecessorId()}">Quiz #${quiz.getPredecessorId()}</a></small>
+                        </h1>
+                        <%
+                            }
+                        %>
+                        <a class="btn btn-default" href="<%=((HttpServletRequest)request).getContextPath()%>/quiz-answering-page/${quiz.getId()}" role="button">Start a new Quiz Attempt</a>
+
+                        <h2>Description</h2>
+                        <p>${quiz.getDescription()}</p>
+
+                        <h2>Edit Quiz</h2>
+                        <p>You can edit the Quiz's name, module, description, and availability.</p>
+
+                        <p><a class="btn btn-default" href="<%=((HttpServletRequest)request).getContextPath()%>/quiz-update-form/${quiz.getId()}" role="button">Edit Quiz details</a></p>
+                    </div>
+                </div>
         <div row>
             <div class="col-md-6">
                 <h2>Advanced Details</h2>

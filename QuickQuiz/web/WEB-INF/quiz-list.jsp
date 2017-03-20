@@ -24,10 +24,8 @@
 <html lang="en">
     
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <%@include file="/WEB-INF/jspf/head.jspf" %>
+        
         <title>Quiz List | QuickQuiz</title>
     </head>
     
@@ -42,6 +40,7 @@
             
           <h1>Available Quizzes</h1>
           <p class="text-info">Click on a module to see the quizzes available for it.</p>
+          
             <%
                 //Entire page has been refactored multiple times!
                 LoggedIn user = (LoggedIn) session.getAttribute("loggedIn");
@@ -58,11 +57,9 @@
             %>
             
             <br />
-            
-            
-                    
-                    <button type="button" class="btn btn-block" data-toggle="collapse" data-target="#demo<%=currentModule.getId()%>"><%=currentModule.getId()%> <%=currentModule.getName()%></button>
-                    <br/>
+ 
+            <button type="button" class="btn btn-block" data-toggle="collapse" data-target="#demo<%=currentModule.getId()%>"><%=currentModule.getId()%> <%=currentModule.getName()%></button>
+            <br/>
             
             <div id="demo<%=currentModule.getId()%>" class="collapse">
                 
@@ -79,20 +76,29 @@
                         }
                         
                     String url = "/QuickQuiz/view-quiz/" + currentQuiz.getId();
-                %> 
+                %>
+                
                     <a href = <%=url%>><%=value%></a>
                     <br />
                     <%-- TODO: List instead --%>
+                    
                 <%
                     }
                 %>
-            </div>
+                
+            </div> <%-- demo collapse --%>
+            
             <%
             } //END While loop
             %>   
+            
         </div>
+        </div>
+        </div>
+        
     <footer>
       <%@include file="/WEB-INF/jspf/footer.jspf" %>
     </footer>
+    
   </body>
 </html>

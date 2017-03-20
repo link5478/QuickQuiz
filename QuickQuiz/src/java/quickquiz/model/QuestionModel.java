@@ -38,6 +38,7 @@ public class QuestionModel
     PreparedStatement statement = null;
     try {
       // TODO: CRITICAL: duplicate quiz if already existing result
+      // TODO: return int of quiz
       String sql = "CALL `AddQuestions`(?, ?, ?, ?, ?, ?, ?, ?, 1);";
       statement = Database.getInstance().prepareStatement(sql);
       statement.setString (1, question.getQuestionText());
@@ -97,5 +98,17 @@ public class QuestionModel
     }
     
     return question;
+  }
+  
+  
+  
+  /**
+   * TODO: implement
+   * @param question
+   * @return 
+   */
+  public static Integer updateQuestion (Question question)
+  {
+    return null;
   }
 }

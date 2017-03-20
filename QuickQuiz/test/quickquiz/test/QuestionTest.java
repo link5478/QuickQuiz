@@ -30,6 +30,5 @@ public class QuestionTest
   public void testCopyAndEquals()
   {
     Question question1 = new Question();
-    
   }
 }

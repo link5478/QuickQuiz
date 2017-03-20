@@ -52,13 +52,37 @@
                         for(int i =0; i < answers.size(); i++)
                         {
                             AnswerDistribution AD = answers.get(i);
+                            int As = AD.getNumberOfAs();
+                            int Bs = AD.getNumberOfBs();
+                            int Cs = AD.getNumberOfCs();
+                            int Ds = AD.getNumberOfDs();
+                            
+                            int sum = As + Bs + Cs + Ds;
+                            
+                            float A;
+                            float B;
+                            float C;
+                            float D;
+                            
+                            if(sum > 0)
+                            {
+                                A = Math.round(((float)As/sum) * 100);
+                                B = Math.round(((float)Bs/sum) * 100);
+                                C = Math.round(((float)Cs/sum) * 100);
+                                D = Math.round(((float)Ds/sum) * 100);
+                            }
+                            else
+                            {
+                                A = B = C = D = 0;
+                            }
+                            
                             %>
                             <tr>
                                 <td> <%=i+1%> </td>
-                                <td> <%=AD.getNumberOfAs()%> </td>
-                                <td> <%=AD.getNumberOfBs()%> </td>
-                                <td> <%=AD.getNumberOfCs()%> </td>
-                                <td> <%=AD.getNumberOfDs()%> </td>
+                                <td> <%=A%> ( <%=As%> )</td>
+                                <td> <%=B%> ( <%=Bs%> )</td>
+                                <td> <%=C%> ( <%=Cs%> )</td>
+                                <td> <%=D%> ( <%=Ds%> )</td>
                             </tr>
                             <%
                         }

@@ -33,7 +33,11 @@
 
         <div class="container indexcontainer">
           
-          <h2>Available Quizzes</h2>
+            <div class="panel panel-default">
+                <div class="panel-body">
+            
+          <h1>Available Quizzes</h1>
+          <p class="text-info">Click on a module to see the quizzes available for it.</p>
             <%
                 // whole page refactored 
                 LoggedIn user = (LoggedIn) session.getAttribute("loggedIn");
@@ -47,9 +51,14 @@
             
             <!-- TODO : show all quizzes collapsed by module id? -->
             <br />
-            <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo<%=currentModule.getId()%>"><%=currentModule.getId()%> <%=currentModule.getName()%></button>
+            
+            
+                    
+                    <button type="button" class="btn btn-block" data-toggle="collapse" data-target="#demo<%=currentModule.getId()%>"><%=currentModule.getId()%> <%=currentModule.getName()%></button>
+                    <br/>
+            
             <div id="demo<%=currentModule.getId()%>" class="collapse">
-                <br />
+                
                 <%
                     Iterator<Quiz> j = currentQuizzes.iterator();
                     
@@ -66,7 +75,7 @@
                 %> 
                     <a href = <%=url%>><%=value%></a>
                     <br />
-                    <br /> <%-- TODO: List instead --%>
+                    <%-- TODO: List instead --%>
                 <%
                     }
                 %>
@@ -74,6 +83,8 @@
             <%
             } //END While loop
             %>   
+        </div>
+            </div>
         </div>
     </body>
 </html>

@@ -4,6 +4,9 @@
     Author     : louis_000
 --%>
 
+<%
+  String root = ((HttpServletRequest)request).getContextPath();
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +18,7 @@
     <%@include file="/WEB-INF/jspf/navbar.jspf" %>
     <div class="container indexcontainer">
       <p class="text-success">You were logged in successfully.</p>
-      <p> Click <a href="/QuickQuiz/index"> here </a> to be redirected...</p>
+      <p> Click <a href="<%= root %>/index"> here </a> to be redirected...</p>
     </div>
     <footer>
       <%@include file="/WEB-INF/jspf/footer.jspf" %>

@@ -101,7 +101,7 @@
                         predecessor = "";
                 %>
                 
-                <li class="bg-success"><a href="/QuickQuiz/view-quiz/<%= currentQuiz.getId() %>">Quiz #<%= currentQuiz.getId() %>: <%= currentQuiz.getName() %></a><%=predecessor%></li>
+                <li class="bg-success"><a href="<%= root %>/view-quiz/<%= currentQuiz.getId() %>">Quiz #<%= currentQuiz.getId() %>: <%= currentQuiz.getName() %></a><%=predecessor%></li>
                     
                 <%
                     }
@@ -122,7 +122,7 @@
                           predecessor = "";
                 %>
                 
-                <li class="bg-danger"><a href="/QuickQuiz/view-quiz/<%= currentQuiz.getId() %>">Quiz #<%= currentQuiz.getId() %>: <%= currentQuiz.getName() %></a><%=predecessor%></li>
+                <li class="bg-danger"><a href="<%= root %>/view-quiz/<%= currentQuiz.getId() %>">Quiz #<%= currentQuiz.getId() %>: <%= currentQuiz.getName() %></a><%=predecessor%></li>
                 
                 <%
                       }

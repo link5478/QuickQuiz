@@ -8,6 +8,7 @@
 <%
   Quiz quiz = (Quiz) request.getAttribute("quiz");
   String isAvailableText = quiz.isAvailable() ? "Yes" : "No";
+  String root = ((HttpServletRequest)request).getContextPath();
 %>
 
 <%-- 
@@ -42,12 +43,12 @@
                         <%
                             if (quiz.getPredecessorId() != null) {
                         %>
-                        <small>Based on <a href="${root}/view-quiz/${quiz.getPredecessorId()}">Quiz #${quiz.getPredecessorId()}</a></small>
+                        <small>Based on <a href="<%=root%>/view-quiz/${quiz.getPredecessorId()}">Quiz #${quiz.getPredecessorId()}</a></small>
                         </h1>
                         <%
                             }
                         %>
-                        <a class="btn btn-default" href="<%=((HttpServletRequest)request).getContextPath()%>/quiz-answering-page/${quiz.getId()}" role="button">Start a new Quiz Attempt</a>
+                        <a class="btn btn-default" href="<%=root%>/quiz-answering-page/${quiz.getId()}" role="button">Start a new Quiz Attempt</a>
 
                         <h2>Description</h2>
                         <p>${quiz.getDescription()}</p>
@@ -55,7 +56,7 @@
                         <h2>Edit Quiz</h2>
                         <p>You can edit the Quiz's name, module, description, and availability.</p>
 
-                        <p><a class="btn btn-default" href="<%=((HttpServletRequest)request).getContextPath()%>/quiz-update-form/${quiz.getId()}" role="button">Edit Quiz details</a></p>
+                        <p><a class="btn btn-default" href="<%=root%>/quiz-update-form/${quiz.getId()}" role="button">Edit Quiz details</a></p>
                     </div>
                 </div>
         <div row>
@@ -93,14 +94,14 @@
                     <div class="col-md-12">
 
                         <h2>Questions</h2>
-                        <p><a class="btn btn-default" href="<%=((HttpServletRequest)request).getContextPath()%>/question-creation-form/${quiz.getId()}" role="button">Add a question</a></p>
+                        <p><a class="btn btn-default" href="<%=root%>/question-creation-form/${quiz.getId()}" role="button">Add a question</a></p>
 
                         <ol>
                         <%
                             for (int i = 0; i < quiz.getNumberOfQuestions(); i++) {
                         %>
 
-                        <li><%= quiz.getQuestion(i).getQuestionText() %>: (<a href="<%=((HttpServletRequest)request).getContextPath()%>/question-update-form/<%= quiz.getQuestion(i).getId() %>">edit</a> / <a href="<%=((HttpServletRequest)request).getContextPath()%>/question-deletion/<%= quiz.getQuestion(i).getId() %>">delete</a>)</li>
+                        <li><%= quiz.getQuestion(i).getQuestionText() %>: (<a href="<%=root%>/question-update-form/<%= quiz.getQuestion(i).getId() %>">edit</a> / <a href="<%=root%>/question-deletion/<%= quiz.getQuestion(i).getId() %>">delete</a>)</li>
                         <%
                             }
                         %>

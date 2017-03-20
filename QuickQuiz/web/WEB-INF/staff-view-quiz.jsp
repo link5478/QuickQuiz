@@ -65,7 +65,7 @@
         <%
           for (int i = 0; i < quiz.getNumberOfQuestions(); i++) {
         %>
-        <li><%= quiz.getQuestion(i).getQuestionText() %>: <a href="<%=((HttpServletRequest)request).getContextPath()%>/question-update-form/<%= quiz.getQuestion(i).getId() %>">edit</a> / <a href="<%=((HttpServletRequest)request).getContextPath()%>/question-deletion-confirmation/<%= quiz.getQuestion(i).getId() %>">delete</a></li>
+        <li><%= quiz.getQuestion(i).getQuestionText() %>: <a href="<%=((HttpServletRequest)request).getContextPath()%>/question-update-form/<%= quiz.getQuestion(i).getId() %>">edit</a> / <a href="<%=((HttpServletRequest)request).getContextPath()%>/question-deletion/<%= quiz.getQuestion(i).getId() %>">delete</a></li>
         <%
           }
         %>

@@ -20,7 +20,7 @@
          <%
          List<AnswerDistribution> answers = (List<AnswerDistribution>)request.getAttribute("answers");
          
-        if(answers !=null || answers.size() == 0)
+        if(answers !=null || answers.size() != 0)
         {
         %>
         

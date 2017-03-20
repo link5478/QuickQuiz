@@ -48,10 +48,10 @@
             <p><a href="<%=((HttpServletRequest)request).getContextPath()%>/staff-detailed-results/<%=currentQuiz.getId()%>"> <%=currentQuiz.getName()%> </a></p>
             <p> Quiz Description: <%=hasResults.get(i).getDescription() %> </p>
             <br>
-            <p> ================================================================= </p>
+            <hr>
             <%
                     }
-                }
+                }   
                 %>
                 <H1> THESE QUIZZES DONT HAVE RESULTS </H2>
                 <%
@@ -70,7 +70,7 @@
             <p><a href="<%=((HttpServletRequest)request).getContextPath()%>/staff-detailed-results/<%=currentQuiz.getId()%>"> <%=currentQuiz.getName()%> </a></p>
             <p> Quiz Description: <%=noResults.get(i).getDescription() %> </p>
             <br>
-            <p> ================================================================= </p>
+            <hr>
             <%
                     }
                 }

@@ -53,7 +53,7 @@
             <h1> Results: <%=q.getName()%> <small>(Result ID: <%= request.getAttribute("URI")%>)</small></h1>
             
             <h3><%=q.getDescription()%> </h3>
-            <h3> Created by <%=q.getUsername()%>.   Attempted by: <%=userName%> </h3>
+            <h3> Created by <%=q.getUsername()%>.   Attempted by: <%=userName%>(<%=r.getUserID()%>) </h3>
 
             <br/>
             

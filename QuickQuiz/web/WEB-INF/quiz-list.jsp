@@ -20,6 +20,9 @@
 <%@page import = "quickquiz.model.QuizModel" %>
 <%@page import = "quickquiz.model.Member" %>
 
+<%
+  String root = ((HttpServletRequest)request).getContextPath();
+%>
 <!DOCTYPE html>
 <html lang="en">
     
@@ -61,7 +64,7 @@
             <button type="button" class="btn btn-block" data-toggle="collapse" data-target="#demo<%=currentModule.getId()%>"><%=currentModule.getId()%> <%=currentModule.getName()%></button>
             <br/>
             
-            <div id="demo<%=currentModule.getId()%>" class="collapse">
+            <ul id="demo<%=currentModule.getId()%>" class="collapse">
                 
                 <%
                     Iterator<Quiz> j = currentQuizzes.iterator();
@@ -75,18 +78,23 @@
                             value += " (unavailable)";
                         }
                         
+                        String predecessor;
+                        if (currentQuiz.getPredecessorId() != null) {
+                          predecessor = " (based on <a href=\"" + root + "/view-quiz/" + currentQuiz.getPredecessorId() + "\">Quiz #" + currentQuiz.getPredecessorId() + "</a>)";
+                        }
+                        else
+                          predecessor = "";
+                        
                     String url = "/QuickQuiz/view-quiz/" + currentQuiz.getId();
                 %>
                 
-                    <a href = <%=url%>><%=value%></a>
-                    <br />
-                    <%-- TODO: List instead --%>
+                <li><a href="<%=url%>"><%=value%></a><%=predecessor%></li>
                     
                 <%
                     }
                 %>
                 
-            </div> <%-- demo collapse --%>
+            </ul>
             
             <%
             } //END While loop

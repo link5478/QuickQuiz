@@ -28,6 +28,13 @@
 
     <div class="container indexcontainer">
       <h1>Quiz #${quiz.getId()}: ${quiz.getName()}</h1>
+      <%
+        if (quiz.getPredecessorId() != null) {
+      %>
+      <p>This quiz is based on <a href="${root}/view-quiz/${quiz.getPredecessorId()}">Quiz #${quiz.getPredecessorId()}</a></p>
+      <%
+        }
+      %>
       <a href="<%=((HttpServletRequest)request).getContextPath()%>/quiz-answering-page/${quiz.getId()}">Try to answer to quiz</a>
       <h2>Description</h2>
       <p><a href="<%=((HttpServletRequest)request).getContextPath()%>/quiz-update-form/${quiz.getId()}">Edit the description</a></p>

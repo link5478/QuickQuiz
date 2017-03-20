@@ -76,8 +76,11 @@ public class ViewQuiz
       
       request.setAttribute("quiz", quiz);
       RequestDispatcher rd;
-      if (lg.getUserType().equalsIgnoreCase("Staff"))
+      if (lg.getUserType().equalsIgnoreCase("Staff")) {
+        String root = ((HttpServletRequest)request).getContextPath();
+        request.setAttribute ("root", root);
         rd = request.getRequestDispatcher (STAFF_VIEW);
+      }
       else
         rd = request.getRequestDispatcher (STUDENT_VIEW);
       rd.forward(request, response);

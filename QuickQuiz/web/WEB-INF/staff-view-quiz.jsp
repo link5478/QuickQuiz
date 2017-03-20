@@ -7,8 +7,7 @@
 
 <%
   Quiz quiz = (Quiz) request.getAttribute("quiz");
-  String unavailableChecked = quiz.isAvailable() ? "" : "checked";
-  String availableChecked = quiz.isAvailable() ? "checked" : "";
+  String isAvailableText = quiz.isAvailable() ? "Yes" : "No";
 %>
 
 <%-- 
@@ -54,6 +53,10 @@
         <tr>
           <td>Creator</td>
           <td>${quiz.getUsername()}</td>
+        </tr>
+        <tr>
+          <td>Available?</td>
+          <td><%=isAvailableText%></td>
         </tr>
       </table>
       <h2>Questions</h2>

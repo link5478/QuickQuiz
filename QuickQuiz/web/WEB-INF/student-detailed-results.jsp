@@ -13,33 +13,45 @@
 
 <!DOCTYPE html>
 <html lang="en">
+    
+            <%
+                Result r = (Result) request.getAttribute("Result");
+                Quiz q = (Quiz) request.getAttribute("Quiz");
+            %>
+    
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="/WEB-INF/jspf/head.jspf" %>
-        <title>A closer look</title>
+        <title>Results: <%=q.getName()%></title>
     </head>
 
     <body>
         <%@include file="/WEB-INF/jspf/navbar.jspf" %>
+        
         <div class="container indexcontainer">
+            
+            <div class="panel panel-default">
+                
+            <div class="panel-heading">
+            <h3 class="panel-title">Quiz Results</h3>
+            </div>
+                
+            <div class="panel-body">
+            
 
-            <h2> Crude Quiz Comparison: <%= request.getAttribute("URI")%></h2>
-            <%
-                Result r = (Result) request.getAttribute("Result");
-                Quiz q = (Quiz) request.getAttribute("Quiz");
 
-            %>
-            <p> Quiz Info </p>
-            <p> Name <%=q.getName()%> </p>
-            <p> Description <%=q.getDescription()%> </p>
-            <p> Creator: <%=q.getUsername()%> </p>
+            <h1> Results: <%=q.getName()%> <small>(Result ID: <%= request.getAttribute("URI")%>)</small></h1>
+            
+            <h3><%=q.getDescription()%> </h3>
+            <h3> Created by <%=q.getUsername()%>.   Attempted by: <%=r.getUserID()%> </h3>
 
-            <h3> Attempt belongs to: <%=r.getUserID()%> </h3>
+            <br/>
+            
             <%
                 for (int i = 0; i < q.getNumberOfQuestions(); i++) {
                     Question qu = q.getQuestions().get(i);
             %>
-            <p> Question No: <%=i + 1%> </p>
+            <h4> Question No. <%=i + 1%> </h4>
             <p> <%=qu.getQuestionText()%> </p>
             <table>
                 <tr> 
@@ -91,10 +103,14 @@
                 %>
             </table>
             <p> Explanation: <%=qu.getExplanation()%> </p>
+            <br/>
             <%
                 }
             %>
         </div>
+        </div>
+        </div>
+        
     <footer>
       <%@include file="/WEB-INF/jspf/footer.jspf" %>
     </footer>

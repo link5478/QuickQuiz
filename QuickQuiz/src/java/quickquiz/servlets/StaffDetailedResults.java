@@ -8,13 +8,21 @@ package quickquiz.servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import quickquiz.model.Member;
 import quickquiz.model.ResultsModel;
 import quickquiz.stores.AnswerDistribution;
+import quickquiz.stores.LoggedIn;
+import quickquiz.stores.Result;
+import quickquiz.stores.User;
 
 /**
  *
@@ -66,16 +74,51 @@ public class StaffDetailedResults extends ServletTemplate {
         
         
         List<AnswerDistribution> answers = new ArrayList<>();
-        
+        List<User> students = new ArrayList<>();
+        Map<String, List<Result>> results = new HashMap<>();
         try 
         {
             answers = ResultsModel.getAnswerDistribution(Integer.parseInt(uri));
+            
+            students = Member.getStudentsWhoDidQuiz(answers.get(0).getQuizID());
+
+            
+            for (User student : students) {
+                LoggedIn user = new LoggedIn();
+                user.setUsername(student.getId());
+                user.setUserType("student");
+                List<Result> res = ResultsModel.getResults(user);
+                List<Result> r = new ArrayList<>();
+                
+                for(Result result: res)
+                {
+                    Result newResult = ResultsModel.getResult(result.getResultID());
+                    newResult.setResultID(result.getResultID());
+                    r.add(newResult);
+                }
+                
+                
+                List<Result> actualResults = new ArrayList<>();
+                
+                for(Result re : r)
+                {
+                    if(re.getQuizId().equals(Integer.parseInt(uri)))
+                    {
+                        actualResults.add(re);
+                    }
+                }                   
+                results.put(student.getUsername(), actualResults);
+                
+            }
         } 
         catch (Exception e) 
         {
-            
+            Logger.getLogger(QuizAnsweringPage.class.getName()).log(Level.SEVERE, null, e);
         }
         
+        
+        request.setAttribute("students", students);
+        request.setAttribute("results", results);
         request.setAttribute("answers", answers);
         
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/staff-detailed-results.jsp");

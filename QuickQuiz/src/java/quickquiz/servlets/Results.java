@@ -41,7 +41,6 @@ import quickquiz.stores.Quiz;
  * 
  * @author hogar
  */
-// TODO: handle when the user is not logged in
 public class Results
   extends HttpServlet
 {

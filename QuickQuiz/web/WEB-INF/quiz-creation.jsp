@@ -1,10 +1,14 @@
+<%@page import="quickquiz.stores.ModuleComparator"%>
+<%@page import="java.util.TreeSet"%>
+<%@page import="java.util.SortedSet"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="quickquiz.stores.Module"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
-  List<Module> modules = (List<Module>) request.getAttribute ("modules");
+  SortedSet<Module> modules = new TreeSet<>(new ModuleComparator());
+  modules.addAll((List<Module>) request.getAttribute ("modules"));
 %>
 
 <!DOCTYPE html>
@@ -64,5 +68,8 @@
     </form>
 
     </div>
+    <footer>
+      <%@include file="/WEB-INF/jspf/footer.jspf" %>
+    </footer>
   </body>
 </html>

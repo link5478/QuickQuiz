@@ -101,9 +101,8 @@ public class Question
   
   
   @Override
-  public boolean equals(Object o)
+  public boolean equals (Object o)
   {
-    // TODO: check for quiz id?
     Boolean isEqual = null; 
     
     if (o instanceof Question) {
@@ -115,7 +114,7 @@ public class Question
       boolean sameAnswer4 = answer4_.equals(q.getAnswer4());
       boolean sameExplanation = explanation_.equals(q.getExplanation());
       boolean sameCorrectAnswer = correctAnswer_.equals(q.getCorrectAnswer());
-      // boolean sameQuizId = quizId_.equals(q.getQuizId());
+      boolean sameQuizId = quizId_.equals(q.getQuizId());
       if (sameQuestionText && sameAnswer1 && sameAnswer2 && sameAnswer3 &&
           sameAnswer4 && sameExplanation && sameCorrectAnswer) {
         isEqual = true;
@@ -265,7 +264,10 @@ public class Question
    */
   public void setCorrectAnswer (Integer correctAnswer)
   {
-    correctAnswer_ = correctAnswer;
+    if (correctAnswer > 4 || correctAnswer < 1)
+      throw new IllegalArgumentException();
+    else
+      correctAnswer_ = correctAnswer;
   }
   
   

@@ -22,7 +22,6 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * TODO: camelCase attributes and methods' names.
  * TODO: use enum or throw exception when user type set to something different
  * from Student and Staff.
  * @author hogar
@@ -70,7 +69,10 @@ public class LoggedIn
    */
   public void setUserType(String type)
   {
-      userType = type;
+    if (!type.equalsIgnoreCase("Staff") && !type.equalsIgnoreCase("Student"))
+      throw new IllegalArgumentException();
+    else
+      userType = type.equalsIgnoreCase ("Staff") ? "Staff" : "Student";
   }
 
   /**

@@ -60,7 +60,9 @@
           }
         %>
       </ol>
-      <%-- TODO: ul / li list --%>
     </div>
+    <footer>
+      <%@include file="/WEB-INF/jspf/footer.jspf" %>
+    </footer>
   </body>
 </html>

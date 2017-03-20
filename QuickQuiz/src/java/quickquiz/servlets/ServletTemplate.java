@@ -28,7 +28,6 @@ import quickquiz.exception.MalformedUrlException;
 /**
  * Provides some utility functions to servlets that inherit it.
  * Refactoring: Removed useless dependencies.
- * TODO: replace by composition?
  * 
  * @author Louis-Marie Matthews
  */

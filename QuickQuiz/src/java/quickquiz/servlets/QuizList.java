@@ -30,7 +30,6 @@ import javax.servlet.http.HttpServletResponse;
  * 
  * @author hogar
  */
-// TODO: handle requests for this page when the user is not logged in
 public class QuizList
   extends HttpServlet
 {

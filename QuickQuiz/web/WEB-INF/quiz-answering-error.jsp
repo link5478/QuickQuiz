@@ -24,6 +24,8 @@
         <p> Returning you to the module listing...</p>
         <p>Click <a href="/QuickQuiz/quiz-list">here</a> if you are not redirected.</p>
         </div>
-    </body>
-    
+    <footer>
+      <%@include file="/WEB-INF/jspf/footer.jspf" %>
+    </footer>
+  </body>
 </html>

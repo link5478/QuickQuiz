@@ -1,3 +1,6 @@
+<%@page import="java.util.TreeSet"%>
+<%@page import="java.util.SortedSet"%>
+<%@page import="quickquiz.stores.ModuleComparator"%>
 <%@page import="quickquiz.stores.Question"%>
 <%@page import="quickquiz.stores.Quiz"%>
 <%@page import="quickquiz.model.ModuleModel"%>
@@ -7,7 +10,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
-  List<Module> modules = (List<Module>) request.getAttribute ("modules");
+  SortedSet<Module> modules = new TreeSet<>(new ModuleComparator());
+  modules.addAll((List<Module>) request.getAttribute ("modules"));
   Quiz quiz = (Quiz) request.getAttribute("quiz");
   String unavailableChecked = quiz.isAvailable() ? "" : "checked";
   String availableChecked = quiz.isAvailable() ? "checked" : "";
@@ -21,7 +25,7 @@
   --%>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <%@include file="/WEB-INF/jspf/head.jspf" %>
     <title>Edit Quiz #${quiz.getId()} | Quick Quiz</title>
@@ -46,7 +50,7 @@
               Module module = i.next();
               String selected = quiz.getModuleId() == module.getId() ? "selected" : "";
           %>
-              <option value="<%= module.getId() %>" <%= selected %> ><%= module.getName() %></option>
+              <option value="<%= module.getId() %>" <%= selected %> ><%= module.getId() %> <%= module.getName() %></option>
           <%
             }
           %>
@@ -71,5 +75,8 @@
         <button type="submit" class="btn btn-default">Update quiz</button>
       </form>
     </div>
+    <footer>
+      <%@include file="/WEB-INF/jspf/footer.jspf" %>
+    </footer>
   </body>
 </html>

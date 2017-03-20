@@ -45,7 +45,6 @@
                   List<Quiz> currentQuizzes = QuizModel.getQuizzes(currentModule.getId(), user);
             %>
             
-            <!-- TODO : show all quizzes collapsed by module id? -->
             <br />
             <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo<%=currentModule.getId()%>"><%=currentModule.getId()%> <%=currentModule.getName()%></button>
             <div id="demo<%=currentModule.getId()%>" class="collapse">
@@ -75,5 +74,8 @@
             } //END While loop
             %>   
         </div>
-    </body>
+    <footer>
+      <%@include file="/WEB-INF/jspf/footer.jspf" %>
+    </footer>
+  </body>
 </html>

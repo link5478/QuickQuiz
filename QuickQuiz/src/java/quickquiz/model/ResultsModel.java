@@ -212,4 +212,15 @@ public class ResultsModel {
         return answersDistributions;
     }
     
+    
+    public static boolean Compare(AnswerDistribution a, AnswerDistribution b)
+    {
+        if(a.getNumberOfAs() == b.getNumberOfAs() &&
+                a.getNumberOfBs() == b.getNumberOfBs() &&
+                a.getNumberOfCs() ==  b.getNumberOfCs() &&
+                a.getNumberOfDs() == b.getNumberOfDs() &&
+                a.getQuizID() == b.getQuizID())
+            return true;
+        return false;
+    }
 }

@@ -4,6 +4,8 @@
     Author     : hogar
 --%>
 
+<%@page import="quickquiz.model.Member"%>
+<%@page import="quickquiz.stores.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="quickquiz.stores.Quiz"%>
 <%@page import="quickquiz.stores.Result"%>
@@ -37,13 +39,21 @@
             </div>
                 
             <div class="panel-body">
-            
-
-
+                <%
+                    String userName = "";
+                    List<User> students = Member.getStudentsWhoDidQuiz(r.getQuizId());
+                    for(User u : students)
+                    {
+                        if(u.getId().equals(r.getUserID()))
+                        {
+                            userName = u.getUsername();
+                        }
+                    }
+                    %>
             <h1> Results: <%=q.getName()%> <small>(Result ID: <%= request.getAttribute("URI")%>)</small></h1>
             
             <h3><%=q.getDescription()%> </h3>
-            <h3> Created by <%=q.getUsername()%>.   Attempted by: <%=r.getUserID()%> </h3>
+            <h3> Created by <%=q.getUsername()%>.   Attempted by: <%=userName%>(<%=r.getUserID()%>) </h3>
 
             <br/>
             

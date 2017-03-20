@@ -2,6 +2,3 @@ Time lock on quiz:- So user can't open quiz and look up answers, then answer qui
 if time ask Josh?
 
 Make functions more Robust. Maybe reduce number of Stored Procedures?
-
-With regards to Staff detailed Results. Maybe have a seperate Page they can choose these options from, as well as when they
-press a quiz they can select to see the results for that specific quiz. 

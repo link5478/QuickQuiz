@@ -8,7 +8,7 @@
 <%-- TODO: link to question id --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <%@include file="/WEB-INF/jspf/head.jspf" %>
     <title>Successful Question Update | Quick Quiz</title>

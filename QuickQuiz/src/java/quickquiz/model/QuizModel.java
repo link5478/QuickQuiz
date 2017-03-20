@@ -57,7 +57,6 @@ public class QuizModel
     
     PreparedStatement statement = null;
     try {
-      // TODO: prepared statement?
       String sql = "CALL `CreateQuiz` (?, ?, ?, ?);";
       statement = Database.getInstance().prepareStatement(sql);
       statement.setString(1, quiz.getName());

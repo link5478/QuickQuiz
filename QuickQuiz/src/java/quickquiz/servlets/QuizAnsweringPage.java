@@ -40,7 +40,6 @@ import quickquiz.stores.Result;
  *
  * @author Louis-Marie Matthews
  */
-// TODO: staff should not have access to this page
 public class QuizAnsweringPage
   extends ServletTemplate
 {
@@ -75,12 +74,7 @@ public class QuizAnsweringPage
                         HttpServletResponse response)
     throws ServletException, IOException
   {
-    // TODO:  handle exceptions
     try {
-      // TODO: get the quiz
-      // TODO: move somewhere
-      // TODO: add page to the list of student login protected pages
-      // TODO: convert to percentage
       Quiz quiz = QuizModel.getQuiz(getQuizId(request));
       List<Question> questions = quiz.getQuestions();
       float points = 0;
@@ -123,7 +117,6 @@ public class QuizAnsweringPage
     catch (SQLException | ClassNotFoundException | InstantiationException |
            IllegalAccessException | MalformedUrlException |
            NumberFormatException | NullPointerException | NoQuizFoundException ex) {
-      Logger.getLogger(QuizAnsweringPage.class.getName()).log(Level.SEVERE, null, ex);
       RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/general-error.jsp") ;
       rd.forward(request, response) ;
     }

@@ -12,7 +12,7 @@
 <%@page import="java.util.ArrayList" %>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="/WEB-INF/jspf/head.jspf" %>
@@ -95,5 +95,8 @@
                 }
             %>
         </div>
-    </body>
+    <footer>
+      <%@include file="/WEB-INF/jspf/footer.jspf" %>
+    </footer>
+  </body>
 </html>

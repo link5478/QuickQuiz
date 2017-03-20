@@ -83,7 +83,6 @@ public class Member
   
   /**
    * Return the ids of the modules associated with a certain user.
-   * TODO: returns set instead
    * 
    * @param ID the id of the user to get modules from
    * @return a list of module ids

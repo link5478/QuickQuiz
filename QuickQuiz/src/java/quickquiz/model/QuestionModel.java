@@ -37,9 +37,7 @@ public class QuestionModel
   {
     PreparedStatement statement = null;
     try {
-      //String sql = "INSERT INTO question (questionText, answer1, answer2, " + 
-      //             "answer3, answer4, explanation, correctAnswer, quizID) " + 
-      //             "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+      // TODO: CRITICAL: duplicate quiz if already existing result
       String sql = "CALL `AddQuestions`(?, ?, ?, ?, ?, ?, ?, ?, 1);";
       statement = Database.getInstance().prepareStatement(sql);
       statement.setString (1, question.getQuestionText());

@@ -35,12 +35,8 @@ import quickquiz.model.QuizModel;
 import quickquiz.stores.Question;
 
 /**
- * TODO: error when no quiz id
  * @author Louis-Marie Matthews
  */
-// TODO: display quiz not found when quiz is not found
-// TODO: students should not be able to create a new quiz
-// TODO: add / as url pattern in web.xml
 // TODO: update the version of the quiz whenever a new question is added?
 public class QuestionCreation
   extends ServletTemplate
@@ -67,7 +63,6 @@ public class QuestionCreation
       forwardToGeneralError(request, response);
     }
     catch (MalformedUrlException | NoQuizFoundException ex) {
-      Logger.getLogger(QuestionCreation.class.getName()).log(Level.SEVERE, null, ex);
       forwardToQuizNotFound(request, response);
     }
   }

@@ -19,8 +19,6 @@ package quickquiz.servlets;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -36,9 +34,11 @@ import quickquiz.stores.Question;
  */
 public class QuestionUpdate extends ServletTemplate
 {
-  private final String form = "/WEB-INF/question-update-form.jsp";
-  private final String notFound = "/WEB-INF/question-not-found-error.jsp";
-  private final String success = "/WEB-INF/successful-question-update.jsp";
+  private final static String FORM = "/WEB-INF/question-update-form.jsp";
+  private final static String NOT_FOUND = "/WEB-INF/question-not-found-error" +
+                                          ".jsp";
+  private final static String SUCCESS = "/WEB-INF/successful-question-update" +
+                                        ".jsp";
   
   
   
@@ -127,7 +127,7 @@ public class QuestionUpdate extends ServletTemplate
                                     HttpServletResponse response)
     throws ServletException, IOException
   {
-    RequestDispatcher rd = request.getRequestDispatcher (form);
+    RequestDispatcher rd = request.getRequestDispatcher (FORM);
     rd.forward(request, response);
   }
   
@@ -146,7 +146,7 @@ public class QuestionUpdate extends ServletTemplate
                                           HttpServletResponse response)
     throws ServletException, IOException
   {
-    RequestDispatcher rd = request.getRequestDispatcher (notFound);
+    RequestDispatcher rd = request.getRequestDispatcher (NOT_FOUND);
     rd.forward(request, response);
   }
   
@@ -156,7 +156,7 @@ public class QuestionUpdate extends ServletTemplate
                                                  HttpServletResponse response)
     throws ServletException, IOException
   {
-    RequestDispatcher rd = request.getRequestDispatcher (success);
+    RequestDispatcher rd = request.getRequestDispatcher (SUCCESS);
     rd.forward(request, response);
   }
   

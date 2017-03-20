@@ -37,12 +37,11 @@ import quickquiz.stores.Quiz;
 /**
  * This class has been refactored. The doPost method has been removed because it
  * was not used, as well as getServletInfo()
+ * TODO: CRITICAL: fix quiz not found when quiz has no question
  * 
  * @author craigchicken
  * @author Louis-Marie Matthews
  */
-// TODO: delete url patterns here?
-// TODO: display quiz not found when quiz is not found
 public class ViewQuiz
   extends ServletTemplate
 {

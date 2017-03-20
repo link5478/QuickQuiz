@@ -1,5 +1,3 @@
-<%-- TODO: prevent direct access to this page as for every jsp page--%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
@@ -18,6 +16,8 @@
         <p>Your quiz could not be created.</p>
         
         </div>
-    </body>
-    
+    <footer>
+      <%@include file="/WEB-INF/jspf/footer.jspf" %>
+    </footer>
+  </body>
 </html>

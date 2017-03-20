@@ -17,7 +17,7 @@
     <%@include file="/WEB-INF/jspf/navbar.jspf" %>
     <div class="container indexcontainer"> <%-- TODO: replace by main --%>
       <h1>Successful Question Update</h1>
-      <p class="text-success">The question has been updated successfully.</p>
+      <p class="text-success">The question has been updated successfully. ${questionId}</p>
     </div>
     <footer>
       <%@include file="/WEB-INF/jspf/footer.jspf" %>

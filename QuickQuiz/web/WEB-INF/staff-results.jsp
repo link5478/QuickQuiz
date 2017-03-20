@@ -28,9 +28,9 @@
 
         <div class="container logincontainer">
             <%
-                List<Quiz> currentQuizzes = (List<Quiz>) request.getAttribute("quizzes");
-                
-                if (currentQuizzes.size() == 0 || currentQuizzes == null)
+                List<Quiz> hasResults = (List<Quiz>) request.getAttribute("hasResults");
+               
+                if (hasResults.size() == 0 || hasResults == null)
                 {
             %>
                     <p> You haven't created any quizzes yet. </p>
@@ -38,13 +38,37 @@
                 } 
                 else 
                 {
-
-                    for (int i = 0; i < currentQuizzes.size(); i++) 
+                %>
+                <h2> THESE QUIZZES HAVE RESULTS </h2>
+                <%
+                    for (int i = 0; i < hasResults.size(); i++) 
                     {
-                    Quiz currentQuiz = currentQuizzes.get(i);
+                    Quiz currentQuiz = hasResults.get(i);
             %>      
             <p><a href="<%=((HttpServletRequest)request).getContextPath()%>/staff-detailed-results/<%=currentQuiz.getId()%>"> <%=currentQuiz.getName()%> </a></p>
-            <p> Quiz Description: <%=currentQuizzes.get(i).getDescription() %> </p>
+            <p> Quiz Description: <%=hasResults.get(i).getDescription() %> </p>
+            <br>
+            <p> ================================================================= </p>
+            <%
+                    }
+                }
+                %>
+                <H1> THESE QUIZZES DONT HAVE RESULTS </H2>
+                <%
+                List<Quiz> noResults = (List<Quiz>) request.getAttribute("noResults");
+               
+                if (noResults.size() == 0 || noResults == null)
+                {
+                } 
+                else 
+                {
+
+                    for (int i = 0; i < noResults.size(); i++) 
+                    {
+                    Quiz currentQuiz = noResults.get(i);
+            %>      
+            <p><a href="<%=((HttpServletRequest)request).getContextPath()%>/staff-detailed-results/<%=currentQuiz.getId()%>"> <%=currentQuiz.getName()%> </a></p>
+            <p> Quiz Description: <%=noResults.get(i).getDescription() %> </p>
             <br>
             <p> ================================================================= </p>
             <%

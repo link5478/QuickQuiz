@@ -7,6 +7,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import ="quickquiz.stores.AnswerDistribution" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="quickquiz.stores.Result" %>
+<%@ page import="quickquiz.stores.User" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -20,11 +23,11 @@
          <%
          List<AnswerDistribution> answers = (List<AnswerDistribution>)request.getAttribute("answers");
          
-        if(answers !=null && answers.size() != 0)
+        if(answers !=null && !answers.isEmpty())
         {
         %>
         
-        <table>
+        <table class = "table">
             <tr>
             <th> Question Number  </th>
             <th> 1s </th>
@@ -49,6 +52,44 @@
             %>    
         </table>
              <%
+                 
+                Map<String, List<Result>> studentBreakdown = (Map<String, List<Result>>)request.getAttribute("results");
+                 
+                 if(studentBreakdown != null && !studentBreakdown.isEmpty())
+                 {
+                     %>
+                     <p> Student Breakdown </p>
+                     <%
+                     String currentStudent = "";
+                     for (Map.Entry<String, List<Result>> entry : studentBreakdown.entrySet())
+                    {
+                        String name = entry.getKey();
+                        if(!name.equals(currentStudent))
+                        {
+                            %>
+                            <p>Student: <%=name%></p>
+                            <%
+                             currentStudent = name;
+                        }
+                        int i = 0;
+                        for(Result r : entry.getValue())
+                        {
+                            i++;
+                            %>
+                            <a href="<%=((HttpServletRequest)request).getContextPath()%>/student-detailed-results/<%=r.getResultID()%>">
+                                Attempt #<%=i%> </a>
+                                <br>
+                            <%
+                        }
+                    }  
+                }
+                else
+                {
+                    %>
+                    <p> Hmm no student results: <%=studentBreakdown.size()%> </p>
+                    <%
+                }
+                 
         }
         else
         {

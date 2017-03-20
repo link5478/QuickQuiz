@@ -74,7 +74,7 @@ public class QuizModelTest
   public void testGetQuizzes()
   {
     
-    final int numberOfAc31007Quizzes = 3;
+    final int numberOfAc31007Quizzes = 5;
     final int numberOfAc31007LiveQuizzes = 2;
     
     LoggedIn staff = new LoggedIn();
@@ -96,13 +96,13 @@ public class QuizModelTest
     try {
       List<Quiz> allQuizzes = QuizModel.getQuizzes("AC31007", staff);
       assertEquals("There should be 3 quizzes retrieved for staff.",
-                   allQuizzes.size(), numberOfAc31007Quizzes);
+                   numberOfAc31007Quizzes, allQuizzes.size());
       Quiz quizDb = allQuizzes.get(0);
-      assertEquals("Quiz has not been correctly fetched", quizDb, quizJava);
+      assertEquals("Quiz has not been correctly fetched", quizJava, quizDb);
       
       List<Quiz> liveQuizzes = QuizModel.getQuizzes("AC31007", student);
       assertEquals("There should be 2 quizzes retrieved for student.",
-                   liveQuizzes.size(), numberOfAc31007LiveQuizzes);
+                   numberOfAc31007LiveQuizzes, liveQuizzes.size());
     }
     catch (SQLException | ClassNotFoundException | InstantiationException |
            IllegalAccessException exception) {
@@ -121,24 +121,23 @@ public class QuizModelTest
   public void testGetQuizPresentation()
   {
     // MAKE SURE THESE VALUES ARE UP-TO-DATE
-    Quiz quizJavaStudent = new Quiz();
-    quizJavaStudent.setId(2);
-    quizJavaStudent.setName("An Agile Approach");
-    quizJavaStudent.setDescription("A quiz about Agile methods in programming");
-    quizJavaStudent.setUsername("AGILE MASTER");
-    quizJavaStudent.setModuleId("AC31007");
-    quizJavaStudent.setModuleName("Agile Software Programming");
+    Quiz quizJava = new Quiz();
+    quizJava.setId(2);
+    quizJava.setName("An Agile Approach");
+    quizJava.setDescription("A quiz about Agile methods in programming");
+    quizJava.setUsername("AGILE MASTER");
+    quizJava.setModuleId("AC31007");
+    quizJava.setModuleName("Agile Software Programming");
+    quizJava.setAvailability(true);
     
     try {
       Quiz quizDb = getQuizPresentation(2, "Student");
       assertEquals("The hard-coded quiz and the one fetched from the database" +
-                   "should be identical.", quizJavaStudent, quizDb);
+                   "should be identical.", quizJava, quizDb);
       
-      Quiz quizJavaStaff = quizJavaStudent;
-      quizJavaStaff.setAvailability(true);
       Quiz quizStaffDb = getQuizPresentation(2, "Staff");
       assertEquals("The hard-coded quiz and the one fetched from the database" +
-                   "should be identical.", quizJavaStaff, quizStaffDb);
+                   "should be identical.", quizJava, quizStaffDb);
     }
     catch (SQLException | ClassNotFoundException | InstantiationException |
              IllegalAccessException | NoQuizFoundException exception) {

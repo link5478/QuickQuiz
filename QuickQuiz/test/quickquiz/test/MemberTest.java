@@ -34,8 +34,8 @@ public class MemberTest {
         }
         
         User student = new User();
-        student.setUsername("Carsten Cheyne");
-        student.setId("140023542");
+        student.setUsername("AGILE MASTER");
+        student.setId("140001337");
         List<User> expectedStudents = new ArrayList<>();
         expectedStudents.add(student);
         

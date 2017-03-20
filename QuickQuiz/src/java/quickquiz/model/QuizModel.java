@@ -370,7 +370,7 @@ public class QuizModel
     
     PreparedStatement preparedStatement = null;
     try {
-      String sql = "CALL `UpdateQuiz`(?, ?, ?, ?,?, 0, 0);";
+      String sql = "CALL `UpdateQuiz`(?, ?, ?, ?, ?);";
       
       preparedStatement = Database.getInstance().prepareStatement(sql);
       
@@ -387,7 +387,7 @@ public class QuizModel
       }
       
       rs.next();
-      newQuizId = rs.getInt("newQuizID");
+      newQuizId = rs.getInt ("Quiz ID");
       
       return newQuizId;
     }

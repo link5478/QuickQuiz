@@ -19,13 +19,18 @@ package quickquiz.servlets;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import quickquiz.exception.MalformedUrlException;
 import quickquiz.exception.NoQuestionFoundException;
+import quickquiz.exception.QuestionInsertionFailureException;
+import quickquiz.model.QuestionModel;
 import static quickquiz.model.QuestionModel.getQuestion;
+import quickquiz.model.QuizModel;
 import quickquiz.stores.Question;
 
 /**
@@ -99,13 +104,16 @@ public class QuestionUpdate extends ServletTemplate
   {
     try {
       Question question = getQuestionFromRequest (request);
-      // TODO: update question
+      //Integer questionId = QuestionModel.updateQuestion (question);
+      request.setAttribute ("questionId", question.getId());
+      
       forwardToSuccessfulQuestionUpdate (request, response);
     }
-    catch (MalformedUrlException ex) {
-      forwardToQuestionNotFound (request, response);
+    catch (MalformedUrlException exception) {
+      forwardToGeneralError(request, response);
     }
   }
+  
   
   
   /**

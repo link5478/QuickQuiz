@@ -65,6 +65,11 @@
         <filter-name>RestrictionToMembers</filter-name>
         <url-pattern>/quiz-answering-page/*</url-pattern>
     </filter-mapping>
+    <filter-mapping>
+        <filter-name>RestrictionToStaff</filter-name>
+        <url-pattern>/question-deletion/*</url-pattern>
+    </filter-mapping>
+    
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -122,6 +127,11 @@
         <servlet-name>StaffDetailedResults</servlet-name>
         <servlet-class>quickquiz.servlets.StaffDetailedResults</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>QuestionDeletion</servlet-name>
+        <servlet-class>quickquiz.servlets.QuestionDeletion</servlet-class>
+    </servlet>
+    
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -182,6 +192,11 @@
         <servlet-name>StaffDetailedResults</servlet-name>
         <url-pattern>/staff-detailed-results/*</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QuestionDeletion</servlet-name>
+        <url-pattern>/question-deletion/*</url-pattern>
+    </servlet-mapping>
+    
     <session-config>
         <session-timeout>
             30

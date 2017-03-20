@@ -102,7 +102,7 @@ public class QuestionModel
                                rs.getString("EXPLANATION"),
                                rs.getInt("CORRECTANSWER"),
                                rs.getInt("ID"),
-                               rs.getInt("QUIZID") );
+                               rs.getInt("QUIZID"));
     }
     finally {
       if (preparedStatement != null) {
@@ -120,8 +120,56 @@ public class QuestionModel
    * @param question
    * @return 
    */
-  public static Integer updateQuestion (Question question)
+  public static Integer updateQuestion (Question question) 
+    throws SQLException, ClassNotFoundException, InstantiationException,
+           IllegalAccessException, QuestionInsertionFailureException
   {
-    return null;
+    PreparedStatement statement = null;
+    try {
+      String sql = "CALL `UpdateQuestions`( null, null, ?, ?, ?, ?, ?, ?, ?, ?);";
+      statement = Database.getInstance().prepareStatement(sql);
+      statement.setString (1, question.getQuestionText());
+      statement.setString (2, question.getAnswer1());
+      statement.setString (3, question.getAnswer2());
+      statement.setString (4, question.getAnswer3());
+      statement.setString (5, question.getAnswer4());
+      statement.setInt (6, question.getCorrectAnswer());
+      statement.setString (7, question.getExplanation());
+      statement.setInt (8, question.getId());
+      
+      ResultSet rs = statement.executeQuery();
+      if (statement.getUpdateCount() == 0) {
+        throw new QuestionInsertionFailureException();
+      }
+      rs.next();
+      return rs.getInt ("New Question ID");
+    }
+    finally {
+      if (statement != null) {
+        statement.close();
+      }
+    }
+  }
+  
+  
+  
+  /**
+   * Delete the specified question (or create a duplicate of the quiz who owns
+   * the specified question without the specified question if the quiz has
+   * already some results associated to it).
+   * 
+   * @param id the id of the question to delete
+   */
+  public static void deleteQuestion (Integer id)
+    throws SQLException
+  {
+    PreparedStatement statement = null;
+    try {
+    }
+    finally {
+      if (statement != null) {
+        statement.close();
+      }
+    }
   }
 }

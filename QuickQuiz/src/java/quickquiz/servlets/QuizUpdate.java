@@ -20,6 +20,8 @@ package quickquiz.servlets;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -76,14 +78,14 @@ public class QuizUpdate extends ServletTemplate
     try {
       Quiz updatedQuiz = getQuizFromRequest (request);
       
-      request.setAttribute ("quiz", updatedQuiz);
-      request.setAttribute("modules", ModuleModel.getModules());
+      Integer newQuizId = QuizModel.updateQuizPresentation (updatedQuiz);
       
+      request.setAttribute ("newQuizId", newQuizId);
+      request.setAttribute("root", request.getContextPath());
       RequestDispatcher r = request.getRequestDispatcher (SUCCESS);
       r.forward(request, response);
-      // TODO: insert quiz. If has results, dispatch to existing-results.jps.
     }
-    catch (MalformedUrlException ex) {
+    catch (MalformedUrlException | NoQuizFoundException exception) {
       forwardToQuizNotFound (request, response);
     }
     catch (CorruptedQuizEditingFormException | SQLException |

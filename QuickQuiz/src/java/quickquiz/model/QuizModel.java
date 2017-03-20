@@ -360,10 +360,41 @@ public class QuizModel
    * Updates an already existing quiz excluding its questions.
    * TODO: finish up
    * 
-   * @param quiz 
+   * @param quiz the quiz to update
    */
   public static Integer updateQuizPresentation(Quiz quiz)
+    throws SQLException, ClassNotFoundException, InstantiationException,
+           IllegalAccessException, NoQuizFoundException
   {
-    return null;
+    Integer newQuizId;
+    
+    PreparedStatement preparedStatement = null;
+    try {
+      String sql = "CALL `UpdateQuiz`(?, ?, ?, ?,?, 0, 0);";
+      
+      preparedStatement = Database.getInstance().prepareStatement(sql);
+      
+      preparedStatement.setString (1, quiz.getName());
+      preparedStatement.setString (2, quiz.getDescription());
+      preparedStatement.setString (3, quiz.getModuleId());
+      preparedStatement.setBoolean (4, quiz.isAvailable());
+      preparedStatement.setInt (5, quiz.getId());
+      
+      ResultSet rs = preparedStatement.executeQuery();
+      
+      if (!rs.isBeforeFirst()) { // if there is no data
+        throw new NoQuizFoundException();
+      }
+      
+      rs.next();
+      newQuizId = rs.getInt("newQuizID");
+      
+      return newQuizId;
+    }
+    finally {
+      if (preparedStatement != null) {
+          preparedStatement.close();
+      }
+    }
   }
 }

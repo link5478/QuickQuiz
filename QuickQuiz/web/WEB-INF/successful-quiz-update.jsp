@@ -6,6 +6,9 @@
   --%>
 
 <%-- TODO: link to quiz id --%>
+<%
+  
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +20,7 @@
     <%@include file="/WEB-INF/jspf/navbar.jspf" %>
     <div class="container indexcontainer"> <%-- TODO: replace by main --%>
       <h1>Successful Quiz Update</h1>
-      <p class="text-success">The quiz has been updated successfully.</p>
+      <p class="text-success">The quiz has been updated successfully. You can <a href="${root}/view-quiz/${newQuizId}">view it now</a>.</p>
     </div>
     <footer>
       <%@include file="/WEB-INF/jspf/footer.jspf" %>

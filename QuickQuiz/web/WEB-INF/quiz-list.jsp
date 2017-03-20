@@ -36,7 +36,7 @@
         
         <%@include file="/WEB-INF/jspf/navbar.jspf" %>
 
-        <div class="container indexcontainer">
+        <main class="container indexcontainer">
           
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -102,7 +102,7 @@
             
         </div>
         </div>
-        </div>
+        </main>
         
     <footer>
       <%@include file="/WEB-INF/jspf/footer.jspf" %>

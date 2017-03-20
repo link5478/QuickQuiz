@@ -27,6 +27,7 @@
         <%@include file="/WEB-INF/jspf/navbar.jspf" %>
 
         <div class="container logincontainer">
+            <H1> QUIZZES YOU HAVE CREATED </H1>
             <%
                 List<Quiz> hasResults = (List<Quiz>) request.getAttribute("hasResults");
                
@@ -40,20 +41,23 @@
                 {
                 %>
                 <h2> THESE QUIZZES HAVE RESULTS </h2>
+                <ol>
                 <%
                     for (int i = 0; i < hasResults.size(); i++) 
                     {
                     Quiz currentQuiz = hasResults.get(i);
             %>      
-            <p><a href="<%=((HttpServletRequest)request).getContextPath()%>/staff-detailed-results/<%=currentQuiz.getId()%>"> <%=currentQuiz.getName()%> </a></p>
-            <p> Quiz Description: <%=hasResults.get(i).getDescription() %> </p>
+            <li><a href="<%=((HttpServletRequest)request).getContextPath()%>/staff-detailed-results/<%=currentQuiz.getId()%>"> <%=currentQuiz.getName()%> </a></p>
+                <p> Quiz Description: <%=hasResults.get(i).getDescription() %> </li>
             <br>
             <hr>
             <%
                     }
                 }   
                 %>
-                <H1> THESE QUIZZES DONT HAVE RESULTS </H2>
+                </ol>
+                <H2> THESE QUIZZES DONT HAVE RESULTS </H2>
+                <ol>
                 <%
                 List<Quiz> noResults = (List<Quiz>) request.getAttribute("noResults");
                
@@ -67,14 +71,15 @@
                     {
                     Quiz currentQuiz = noResults.get(i);
             %>      
-            <p><a href="<%=((HttpServletRequest)request).getContextPath()%>/staff-detailed-results/<%=currentQuiz.getId()%>"> <%=currentQuiz.getName()%> </a></p>
-            <p> Quiz Description: <%=noResults.get(i).getDescription() %> </p>
+            <li><a href="<%=((HttpServletRequest)request).getContextPath()%>/staff-detailed-results/<%=currentQuiz.getId()%>"> <%=currentQuiz.getName()%> </a></p>
+            <p> Quiz Description: <%=noResults.get(i).getDescription() %> </li>
             <br>
             <hr>
             <%
                     }
                 }
             %>
+                </ol>
         </div>
       <footer>
         <%@include file="/WEB-INF/jspf/footer.jspf" %>

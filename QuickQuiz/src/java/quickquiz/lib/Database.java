@@ -52,7 +52,9 @@ public class Database
   public static Connection getInstance()
     throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException
   {
-    if(connection == null)
+    if (connection == null)
+      Database.initialize();
+    else if (connection.isClosed())
       Database.initialize();
     return connection;
   }
